@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-12T23:05:55.840Z",
+  "generated": "2026-10-12T23:23:18.445Z",
   "origin": "https://tailgrab.io",
   "files": {
     "apple-touch-icon.png": {
@@ -602,17 +602,77 @@
       "bytes": 9902,
       "sha256": "410c34274ea3612fce1deff56ed2ac7ae9b8b3d41b89af3b922e71eb2049587a"
     },
+    "stickers/board.webp": {
+      "bytes": 11030,
+      "sha256": "19ff8ec6718fbdf371dad2fa0ac2576b2f798d143046eb95b93776c98cc7a4a5"
+    },
     "stickers/bubblewrap.webp": {
       "bytes": 11166,
       "sha256": "a92c396bf446b27d9f0268eb9b03140c49ff2038e31b5284f8452812d700dbf8"
+    },
+    "stickers/coin.webp": {
+      "bytes": 13000,
+      "sha256": "c2809036b19b3b0ddfa6011c082b9202d5e0e980d0d3ecc25104583c97d22445"
     },
     "stickers/fish.webp": {
       "bytes": 11676,
       "sha256": "31242cd79ff1b6940d169124b8082d82ddad0fe987b3d0d26fad024aa6a64d40"
     },
+    "stickers/flag.webp": {
+      "bytes": 6806,
+      "sha256": "99614a798f4ee049e5d3c6cf3f0a416941d286c93bc93b82b6f855bde06fb115"
+    },
+    "stickers/flame.webp": {
+      "bytes": 12278,
+      "sha256": "c7d4ce9c7dbb6cf7d7efbedfc18b28067a8adfbec9b0a4cd78b416768a9bdccc"
+    },
+    "stickers/hammer.webp": {
+      "bytes": 10650,
+      "sha256": "5c548107769ec9529628476959ad9f99d3f58b775d91ec84cb41fc5bd1533c2a"
+    },
+    "stickers/hand-clap.webp": {
+      "bytes": 17248,
+      "sha256": "f71d926a872fbdb053fda402390c53b9837c3a943aec39d80dc2d09ad1347f48"
+    },
+    "stickers/hand-horns.webp": {
+      "bytes": 11344,
+      "sha256": "0f5ed629b0b5dd851720aa19a347c67ef5fda17ef7ca195d7020d47f5b06ebc8"
+    },
+    "stickers/hand-palm.webp": {
+      "bytes": 11492,
+      "sha256": "83fb4bb2614dddcbb21004f5bb432b84534d96b43b8124f497d3105607afae09"
+    },
+    "stickers/hand-point.webp": {
+      "bytes": 10818,
+      "sha256": "9bae14e13e45edf2f5976d5fcaeb30d68706873c7f017aa54cb8aeb7cdb2e517"
+    },
+    "stickers/hand-shake.webp": {
+      "bytes": 10512,
+      "sha256": "12246fa3817cdabbcf09fb5c91b3a29c5a92c1876a4ba8db8499f5644e76f380"
+    },
+    "stickers/hand-you.webp": {
+      "bytes": 10062,
+      "sha256": "6ec5a1afdd8c9017b74433dc62c5f19038f6a4bd02417bb83f2ba963bd877f3d"
+    },
     "stickers/homework.webp": {
       "bytes": 14988,
       "sha256": "1af8ace694e147e49d81ce9eab189b63efff7f3decc74b2a0b8f2b4b70d5c32d"
+    },
+    "stickers/horseshoe.webp": {
+      "bytes": 15374,
+      "sha256": "e03bfb3049eb96c97989ca1e40aac4460f0d19675a9186b4d029b6124612607f"
+    },
+    "stickers/letters.webp": {
+      "bytes": 15096,
+      "sha256": "b9f978ef7f49574bec09738606b76eac9913424afb10f19455e5124e68a713df"
+    },
+    "stickers/oops.webp": {
+      "bytes": 18292,
+      "sha256": "ab98c80f70b0f969eb1968575d99e9e4bdadf5ff173e0df22215b3d528358128"
+    },
+    "stickers/popper.webp": {
+      "bytes": 17882,
+      "sha256": "866bf4fe703ffbd0b5a1e11204de23d07bf838327f43657429cf0e6602e9f369"
     },
     "stickers/rose.webp": {
       "bytes": 10890,
@@ -622,6 +682,18 @@
       "bytes": 15372,
       "sha256": "1837f7eed3cb7c0dd01e1e266765c47450495fd64ddba8c764c1905970d1939c"
     },
+    "stickers/sparkle.webp": {
+      "bytes": 15978,
+      "sha256": "0308fd78e1fcb636d1bbe8c3a4ba4008591cdc9301cf273da8f036ef8d054b1f"
+    },
+    "stickers/spray.webp": {
+      "bytes": 10670,
+      "sha256": "2d933168c5492ad39181b0c49b2d674fc6d718acfa1a2900465e78beca409444"
+    },
+    "stickers/star.webp": {
+      "bytes": 12024,
+      "sha256": "d2b658fdc0ed0ac8e97ab4b2da8fa62f36390e2e49b7ac57f1c614b60debbc63"
+    },
     "stickers/tape.webp": {
       "bytes": 8668,
       "sha256": "2cbdfe3a2f2b7f649e451413111a1575f8d715b76c431d5068c5f58f9365d181"
@@ -629,6 +701,10 @@
     "stickers/ticket.webp": {
       "bytes": 9848,
       "sha256": "98a471366b351a2686f20786141e37f3380c895445a4c3b4c86e9ad2f2c80d2e"
+    },
+    "stickers/trophy.webp": {
+      "bytes": 16920,
+      "sha256": "84e9674f2a4d57351decb97473102f3b7434a520c71a52feab251c378916869b"
     },
     "stickers/wrench.webp": {
       "bytes": 8426,

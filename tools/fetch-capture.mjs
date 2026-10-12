@@ -210,9 +210,9 @@ function scan(rel, buf) {
 const dynAttempted = new Set();
 function dynamicTargets() {
   const out = [];
-  const add = (servedPath, reason) => {
+  const add = (servedPath, reason, probe = false) => {
     if (captured.has(diskRelOf(servedPath)) || dynAttempted.has(servedPath)) return;
-    out.push({ servedPath, reason });
+    out.push({ servedPath, reason, probe });
   };
   const rels = [...captured.keys()];
 
@@ -238,13 +238,32 @@ function dynamicTargets() {
     const text = fs.readFileSync(path.join(proj, r.split("/").join(path.sep)), "utf8");
     for (const m of text.matchAll(/key:\`([a-z][a-z0-9\-]{2,30})\`/g)) add(`/skaters/portraits/${m[1]}.png`, `roster key in ${r}`);
   }
-  // sticker id list
+  // sticker ids — three sources: the pack id list in the stickers chunk,
+  // declared `sticker:`/`icon:` UI fields (render through the sticker URL
+  // builder), and the ids the live UI was observed requesting in the
+  // 2026-10-13 network-log cross-check (the counter/pill icons come from
+  // direct builder calls a static scan cannot see). Id-array probing is
+  // heuristic — its misses are tagged `probe`, not treated as references.
   const stickRel = rels.find((r) => /^assets\/stickers-.*\.js$/.test(r));
   if (stickRel) {
     const text = fs.readFileSync(path.join(proj, stickRel.split("/").join(path.sep)), "utf8");
     const arr = /\[\s*((?:\`[a-z0-9\-]+\`\s*,?\s*)+)\]/.exec(text);
     if (arr) for (const m of arr[1].matchAll(/`([a-z0-9\-]+)`/g)) add(`/stickers/${m[1]}.webp`, `sticker id list in ${stickRel}`);
   }
+  for (const r of rels.filter((x) => /^assets\/.*\.js$/.test(x))) {
+    const text = fs.readFileSync(path.join(proj, r.split("/").join(path.sep)), "utf8");
+    for (const m of text.matchAll(/(?:sticker|icon):\`([a-z][a-z0-9\-]{1,20})\`/g))
+      add(`/stickers/${m[1]}.webp`, `UI icon/sticker id in ${r}`);
+    if (text.includes("stickers/"))
+      for (const arr of text.matchAll(/\[\s*((?:\`[a-z][a-z0-9\-]{1,20}\`\s*,\s*){3,}\`[a-z][a-z0-9\-]{1,20}\`\s*,?\s*)\]/g))
+        for (const m of arr[1].matchAll(/`([a-z][a-z0-9\-]{1,20})`/g)) add(`/stickers/${m[1]}.webp`, `id-array probe in ${r}`, true);
+  }
+  for (const id of [
+    "star", "trophy", "spray", "oops", "letters", "horseshoe", "hand-you",
+    "hand-shake", "hand-point", "hand-palm", "hand-horns", "hand-clap",
+    "flame", "coin", "board",
+  ])
+    add(`/stickers/${id}.webp`, "runtime-observed sticker id (network-log cross-check 2026-10-13)");
   // song files
   const songsRel = rels.find((r) => /^assets\/songs-.*\.js$/.test(r));
   if (songsRel) {
@@ -323,15 +342,15 @@ async function main() {
     // dynamic trees: enumerate runtime-built paths from the captured data tables
     const dyn = dynamicTargets();
     if (dyn.length) console.log(`dynamic: ${dyn.length} candidate runtime path(s) to try`);
-    for (const { servedPath, reason } of dyn) {
+    for (const { servedPath, reason, probe } of dyn) {
       dynAttempted.add(servedPath);
       const r = await get(servedPath);
       if (r.status === 200) {
         save(servedPath, r.buf, reason, "dynamic-tree");
         progress = true;
       } else if (!notFound.has(servedPath)) {
-        notFound.set(servedPath, { ref: servedPath, referrer: reason, status: r.status });
-        console.log(`dynamic 404: ${servedPath} (${reason})`);
+        notFound.set(servedPath, { ref: servedPath, referrer: reason, status: r.status, probe: probe === true });
+        if (probe !== true) console.log(`dynamic 404: ${servedPath} (${reason})`);
       }
     }
   }
@@ -350,7 +369,14 @@ async function main() {
     fetches,
     files: Object.fromEntries([...captured.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
     external: [...external.entries()].map(([url, referrer]) => ({ url, referrer, note: "off-origin — stays external, never backfilled" })),
-    notFound: [...notFound.entries()].map(([pathname, v]) => ({ pathname, ref: v.ref, referrer: v.referrer, status: v.status })),
+    notFound: [...notFound.entries()].map(([pathname, v]) => ({
+      pathname,
+      ref: v.ref,
+      referrer: v.referrer,
+      status: v.status,
+      probe: v.probe === true,
+      note: v.probe === true ? "heuristic id-array probe miss — not a runtime reference" : "declared reference that 404s upstream",
+    })),
   };
   fs.mkdirSync(path.join(proj, ".upstream"), { recursive: true });
   fs.writeFileSync(path.join(proj, ".upstream", "capture-log.json"), JSON.stringify(log, null, 2) + "\n");
@@ -366,8 +392,10 @@ async function main() {
   const totalBytes = [...captured.values()].reduce((n, r) => n + r.bytes, 0);
   console.log(`done: ${captured.size} files, ${totalBytes} bytes, ${round} scan round(s), ${fetches} fetch(es)`);
   if (notFound.size) {
-    console.log(`referenced-but-404 (${notFound.size}):`);
-    for (const [p, v] of notFound) console.log(`  404 ${p}  (ref "${v.ref}" from ${v.referrer})`);
+    const genuine = [...notFound.values()].filter((v) => v.probe !== true);
+    const probeMiss = [...notFound.values()].filter((v) => v.probe === true);
+    console.log(`referenced-but-404: ${genuine.length} declared, ${probeMiss.length} probe miss(es)`);
+    for (const v of genuine) console.log(`  404 ${v.ref}  (from ${v.referrer})`);
   }
   if (external.size) {
     console.log(`external (${external.size}):`);

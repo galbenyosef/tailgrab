@@ -9,14 +9,14 @@
     "css": "parser css, no plugins",
     "json": "parser json, no plugins (inline importmap blocks, if any)"
   },
-  "source": "readable/: 57 JS pretties (50 app chunk(s) sliced, 6 vendor wholeFile) + 4 CSS pretties; src/: 214 statement-aligned slices across 50 app chunk(s); 47 skipped section(s); 12 wholeFile section(s); capture: 158 files under .upstream/manifest.json; inline scan: index.html, parks/index.html (3 inline content block(s) with twins, 1 inline data block(s) notRendered); notRendered: 99.",
+  "source": "readable/: 57 JS pretties (50 app chunk(s) sliced, 6 vendor wholeFile) + 4 CSS pretties; src/: 214 statement-aligned slices across 50 app chunk(s); 47 skipped section(s); 12 wholeFile section(s); capture: 177 files under .upstream/manifest.json; inline scan: index.html, parks/index.html (3 inline content block(s) with twins, 1 inline data block(s) notRendered); notRendered: 118.",
   "inline": {
     "scanned": [
       "index.html",
       "parks/index.html"
     ],
     "contentBlocks": 3,
-    "notRendered": 99,
+    "notRendered": 118,
     "note": "index.html carries an inline critical <style> and an inline gtag bootstrap (twins readable/index-inline-1.pretty.css / index-inline-2.pretty.js + readable/index-inline-map.json); its application/ld+json block is structured data, recorded in notRendered with range + sha256. parks/index.html carries its viewer <style> twin."
   },
   "sources": [
@@ -3957,10 +3957,26 @@
       "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
     },
     {
+      "capture": "stickers/board.webp",
+      "kind": "payload",
+      "bytes": 11030,
+      "sha256": "19ff8ec6718fbdf371dad2fa0ac2576b2f798d143046eb95b93776c98cc7a4a5",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
       "capture": "stickers/bubblewrap.webp",
       "kind": "payload",
       "bytes": 11166,
       "sha256": "a92c396bf446b27d9f0268eb9b03140c49ff2038e31b5284f8452812d700dbf8",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/coin.webp",
+      "kind": "payload",
+      "bytes": 13000,
+      "sha256": "c2809036b19b3b0ddfa6011c082b9202d5e0e980d0d3ecc25104583c97d22445",
       "rendered": false,
       "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
     },
@@ -3973,10 +3989,114 @@
       "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
     },
     {
+      "capture": "stickers/flag.webp",
+      "kind": "payload",
+      "bytes": 6806,
+      "sha256": "99614a798f4ee049e5d3c6cf3f0a416941d286c93bc93b82b6f855bde06fb115",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/flame.webp",
+      "kind": "payload",
+      "bytes": 12278,
+      "sha256": "c7d4ce9c7dbb6cf7d7efbedfc18b28067a8adfbec9b0a4cd78b416768a9bdccc",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hammer.webp",
+      "kind": "payload",
+      "bytes": 10650,
+      "sha256": "5c548107769ec9529628476959ad9f99d3f58b775d91ec84cb41fc5bd1533c2a",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hand-clap.webp",
+      "kind": "payload",
+      "bytes": 17248,
+      "sha256": "f71d926a872fbdb053fda402390c53b9837c3a943aec39d80dc2d09ad1347f48",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hand-horns.webp",
+      "kind": "payload",
+      "bytes": 11344,
+      "sha256": "0f5ed629b0b5dd851720aa19a347c67ef5fda17ef7ca195d7020d47f5b06ebc8",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hand-palm.webp",
+      "kind": "payload",
+      "bytes": 11492,
+      "sha256": "83fb4bb2614dddcbb21004f5bb432b84534d96b43b8124f497d3105607afae09",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hand-point.webp",
+      "kind": "payload",
+      "bytes": 10818,
+      "sha256": "9bae14e13e45edf2f5976d5fcaeb30d68706873c7f017aa54cb8aeb7cdb2e517",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hand-shake.webp",
+      "kind": "payload",
+      "bytes": 10512,
+      "sha256": "12246fa3817cdabbcf09fb5c91b3a29c5a92c1876a4ba8db8499f5644e76f380",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/hand-you.webp",
+      "kind": "payload",
+      "bytes": 10062,
+      "sha256": "6ec5a1afdd8c9017b74433dc62c5f19038f6a4bd02417bb83f2ba963bd877f3d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
       "capture": "stickers/homework.webp",
       "kind": "payload",
       "bytes": 14988,
       "sha256": "1af8ace694e147e49d81ce9eab189b63efff7f3decc74b2a0b8f2b4b70d5c32d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/horseshoe.webp",
+      "kind": "payload",
+      "bytes": 15374,
+      "sha256": "e03bfb3049eb96c97989ca1e40aac4460f0d19675a9186b4d029b6124612607f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/letters.webp",
+      "kind": "payload",
+      "bytes": 15096,
+      "sha256": "b9f978ef7f49574bec09738606b76eac9913424afb10f19455e5124e68a713df",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/oops.webp",
+      "kind": "payload",
+      "bytes": 18292,
+      "sha256": "ab98c80f70b0f969eb1968575d99e9e4bdadf5ff173e0df22215b3d528358128",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/popper.webp",
+      "kind": "payload",
+      "bytes": 17882,
+      "sha256": "866bf4fe703ffbd0b5a1e11204de23d07bf838327f43657429cf0e6602e9f369",
       "rendered": false,
       "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
     },
@@ -3997,6 +4117,30 @@
       "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
     },
     {
+      "capture": "stickers/sparkle.webp",
+      "kind": "payload",
+      "bytes": 15978,
+      "sha256": "0308fd78e1fcb636d1bbe8c3a4ba4008591cdc9301cf273da8f036ef8d054b1f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/spray.webp",
+      "kind": "payload",
+      "bytes": 10670,
+      "sha256": "2d933168c5492ad39181b0c49b2d674fc6d718acfa1a2900465e78beca409444",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/star.webp",
+      "kind": "payload",
+      "bytes": 12024,
+      "sha256": "d2b658fdc0ed0ac8e97ab4b2da8fa62f36390e2e49b7ac57f1c614b60debbc63",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
       "capture": "stickers/tape.webp",
       "kind": "payload",
       "bytes": 8668,
@@ -4009,6 +4153,14 @@
       "kind": "payload",
       "bytes": 9848,
       "sha256": "98a471366b351a2686f20786141e37f3380c895445a4c3b4c86e9ad2f2c80d2e",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/trophy.webp",
+      "kind": "payload",
+      "bytes": 16920,
+      "sha256": "84e9674f2a4d57351decb97473102f3b7434a520c71a52feab251c378916869b",
       "rendered": false,
       "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
     },
