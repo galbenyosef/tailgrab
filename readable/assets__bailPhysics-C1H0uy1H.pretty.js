@@ -1,0 +1,1511 @@
+import { Ut as e, bt as t, yr as n } from "./three.core-DVWDmH0S.js";
+import { Zt as r } from "./tuning-D4mSK766.js";
+import { t as i } from "./verlet-BVVzuOqv.js";
+var a = [
+    `Hips`,
+    `Spine`,
+    `Chest`,
+    `Head`,
+    `LeftEar`,
+    `RightEar`,
+    `Acc`,
+    `LeftArm`,
+    `LeftForeArm`,
+    `LeftHand`,
+    `RightArm`,
+    `RightForeArm`,
+    `RightHand`,
+    `LeftUpLeg`,
+    `LeftLeg`,
+    `LeftFoot`,
+    `RightUpLeg`,
+    `RightLeg`,
+    `RightFoot`,
+    `Tail1`,
+    `Tail2`,
+  ],
+  o = {
+    ankleY: 0.065,
+    kneeY: 0.19,
+    hipJointY: 0.325,
+    hipX: 0.072,
+    hipsY: 0.35,
+    spineY: 0.42,
+    chestY: 0.5,
+    neckY: 0.615,
+    shoulderX: 0.158,
+    shoulderY: 0.565,
+    elbowY: 0.445,
+    wristY: 0.33,
+    handDrop: 0.036,
+    handR: 0.046,
+    headC: [0, 0.8, 0.01],
+    headR: [0.215, 0.195, 0.2],
+    torsoHalf: [0.13, 0.12, 0.11],
+    ear: [0.12, 0.95, -0.02],
+    acc: [0, 0.8, -0.15],
+    tail1: [0, 0.33, -0.1],
+    tail2: [0, 0.31, -0.23],
+    shoeToe: 0.125,
+    shoeHeel: 0.07,
+    shoeHalfW: 0.052,
+  };
+(o.hipJointY - o.kneeY,
+  o.kneeY - o.ankleY,
+  o.shoulderY - o.elbowY,
+  o.elbowY - o.wristY);
+var s = (e, t) => e * t;
+function c(e) {
+  let t = e === `Left` ? 1 : -1;
+  return [
+    {
+      name: `${e}Arm`,
+      parent: `Chest`,
+      head: [s(t, o.shoulderX), o.shoulderY, 0],
+    },
+    {
+      name: `${e}ForeArm`,
+      parent: `${e}Arm`,
+      head: [s(t, o.shoulderX), o.elbowY, 0],
+    },
+    {
+      name: `${e}Hand`,
+      parent: `${e}ForeArm`,
+      head: [s(t, o.shoulderX), o.wristY, 0],
+    },
+    { name: `${e}UpLeg`, parent: `Hips`, head: [s(t, o.hipX), o.hipJointY, 0] },
+    { name: `${e}Leg`, parent: `${e}UpLeg`, head: [s(t, o.hipX), o.kneeY, 0] },
+    { name: `${e}Foot`, parent: `${e}Leg`, head: [s(t, o.hipX), o.ankleY, 0] },
+  ];
+}
+var l = (() => {
+    let e = c(`Left`),
+      t = c(`Right`),
+      n = [
+        { name: `Hips`, parent: null, head: [0, o.hipsY, 0] },
+        { name: `Spine`, parent: `Hips`, head: [0, o.spineY, 0] },
+        { name: `Chest`, parent: `Spine`, head: [0, o.chestY, 0] },
+        { name: `Head`, parent: `Chest`, head: [0, o.neckY, 0] },
+        {
+          name: `LeftEar`,
+          parent: `Head`,
+          head: [o.ear[0], o.ear[1], o.ear[2]],
+        },
+        {
+          name: `RightEar`,
+          parent: `Head`,
+          head: [-o.ear[0], o.ear[1], o.ear[2]],
+        },
+        { name: `Acc`, parent: `Head`, head: [...o.acc] },
+        e[0],
+        e[1],
+        e[2],
+        t[0],
+        t[1],
+        t[2],
+        e[3],
+        e[4],
+        e[5],
+        t[3],
+        t[4],
+        t[5],
+        { name: `Tail1`, parent: `Hips`, head: [...o.tail1] },
+        { name: `Tail2`, parent: `Tail1`, head: [...o.tail2] },
+      ];
+    if (n.map((e) => e.name).join() !== a.join())
+      throw Error(`rig: BONES / BONE_NAMES order mismatch`);
+    return n;
+  })(),
+  u = Object.fromEntries(l.map((e, t) => [e.name, t]));
+function d(e) {
+  return l[u[e]];
+}
+var f = {
+    length: 0.8,
+    width: 0.235,
+    deckTop: 0.13,
+    deckThick: 0.022,
+    kickStart: 0.25,
+    kickRise: 0.05,
+    truckZ: 0.17,
+    wheelR: 0.03,
+    wheelX: 0.1,
+    flipPivotY: 0.09,
+  },
+  p = { cycle: 0.34, speed: 3 },
+  m = { cycle: 0.42, speed: 1.3 };
+function h(e) {
+  let t = Math.abs(e) - f.kickStart;
+  if (t <= 0) return f.deckTop;
+  let n = f.length / 2 - f.kickStart,
+    r = Math.min(1, t / n);
+  return f.deckTop + f.kickRise * r * r;
+}
+var g = { bump: null },
+  _ = {
+    PELVIS: 0,
+    BUTT: 1,
+    CHEST: 2,
+    STERNUM: 3,
+    NECK: 4,
+    HEAD: 5,
+    SH_L: 6,
+    EL_L: 7,
+    WR_L: 8,
+    SH_R: 9,
+    EL_R: 10,
+    WR_R: 11,
+    HIP_L: 12,
+    KN_L: 13,
+    AN_L: 14,
+    HIP_R: 15,
+    KN_R: 16,
+    AN_R: 17,
+  },
+  v = [
+    { bone: `Hips`, off: [0, 0, 0], r: 0.1, w: 1 / 3 },
+    { bone: `Hips`, off: [0, 0, -0.09], r: 0.09, w: 1 / 2 },
+    { bone: `Chest`, off: [0, 0, 0], r: 0.11, w: 1 / 3 },
+    { bone: `Chest`, off: [0, 0, 0.09], r: 0.09, w: 1 / 2 },
+    { bone: `Head`, off: [0, 0, 0], r: 0.06, w: 1 },
+    {
+      bone: `Head`,
+      off: [o.headC[0], o.headC[1] - o.neckY, o.headC[2]],
+      r: 0.19,
+      w: 1 / 2.5,
+    },
+    { bone: `LeftArm`, off: [0, 0, 0], r: 0.045, w: 1 },
+    { bone: `LeftForeArm`, off: [0, 0, 0], r: 0.04, w: 1 },
+    { bone: `LeftHand`, off: [0, -o.handDrop, 0], r: o.handR, w: 1 },
+    { bone: `RightArm`, off: [0, 0, 0], r: 0.045, w: 1 },
+    { bone: `RightForeArm`, off: [0, 0, 0], r: 0.04, w: 1 },
+    { bone: `RightHand`, off: [0, -o.handDrop, 0], r: o.handR, w: 1 },
+    { bone: `LeftUpLeg`, off: [0, 0, 0], r: 0.07, w: 1 / 2 },
+    { bone: `LeftLeg`, off: [0, 0, 0], r: 0.05, w: 1 },
+    { bone: `LeftFoot`, off: [0, 0, 0], r: 0.06, w: 1 },
+    { bone: `RightUpLeg`, off: [0, 0, 0], r: 0.07, w: 1 / 2 },
+    { bone: `RightLeg`, off: [0, 0, 0], r: 0.05, w: 1 },
+    { bone: `RightFoot`, off: [0, 0, 0], r: 0.06, w: 1 },
+  ],
+  y = v.map((e) => {
+    let t = d(e.bone).head;
+    return [t[0] + e.off[0], t[1] + e.off[1], t[2] + e.off[2]];
+  }),
+  b = [
+    `Hips`,
+    `Spine`,
+    `Chest`,
+    `Head`,
+    `LeftArm`,
+    `LeftForeArm`,
+    `RightArm`,
+    `RightForeArm`,
+    `LeftUpLeg`,
+    `LeftLeg`,
+    `RightUpLeg`,
+    `RightLeg`,
+  ];
+function x() {
+  let t = {};
+  for (let n of b) t[n] = new e();
+  return { hips: new n(), q: t };
+}
+var S = {
+    arm: [0.35, -0.2, 1],
+    fore: [0.25, 0.1, 1],
+    thigh: [0.15, -1, -0.15],
+    shin: [0.15, -1, -0.25],
+    arch: 10,
+    nod: 25,
+  },
+  C = {
+    arm: [1, 0.35, 0.1],
+    fore: [1, 0.45, 0.1],
+    thigh: [0.4, -1, 0],
+    shin: [0.45, -1, 0],
+    arch: 5,
+    nod: 10,
+  },
+  w = {
+    arm: [0.45, 1, 0.3],
+    fore: [0.4, 1, 0.3],
+    thigh: [0.12, -1, -0.15],
+    shin: [0.12, -1, -0.2],
+    arch: 15,
+    nod: 30,
+  },
+  T = {
+    arm: [0.6, 1, 0.1],
+    fore: [0.7, 1, 0.1],
+    thigh: [0.3, -1, -0.05],
+    shin: [0.35, -1, -0.1],
+    arch: 8,
+    nod: 20,
+  },
+  E = {
+    arm: [0.8, 0.4, 0.4],
+    fore: [0.7, 0.6, 0.4],
+    thigh: [0.2, -0.9, 0.4],
+    shin: [0.2, -0.9, 0.3],
+    arch: 10,
+    nod: 0,
+  },
+  D = {
+    arm: [1, 0.5, -0.1],
+    fore: [1, 0.7, -0.1],
+    thigh: [0.4, -1, 0.25],
+    shin: [0.4, -1, 0.2],
+    arch: 0,
+    nod: 0,
+  },
+  O = {
+    braceT: 0.12,
+    braceFade: 0.1,
+    braceK: 0.7,
+    resist: 4,
+    footMu: 1.6,
+    slack: 0.4,
+    gravity: 12,
+    damp: 2.5,
+    rollDamp: 10,
+    rollCap: 3,
+    airAim: 6,
+    bodyMu: 0.25,
+    limbMu: 0.7,
+    bodyBounce: 0.02,
+    spine: 0.12,
+    neck: 0.25,
+    spineRange: 0.1,
+    fall: 1,
+    tripBase: 1.2,
+    tripPerSpeed: 0.35,
+    tripMax: 4,
+    lift: 0,
+    topple: 1.4,
+    leanFall: 4,
+    twist: 0.5,
+    feetKeep: 0.85,
+    reach: S,
+    splat: C,
+    splatT: 0.15,
+    muscle: [0.08, 0.05],
+    core: [0.1, 0.06],
+    muscleDamp: 0.35,
+    jitter: 0.2,
+    boardKeep: 0.95,
+    boardPop: 1.7,
+    boardPopPerSpeed: 0.06,
+    boardFlip: [3, 7],
+    boardYaw: [1, 3],
+    boardBounce: 0.15,
+    boardMu: 0.7,
+    boardRoll: 0.25,
+    blend: 0.3,
+    hopWait: 0.18,
+    hop: 0.2,
+    hopHeight: 0.25,
+    pick: ee,
+    rand: Math.random,
+  },
+  k = O,
+  A = {
+    starfish: {},
+    superman: {
+      braceT: 0.05,
+      braceFade: 0.06,
+      resist: 0,
+      feetKeep: 0.6,
+      tripBase: 2,
+      tripPerSpeed: 0.25,
+      tripMax: 4,
+      lift: 1.4,
+      reach: w,
+      splat: T,
+      muscle: [0.1, 0.05],
+      core: [0.12, 0.08],
+      rollDamp: 14,
+      bodyMu: 0.12,
+      limbMu: 0.5,
+    },
+    backslam: {
+      fall: -1,
+      feetKeep: 1.25,
+      braceT: 0.05,
+      braceFade: 0.08,
+      resist: 0,
+      tripBase: 1.5,
+      tripPerSpeed: 0.3,
+      tripMax: 4.5,
+      reach: E,
+      splat: D,
+      rollDamp: 12,
+      bodyMu: 0.15,
+      limbMu: 0.6,
+      boardKeep: 1.25,
+      boardPop: 1,
+    },
+  },
+  j = { ...A.backslam, fall: 1, feetKeep: 0.8, boardKeep: 0.95, boardPop: 1.7 };
+function ee(e, t) {
+  return e.speed < 1.5
+    ? A.starfish
+    : e.lean < -0.5
+      ? A.backslam
+      : e.off > 2.3
+        ? j
+        : e.lean > 0.5
+          ? e.speed > 6 && t() < 0.6
+            ? A.superman
+            : A.starfish
+          : e.leaned || e.off > 0.7
+            ? A.starfish
+            : e.speed > 6
+              ? t() < 0.6
+                ? A.superman
+                : A.backslam
+              : t() < 0.5
+                ? A.starfish
+                : A.backslam;
+}
+var M = [_.PELVIS, _.BUTT, _.HIP_L, _.HIP_R],
+  N = [_.CHEST, _.STERNUM, _.SH_L, _.SH_R, _.NECK],
+  te = [_.KN_L, _.AN_L, _.KN_R, _.AN_R],
+  ne = [_.EL_L, _.WR_L, _.EL_R, _.WR_R],
+  re = [...te, ...ne],
+  ie = {
+    [_.AN_L]: _.KN_L,
+    [_.AN_R]: _.KN_R,
+    [_.WR_L]: _.EL_L,
+    [_.WR_R]: _.EL_R,
+  },
+  ae = (e) => e.reduce((e, t) => e + 1 / v[t].w, 0),
+  oe = ae(M),
+  se = ae(N),
+  P = Math.PI / 180,
+  ce = 0.1,
+  le = 10,
+  ue = 0.5,
+  de = 0.01,
+  fe = { fwd: 115 * P, back: 25 * P, out: 70 * P, across: 25 * P },
+  pe = 25 * P,
+  me = [
+    [_.HIP_L, _.KN_L, _.AN_L, 1],
+    [_.HIP_R, _.KN_R, _.AN_R, -1],
+  ],
+  F = new n(0, -1, 0),
+  he = new n(0, o.headC[1] - o.neckY, o.headC[2]).normalize(),
+  I = v.map(() => new n()),
+  L = new n(),
+  R = new n(),
+  z = new n(),
+  B = new n(),
+  V = new n(),
+  H = new t(),
+  U = new e(),
+  W = new e(),
+  ge = new e(),
+  _e = new e(),
+  ve = new e(),
+  ye = new e(),
+  be = new Float64Array(12),
+  xe = new Float64Array(v.length * 3),
+  Se = new Float64Array(v.length * 3),
+  G = new Float64Array(3),
+  K = new Float64Array(3),
+  Ce = new Float64Array(9),
+  q = new Float64Array(3),
+  we = r(),
+  Te = class {
+    body = new i(v.length);
+    target = new n();
+    targetV = new n();
+    tune = k;
+    mirror = 1;
+    braces = [];
+    spine = [];
+    spineLimits = [];
+    neck = [];
+    braceT = 0;
+    limpAt = -1;
+    clock = 0;
+    downAt = -1;
+    blocks = [new Oe(M), new Oe(N)];
+    reachT = new Float64Array(v.length * 3);
+    splatT = new Float64Array(v.length * 3);
+    constructor() {
+      let e = this.body;
+      (v.forEach((t, n) => {
+        ((e.r[n] = t.r), (e.w[n] = t.w));
+      }),
+        (e.walls[_.NECK] = 0));
+      let t = y,
+        n = (n, r, i = 1, a = !1, o = 1) =>
+          e.stick(
+            n,
+            r,
+            i,
+            a,
+            Math.hypot(
+              t[r][0] - t[n][0],
+              t[r][1] - t[n][1],
+              t[r][2] - t[n][2],
+            ) * o,
+          ),
+        {
+          PELVIS: r,
+          BUTT: i,
+          CHEST: a,
+          STERNUM: o,
+          NECK: s,
+          HEAD: c,
+          SH_L: l,
+          EL_L: u,
+          WR_L: d,
+          SH_R: f,
+          EL_R: p,
+          WR_R: m,
+          HIP_L: h,
+          KN_L: g,
+          AN_L: b,
+          HIP_R: x,
+          KN_R: S,
+          AN_R: C,
+        } = _;
+      for (let [e, t] of [
+        [r, i],
+        [r, h],
+        [r, x],
+        [h, x],
+        [i, h],
+        [i, x],
+      ])
+        n(e, t);
+      for (let [e, t] of [
+        [a, o],
+        [a, l],
+        [a, f],
+        [l, f],
+        [o, l],
+        [o, f],
+        [s, a],
+        [s, l],
+        [s, f],
+        [s, o],
+      ])
+        n(e, t);
+      n(r, a);
+      for (let [t, s] of [
+        [i, a],
+        [r, o],
+        [h, l],
+        [x, f],
+      ]) {
+        let r = n(t, s);
+        (this.spine.push(r),
+          this.spineLimits.push(
+            e.stick(t, s, 0, !0, r.rest),
+            e.stick(t, s, 0, !1, r.rest, !0),
+          ));
+      }
+      n(s, c);
+      for (let e of [l, f, o]) this.neck.push(n(e, c));
+      for (let [e, t] of [
+        [l, u],
+        [u, d],
+        [f, p],
+        [p, m],
+        [h, g],
+        [g, b],
+        [x, S],
+        [S, C],
+      ])
+        n(e, t);
+      (n(h, b, 1, !0, 0.6),
+        n(x, C, 1, !0, 0.6),
+        n(l, d, 1, !0, 0.5),
+        n(f, m, 1, !0, 0.5));
+      for (let t of [g, S]) e.stick(t, o, 1, !0, 0.18);
+      for (let t of [b, C]) e.stick(t, i, 1, !0, 0.15);
+      for (let t of [d, m, u, p]) e.stick(t, c, 1, !0, 0.22);
+      (e.stick(g, S, 1, !0, 0.1), e.stick(b, C, 1, !0, 0.1));
+      for (let [e, t] of [
+        [h, b],
+        [r, b],
+        [i, b],
+        [x, C],
+        [r, C],
+        [i, C],
+        [r, s],
+        [i, o],
+        [h, f],
+        [x, l],
+      ])
+        this.braces.push(n(e, t, 0));
+      ((e.pre = (t) => {
+        this.clock += t;
+        for (let t of this.blocks) t.match(e);
+        (this.downAt < 0 && this.grounded(0) && (this.downAt = this.clock),
+          this.brace(t),
+          this.resist(t),
+          this.leash(t),
+          this.airAim(t),
+          this.capRoll(t),
+          xe.set(e.p),
+          this.muscles());
+        let n = this.tune,
+          r = e.p,
+          i =
+            this.downAt < 0
+              ? 0
+              : Math.min(1, Math.max(0, (0.75 - ke(r)) / 0.25));
+        e.spinDamp = n.damp + (n.rollDamp - n.damp) * i;
+      }),
+        (e.solve = () => this.hinges()),
+        (e.post = () => {
+          for (let t of this.blocks) t.match(e);
+          this.keepSpin();
+        }));
+    }
+    start(e, t, n, r, i, a, o, s, c, l = k.rand, u = null) {
+      let d = this.body;
+      (d.reset(), (d.col = s), (d.planeY = c), (this.mirror = o));
+      let f = Math.hypot(t.x, t.y, t.z),
+        p = t.x * n.x + t.y * n.y + t.z * n.z;
+      B.set(t.x - n.x * p, t.y - n.y * p, t.z - n.z * p);
+      let m = B.length(),
+        h =
+          m > 0.5
+            ? Math.acos(
+                Math.max(
+                  -1,
+                  Math.min(1, (B.x * r.x + B.y * r.y + B.z * r.z) / m),
+                ),
+              )
+            : 0,
+        g = u ? Math.hypot(u.x, u.y, u.z) : 0,
+        v = g > ce,
+        y =
+          v && m > 0.5
+            ? (u.x * (n.y * B.z - n.z * B.y) +
+                u.y * (n.z * B.x - n.x * B.z) +
+                u.z * (n.x * B.y - n.y * B.x)) /
+              (g * m)
+            : 0,
+        b = (this.tune = k.pick
+          ? {
+              ...k,
+              ...k.pick({ speed: f, off: h, bal: a, lean: y, leaned: v }, l),
+            }
+          : k);
+      d.mu.fill(b.bodyMu);
+      for (let e of re) d.mu[e] = b.limbMu;
+      (d.e.fill(b.bodyBounce), (d.gravity = b.gravity), (d.spinDamp = b.damp));
+      for (let e of this.spine) e.k = b.spine;
+      for (let e of this.neck) e.k = b.neck;
+      this.spineLimits.forEach((e, t) => {
+        ((e.k = +(b.spineRange > 0)),
+          (e.rest =
+            this.spine[t >> 1].rest *
+            (1 + (t & 1 ? b.spineRange : -b.spineRange))));
+      });
+      for (let t = 0; t < d.n * 3; t++) d.p[t] = d.o[t] = e[t];
+      for (let e of this.braces)
+        e.rest = Math.hypot(
+          d.p[e.b * 3] - d.p[e.a * 3],
+          d.p[e.b * 3 + 1] - d.p[e.a * 3 + 1],
+          d.p[e.b * 3 + 2] - d.p[e.a * 3 + 2],
+        );
+      ((this.braceT = 0), (this.limpAt = -1), (this.clock = 0));
+      for (let e of this.blocks) e.start(d, o);
+      ((this.downAt = -1), (d.mu[_.AN_L] = d.mu[_.AN_R] = b.footMu));
+      let x, S, C, w;
+      if (f > 1.5) {
+        if (
+          (B.lengthSq() < 0.25 && B.set(r.x, r.y, r.z),
+          B.normalize(),
+          (x = (n.y * B.z - n.z * B.y) * b.fall),
+          (S = (n.z * B.x - n.x * B.z) * b.fall),
+          (C = (n.x * B.y - n.y * B.x) * b.fall),
+          (w = Math.min(
+            b.tripMax,
+            Math.max(1, b.tripBase + b.tripPerSpeed * f),
+          )),
+          v)
+        ) {
+          let e = w / (Math.hypot(x, S, C) || 1),
+            t = b.leanFall / g;
+          ((x = x * e + u.x * t),
+            (S = S * e + u.y * t),
+            (C = C * e + u.z * t),
+            (w = Math.hypot(x, S, C)));
+        }
+      } else if (v) ((x = u.x), (S = u.y), (C = u.z), (w = b.leanFall));
+      else {
+        let e = a > 0.05 ? -1 : a < -0.05 ? 1 : l() < 0.5 ? -1 : 1;
+        ((x = r.x * e), (S = r.y * e), (C = r.z * e), (w = b.topple));
+      }
+      let T = Math.hypot(x, S, C) || 1,
+        E = (l() - 0.5) * 2 * b.twist,
+        D = (x / T) * w + n.x * E,
+        O = (S / T) * w + n.y * E,
+        A = (C / T) * w + n.z * E,
+        j = d.p,
+        ee = (j[_.AN_L * 3] + j[_.AN_R * 3]) / 2,
+        M = (j[_.AN_L * 3 + 1] + j[_.AN_R * 3 + 1]) / 2,
+        N = (j[_.AN_L * 3 + 2] + j[_.AN_R * 3 + 2]) / 2;
+      for (let e = 0; e < d.n; e++) {
+        let r = e * 3,
+          i = j[r] - ee,
+          a = j[r + 1] - M,
+          o = j[r + 2] - N,
+          s = e === _.AN_L || e === _.AN_R || e === _.KN_L || e === _.KN_R,
+          c = s ? b.feetKeep : 1,
+          l = s ? 0 : b.lift;
+        ((d.v[r] = t.x * c + n.x * l + O * o - A * a),
+          (d.v[r + 1] = t.y * c + n.y * l + A * i - D * o),
+          (d.v[r + 2] = t.z * c + n.z * l + D * a - O * i));
+      }
+      b.reach &&
+        (je(b.reach, b.jitter, l, this.reachT),
+        je(b.splat ?? b.reach, b.jitter, l, this.splatT));
+    }
+    step(e) {
+      this.body.step(e);
+    }
+    grounded(e) {
+      let t = this.body.air;
+      return (
+        Math.min(t[_.PELVIS], t[_.BUTT], t[_.CHEST], t[_.STERNUM], t[_.HEAD]) <=
+        e
+      );
+    }
+    gap() {
+      let e = this.body.p;
+      return Math.hypot(
+        e[0] - this.target.x,
+        e[1] - this.target.y,
+        e[2] - this.target.z,
+      );
+    }
+    brace(e) {
+      let t = this.tune;
+      if (this.limpAt >= 0 && this.braceT - this.limpAt > t.braceFade) return;
+      ((this.braceT += e),
+        this.limpAt < 0 &&
+          (this.braceT >= t.braceT || this.grounded(0) || this.aloft()) &&
+          (this.limpAt = this.braceT));
+      let n =
+        this.limpAt < 0
+          ? t.braceK
+          : t.braceK *
+            Math.max(
+              0,
+              1 - (this.braceT - this.limpAt) / Math.max(t.braceFade, 1e-6),
+            );
+      for (let e of this.braces) e.k = n;
+      n === 0 && (this.body.mu[_.AN_L] = this.body.mu[_.AN_R] = t.limbMu);
+    }
+    aloft() {
+      let e = 1 / 0;
+      for (let t of this.body.air) e = Math.min(e, t);
+      return e > 0.08;
+    }
+    resist(e) {
+      let { p: t, o: n, n: r, air: i } = this.body;
+      if (Math.min(i[_.AN_L], i[_.AN_R]) > 0.05) return;
+      let a = this.tune,
+        o =
+          Math.min(1, a.resist * e) *
+          (this.braces[0].k / Math.max(a.braceK, 1e-6));
+      if (o <= 0) return;
+      let s = _.AN_L * 3,
+        c = _.AN_R * 3,
+        l = (t[s] - n[s] + t[c] - n[c]) / 2,
+        u = (t[s + 1] - n[s + 1] + t[c + 1] - n[c + 1]) / 2,
+        d = (t[s + 2] - n[s + 2] + t[c + 2] - n[c + 2]) / 2;
+      for (let e = 0; e < r; e++) {
+        if (e === _.AN_L || e === _.AN_R) continue;
+        let r = e * 3;
+        ((t[r] -= (t[r] - n[r] - l) * o),
+          (t[r + 1] -= (t[r + 1] - n[r + 1] - u) * o),
+          (t[r + 2] -= (t[r + 2] - n[r + 2] - d) * o));
+      }
+    }
+    muscles() {
+      let e = this.tune;
+      if (!e.reach) return;
+      let t =
+          this.downAt < 0
+            ? 0
+            : Math.min(
+                1,
+                (this.clock - this.downAt) / Math.max(e.splatT, 1e-6),
+              ),
+        n = e.muscle[0] + (e.muscle[1] - e.muscle[0]) * t,
+        r = e.core[0] + (e.core[1] - e.core[0]) * t,
+        i = this.braces[0].k / Math.max(e.braceK, 1e-6),
+        a = Math.min(1, this.clock / 0.1),
+        o = this.body.p;
+      if (
+        (Ae(o, _.PELVIS, _.HIP_L, _.HIP_R, _.PELVIS, _.BUTT, this.mirror, be),
+        this.blockStep(M, oe),
+        n * (1 - i) > 0)
+      )
+        for (let e of te) this.pull(e, t, n * (1 - i), M, oe);
+      if (r * (1 - i) > 0) for (let e of N) this.pull(e, t, r * (1 - i), M, oe);
+      (Ae(o, _.CHEST, _.SH_L, _.SH_R, _.STERNUM, _.CHEST, this.mirror, be),
+        this.blockStep(N, se));
+      for (let e of ne) this.pull(e, t, n * a, N, se);
+      this.pull(_.HEAD, t, r * a, N, se);
+    }
+    blockStep(e, t) {
+      let { p: n, o: r, w: i } = this.body;
+      q[0] = q[1] = q[2] = 0;
+      for (let a of e) {
+        let e = 1 / i[a] / t;
+        ((q[0] += (n[a * 3] - r[a * 3]) * e),
+          (q[1] += (n[a * 3 + 1] - r[a * 3 + 1]) * e),
+          (q[2] += (n[a * 3 + 2] - r[a * 3 + 2]) * e));
+      }
+    }
+    keepSpin() {
+      let { p: e } = this.body;
+      for (let t = 0; t < e.length; t++) Se[t] = e[t] - xe[t];
+      Ee(this.body, Se, G) && De(this.body, -1);
+    }
+    capRoll(e) {
+      let t = this.tune,
+        n = this.body;
+      if (t.rollCap <= 0 || this.downAt < 0 || !Ee(n, n.v, G)) return;
+      let r = Math.hypot(G[0], G[2]);
+      if (r <= t.rollCap) return;
+      let i = ((r - t.rollCap) / r) * e;
+      ((G[0] *= i), (G[1] = 0), (G[2] *= i), De(n, -1));
+    }
+    airAim(e) {
+      let t = this.tune,
+        n = this.body,
+        r = n.p;
+      if (t.airAim <= 0 || this.downAt >= 0 || !this.aloft()) return;
+      let i = _.PELVIS * 3,
+        a = _.NECK * 3,
+        o = r[a] - r[i],
+        s = r[a + 1] - r[i + 1],
+        c = r[a + 2] - r[i + 2],
+        l = Math.sqrt(o * o + s * s + c * c) || 1;
+      ((o /= l), (s /= l), (c /= l));
+      let u = c,
+        d = -o,
+        f = Math.sqrt(u * u + d * d);
+      if (f < 0.2) return;
+      ((u /= f), (d /= f));
+      let p = n.planeY;
+      if (n.col) {
+        if (!n.col.raySurface(r[i], r[i + 1] + 0.1, r[i + 2], 0, -1, 0, 30, we))
+          return;
+        p = we.py;
+      }
+      let m = 0,
+        h = 0;
+      for (let e = 0; e < n.n; e++) {
+        let t = 1 / n.w[e];
+        ((m += n.v[e * 3 + 1] * t), (h += t));
+      }
+      m /= h;
+      let g = Math.max(0, r[i + 1] - p - 0.15),
+        v = n.gravity,
+        y = Math.max(0.12, (m + Math.sqrt(Math.max(0, m * m + 2 * v * g))) / v),
+        b = (Math.PI / 2 - Math.acos(Math.max(-1, Math.min(1, s)))) / y;
+      if (!Ee(n, n.v, G)) return;
+      let x = (b - (G[0] * u + G[2] * d)) * Math.min(1, t.airAim * e);
+      ((G[0] = u * x * e), (G[1] = 0), (G[2] = d * x * e), De(n, 1));
+    }
+    pull(e, t, n, r, i) {
+      if (n <= 0) return;
+      let a = this.reachT,
+        o = this.splatT,
+        s = e * 3,
+        c = this.body.p,
+        l = be,
+        u = a[s] + (o[s] - a[s]) * t,
+        d = a[s + 1] + (o[s + 1] - a[s + 1]) * t,
+        f = a[s + 2] + (o[s + 2] - a[s + 2]) * t,
+        p = ie[e] ?? -1,
+        m = p < 0 ? l[0] : c[p * 3],
+        h = p < 0 ? l[1] : c[p * 3 + 1],
+        g = p < 0 ? l[2] : c[p * 3 + 2],
+        _ = (m + l[3] * u + l[6] * d + l[9] * f - c[s]) * n,
+        y = (h + l[4] * u + l[7] * d + l[10] * f - c[s + 1]) * n,
+        b = (g + l[5] * u + l[8] * d + l[11] * f - c[s + 2]) * n,
+        x = Math.sqrt(_ * _ + y * y + b * b);
+      if (x > de) {
+        let e = de / x;
+        ((_ *= e), (y *= e), (b *= e));
+      }
+      let S = this.body.o,
+        C = this.tune.muscleDamp;
+      ((_ -= (c[s] - S[s] - q[0]) * C),
+        (y -= (c[s + 1] - S[s + 1] - q[1]) * C),
+        (b -= (c[s + 2] - S[s + 2] - q[2]) * C),
+        (c[s] += _),
+        (c[s + 1] += y),
+        (c[s + 2] += b));
+      let w = 1 / v[e].w / i;
+      for (let e of r)
+        ((c[e * 3] -= _ * w), (c[e * 3 + 1] -= y * w), (c[e * 3 + 2] -= b * w));
+    }
+    leash(e) {
+      let t = this.body,
+        n = t.p,
+        r = t.o,
+        i = this.target,
+        a = i.x - n[0],
+        o = i.y - n[1],
+        s = i.z - n[2],
+        c = Math.sqrt(a * a + o * o + s * s),
+        l = this.tune.slack;
+      if (c > l) {
+        let e = ((c - l) / c) * 0.2;
+        for (let r = 0; r < t.n; r++)
+          ((n[r * 3] += a * e),
+            (n[r * 3 + 1] += o * e),
+            (n[r * 3 + 2] += s * e));
+      }
+      if (!this.grounded(0.1)) return;
+      let u = 0,
+        d = 0,
+        f = 0;
+      for (let e = 0; e < t.n; e++) {
+        let i = 1 / t.w[e];
+        ((u += (n[e * 3] - r[e * 3]) * i),
+          (d += (n[e * 3 + 2] - r[e * 3 + 2]) * i),
+          (f += i));
+      }
+      let p = Math.min(1, le * e),
+        m = (this.targetV.x * e - u / f) * p,
+        h = (this.targetV.z * e - d / f) * p,
+        g = a * ue * e,
+        _ = s * ue * e;
+      for (let e = 0; e < t.n; e++)
+        ((n[e * 3] += m + g),
+          (n[e * 3 + 2] += h + _),
+          (r[e * 3] += g),
+          (r[e * 3 + 2] += _));
+    }
+    hinges() {
+      this.hipCones();
+      let e = this.mirror;
+      (this.hinge(_.HIP_L, _.KN_L, _.AN_L, _.HIP_L, _.HIP_R, e),
+        this.hinge(_.HIP_R, _.KN_R, _.AN_R, _.HIP_L, _.HIP_R, e),
+        this.hinge(_.SH_L, _.EL_L, _.WR_L, _.SH_L, _.SH_R, -e),
+        this.hinge(_.SH_R, _.EL_R, _.WR_R, _.SH_L, _.SH_R, -e));
+    }
+    hipCones() {
+      let e = this.body.p,
+        t = be;
+      Ae(e, _.PELVIS, _.HIP_L, _.HIP_R, _.PELVIS, _.BUTT, this.mirror, t);
+      for (let [n, r, i, a] of me) {
+        let o = e[r * 3] - e[n * 3],
+          s = e[r * 3 + 1] - e[n * 3 + 1],
+          c = e[r * 3 + 2] - e[n * 3 + 2],
+          l = Math.sqrt(o * o + s * s + c * c);
+        if (l < 1e-6) continue;
+        let u = ((o * t[3] + s * t[4] + c * t[5]) / l) * a,
+          d = (o * t[6] + s * t[7] + c * t[8]) / l,
+          f = (o * t[9] + s * t[10] + c * t[11]) / l,
+          p = Math.acos(Math.max(-1, Math.min(1, -d)));
+        if (p < pe) continue;
+        let m = Math.hypot(u, f),
+          h = m > 1e-6 ? u / m : 0,
+          g = m > 1e-6 ? f / m : 1,
+          _ = g >= 0 ? fe.fwd : fe.back,
+          y = h >= 0 ? fe.out : fe.across,
+          b = 1 / Math.sqrt((g * g) / (_ * _) + (h * h) / (y * y));
+        if (p <= b) continue;
+        let x = Math.sin(b),
+          S = Math.cos(b),
+          C = h * x * a,
+          w = -S,
+          T = g * x,
+          E = (t[3] * C + t[6] * w + t[9] * T) * l,
+          D = (t[4] * C + t[7] * w + t[10] * T) * l,
+          O = (t[5] * C + t[8] * w + t[11] * T) * l,
+          k = e[n * 3] + E - e[r * 3],
+          A = e[n * 3 + 1] + D - e[r * 3 + 1],
+          j = e[n * 3 + 2] + O - e[r * 3 + 2];
+        for (let t of [r, i])
+          ((e[t * 3] += k), (e[t * 3 + 1] += A), (e[t * 3 + 2] += j));
+        let ee = (1 / v[r].w + 1 / v[i].w) / oe;
+        for (let t of M)
+          ((e[t * 3] -= k * ee),
+            (e[t * 3 + 1] -= A * ee),
+            (e[t * 3 + 2] -= j * ee));
+      }
+    }
+    hinge(e, t, n, r, i, a) {
+      let o = this.body.p,
+        s = o[n * 3] - o[e * 3],
+        c = o[n * 3 + 1] - o[e * 3 + 1],
+        l = o[n * 3 + 2] - o[e * 3 + 2],
+        u = o[r * 3] - o[i * 3],
+        d = o[r * 3 + 1] - o[i * 3 + 1],
+        f = o[r * 3 + 2] - o[i * 3 + 2],
+        p = Math.sqrt(s * s + c * c + l * l),
+        m = Math.sqrt(u * u + d * d + f * f);
+      if (p < 1e-6 || m < 1e-6) return;
+      ((s /= p), (c /= p), (l /= p), (u /= m), (d /= m), (f /= m));
+      let h = c * f - l * d,
+        g = l * u - s * f,
+        _ = s * d - c * u,
+        v = Math.sqrt(h * h + g * g + _ * _),
+        y = Math.min(1, Math.max(0, (v - 0.25) / 0.35));
+      if (y === 0) return;
+      ((h /= v), (g /= v), (_ /= v));
+      let b =
+        (o[t * 3] - o[e * 3]) * h +
+        (o[t * 3 + 1] - o[e * 3 + 1]) * g +
+        (o[t * 3 + 2] - o[e * 3 + 2]) * _;
+      if (b * a >= 0) return;
+      let x = b * y;
+      ((o[t * 3] -= h * x), (o[t * 3 + 1] -= g * x), (o[t * 3 + 2] -= _ * x));
+    }
+    pose(e, t) {
+      let n = this.body.lerped();
+      for (let t = 0; t < I.length; t++)
+        I[t].fromArray(n, t * 3).applyMatrix4(e);
+      (Me(I[_.HIP_L], I[_.HIP_R], I[_.PELVIS], I[_.BUTT], U),
+        Me(I[_.SH_L], I[_.SH_R], I[_.STERNUM], I[_.CHEST], W),
+        ge.slerpQuaternions(U, W, 0.5));
+      let r = t.q;
+      (t.hips.copy(I[_.PELVIS]),
+        r.Hips.copy(U),
+        r.Spine.copy(ve.copy(U).invert()).multiply(ge),
+        r.Chest.copy(ve.copy(ge).invert()).multiply(W),
+        J(he, W, I[_.NECK], I[_.HEAD], r.Head),
+        J(F, W, I[_.SH_L], I[_.EL_L], r.LeftArm),
+        J(
+          F,
+          _e.copy(W).multiply(r.LeftArm),
+          I[_.EL_L],
+          I[_.WR_L],
+          r.LeftForeArm,
+        ),
+        J(F, W, I[_.SH_R], I[_.EL_R], r.RightArm),
+        J(
+          F,
+          _e.copy(W).multiply(r.RightArm),
+          I[_.EL_R],
+          I[_.WR_R],
+          r.RightForeArm,
+        ),
+        J(F, U, I[_.HIP_L], I[_.KN_L], r.LeftUpLeg),
+        J(F, _e.copy(U).multiply(r.LeftUpLeg), I[_.KN_L], I[_.AN_L], r.LeftLeg),
+        J(F, U, I[_.HIP_R], I[_.KN_R], r.RightUpLeg),
+        J(
+          F,
+          _e.copy(U).multiply(r.RightUpLeg),
+          I[_.KN_R],
+          I[_.AN_R],
+          r.RightLeg,
+        ));
+    }
+  };
+function Ee(e, t, n) {
+  let { p: r, w: i, n: a } = e,
+    o = 0,
+    s = 0,
+    c = 0,
+    l = 0;
+  for (let e = 0; e < a; e++) {
+    let t = 1 / i[e];
+    ((o += r[e * 3] * t),
+      (s += r[e * 3 + 1] * t),
+      (c += r[e * 3 + 2] * t),
+      (l += t));
+  }
+  ((o /= l), (s /= l), (c /= l));
+  let u = 0,
+    d = 0,
+    f = 0,
+    p = 0,
+    m = 0,
+    h = 0,
+    g = 0,
+    _ = 0,
+    v = 0;
+  for (let e = 0; e < a; e++) {
+    let n = 1 / i[e],
+      a = e * 3,
+      l = r[a] - o,
+      y = r[a + 1] - s,
+      b = r[a + 2] - c,
+      x = t[a],
+      S = t[a + 1],
+      C = t[a + 2];
+    ((u += n * (y * C - b * S)),
+      (d += n * (b * x - l * C)),
+      (f += n * (l * S - y * x)),
+      (p += n * (y * y + b * b)),
+      (m += n * (l * l + b * b)),
+      (h += n * (l * l + y * y)),
+      (g -= n * l * y),
+      (_ -= n * l * b),
+      (v -= n * y * b));
+  }
+  let y = m * h - v * v,
+    b = _ * v - g * h,
+    x = g * v - _ * m,
+    S = p * y + g * b + _ * x;
+  if (Math.abs(S) < 1e-12) return !1;
+  let C = p * h - _ * _,
+    w = g * _ - p * v,
+    T = p * m - g * g;
+  return (
+    (n[0] = (y * u + b * d + x * f) / S),
+    (n[1] = (b * u + C * d + w * f) / S),
+    (n[2] = (x * u + w * d + T * f) / S),
+    (K[0] = o),
+    (K[1] = s),
+    (K[2] = c),
+    !0
+  );
+}
+function De(e, t) {
+  let n = e.p,
+    r = G[0] * t,
+    i = G[1] * t,
+    a = G[2] * t;
+  for (let t = 0; t < e.n; t++) {
+    let e = t * 3,
+      o = n[e] - K[0],
+      s = n[e + 1] - K[1],
+      c = n[e + 2] - K[2];
+    ((n[e] += i * c - a * s),
+      (n[e + 1] += a * o - r * c),
+      (n[e + 2] += r * s - i * o));
+  }
+}
+var Oe = class {
+  q;
+  m;
+  rot = new e();
+  ids;
+  constructor(e) {
+    ((this.ids = e),
+      (this.q = new Float64Array(e.length * 3)),
+      (this.m = Float64Array.from(e, (e) => 1 / v[e].w)));
+  }
+  start(e, t) {
+    let n = y,
+      { ids: r, q: i, m: a } = this,
+      o = 0,
+      s = 0,
+      c = 0,
+      l = 0;
+    (r.forEach((e, t) => {
+      ((o += n[e][0] * a[t]),
+        (s += n[e][1] * a[t]),
+        (c += n[e][2] * a[t]),
+        (l += a[t]));
+    }),
+      r.forEach((e, r) => {
+        ((i[r * 3] = (n[e][0] - o / l) * t),
+          (i[r * 3 + 1] = n[e][1] - s / l),
+          (i[r * 3 + 2] = n[e][2] - c / l));
+      }),
+      this.rot.identity(),
+      this.fit(e.p, 30));
+  }
+  match(e) {
+    this.fit(e.p, 20);
+    let { ids: t, q: n } = this,
+      r = e.p;
+    H.makeRotationFromQuaternion(this.rot);
+    let i = H.elements;
+    t.forEach((e, t) => {
+      let a = n[t * 3],
+        o = n[t * 3 + 1],
+        s = n[t * 3 + 2];
+      ((r[e * 3] = K[0] + i[0] * a + i[4] * o + i[8] * s),
+        (r[e * 3 + 1] = K[1] + i[1] * a + i[5] * o + i[9] * s),
+        (r[e * 3 + 2] = K[2] + i[2] * a + i[6] * o + i[10] * s));
+    });
+  }
+  fit(e, t) {
+    let { ids: n, q: r, m: i } = this,
+      a = 0,
+      o = 0,
+      s = 0,
+      c = 0;
+    (n.forEach((t, n) => {
+      ((a += e[t * 3] * i[n]),
+        (o += e[t * 3 + 1] * i[n]),
+        (s += e[t * 3 + 2] * i[n]),
+        (c += i[n]));
+    }),
+      (a /= c),
+      (o /= c),
+      (s /= c),
+      (K[0] = a),
+      (K[1] = o),
+      (K[2] = s));
+    let l = Ce;
+    (l.fill(0),
+      n.forEach((t, n) => {
+        let c = (e[t * 3] - a) * i[n],
+          u = (e[t * 3 + 1] - o) * i[n],
+          d = (e[t * 3 + 2] - s) * i[n];
+        for (let e = 0; e < 3; e++) {
+          let t = r[n * 3 + e];
+          ((l[e * 3] += c * t),
+            (l[e * 3 + 1] += u * t),
+            (l[e * 3 + 2] += d * t));
+        }
+      }));
+    for (let e = 0; e < t; e++) {
+      H.makeRotationFromQuaternion(this.rot);
+      let e = H.elements,
+        t = 0,
+        n = 0,
+        r = 0,
+        i = 0;
+      for (let a = 0; a < 3; a++) {
+        let o = e[a * 4],
+          s = e[a * 4 + 1],
+          c = e[a * 4 + 2],
+          u = l[a * 3],
+          d = l[a * 3 + 1],
+          f = l[a * 3 + 2];
+        ((t += s * f - c * d),
+          (n += c * u - o * f),
+          (r += o * d - s * u),
+          (i += o * u + s * d + c * f));
+      }
+      let a = 1 / (Math.abs(i) + 1e-9);
+      ((t *= a), (n *= a), (r *= a));
+      let o = Math.sqrt(t * t + n * n + r * r);
+      if (o < 1e-6) break;
+      (ye.setFromAxisAngle(V.set(t / o, n / o, r / o), o),
+        this.rot.premultiply(ye).normalize());
+    }
+  }
+};
+function ke(e) {
+  let t = _.PELVIS * 3,
+    n = _.NECK * 3,
+    r = e[n] - e[t],
+    i = e[n + 1] - e[t + 1],
+    a = e[n + 2] - e[t + 2];
+  return Math.abs(i) / (Math.sqrt(r * r + i * i + a * a) || 1);
+}
+function Ae(e, t, n, r, i, a, o, s) {
+  (L.set(
+    e[n * 3] - e[r * 3],
+    e[n * 3 + 1] - e[r * 3 + 1],
+    e[n * 3 + 2] - e[r * 3 + 2],
+  ).normalize(),
+    z.set(
+      e[i * 3] - e[a * 3],
+      e[i * 3 + 1] - e[a * 3 + 1],
+      e[i * 3 + 2] - e[a * 3 + 2],
+    ),
+    R.crossVectors(z, L).normalize().multiplyScalar(o),
+    z.crossVectors(L, R).multiplyScalar(o),
+    (s[0] = e[t * 3]),
+    (s[1] = e[t * 3 + 1]),
+    (s[2] = e[t * 3 + 2]),
+    (s[3] = L.x),
+    (s[4] = L.y),
+    (s[5] = L.z),
+    (s[6] = R.x),
+    (s[7] = R.y),
+    (s[8] = R.z),
+    (s[9] = z.x),
+    (s[10] = z.y),
+    (s[11] = z.z));
+}
+function je(e, t, n, r) {
+  let i = y,
+    a = (e, t, n, a, o) => {
+      ((r[e * 3] = t - i[o][0]),
+        (r[e * 3 + 1] = n - i[o][1]),
+        (r[e * 3 + 2] = a - i[o][2]));
+    },
+    o = (e, t, n, r) => {
+      let o = Math.cos(n),
+        s = Math.sin(n),
+        [c, l, u] = i[t],
+        [d, f, p] = i[e];
+      a(e, d, l + (f - l) * o - (p - u) * s, u + (f - l) * s + (p - u) * o, r);
+    };
+  for (let t of N) o(t, _.PELVIS, -e.arch * P, _.PELVIS);
+  o(_.HEAD, _.NECK, -e.nod * P, _.CHEST);
+  let s = () => (n() - 0.5) * 2 * t,
+    c = (e, t, n, o, c, l, u) => {
+      let d = s(),
+        f = s(),
+        p = s();
+      (B.set(o[0] * l + d * l, o[1] + f, o[2] + p).normalize(),
+        V.set(
+          c[0] * l + (d + s() * 0.3) * l,
+          c[1] + f + s() * 0.3,
+          c[2] + p + s() * 0.3,
+        ).normalize());
+      let m = Math.hypot(
+          i[t][0] - i[e][0],
+          i[t][1] - i[e][1],
+          i[t][2] - i[e][2],
+        ),
+        h = Math.hypot(i[n][0] - i[t][0], i[n][1] - i[t][1], i[n][2] - i[t][2]),
+        g = i[e][0] + B.x * m,
+        _ = i[e][1] + B.y * m,
+        v = i[e][2] + B.z * m;
+      (a(t, g, _, v, u),
+        (r[n * 3] = V.x * h),
+        (r[n * 3 + 1] = V.y * h),
+        (r[n * 3 + 2] = V.z * h));
+    };
+  (c(_.HIP_L, _.KN_L, _.AN_L, e.thigh, e.shin, 1, _.PELVIS),
+    c(_.HIP_R, _.KN_R, _.AN_R, e.thigh, e.shin, -1, _.PELVIS),
+    c(_.SH_L, _.EL_L, _.WR_L, e.arm, e.fore, 1, _.CHEST),
+    c(_.SH_R, _.EL_R, _.WR_R, e.arm, e.fore, -1, _.CHEST));
+}
+function Me(e, t, n, r, i) {
+  (L.subVectors(e, t).normalize(),
+    z.subVectors(n, r),
+    R.crossVectors(z, L).normalize(),
+    z.crossVectors(L, R),
+    i.setFromRotationMatrix(H.makeBasis(L, R, z)));
+}
+function J(e, t, n, r, i) {
+  (B.subVectors(r, n).normalize().applyQuaternion(ve.copy(t).invert()),
+    V.copy(e).applyQuaternion(i),
+    i.premultiply(ye.setFromUnitVectors(V, B)).normalize());
+}
+var Ne = 0.02,
+  Pe = f.width / 2 - Ne,
+  Y = f.length / 2 - 0.03,
+  X = h(Y) - Ne,
+  Fe = [
+    [f.wheelX, f.wheelR, f.truckZ],
+    [-f.wheelX, f.wheelR, f.truckZ],
+    [f.wheelX, f.wheelR, -f.truckZ],
+    [-f.wheelX, f.wheelR, -f.truckZ],
+    [Pe, X, Y],
+    [-Pe, X, Y],
+    [Pe, X, -Y],
+    [-Pe, X, -Y],
+  ],
+  Ie = [0, 1, 4, 5],
+  Le = [2, 3, 6, 7],
+  Re = [4, 5, 6, 7],
+  ze = [0, 1, 2, 3],
+  Z = Fe.reduce(
+    (e, t) => [e[0] + t[0] / 8, e[1] + t[1] / 8, e[2] + t[2] / 8],
+    [0, 0, 0],
+  ),
+  Q = new n(),
+  $ = new n(),
+  Be = new n(),
+  Ve = f.width / 2,
+  He = -Z[1],
+  Ue = X + Ne - Z[1],
+  We = f.length / 2,
+  Ge = 0.15,
+  Ke = 6,
+  qe = 0.004,
+  Je = class {
+    body = new i(8);
+    mirror = 1;
+    rider = null;
+    clock = 0;
+    constructor() {
+      let e = this.body;
+      Fe.forEach((t, n) => {
+        (e.set(n, t[0], t[1], t[2]),
+          (e.r[n] = n < 4 ? f.wheelR : Ne),
+          (e.roll[n] = +(n < 4)));
+      });
+      for (let t = 0; t < 8; t++) for (let n = t + 1; n < 8; n++) e.stick(t, n);
+      ((e.drag = 0.1),
+        (e.canSleep = !0),
+        (e.pre = (t) => {
+          if (
+            ((this.clock += t),
+            this.axes(e.p),
+            (e.rollAxis.x = z.x),
+            (e.rollAxis.y = z.y),
+            (e.rollAxis.z = z.z),
+            (e.rolling = R.y > 0.5),
+            Math.abs(z.y) > 0.75)
+          ) {
+            let n = z.y > 0 ? Ie : Le,
+              r = Ke * t * t;
+            for (let t of n)
+              ((e.p[t * 3] -= R.x * r), (e.p[t * 3 + 2] -= R.z * r));
+          }
+        }),
+        (e.solve = () => {
+          this.shove(!0);
+        }));
+    }
+    shove(e) {
+      let t = this.rider;
+      if (!t || this.clock < Ge) return !1;
+      let n = this.body.p,
+        r = t.p,
+        i = 0,
+        a = 0,
+        o = 0;
+      for (let e = 0; e < 8; e++)
+        ((i += n[e * 3] / 8), (a += n[e * 3 + 1] / 8), (o += n[e * 3 + 2] / 8));
+      let s = !1;
+      for (let c = 0; c < t.n; c++) {
+        let l = t.r[c],
+          u = r[c * 3] - i,
+          d = r[c * 3 + 1] - a,
+          f = r[c * 3 + 2] - o,
+          p = u * L.x + d * L.y + f * L.z,
+          m = u * R.x + d * R.y + f * R.z,
+          h = u * z.x + d * z.y + f * z.z,
+          g = Math.max(-Ve, Math.min(Ve, p)),
+          _ = Math.max(He, Math.min(Ue, m)),
+          v = Math.max(-We, Math.min(We, h)),
+          y = p - g,
+          b = m - _,
+          x = h - v,
+          S = Math.sqrt(y * y + b * b + x * x);
+        if (S >= l) continue;
+        if (
+          (S < 1e-6
+            ? ((y = 0), (b = m > (He + Ue) / 2 ? 1 : -1), (x = 0), (S = 0))
+            : ((y /= S), (b /= S), (x /= S)),
+          (s = !0),
+          !e)
+        )
+          return !0;
+        let C = S === 0 ? l + Math.abs(m - (b > 0 ? Ue : He)) : l - S,
+          w = -(L.x * y + R.x * b + z.x * x) * C,
+          T = -(L.y * y + R.y * b + z.y * x) * C,
+          E = -(L.z * y + R.z * b + z.z * x) * C,
+          D = Math.max(0, 1 - qe / Math.max(C, 1e-9)),
+          O = this.body.o;
+        for (let e = 0; e < 8; e++)
+          ((n[e * 3] += w),
+            (n[e * 3 + 1] += T),
+            (n[e * 3 + 2] += E),
+            (O[e * 3] += w * D),
+            (O[e * 3 + 1] += T * D),
+            (O[e * 3 + 2] += E * D));
+        ((i += w), (a += T), (o += E));
+      }
+      return s;
+    }
+    start(e, t, n, r, i, a = k.rand, o = k) {
+      let s = this.body;
+      (s.reset(),
+        (s.col = r),
+        (s.planeY = i),
+        (this.clock = 0),
+        s.mu.fill(o.boardMu),
+        s.e.fill(o.boardBounce),
+        (s.muRoll = o.boardRoll),
+        (this.mirror = e.determinant() < 0 ? -1 : 1),
+        Fe.forEach((t, n) => {
+          (Q.set(t[0], t[1], t[2]).applyMatrix4(e), s.set(n, Q.x, Q.y, Q.z));
+        }),
+        s.o.set(s.p),
+        this.axes(s.p),
+        this.center($));
+      let c = Math.hypot(t.x, t.y, t.z),
+        l = (a() - 0.5) * 2,
+        u,
+        d,
+        f;
+      if (c < 1) {
+        let e = (a() < 0.5 ? -1 : 1) * 1.2;
+        ((u = n.x * o.boardPop + L.x * e),
+          (d = n.y * o.boardPop + L.y * e),
+          (f = n.z * o.boardPop + L.z * e));
+      } else {
+        let e = o.boardPop + Math.min(c, 10) * o.boardPopPerSpeed,
+          r = o.boardKeep;
+        ((u = t.x * r + n.x * e + L.x * l),
+          (d = t.y * r + n.y * e + L.y * l),
+          (f = t.z * r + n.z * e + L.z * l));
+      }
+      let [p, m] = o.boardFlip,
+        [h, g] = o.boardYaw,
+        _ = (a() < 0.5 ? -1 : 1) * (p + a() * (m - p)),
+        v = (a() - 0.5) * 2 * (h + a() * (g - h)),
+        y = z.x * _ + n.x * v,
+        b = z.y * _ + n.y * v,
+        x = z.z * _ + n.z * v;
+      for (let e = 0; e < 8; e++) {
+        let t = e * 3,
+          n = s.p[t] - $.x,
+          r = s.p[t + 1] - $.y,
+          i = s.p[t + 2] - $.z;
+        ((s.v[t] = u + b * i - x * r),
+          (s.v[t + 1] = d + x * n - y * i),
+          (s.v[t + 2] = f + y * r - b * n));
+      }
+    }
+    step(e) {
+      (this.body.sleeping &&
+        this.rider &&
+        (this.axes(this.body.p), this.shove(!1) && this.body.wake()),
+        this.body.step(e));
+    }
+    center(e) {
+      let t = this.body.lerped();
+      e.set(0, 0, 0);
+      for (let n = 0; n < 8; n++)
+        ((e.x += t[n * 3] / 8),
+          (e.y += t[n * 3 + 1] / 8),
+          (e.z += t[n * 3 + 2] / 8));
+      return e;
+    }
+    matrix(e) {
+      return (
+        this.axes(this.body.lerped()),
+        this.center($),
+        e.makeBasis(L, R, z),
+        Q.set(Z[0], Z[1], Z[2]).applyMatrix4(e),
+        e.scale(Be.set(this.mirror, 1, 1)),
+        e.setPosition($.sub(Q))
+      );
+    }
+    axes(e) {
+      (Ye(e, Ie, z),
+        Ye(e, Le, Q),
+        z.sub(Q).normalize(),
+        Ye(e, Re, R),
+        Ye(e, ze, Q),
+        R.sub(Q),
+        R.addScaledVector(z, -R.dot(z)).normalize(),
+        L.crossVectors(R, z));
+    }
+  };
+function Ye(e, t, n) {
+  n.set(0, 0, 0);
+  for (let r of t)
+    ((n.x += e[r * 3]), (n.y += e[r * 3 + 1]), (n.z += e[r * 3 + 2]));
+  return n.multiplyScalar(1 / t.length);
+}
+export {
+  v as a,
+  g as c,
+  l as d,
+  u as f,
+  b as i,
+  x as l,
+  p as m,
+  O as n,
+  _ as o,
+  m as p,
+  Je as r,
+  Te as s,
+  A as t,
+  f as u,
+};

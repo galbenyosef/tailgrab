@@ -1,0 +1,2 @@
+import { r as e } from "./decor-Tyb8Za1u.js";
+export { e as loadProps };

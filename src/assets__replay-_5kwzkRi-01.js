@@ -1,0 +1,332 @@
+// assets__replay-_5kwzkRi 01 — stage
+// Lines 1-330 of readable/assets__replay-_5kwzkRi.pretty.js (statement-aligned).
+import { yr as e } from "./three.core-DVWDmH0S.js";
+import "./tuning-D4mSK766.js";
+import { c as t, f as n, l as r, n as i, p as a } from "./scene-DiAs2bfK.js";
+import { o } from "./types-DM-HODfo.js";
+import {
+  E as s,
+  V as c,
+  W as l,
+  at as u,
+  nt as d,
+} from "./tagPaint-BOEtbgNi.js";
+import { C as f } from "./juice-6UyTKeka.js";
+import { s as p } from "./missions-eXNMrvRm.js";
+import { b as m, c as h, l as g, p as _, s as v } from "./session-DxCN6jDh.js";
+import { d as y, r as b, t as x } from "./fxHooks-Cvx_8YWC.js";
+import { n as S, t as C } from "./tapeRider-C0l9JrgL.js";
+var w = new e(),
+  T = class {
+    stage;
+    cam = new m();
+    rider;
+    local;
+    onRemoteMode = () => {};
+    speed = 1;
+    paused = !1;
+    loaded;
+    hud;
+    announcer;
+    park = null;
+    fence = null;
+    touch = { world: null, each: (e) => this.eachRider(e) };
+    fov;
+    frames = 0;
+    frameMs = 0;
+    fade = 1;
+    plain;
+    vx = !1;
+    constructor(e, t, n, a) {
+      ((this.stage = e),
+        (this.loaded = t),
+        (this.announcer = a),
+        (this.fov = e.camera.fov),
+        (this.rider = new C(t)),
+        (this.local = { state: this.rider.sim }),
+        (this.rider.onCut = () => this.cut()),
+        (this.rider.onStep = (e, t) => {
+          if (e.flags & o.COMBO_LANDED) {
+            let t = e.comboScore,
+              n = b(t);
+            (this.announcer.landing(
+              `+${t.toLocaleString()}`,
+              n?.tone ?? `white`,
+              n?.text,
+              n ? 1300 : 900,
+            ),
+              x.landed(t));
+          }
+          x.simEvents(e, t, this);
+        }),
+        (this.cam.col = t.world.col),
+        (this.hud = new g(n, t.world.layout)),
+        (this.plain = { tune: { ...this.cam.tune }, fov: this.cam.baseFov }),
+        (r || e.tier !== i.low) && this.setVx(!0));
+    }
+    get run() {
+      return this.rider.run;
+    }
+    get localFrame() {
+      return this.rider.frame;
+    }
+    get localView() {
+      return this.rider.view;
+    }
+    set onEnd(e) {
+      this.rider.onEnd = e;
+    }
+    setVx(e) {
+      ((this.vx = e),
+        this.stage.setLens(e),
+        (this.cam.tune = { ...(e ? t.cam.tune : this.plain.tune) }),
+        (this.cam.baseFov = e ? t.cam.fov : this.plain.fov));
+    }
+    async load() {
+      let e = this.loaded.world.layout;
+      ((this.park = await h(e, { day: p(d()) })),
+        this.stage.scene.add(this.park.group, this.localView.root),
+        this.stage.setLook(a(e.id)),
+        (this.fence = v(this.loaded.world)),
+        this.fence && this.stage.scene.add(this.fence),
+        await this.rider.ready());
+    }
+    get steps() {
+      return this.loaded.tape.n;
+    }
+    get at() {
+      return this.run.i;
+    }
+    get done() {
+      return this.run.done;
+    }
+    restart() {
+      this.seek(0);
+    }
+    seek(e) {
+      (this.rider.seek(e), (this.cam.inited = !1));
+    }
+    frame(e, t) {
+      let n = performance.now(),
+        r = this.paused ? 0 : t * this.speed,
+        i = this.rider.update(r),
+        a = this.run.sim,
+        o = this.localFrame;
+      ((this.cam.ridePiece = a.lastPiece),
+        this.cam.update(this.stage.camera, o, a.vx, a.vz, t),
+        this.stage.followShadow(w.set(o.x, o.y, o.z), 8));
+      let s = 1 - this.cam.closeness * 0.65;
+      ((Math.abs(s - this.fade) > 0.02 || (s === 1 && this.fade !== 1)) &&
+        (this.localView.setGhost(s), (this.fade = s)),
+        this.hud.update(a, i),
+        (this.touch.world = this.loaded.world),
+        this.park?.update(
+          r,
+          this.stage.camera.position,
+          this.stage.tier.drawDist,
+          this.touch,
+        ),
+        this.stage.render(),
+        this.frames++,
+        (this.frameMs += performance.now() - n));
+    }
+    get rails() {
+      return this.loaded.world.rails;
+    }
+    posOf(e) {
+      return this.localFrame;
+    }
+    eachRider(e) {
+      e(`tape`, this.localFrame, this.loaded.tape.look);
+    }
+    hitStop(e) {}
+    cut() {
+      this.cam.inited = !1;
+    }
+    get stats() {
+      return {
+        ...this.loaded.times,
+        frames: this.frames,
+        frameMs: this.frames ? this.frameMs / this.frames : 0,
+        at: this.run.i,
+        steps: this.steps,
+      };
+    }
+    dispose() {
+      (this.rider.dispose(),
+        this.park?.dispose(),
+        this.fence &&
+          (this.fence.removeFromParent(),
+          this.fence.geometry.dispose(),
+          this.fence.material.dispose()),
+        this.hud.dispose(),
+        this.stage.setLook(n),
+        this.vx !== r && this.stage.setLens(r));
+      let e = this.stage.camera;
+      e.fov !== this.fov && ((e.fov = this.fov), e.updateProjectionMatrix());
+    }
+  },
+  E = (e) => {
+    let t = Math.floor(e / 30);
+    return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, `0`)}`;
+  };
+function D(e) {
+  return u.link({ replay: e });
+}
+async function O(e) {
+  try {
+    let t = await l(e);
+    return k(
+      { replay: e, name: t.name || `Skater`, score: t.score, rank: t.rank },
+      t.title,
+      t,
+    );
+  } catch {
+    return {
+      id: `replay`,
+      title: `Replay`,
+      hue: `#FF8A1F`,
+      build(e) {
+        (e.own(() => setTimeout(() => y.host?.link(null), 0)),
+          e.body.append(
+            f(
+              `This replay is gone: its skater beat it since, or the game changed under it.`,
+            ),
+          ));
+      },
+    };
+  }
+}
+function k(e, t, n) {
+  return {
+    id: `replay`,
+    title: `#${e.rank} ${e.name}`,
+    hue: `#FF8A1F`,
+    backdrop: `none`,
+    build(r) {
+      let i = y.host,
+        a = f(`Checking the tape…`);
+      if (
+        (r.body.classList.add(`rp-body`),
+        r.body.append(a),
+        r.extra.append(
+          s(`span`, `chip-stat`, `${t} · ${e.score.toLocaleString()}`),
+        ),
+        !i)
+      ) {
+        a.textContent = `Replays play from the lobby.`;
+        return;
+      }
+      (i.link(e.replay), r.own(() => setTimeout(() => i.link(null), 0)));
+      let o = async () => {
+        let n = await D(e.replay),
+          a = `${e.name}'s ${e.score.toLocaleString()} · ${t} on Tailgrab`;
+        if (navigator.share && matchMedia(`(pointer: coarse)`).matches)
+          try {
+            await navigator.share({
+              title: `Tailgrab replay`,
+              text: a,
+              url: n,
+            });
+            return;
+          } catch (e) {
+            if (e?.name === `AbortError`) return;
+          }
+        try {
+          (await navigator.clipboard.writeText(n),
+            i.announcer.toast(`Replay link copied: paste it anywhere`, `mint`));
+        } catch {
+          let e = r.body.querySelector(`.rp-link`);
+          (e ||
+            ((e = s(`input`, `rp-link`)), (e.readOnly = !0), r.body.append(e)),
+            (e.value = n),
+            e.focus(),
+            e.select());
+        }
+      };
+      (async () => {
+        let t;
+        try {
+          t = await S(e.replay, r.signal, n);
+        } catch (e) {
+          r.signal.aborted ||
+            (a.textContent = `Couldn't load the replay: ${c(e)}`);
+          return;
+        }
+        if (r.signal.aborted) return;
+        if (!t.check.ok) {
+          a.textContent = `This replay is from a different version — reload to watch.`;
+          return;
+        }
+        let l = new T(i.stage, t, i.zones, i.announcer);
+        if ((await l.load(), r.signal.aborted || !i.open(l))) {
+          l.dispose();
+          return;
+        }
+        (x.bind(l, i.announcer, !0),
+          r.own(() => {
+            (x.unbind(), i.close(l), l.dispose());
+          }),
+          a.remove());
+        let u = t.tape.kind === _.RUN,
+          d = s(`div`, `rp-bar`),
+          f = s(`div`, `rp-fill`);
+        d.append(f);
+        let p = s(`span`, `rp-time`, ``),
+          m = s(`button`, `btn rp-ctl`, `PAUSE`),
+          h = s(`button`, `btn rp-ctl`, `RESTART`),
+          g = s(`button`, `btn rp-ctl`, `SLOW-MO`),
+          v = s(`button`, `btn rp-ctl`, `VX1000`),
+          y = s(`button`, `btn rp-ctl rp-share`, `SHARE`);
+        for (let e of [m, h, g, v, y]) e.type = `button`;
+        m.dataset.autofocus = ``;
+        let b = () => {
+          ((m.textContent = l.paused ? `PLAY` : `PAUSE`),
+            g.classList.toggle(`on`, l.speed < 1),
+            v.classList.toggle(`on`, l.vx));
+        };
+        (m.addEventListener(`click`, () => {
+          ((l.paused = !l.paused), b());
+        }),
+          h.addEventListener(`click`, () => {
+            (l.restart(), (l.paused = !1), (w.hidden = !0), b());
+          }),
+          g.addEventListener(`click`, () => {
+            ((l.speed = l.speed < 1 ? 1 : 0.25), b());
+          }),
+          v.addEventListener(`click`, () => {
+            (l.setVx(!l.vx), b());
+          }),
+          y.addEventListener(`click`, () => void o()));
+        let C = s(`div`, `rp-controls`);
+        C.append(p, y, m, h, g, v);
+        let w = s(`div`, `rp-end`),
+          D = s(`button`, `btn rp-again`, `WATCH AGAIN`),
+          O = s(`button`, `btn rp-ctl rp-share`, `SHARE`),
+          k = s(`button`, `btn rp-ctl`, `BACK`);
+        ((D.type = O.type = k.type = `button`),
+          D.addEventListener(`click`, () => h.click()),
+          O.addEventListener(`click`, () => void o()),
+          k.addEventListener(`click`, () => r.resolve()));
+        let A = s(`div`, `rp-end-row`);
+        (A.append(O, k),
+          w.append(s(`div`, `rp-end-score`, e.score.toLocaleString()), D, A),
+          (w.hidden = !0),
+          (l.onEnd = () => {
+            ((w.hidden = !1), D.focus());
+          }),
+          r.body.append(d, C, w),
+          b());
+        let j = () => {
+          r.signal.aborted ||
+            ((f.style.width = `${(100 * l.at) / Math.max(1, l.steps)}%`),
+            (p.textContent = u
+              ? `${E(l.at)} / ${E(l.steps)}`
+              : `${(l.at / 30).toFixed(1)} s`),
+            requestAnimationFrame(j));
+        };
+        j();
+      })();
+    },
+  };
+}

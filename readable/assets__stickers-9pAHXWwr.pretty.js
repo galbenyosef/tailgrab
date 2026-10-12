@@ -1,0 +1,15 @@
+var e = [
+    `homework`,
+    `bubblewrap`,
+    `fish`,
+    `bag`,
+    `tape`,
+    `ticket`,
+    `wrench`,
+    `shell`,
+    `rose`,
+  ],
+  t = (t) => e.includes(t);
+[...e];
+var n = (e) => `piece-${e}`;
+export { e as n, t as r, n as t };

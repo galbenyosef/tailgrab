@@ -1,0 +1,4036 @@
+{
+  "project": "tailgrab",
+  "kind": "statement-aligned-slices",
+  "defaultFile": "src/assets__main-CzsUDvlE-01.js",
+  "note": "Tailgrab (https://tailgrab.io/) is capture-class: a Vite production build of a free multiplayer skateboarding game (three.js r186 + Colyseus SDK) served at the origin root by Cloudflare. §0.4 fork-over-mirror was checked on 2026-10-13 — nothing in the capture references an upstream repository (the page credits its author but publishes no source), so the mirror stands. Derived pipeline: capture → pinned prettier 3.9.6 (module API, default options, single pass — deterministic from the capture; preload-helper-DR1MrGPZ is not a prettier fixed point (a member chain only joins on a second pass) and is flagged idempotent:false in sources — never the CLI: it respects .gitignore and can silently echo its input) → readable/<name>.pretty.js|css per captured JS/CSS file (capture-relative name, nested dirs flattened with __; every pretty provably NOT byte-identical to its capture source) → statement-aligned slices src/<name>-NN.js of every APP chunk (top-level declaration boundaries only, ~250-350 line windows; oversized single declarations stay whole) with an exact 2-line provenance header. Every slice parses standalone under `node --input-type=module --check -` and round-trips byte-exact to its recorded readable line range. Vendor rule — wholeFile sections, never sliced: three.core (the r186 core build), the GLTFLoader (DRACO/KTX2/meshopt) and OrbitControls addons, the lil-gui build, the Colyseus SDK client, and the Vite modulepreload polyfill (build machinery). Mixed chunk: toon-CycGToy9 body is the minifier-merged three.js r186 WebGLRenderer bundle — content-anchored between the app's three.core import and the statement that merges the renderer class with the app's `Xr = { uSlab … }` uniform record, guarded and asserted as a wholeFile vendor region; the app's import statements and its toon-material/shader tail are sliced. Inline <script>/<style> scan: index.html carries the critical <style> and the gtag bootstrap (both twins + readable/index-inline-map.json), plus an application/ld+json structured-data block recorded in notRendered (data, not code); parks/index.html (the stored /parks route page) carries its viewer <style> twin. Non-standalone parts are skipped sections, indexed but never sliced: every app chunk's final export {…} table (the bindings live in the earlier slices). Identifiers in src/ are the bundle's own minified names — the rename campaign (PLAN §5) is recorded as an open task in README.md, not claimed here. Capture bytes are untouched by everything above; re-cut with `node tools/derive.mjs` after any capture refresh. `node tools/audit.js` is the gate.",
+  "renderOptions": {
+    "_default": "prettier 3.9.6, module API, default options, single pass; every pretty re-renders byte-exact from its capture bytes (audit re-renders one pass) — non-fixed-point sources are flagged idempotent:false — never the CLI: it respects .gitignore and can silently echo its input",
+    "js": "parser babel, no plugins",
+    "css": "parser css, no plugins",
+    "json": "parser json, no plugins (inline importmap blocks, if any)"
+  },
+  "source": "readable/: 57 JS pretties (50 app chunk(s) sliced, 6 vendor wholeFile) + 4 CSS pretties; src/: 214 statement-aligned slices across 50 app chunk(s); 47 skipped section(s); 12 wholeFile section(s); capture: 158 files under .upstream/manifest.json; inline scan: index.html, parks/index.html (3 inline content block(s) with twins, 1 inline data block(s) notRendered); notRendered: 99.",
+  "inline": {
+    "scanned": [
+      "index.html",
+      "parks/index.html"
+    ],
+    "contentBlocks": 3,
+    "notRendered": 99,
+    "note": "index.html carries an inline critical <style> and an inline gtag bootstrap (twins readable/index-inline-1.pretty.css / index-inline-2.pretty.js + readable/index-inline-map.json); its application/ld+json block is structured data, recorded in notRendered with range + sha256. parks/index.html carries its viewer <style> twin."
+  },
+  "sources": [
+    {
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js",
+      "capture": "assets/main-CzsUDvlE.js",
+      "captureKind": "file",
+      "captureSha256": "9a2d38ba029cd150c4ec6b2ecb8c9d1e5e623abb219fb190d206680a5153c80e",
+      "captureBytes": 335134,
+      "prettyLines": 17758,
+      "prettyBytes": 538549,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__main-CzsUDvlE",
+      "slices": 45,
+      "derived": "readable + 45 statement-aligned slice(s)"
+    },
+    {
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js",
+      "capture": "assets/bailPhysics-C1H0uy1H.js",
+      "captureKind": "file",
+      "captureSha256": "c217200d51c8cb1611106ce4b9df3709815619f814112b87a89968ffe9e04e94",
+      "captureBytes": 23814,
+      "prettyLines": 1511,
+      "prettyBytes": 41397,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__bailPhysics-C1H0uy1H",
+      "slices": 5,
+      "derived": "readable + 5 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__bestTv-zah2thYf.pretty.js",
+      "capture": "assets/bestTv-zah2thYf.js",
+      "captureKind": "file",
+      "captureSha256": "02b949d3e28ab9b43f3809b06df7ed8d228c639bd524137eba5265f81f9f8b0c",
+      "captureBytes": 7433,
+      "prettyLines": 324,
+      "prettyBytes": 10096,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__bestTv-zah2thYf",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__catalog-CGuOpeY8.pretty.js",
+      "capture": "assets/catalog-CGuOpeY8.js",
+      "captureKind": "file",
+      "captureSha256": "e810ead1c23d4fd4b538f7f0842e08b093c52c90b49772288f16da6456834cac",
+      "captureBytes": 17182,
+      "prettyLines": 1229,
+      "prettyBytes": 28415,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__catalog-CGuOpeY8",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__compose-C1tLg9l9.pretty.js",
+      "capture": "assets/compose-C1tLg9l9.js",
+      "captureKind": "file",
+      "captureSha256": "8e4be8a3d8157dd91817d2f12e3f1ddec325e5f3cf2b6b8306ee8868c491434f",
+      "captureBytes": 2707,
+      "prettyLines": 218,
+      "prettyBytes": 4519,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__compose-C1tLg9l9",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js",
+      "capture": "assets/debug-BVnJLfS4.js",
+      "captureKind": "file",
+      "captureSha256": "b6c00985101f63b801fea73fba3bdc8b909c1e3fd23ff321e8ce22583989fa87",
+      "captureBytes": 83169,
+      "prettyLines": 3206,
+      "prettyBytes": 110748,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__debug-BVnJLfS4",
+      "slices": 11,
+      "derived": "readable + 11 statement-aligned slice(s)"
+    },
+    {
+      "sourceFile": "readable/assets__decor-EQ8VRNuO.pretty.js",
+      "capture": "assets/decor-EQ8VRNuO.js",
+      "captureKind": "file",
+      "captureSha256": "cc35d123cd883b056448e74d4a64ed1e8a60739d9c21e9c7a8efd49952abd834",
+      "captureBytes": 63,
+      "prettyLines": 2,
+      "prettyBytes": 73,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__decor-EQ8VRNuO",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__decor-Tyb8Za1u.pretty.js",
+      "capture": "assets/decor-Tyb8Za1u.js",
+      "captureKind": "file",
+      "captureSha256": "dc31ae5635188509d75111e42d65e56e73b4c43b0ea3dc7bf0dff29da088a122",
+      "captureBytes": 18939,
+      "prettyLines": 1194,
+      "prettyBytes": 31835,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__decor-Tyb8Za1u",
+      "slices": 4,
+      "derived": "readable + 4 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__dmath-_BI8hNwF.pretty.js",
+      "capture": "assets/dmath-_BI8hNwF.js",
+      "captureKind": "file",
+      "captureSha256": "deb23eaa2022faee75e2b7133f4d47794f73a85887f2c211f06a2e3e6d409459",
+      "captureBytes": 1225,
+      "prettyLines": 106,
+      "prettyBytes": 2205,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__dmath-_BI8hNwF",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js",
+      "capture": "assets/fxHooks-Cvx_8YWC.js",
+      "captureKind": "file",
+      "captureSha256": "fe7e5eac23e4d462f50314e076f032484e4386609bee314292fc85858ec1c29a",
+      "captureBytes": 87635,
+      "prettyLines": 4744,
+      "prettyBytes": 142396,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__fxHooks-Cvx_8YWC",
+      "slices": 9,
+      "derived": "readable + 9 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__ground-ufcYH9Hx.pretty.js",
+      "capture": "assets/ground-ufcYH9Hx.js",
+      "captureKind": "file",
+      "captureSha256": "667b6dc52ffa8ea1b936eea319ec0dd743a39ff68d28b7699631a56b23de7cad",
+      "captureBytes": 1924,
+      "prettyLines": 103,
+      "prettyBytes": 2691,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__ground-ufcYH9Hx",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__juice-6UyTKeka.pretty.js",
+      "capture": "assets/juice-6UyTKeka.js",
+      "captureKind": "file",
+      "captureSha256": "e4d20dbbf3e8735f0d2bde9eeb762dfe76025de4f5d53c64c29f4ceeee30c251",
+      "captureBytes": 26484,
+      "prettyLines": 991,
+      "prettyBytes": 33958,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__juice-6UyTKeka",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__kit-C-OErpbU.pretty.js",
+      "capture": "assets/kit-C-OErpbU.js",
+      "captureKind": "file",
+      "captureSha256": "5894f86ee9728a59a4ed13789295eb244bda83a7fe8eabeebde0f235c5248328",
+      "captureBytes": 2553,
+      "prettyLines": 116,
+      "prettyBytes": 3723,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__kit-C-OErpbU",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__lens-BwVvQcWW.pretty.js",
+      "capture": "assets/lens-BwVvQcWW.js",
+      "captureKind": "file",
+      "captureSha256": "58efe0e0c74e090099da42f5c5d52a2f6ae3d282948f385c843fccc0fcdc0f53",
+      "captureBytes": 57,
+      "prettyLines": 2,
+      "prettyBytes": 67,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__lens-BwVvQcWW",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__lens-Csl3PMnC.pretty.js",
+      "capture": "assets/lens-Csl3PMnC.js",
+      "captureKind": "file",
+      "captureSha256": "adca1cd5a9cea3590327264db9bd7095467db98cc39f374b8605c5b865d0f58c",
+      "captureBytes": 3692,
+      "prettyLines": 132,
+      "prettyBytes": 4305,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__lens-Csl3PMnC",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__missions-eXNMrvRm.pretty.js",
+      "capture": "assets/missions-eXNMrvRm.js",
+      "captureKind": "file",
+      "captureSha256": "780c315379e971056906e8bf5a8838de97a58e776bc7a2e15289fc0866ef8aab",
+      "captureBytes": 6655,
+      "prettyLines": 520,
+      "prettyBytes": 10535,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__missions-eXNMrvRm",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__music-D6fpJLig.pretty.js",
+      "capture": "assets/music-D6fpJLig.js",
+      "captureKind": "file",
+      "captureSha256": "8814f8398a1a6d690110a14cd936080a2df8cab8ce29bf4ea09eadd7fa1e3ace",
+      "captureBytes": 3032,
+      "prettyLines": 163,
+      "prettyBytes": 4380,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__music-D6fpJLig",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__outline-BufNikL2.pretty.js",
+      "capture": "assets/outline-BufNikL2.js",
+      "captureKind": "file",
+      "captureSha256": "03a5cbdddcba4edde3be9ca21d3d7270caf92aa872c8571bb37757822394e86a",
+      "captureBytes": 3021,
+      "prettyLines": 147,
+      "prettyBytes": 4124,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__outline-BufNikL2",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__outline-DM9oZu0n.pretty.js",
+      "capture": "assets/outline-DM9oZu0n.js",
+      "captureKind": "file",
+      "captureSha256": "5d935245883446b429d28cf9dd267385b473ee164f2d7fe67a65ffd07ecb920c",
+      "captureBytes": 67,
+      "prettyLines": 2,
+      "prettyBytes": 77,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__outline-DM9oZu0n",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__padNav-a65kF6ol.pretty.js",
+      "capture": "assets/padNav-a65kF6ol.js",
+      "captureKind": "file",
+      "captureSha256": "e5d4593f6d5ac9ae1a7ab6d4fdad975d2200ade55aace076baf21ef96cee24f1",
+      "captureBytes": 23706,
+      "prettyLines": 1362,
+      "prettyBytes": 36331,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__padNav-a65kF6ol",
+      "slices": 4,
+      "derived": "readable + 4 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__palette-DQTkVEn_.pretty.js",
+      "capture": "assets/palette-DQTkVEn_.js",
+      "captureKind": "file",
+      "captureSha256": "ee1b636569a0add2a833f4771954807c72fd001945c2358268e41e7bcaa7a72c",
+      "captureBytes": 856,
+      "prettyLines": 69,
+      "prettyBytes": 1214,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__palette-DQTkVEn_",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__parkMesh-CjoleZJz.pretty.js",
+      "capture": "assets/parkMesh-CjoleZJz.js",
+      "captureKind": "file",
+      "captureSha256": "866b488a9e7707822843a89823ec351a501afb2d824f18426bde97b63ff70581",
+      "captureBytes": 4507,
+      "prettyLines": 279,
+      "prettyBytes": 7111,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__parkMesh-CjoleZJz",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__parkModel-D9KlCEyZ.pretty.js",
+      "capture": "assets/parkModel-D9KlCEyZ.js",
+      "captureKind": "file",
+      "captureSha256": "25bf4279d39624e5ad3397d0d69d54eecb40354405cd6c11693d5cc90995a36d",
+      "captureBytes": 66,
+      "prettyLines": 2,
+      "prettyBytes": 76,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__parkModel-D9KlCEyZ",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js",
+      "capture": "assets/parkModel-DmiMeogd.js",
+      "captureKind": "file",
+      "captureSha256": "4305bd5f65c458c1f4fbb0699978b24e66c9edc1b8a23e67613a65708b6fd49f",
+      "captureBytes": 51411,
+      "prettyLines": 2963,
+      "prettyBytes": 80306,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__parkModel-DmiMeogd",
+      "slices": 11,
+      "derived": "readable + 11 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js",
+      "capture": "assets/parks-C2dnYY6C.js",
+      "captureKind": "file",
+      "captureSha256": "2b7cbe9088d6ebc8bac6697b9fe46f2717050472de6552ebf6df29dcd359edba",
+      "captureBytes": 58115,
+      "prettyLines": 5713,
+      "prettyBytes": 113379,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__parks-C2dnYY6C",
+      "slices": 10,
+      "derived": "readable + 10 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__parks-vuvy8Lj9.pretty.js",
+      "capture": "assets/parks-vuvy8Lj9.js",
+      "captureKind": "file",
+      "captureSha256": "174af868091a9e7200a9a682616e7e77d340ffb7fecda7cc3557262f4711b03e",
+      "captureBytes": 7920,
+      "prettyLines": 372,
+      "prettyBytes": 10882,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__parks-vuvy8Lj9",
+      "slices": 2,
+      "derived": "readable + 2 statement-aligned slice(s)"
+    },
+    {
+      "sourceFile": "readable/assets__perfLab-Dt5WuMzb.pretty.js",
+      "capture": "assets/perfLab-Dt5WuMzb.js",
+      "captureKind": "file",
+      "captureSha256": "d2a545ac302b398d677bca4f4e8bb73ba0291c8f89e316fa0b494e4d483f4d2c",
+      "captureBytes": 2812,
+      "prettyLines": 114,
+      "prettyBytes": 3793,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__perfLab-Dt5WuMzb",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__poses-DwKBijP_.pretty.js",
+      "capture": "assets/poses-DwKBijP_.js",
+      "captureKind": "file",
+      "captureSha256": "1da9d7d81c39dc13a4af61cb9a0f9bb38bcb2e0d428e0851a614b08997565780",
+      "captureBytes": 2841,
+      "prettyLines": 122,
+      "prettyBytes": 3761,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__poses-DwKBijP_",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js",
+      "capture": "assets/preload-helper-DR1MrGPZ.js",
+      "captureKind": "file",
+      "captureSha256": "280e8b2ef7731d98717212fc9c46c126021dd1ea71a4c5fe84c8bf850eaa0f3c",
+      "captureBytes": 86819,
+      "prettyLines": 5949,
+      "prettyBytes": 155606,
+      "prettyPasses": 1,
+      "idempotent": false,
+      "tag": "assets__preload-helper-DR1MrGPZ",
+      "slices": 18,
+      "derived": "readable + 18 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__prims-CECOBLSv.pretty.js",
+      "capture": "assets/prims-CECOBLSv.js",
+      "captureKind": "file",
+      "captureSha256": "ac3694b29cff6af719de3e8746b936fbfb6b65e6136fb091413e55999de0214f",
+      "captureBytes": 13124,
+      "prettyLines": 864,
+      "prettyBytes": 21990,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__prims-CECOBLSv",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__replay-_5kwzkRi.pretty.js",
+      "capture": "assets/replay-_5kwzkRi.js",
+      "captureKind": "file",
+      "captureSha256": "d39a23ed12b7b44250e202a6fe03858aa65fc9767ed2d8ffabb69da18f7fbb3d",
+      "captureBytes": 6526,
+      "prettyLines": 331,
+      "prettyBytes": 9989,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__replay-_5kwzkRi",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__scene-DiAs2bfK.pretty.js",
+      "capture": "assets/scene-DiAs2bfK.js",
+      "captureKind": "file",
+      "captureSha256": "dd4e38e808526082875eb599547627cbf52fe5b2b362f862c3ed47c19f8bb5dc",
+      "captureBytes": 17273,
+      "prettyLines": 959,
+      "prettyBytes": 24623,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__scene-DiAs2bfK",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__secrets-Czes5esN.pretty.js",
+      "capture": "assets/secrets-Czes5esN.js",
+      "captureKind": "file",
+      "captureSha256": "ef45da466325b80240ae77312af47ba936509752322cab1657eec73fa691d5a2",
+      "captureBytes": 8637,
+      "prettyLines": 557,
+      "prettyBytes": 13344,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__secrets-Czes5esN",
+      "slices": 2,
+      "derived": "readable + 2 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js",
+      "capture": "assets/session-DxCN6jDh.js",
+      "captureKind": "file",
+      "captureSha256": "b0e7490998fdad6e64f4bd3dd3145f1366b5d6d00298f7df109cd6696568ba74",
+      "captureBytes": 64633,
+      "prettyLines": 4051,
+      "prettyBytes": 104292,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__session-DxCN6jDh",
+      "slices": 12,
+      "derived": "readable + 12 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__sfx-6jovSU2-.pretty.js",
+      "capture": "assets/sfx-6jovSU2-.js",
+      "captureKind": "file",
+      "captureSha256": "d2c7df48123e44d2c1551dd6a2760003e32404765383511ab37754c1ae218928",
+      "captureBytes": 28209,
+      "prettyLines": 1393,
+      "prettyBytes": 46390,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__sfx-6jovSU2-",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__skaterRig-CvzHL-r4.pretty.js",
+      "capture": "assets/skaterRig-CvzHL-r4.js",
+      "captureKind": "file",
+      "captureSha256": "aa356b6e4143d2880033d123f8f5221482431917087e9e40a47ee38311350818",
+      "captureBytes": 34280,
+      "prettyLines": 1788,
+      "prettyBytes": 53526,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__skaterRig-CvzHL-r4",
+      "slices": 4,
+      "derived": "readable + 4 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__skaterRig-CWjsS5UF.pretty.js",
+      "capture": "assets/skaterRig-CWjsS5UF.js",
+      "captureKind": "file",
+      "captureSha256": "6f87b4e362224518e35979ae62fbb6a9b1f4e8c92462ac4533b9eacfa8e3171b",
+      "captureBytes": 123,
+      "prettyLines": 2,
+      "prettyBytes": 137,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__skaterRig-CWjsS5UF",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__skaters-pUdq6stw.pretty.js",
+      "capture": "assets/skaters-pUdq6stw.js",
+      "captureKind": "file",
+      "captureSha256": "44b7ed638c72a182c9a4cee1d88ccd62e7f8ab22a6cbc6f711039d63ca056360",
+      "captureBytes": 13781,
+      "prettyLines": 933,
+      "prettyBytes": 20800,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__skaters-pUdq6stw",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__skaterView-DCMhULBk.pretty.js",
+      "capture": "assets/skaterView-DCMhULBk.js",
+      "captureKind": "file",
+      "captureSha256": "93f26848b6001ae9de93f23025314762d71009a15331f221750d86d4acb87d53",
+      "captureBytes": 5686,
+      "prettyLines": 295,
+      "prettyBytes": 8688,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__skaterView-DCMhULBk",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__songs-B3nWAdc6.pretty.js",
+      "capture": "assets/songs-B3nWAdc6.js",
+      "captureKind": "file",
+      "captureSha256": "a4b2b1ef3d1a81a6e84cb1f3328453d8f0b7809bd70222b9f9449a8ff48315d0",
+      "captureBytes": 752,
+      "prettyLines": 46,
+      "prettyBytes": 1071,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__songs-B3nWAdc6",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__stickers-9pAHXWwr.pretty.js",
+      "capture": "assets/stickers-9pAHXWwr.js",
+      "captureKind": "file",
+      "captureSha256": "36f5900101cf3b141823e97d270c1dcce9c946d5ebccb2f23735d87e31b2d104",
+      "captureBytes": 162,
+      "prettyLines": 15,
+      "prettyBytes": 237,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__stickers-9pAHXWwr",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__table-W1plLavt.pretty.js",
+      "capture": "assets/table-W1plLavt.js",
+      "captureKind": "file",
+      "captureSha256": "f36fd558d1339f5f033e3ab1bf81013db22d928ad07922feafd1ec5d02e5137d",
+      "captureBytes": 12487,
+      "prettyLines": 550,
+      "prettyBytes": 16536,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__table-W1plLavt",
+      "slices": 2,
+      "derived": "readable + 2 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__tag-BoiZZ9xV.pretty.js",
+      "capture": "assets/tag-BoiZZ9xV.js",
+      "captureKind": "file",
+      "captureSha256": "0c9f633dddf0a970df851988ec9be9c7f3c0ce39c05c3ae54b44fbb1b843b41d",
+      "captureBytes": 11961,
+      "prettyLines": 666,
+      "prettyBytes": 19813,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__tag-BoiZZ9xV",
+      "slices": 3,
+      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js",
+      "capture": "assets/tagPaint-BOEtbgNi.js",
+      "captureKind": "file",
+      "captureSha256": "03915df441d8d4b70a2859b10759ba9606022fd77177bdd3d05ebae3db9df05b",
+      "captureBytes": 92674,
+      "prettyLines": 5205,
+      "prettyBytes": 139070,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__tagPaint-BOEtbgNi",
+      "slices": 12,
+      "derived": "readable + 12 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__tapeRider-C0l9JrgL.pretty.js",
+      "capture": "assets/tapeRider-C0l9JrgL.js",
+      "captureKind": "file",
+      "captureSha256": "b0f763c29c7f5e0cc4463a4fdc62e001d19b48ec3a470a51580fb3938944def1",
+      "captureBytes": 3964,
+      "prettyLines": 246,
+      "prettyBytes": 6116,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__tapeRider-C0l9JrgL",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__toon-CycGToy9.pretty.js",
+      "capture": "assets/toon-CycGToy9.js",
+      "captureKind": "file",
+      "captureSha256": "1f1166e0eddcc5b3090b0879a5edcf450155131d9a7b399b28a4085e014a9955",
+      "captureBytes": 362064,
+      "prettyLines": 14427,
+      "prettyBytes": 477133,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__toon-CycGToy9",
+      "slices": 2,
+      "derived": "readable + 2 statement-aligned slice(s) + 1 wholeFile region(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__toon-L4_S6Akl.pretty.js",
+      "capture": "assets/toon-L4_S6Akl.js",
+      "captureKind": "file",
+      "captureSha256": "9581d330f9d0d84f3c776df1c184de2e2108f4bba1671599a1ba69078b3aa4f5",
+      "captureBytes": 87,
+      "prettyLines": 2,
+      "prettyBytes": 99,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__toon-L4_S6Akl",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js",
+      "capture": "assets/tuning-D4mSK766.js",
+      "captureKind": "file",
+      "captureSha256": "f9b468c6b0ae8f2f1246687833cf80162863340c76b4efa4e40d4db91b927e50",
+      "captureBytes": 51277,
+      "prettyLines": 3299,
+      "prettyBytes": 88092,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__tuning-D4mSK766",
+      "slices": 11,
+      "derived": "readable + 11 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__types-DM-HODfo.pretty.js",
+      "capture": "assets/types-DM-HODfo.js",
+      "captureKind": "file",
+      "captureSha256": "10962268dfe9fb20230e4b7c178ed448322e123816b1a69d5ce349e8ee39b79f",
+      "captureBytes": 2459,
+      "prettyLines": 216,
+      "prettyBytes": 4026,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__types-DM-HODfo",
+      "slices": 1,
+      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__verlet-BVVzuOqv.pretty.js",
+      "capture": "assets/verlet-BVVzuOqv.js",
+      "captureKind": "file",
+      "captureSha256": "e638d0dbde189d6a062a29cdb0751f96447a5315f694edd39352f386baae6973",
+      "captureBytes": 9599,
+      "prettyLines": 573,
+      "prettyBytes": 16787,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__verlet-BVVzuOqv",
+      "slices": 2,
+      "derived": "readable + 2 statement-aligned slice(s) + 1 skipped section(s)"
+    },
+    {
+      "sourceFile": "readable/assets__Client-CpE02kO_.pretty.js",
+      "capture": "assets/Client-CpE02kO_.js",
+      "captureKind": "file",
+      "captureSha256": "372665deada44357105983509024abac0a9e069aac96dbe4847bdb839fd2b257",
+      "captureBytes": 171412,
+      "prettyLines": 9830,
+      "prettyBytes": 273805,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__Client-CpE02kO_",
+      "slices": 0,
+      "derived": "readable only (vendor bundle, wholeFile)",
+      "what": "Colyseus SDK client"
+    },
+    {
+      "sourceFile": "readable/assets__GLTFLoader-BAb7LzOS.pretty.js",
+      "capture": "assets/GLTFLoader-BAb7LzOS.js",
+      "captureKind": "file",
+      "captureSha256": "d2b70fb9e6b7ac784a79dfc4dc71ff21ee93697cccdb36955056780a00b46fc6",
+      "captureBytes": 44318,
+      "prettyLines": 2406,
+      "prettyBytes": 71408,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__GLTFLoader-BAb7LzOS",
+      "slices": 0,
+      "derived": "readable only (vendor bundle, wholeFile)",
+      "what": "three.js GLTFLoader addon (DRACO/KTX2/meshopt)"
+    },
+    {
+      "sourceFile": "readable/assets__lil-gui.esm-uYN4JE7y.pretty.js",
+      "capture": "assets/lil-gui.esm-uYN4JE7y.js",
+      "captureKind": "file",
+      "captureSha256": "7978c4c32466bf747353f6c6ded264a59d939c16ebae62f159d4e1afb9c30c3c",
+      "captureBytes": 31027,
+      "prettyLines": 1315,
+      "prettyBytes": 40618,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__lil-gui.esm-uYN4JE7y",
+      "slices": 0,
+      "derived": "readable only (vendor bundle, wholeFile)",
+      "what": "lil-gui build"
+    },
+    {
+      "sourceFile": "readable/assets__modulepreload-polyfill-P2Xu9kJm.pretty.js",
+      "capture": "assets/modulepreload-polyfill-P2Xu9kJm.js",
+      "captureKind": "file",
+      "captureSha256": "418c206484b89b68ef5f067277831e583fc9193a62aadf4de269acaaeb12a85f",
+      "captureBytes": 670,
+      "prettyLines": 31,
+      "prettyBytes": 921,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__modulepreload-polyfill-P2Xu9kJm",
+      "slices": 0,
+      "derived": "readable only (vendor bundle, wholeFile)",
+      "what": "Vite modulepreload polyfill"
+    },
+    {
+      "sourceFile": "readable/assets__OrbitControls-CQWqkYLs.pretty.js",
+      "capture": "assets/OrbitControls-CQWqkYLs.js",
+      "captureKind": "file",
+      "captureSha256": "f913561329caa2c7da2ffd35677b9536a5d07b73ce9e827d9fa162a6facd5d35",
+      "captureBytes": 19852,
+      "prettyLines": 854,
+      "prettyBytes": 28695,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__OrbitControls-CQWqkYLs",
+      "slices": 0,
+      "derived": "readable only (vendor bundle, wholeFile)",
+      "what": "three.js OrbitControls addon"
+    },
+    {
+      "sourceFile": "readable/assets__three.core-DVWDmH0S.pretty.js",
+      "capture": "assets/three.core-DVWDmH0S.js",
+      "captureKind": "file",
+      "captureSha256": "9548d1efaf3c3d1116355fe2ee46e3c9903012d42a4bc154a5cf677e9ef691c7",
+      "captureBytes": 269473,
+      "prettyLines": 15349,
+      "prettyBytes": 437008,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "assets__three.core-DVWDmH0S",
+      "slices": 0,
+      "derived": "readable only (vendor bundle, wholeFile)",
+      "what": "three.js r186 core build"
+    },
+    {
+      "sourceFile": "readable/assets__main-BefG6oT8.pretty.css",
+      "capture": "assets/main-BefG6oT8.css",
+      "captureKind": "file",
+      "captureSha256": "249c355d3aad5e004efc56b3b82296cc21a26cfec16ac96da7e41a0c58506dd0",
+      "captureBytes": 229010,
+      "prettyLines": 14465,
+      "prettyBytes": 283351,
+      "prettyPasses": 1,
+      "idempotent": false,
+      "tag": "assets__main-BefG6oT8",
+      "slices": 0,
+      "derived": "readable only (stylesheet, wholeFile)"
+    },
+    {
+      "sourceFile": "readable/fonts__fonts.pretty.css",
+      "capture": "fonts/fonts.css",
+      "captureKind": "file",
+      "captureSha256": "8b5a687310fe3a961a57d713a7ac2ac4fee11b00e5684032e3ed4cda07131494",
+      "captureBytes": 975,
+      "prettyLines": 20,
+      "prettyBytes": 975,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "fonts__fonts",
+      "slices": 0,
+      "derived": "readable only (stylesheet, wholeFile)"
+    },
+    {
+      "sourceFile": "readable/index-inline-1.pretty.css",
+      "capture": "index.html",
+      "captureKind": "inline-style",
+      "captureByteStart": 3314,
+      "captureByteEnd": 5619,
+      "captureSha256": "58692225950b342059f07ed9b3aef00ee2a6e293aa5014352af547c605d49866",
+      "captureBytes": 2305,
+      "prettyLines": 147,
+      "prettyBytes": 2853,
+      "prettySha256": "09ad7ff4301571d5eb5aa8366da92d9eba0a885aeeab7fe14b8d1bf35351e985",
+      "tag": "index-inline-1",
+      "slices": 0,
+      "derived": "readable only (inline block, wholeFile)"
+    },
+    {
+      "sourceFile": "readable/index-inline-2.pretty.js",
+      "capture": "index.html",
+      "captureKind": "inline-script",
+      "captureByteStart": 8696,
+      "captureByteEnd": 8829,
+      "captureSha256": "5e5e0c277a63435211d9730663d3bf12808cf072cfd43a4f32adea9787d24da0",
+      "captureBytes": 133,
+      "prettyLines": 6,
+      "prettyBytes": 148,
+      "prettySha256": "52f3c6e867f16e7c9c5ca101fddca61fb7dca4d6936c13dc5be27c8aa6977368",
+      "tag": "index-inline-2",
+      "slices": 0,
+      "derived": "readable only (inline block, wholeFile)"
+    },
+    {
+      "sourceFile": "readable/parks__index-inline-1.pretty.css",
+      "capture": "parks/index.html",
+      "captureKind": "inline-style",
+      "captureByteStart": 327,
+      "captureByteEnd": 597,
+      "captureSha256": "e82992b15e2d91fb940830aad31ea246397a440a9c6384f5e5c7464674dbeca0",
+      "captureBytes": 270,
+      "prettyLines": 22,
+      "prettyBytes": 345,
+      "prettySha256": "4bf2823a88075e0b216327e9f293e0e0d03f12b0ef810fc21f39df79bd89ded5",
+      "tag": "parks__index-inline-1",
+      "slices": 0,
+      "derived": "readable only (inline block, wholeFile)"
+    }
+  ],
+  "sections": [
+    {
+      "file": "assets__main-CzsUDvlE-01.js",
+      "title": "assets__main-CzsUDvlE 01 — vite__mapdeps",
+      "desc": "Lines 1-343. Markers: vite__mapdeps(2), map(1).",
+      "startLine": 1,
+      "endLine": 343,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-02.js",
+      "title": "assets__main-CzsUDvlE 02 — append",
+      "desc": "Lines 344-642. Markers: append(9), ghosts(8).",
+      "startLine": 344,
+      "endLine": 642,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-03.js",
+      "title": "assets__main-CzsUDvlE 03 — focus",
+      "desc": "Lines 643-818. Markers: focus(9), math(9).",
+      "startLine": 643,
+      "endLine": 818,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-04.js",
+      "title": "assets__main-CzsUDvlE 04 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 819-1241. Markers: math(34), view(26).",
+      "startLine": 819,
+      "endLine": 1241,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-05.js",
+      "title": "assets__main-CzsUDvlE 05 — done",
+      "desc": "Lines 1242-1244. Markers: done(1), icon(1).",
+      "startLine": 1242,
+      "endLine": 1244,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-06.js",
+      "title": "assets__main-CzsUDvlE 06 — root",
+      "desc": "Oversized single declaration (kept whole). Lines 1245-1754. Markers: root(28), home(24).",
+      "startLine": 1245,
+      "endLine": 1754,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-07.js",
+      "title": "assets__main-CzsUDvlE 07 — append",
+      "desc": "Lines 1755-2057. Markers: append(17), card(14).",
+      "startLine": 1755,
+      "endLine": 2057,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-08.js",
+      "title": "assets__main-CzsUDvlE 08 — append",
+      "desc": "Lines 2058-2401. Markers: append(22), textcontent(14).",
+      "startLine": 2058,
+      "endLine": 2401,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-09.js",
+      "title": "assets__main-CzsUDvlE 09 — look",
+      "desc": "Lines 2402-2422. Markers: look(3), style(3).",
+      "startLine": 2402,
+      "endLine": 2422,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-10.js",
+      "title": "assets__main-CzsUDvlE 10 — append",
+      "desc": "Oversized single declaration (kept whole). Lines 2423-3104. Markers: append(37), profile(19).",
+      "startLine": 2423,
+      "endLine": 3104,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-11.js",
+      "title": "assets__main-CzsUDvlE 11 — append",
+      "desc": "Lines 3105-3437. Markers: append(22), dataset(10).",
+      "startLine": 3105,
+      "endLine": 3437,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-12.js",
+      "title": "assets__main-CzsUDvlE 12 — append",
+      "desc": "Lines 3438-3770. Markers: append(26), kind(18).",
+      "startLine": 3438,
+      "endLine": 3770,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-13.js",
+      "title": "assets__main-CzsUDvlE 13 — append",
+      "desc": "Lines 3771-4098. Markers: append(13), classlist(11).",
+      "startLine": 3771,
+      "endLine": 4098,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-14.js",
+      "title": "assets__main-CzsUDvlE 14 — append",
+      "desc": "Lines 4099-4442. Markers: append(36), textcontent(11).",
+      "startLine": 4099,
+      "endLine": 4442,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-15.js",
+      "title": "assets__main-CzsUDvlE 15 — append",
+      "desc": "Lines 4443-4732. Markers: append(21), math(8).",
+      "startLine": 4443,
+      "endLine": 4732,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-16.js",
+      "title": "assets__main-CzsUDvlE 16 — math",
+      "desc": "Lines 4733-5018. Markers: math(16), pts(15).",
+      "startLine": 4733,
+      "endLine": 5018,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-17.js",
+      "title": "assets__main-CzsUDvlE 17 — append",
+      "desc": "Lines 5019-5318. Markers: append(25), code(12).",
+      "startLine": 5019,
+      "endLine": 5318,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-18.js",
+      "title": "assets__main-CzsUDvlE 18 — append",
+      "desc": "Lines 5319-5631. Markers: append(19), setattribute(6).",
+      "startLine": 5319,
+      "endLine": 5631,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-19.js",
+      "title": "assets__main-CzsUDvlE 19 — append",
+      "desc": "Lines 5632-5840. Markers: append(26), via(8).",
+      "startLine": 5632,
+      "endLine": 5840,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-20.js",
+      "title": "assets__main-CzsUDvlE 20 — gain",
+      "desc": "Lines 5841-6102. Markers: gain(9), show(8).",
+      "startLine": 5841,
+      "endLine": 6102,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-21.js",
+      "title": "assets__main-CzsUDvlE 21 — append",
+      "desc": "Lines 6103-6417. Markers: append(30), dataset(14).",
+      "startLine": 6103,
+      "endLine": 6417,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-22.js",
+      "title": "assets__main-CzsUDvlE 22 — append",
+      "desc": "Lines 6418-6761. Markers: append(34), add(20).",
+      "startLine": 6418,
+      "endLine": 6761,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-23.js",
+      "title": "assets__main-CzsUDvlE 23 — pointerid",
+      "desc": "Lines 6762-7096. Markers: pointerid(19), style(16).",
+      "startLine": 6762,
+      "endLine": 7096,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-24.js",
+      "title": "assets__main-CzsUDvlE 24 — kind",
+      "desc": "Lines 7097-7433. Markers: kind(12), isleader(10).",
+      "startLine": 7097,
+      "endLine": 7433,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-25.js",
+      "title": "assets__main-CzsUDvlE 25 — append",
+      "desc": "Lines 7434-7737. Markers: append(37), addeventlistener(13).",
+      "startLine": 7434,
+      "endLine": 7737,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-26.js",
+      "title": "assets__main-CzsUDvlE 26 — append",
+      "desc": "Oversized single declaration (kept whole). Lines 7738-8221. Markers: append(29), mode(17).",
+      "startLine": 7738,
+      "endLine": 8221,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-27.js",
+      "title": "assets__main-CzsUDvlE 27 — append",
+      "desc": "Lines 8222-8502. Markers: append(12), icon(10).",
+      "startLine": 8222,
+      "endLine": 8502,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-28.js",
+      "title": "assets__main-CzsUDvlE 28 — append",
+      "desc": "Oversized single declaration (kept whole). Lines 8503-9384. Markers: append(56), math(19).",
+      "startLine": 8503,
+      "endLine": 9384,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-29.js",
+      "title": "assets__main-CzsUDvlE 29 — math",
+      "desc": "Lines 9385-9414. Markers: math(3), textcontent(3).",
+      "startLine": 9385,
+      "endLine": 9414,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-30.js",
+      "title": "assets__main-CzsUDvlE 30 — append",
+      "desc": "Oversized single declaration (kept whole). Lines 9415-10400. Markers: append(49), phase(30).",
+      "startLine": 9415,
+      "endLine": 10400,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-31.js",
+      "title": "assets__main-CzsUDvlE 31 — math",
+      "desc": "Lines 10401-10735. Markers: math(16), append(12).",
+      "startLine": 10401,
+      "endLine": 10735,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-32.js",
+      "title": "assets__main-CzsUDvlE 32 — root",
+      "desc": "Lines 10736-11078. Markers: root(12), add(10).",
+      "startLine": 10736,
+      "endLine": 11078,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-33.js",
+      "title": "assets__main-CzsUDvlE 33 — append",
+      "desc": "Lines 11079-11405. Markers: append(23), classlist(14).",
+      "startLine": 11079,
+      "endLine": 11405,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-34.js",
+      "title": "assets__main-CzsUDvlE 34 — math",
+      "desc": "Lines 11406-11750. Markers: math(18), hidden(9).",
+      "startLine": 11406,
+      "endLine": 11750,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-35.js",
+      "title": "assets__main-CzsUDvlE 35 — math",
+      "desc": "Lines 11751-12092. Markers: math(22), piece(20).",
+      "startLine": 11751,
+      "endLine": 12092,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-36.js",
+      "title": "assets__main-CzsUDvlE 36 — math",
+      "desc": "Lines 12093-12371. Markers: math(31), piece(12).",
+      "startLine": 12093,
+      "endLine": 12371,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-37.js",
+      "title": "assets__main-CzsUDvlE 37 — core",
+      "desc": "Lines 12372-12660. Markers: core(12), marks(10).",
+      "startLine": 12372,
+      "endLine": 12660,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-38.js",
+      "title": "assets__main-CzsUDvlE 38 — group",
+      "desc": "Oversized single declaration (kept whole). Lines 12661-13056. Markers: group(23), visible(21).",
+      "startLine": 12661,
+      "endLine": 13056,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-39.js",
+      "title": "assets__main-CzsUDvlE 39 — pointerid",
+      "desc": "Lines 13057-13119. Markers: pointerid(5), addeventlistener(4).",
+      "startLine": 13057,
+      "endLine": 13119,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-40.js",
+      "title": "assets__main-CzsUDvlE 40 — append",
+      "desc": "Lines 13120-13452. Markers: append(33), hooks(19).",
+      "startLine": 13120,
+      "endLine": 13452,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-41.js",
+      "title": "assets__main-CzsUDvlE 41 — append",
+      "desc": "Lines 13453-13516. Markers: append(13), addeventlistener(3).",
+      "startLine": 13453,
+      "endLine": 13516,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-42.js",
+      "title": "assets__main-CzsUDvlE 42 — gizmos",
+      "desc": "Oversized single declaration (kept whole). Lines 13517-15417. Markers: gizmos(54), armed(49).",
+      "startLine": 13517,
+      "endLine": 15417,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-43.js",
+      "title": "assets__main-CzsUDvlE 43 — kind",
+      "desc": "Lines 15418-15456. Markers: kind(4), code(3).",
+      "startLine": 15418,
+      "endLine": 15456,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-44.js",
+      "title": "assets__main-CzsUDvlE 44 — announcer",
+      "desc": "Oversized single declaration (kept whole). Lines 15457-17654. Markers: announcer(54), screen(49).",
+      "startLine": 15457,
+      "endLine": 17654,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__main-CzsUDvlE-45.js",
+      "title": "assets__main-CzsUDvlE 45 — classlist",
+      "desc": "Lines 17655-17758. Markers: classlist(4), body(3).",
+      "startLine": 17655,
+      "endLine": 17758,
+      "sourceFile": "readable/assets__main-CzsUDvlE.pretty.js"
+    },
+    {
+      "file": "assets__bailPhysics-C1H0uy1H-01.js",
+      "title": "assets__bailPhysics-C1H0uy1H 01 — off",
+      "desc": "Lines 1-348. Markers: off(21), bone(19).",
+      "startLine": 1,
+      "endLine": 348,
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js"
+    },
+    {
+      "file": "assets__bailPhysics-C1H0uy1H-02.js",
+      "title": "assets__bailPhysics-C1H0uy1H 02 — starfish",
+      "desc": "Lines 349-369. Markers: starfish(4), backslam(3).",
+      "startLine": 349,
+      "endLine": 369,
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js"
+    },
+    {
+      "file": "assets__bailPhysics-C1H0uy1H-03.js",
+      "title": "assets__bailPhysics-C1H0uy1H 03 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 370-1012. Markers: math(55), body(23).",
+      "startLine": 370,
+      "endLine": 1012,
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js"
+    },
+    {
+      "file": "assets__bailPhysics-C1H0uy1H-04.js",
+      "title": "assets__bailPhysics-C1H0uy1H 04 — math",
+      "desc": "Lines 1013-1284. Markers: math(9), normalize(9).",
+      "startLine": 1013,
+      "endLine": 1284,
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js"
+    },
+    {
+      "file": "assets__bailPhysics-C1H0uy1H-05.js",
+      "title": "assets__bailPhysics-C1H0uy1H 05 — math",
+      "desc": "Lines 1285-1495. Markers: math(13), body(11).",
+      "startLine": 1285,
+      "endLine": 1495,
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js"
+    },
+    {
+      "file": "assets__bailPhysics-C1H0uy1H-tail-export.js",
+      "skipped": true,
+      "title": "assets__bailPhysics-C1H0uy1H — final export table (not sliced)",
+      "desc": "Lines 1496-1511. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 1496,
+      "endLine": 1511,
+      "sourceFile": "readable/assets__bailPhysics-C1H0uy1H.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__bestTv-zah2thYf-01.js",
+      "title": "assets__bestTv-zah2thYf 01 — stage",
+      "desc": "Lines 1-323. Markers: stage(16), root(12).",
+      "startLine": 1,
+      "endLine": 323,
+      "sourceFile": "readable/assets__bestTv-zah2thYf.pretty.js"
+    },
+    {
+      "file": "assets__bestTv-zah2thYf-tail-export.js",
+      "skipped": true,
+      "title": "assets__bestTv-zah2thYf — final export table (not sliced)",
+      "desc": "Lines 324-324. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 324,
+      "endLine": 324,
+      "sourceFile": "readable/assets__bestTv-zah2thYf.pretty.js",
+      "firstLine": "export { M as BestTv };",
+      "lastLine": "export { M as BestTv };"
+    },
+    {
+      "file": "assets__catalog-CGuOpeY8-01.js",
+      "title": "assets__catalog-CGuOpeY8 01 — label",
+      "desc": "Lines 1-123. Markers: label(7), math(7).",
+      "startLine": 1,
+      "endLine": 123,
+      "sourceFile": "readable/assets__catalog-CGuOpeY8.pretty.js"
+    },
+    {
+      "file": "assets__catalog-CGuOpeY8-02.js",
+      "title": "assets__catalog-CGuOpeY8 02 — label",
+      "desc": "Oversized single declaration (kept whole). Lines 124-1078. Markers: label(53), cat(52).",
+      "startLine": 124,
+      "endLine": 1078,
+      "sourceFile": "readable/assets__catalog-CGuOpeY8.pretty.js"
+    },
+    {
+      "file": "assets__catalog-CGuOpeY8-03.js",
+      "title": "assets__catalog-CGuOpeY8 03 — math",
+      "desc": "Lines 1079-1206. Markers: math(11), shape(11).",
+      "startLine": 1079,
+      "endLine": 1206,
+      "sourceFile": "readable/assets__catalog-CGuOpeY8.pretty.js"
+    },
+    {
+      "file": "assets__catalog-CGuOpeY8-tail-export.js",
+      "skipped": true,
+      "title": "assets__catalog-CGuOpeY8 — final export table (not sliced)",
+      "desc": "Lines 1207-1229. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 1207,
+      "endLine": 1229,
+      "sourceFile": "readable/assets__catalog-CGuOpeY8.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__compose-C1tLg9l9-01.js",
+      "title": "assets__compose-C1tLg9l9 01 — skin",
+      "desc": "Lines 1-217. Markers: skin(17), rot(15).",
+      "startLine": 1,
+      "endLine": 217,
+      "sourceFile": "readable/assets__compose-C1tLg9l9.pretty.js"
+    },
+    {
+      "file": "assets__compose-C1tLg9l9-tail-export.js",
+      "skipped": true,
+      "title": "assets__compose-C1tLg9l9 — final export table (not sliced)",
+      "desc": "Lines 218-218. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 218,
+      "endLine": 218,
+      "sourceFile": "readable/assets__compose-C1tLg9l9.pretty.js",
+      "firstLine": "export { s as a, m as i, c as n, d as o, o as r, a as s, f as t };",
+      "lastLine": "export { s as a, m as i, c as n, d as o, o as r, a as s, f as t };"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-01.js",
+      "title": "assets__debug-BVnJLfS4 01 — style",
+      "desc": "Lines 1-346. Markers: style(28), getelementbyid(8).",
+      "startLine": 1,
+      "endLine": 346,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-02.js",
+      "title": "assets__debug-BVnJLfS4 02 — style",
+      "desc": "Lines 347-464. Markers: style(17), background(6).",
+      "startLine": 347,
+      "endLine": 464,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-03.js",
+      "title": "assets__debug-BVnJLfS4 03 — style",
+      "desc": "Oversized single declaration (kept whole). Lines 465-947. Markers: style(78), appendchild(37).",
+      "startLine": 465,
+      "endLine": 947,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-04.js",
+      "title": "assets__debug-BVnJLfS4 04 — style",
+      "desc": "Lines 948-1153. Markers: style(82), addeventlistener(9).",
+      "startLine": 948,
+      "endLine": 1153,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-05.js",
+      "title": "assets__debug-BVnJLfS4 05 — style",
+      "desc": "Lines 1154-1483. Markers: style(132), appendchild(23).",
+      "startLine": 1154,
+      "endLine": 1483,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-06.js",
+      "title": "assets__debug-BVnJLfS4 06 — color",
+      "desc": "Lines 1484-1822. Markers: color(9), fullrendertimer(9).",
+      "startLine": 1484,
+      "endLine": 1822,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-07.js",
+      "title": "assets__debug-BVnJLfS4 07 — style",
+      "desc": "Lines 1823-2124. Markers: style(78), left(14).",
+      "startLine": 1823,
+      "endLine": 2124,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-08.js",
+      "title": "assets__debug-BVnJLfS4 08 — style",
+      "desc": "Lines 2125-2459. Markers: style(85), display(13).",
+      "startLine": 2125,
+      "endLine": 2459,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-09.js",
+      "title": "assets__debug-BVnJLfS4 09 — style",
+      "desc": "Lines 2460-2803. Markers: style(20), dataset(9).",
+      "startLine": 2460,
+      "endLine": 2803,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-10.js",
+      "title": "assets__debug-BVnJLfS4 10 — queryselector",
+      "desc": "Lines 2804-3018. Markers: queryselector(17), style(12).",
+      "startLine": 2804,
+      "endLine": 3018,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__debug-BVnJLfS4-11.js",
+      "title": "assets__debug-BVnJLfS4 11 — latencysimulation",
+      "desc": "Lines 3019-3206. Markers: latencysimulation(9), blob(8).",
+      "startLine": 3019,
+      "endLine": 3206,
+      "sourceFile": "readable/assets__debug-BVnJLfS4.pretty.js"
+    },
+    {
+      "file": "assets__decor-EQ8VRNuO-01.js",
+      "title": "assets__decor-EQ8VRNuO 01 — imports",
+      "desc": "Lines 1-1. Markers: .",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/assets__decor-EQ8VRNuO.pretty.js"
+    },
+    {
+      "file": "assets__decor-EQ8VRNuO-tail-export.js",
+      "skipped": true,
+      "title": "assets__decor-EQ8VRNuO — final export table (not sliced)",
+      "desc": "Lines 2-2. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2,
+      "endLine": 2,
+      "sourceFile": "readable/assets__decor-EQ8VRNuO.pretty.js",
+      "firstLine": "export { e as loadProps };",
+      "lastLine": "export { e as loadProps };"
+    },
+    {
+      "file": "assets__decor-Tyb8Za1u-01.js",
+      "title": "assets__decor-Tyb8Za1u 01 — math",
+      "desc": "Lines 1-290. Markers: math(28), minx(17).",
+      "startLine": 1,
+      "endLine": 290,
+      "sourceFile": "readable/assets__decor-Tyb8Za1u.pretty.js"
+    },
+    {
+      "file": "assets__decor-Tyb8Za1u-02.js",
+      "title": "assets__decor-Tyb8Za1u 02 — math",
+      "desc": "Lines 291-392. Markers: math(4), bottom(2).",
+      "startLine": 291,
+      "endLine": 392,
+      "sourceFile": "readable/assets__decor-Tyb8Za1u.pretty.js"
+    },
+    {
+      "file": "assets__decor-Tyb8Za1u-03.js",
+      "title": "assets__decor-Tyb8Za1u 03 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 393-903. Markers: math(37), shape(18).",
+      "startLine": 393,
+      "endLine": 903,
+      "sourceFile": "readable/assets__decor-Tyb8Za1u.pretty.js"
+    },
+    {
+      "file": "assets__decor-Tyb8Za1u-04.js",
+      "title": "assets__decor-Tyb8Za1u 04 — math",
+      "desc": "Lines 904-1193. Markers: math(10), count(9).",
+      "startLine": 904,
+      "endLine": 1193,
+      "sourceFile": "readable/assets__decor-Tyb8Za1u.pretty.js"
+    },
+    {
+      "file": "assets__decor-Tyb8Za1u-tail-export.js",
+      "skipped": true,
+      "title": "assets__decor-Tyb8Za1u — final export table (not sliced)",
+      "desc": "Lines 1194-1194. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 1194,
+      "endLine": 1194,
+      "sourceFile": "readable/assets__decor-Tyb8Za1u.pretty.js",
+      "firstLine": "export { je as n, Ae as r, Re as t };",
+      "lastLine": "export { je as n, Ae as r, Re as t };"
+    },
+    {
+      "file": "assets__dmath-_BI8hNwF-01.js",
+      "title": "assets__dmath-_BI8hNwF 01 — math",
+      "desc": "Lines 1-105. Markers: math(8), imul(4).",
+      "startLine": 1,
+      "endLine": 105,
+      "sourceFile": "readable/assets__dmath-_BI8hNwF.pretty.js"
+    },
+    {
+      "file": "assets__dmath-_BI8hNwF-tail-export.js",
+      "skipped": true,
+      "title": "assets__dmath-_BI8hNwF — final export table (not sliced)",
+      "desc": "Lines 106-106. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 106,
+      "endLine": 106,
+      "sourceFile": "readable/assets__dmath-_BI8hNwF.pretty.js",
+      "firstLine": "export { f as a, p as c, m as i, h as l, n, l as o, r, c as s, i as t };",
+      "lastLine": "export { f as a, p as c, m as i, h as l, n, l as o, r, c as s, i as t };"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-01.js",
+      "title": "assets__fxHooks-Cvx_8YWC 01 — math",
+      "desc": "Lines 1-102. Markers: math(3), map(2).",
+      "startLine": 1,
+      "endLine": 102,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-02.js",
+      "title": "assets__fxHooks-Cvx_8YWC 02 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 103-783. Markers: math(36), life(33).",
+      "startLine": 103,
+      "endLine": 783,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-03.js",
+      "title": "assets__fxHooks-Cvx_8YWC 03 — math",
+      "desc": "Lines 784-1110. Markers: math(14), mesh(6).",
+      "startLine": 784,
+      "endLine": 1110,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-04.js",
+      "title": "assets__fxHooks-Cvx_8YWC 04 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 1111-2552. Markers: math(114), random(41).",
+      "startLine": 1111,
+      "endLine": 2552,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-05.js",
+      "title": "assets__fxHooks-Cvx_8YWC 05 — min",
+      "desc": "Lines 2553-2639. Markers: min(9), append(2).",
+      "startLine": 2553,
+      "endLine": 2639,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-06.js",
+      "title": "assets__fxHooks-Cvx_8YWC 06 — append",
+      "desc": "Oversized single declaration (kept whole). Lines 2640-3006. Markers: append(19), fill(13).",
+      "startLine": 2640,
+      "endLine": 3006,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-07.js",
+      "title": "assets__fxHooks-Cvx_8YWC 07 — math",
+      "desc": "Lines 3007-3351. Markers: math(20), geo(11).",
+      "startLine": 3007,
+      "endLine": 3351,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-08.js",
+      "title": "assets__fxHooks-Cvx_8YWC 08 — absarc",
+      "desc": "Lines 3352-3364. Markers: absarc(2), lineto(2).",
+      "startLine": 3352,
+      "endLine": 3364,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-09.js",
+      "title": "assets__fxHooks-Cvx_8YWC 09 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 3365-4729. Markers: math(62), color(42).",
+      "startLine": 3365,
+      "endLine": 4729,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js"
+    },
+    {
+      "file": "assets__fxHooks-Cvx_8YWC-tail-export.js",
+      "skipped": true,
+      "title": "assets__fxHooks-Cvx_8YWC — final export table (not sliced)",
+      "desc": "Lines 4730-4744. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 4730,
+      "endLine": 4744,
+      "sourceFile": "readable/assets__fxHooks-Cvx_8YWC.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__ground-ufcYH9Hx-01.js",
+      "title": "assets__ground-ufcYH9Hx 01 — math",
+      "desc": "Lines 1-102. Markers: math(10), grass(4).",
+      "startLine": 1,
+      "endLine": 102,
+      "sourceFile": "readable/assets__ground-ufcYH9Hx.pretty.js"
+    },
+    {
+      "file": "assets__ground-ufcYH9Hx-tail-export.js",
+      "skipped": true,
+      "title": "assets__ground-ufcYH9Hx — final export table (not sliced)",
+      "desc": "Lines 103-103. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 103,
+      "endLine": 103,
+      "sourceFile": "readable/assets__ground-ufcYH9Hx.pretty.js",
+      "firstLine": "export { v as n, p as r, g as t };",
+      "lastLine": "export { v as n, p as r, g as t };"
+    },
+    {
+      "file": "assets__juice-6UyTKeka-01.js",
+      "title": "assets__juice-6UyTKeka 01 — ffd21f",
+      "desc": "Lines 1-336. Markers: ffd21f(15), fff(15).",
+      "startLine": 1,
+      "endLine": 336,
+      "sourceFile": "readable/assets__juice-6UyTKeka.pretty.js"
+    },
+    {
+      "file": "assets__juice-6UyTKeka-02.js",
+      "title": "assets__juice-6UyTKeka 02 — addeventlistener",
+      "desc": "Lines 337-681. Markers: addeventlistener(10), classlist(8).",
+      "startLine": 337,
+      "endLine": 681,
+      "sourceFile": "readable/assets__juice-6UyTKeka.pretty.js"
+    },
+    {
+      "file": "assets__juice-6UyTKeka-03.js",
+      "title": "assets__juice-6UyTKeka 03 — layer",
+      "desc": "Lines 682-954. Markers: layer(11), math(10).",
+      "startLine": 682,
+      "endLine": 954,
+      "sourceFile": "readable/assets__juice-6UyTKeka.pretty.js"
+    },
+    {
+      "file": "assets__juice-6UyTKeka-tail-export.js",
+      "skipped": true,
+      "title": "assets__juice-6UyTKeka — final export table (not sliced)",
+      "desc": "Lines 955-991. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 955,
+      "endLine": 991,
+      "sourceFile": "readable/assets__juice-6UyTKeka.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__kit-C-OErpbU-01.js",
+      "title": "assets__kit-C-OErpbU 01 — index",
+      "desc": "Lines 1-115. Markers: index(12), position(12).",
+      "startLine": 1,
+      "endLine": 115,
+      "sourceFile": "readable/assets__kit-C-OErpbU.pretty.js"
+    },
+    {
+      "file": "assets__kit-C-OErpbU-tail-export.js",
+      "skipped": true,
+      "title": "assets__kit-C-OErpbU — final export table (not sliced)",
+      "desc": "Lines 116-116. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 116,
+      "endLine": 116,
+      "sourceFile": "readable/assets__kit-C-OErpbU.pretty.js",
+      "firstLine": "export { l as a, d as i, o as n, u as r, s as t };",
+      "lastLine": "export { l as a, d as i, o as n, u as r, s as t };"
+    },
+    {
+      "file": "assets__lens-BwVvQcWW-01.js",
+      "title": "assets__lens-BwVvQcWW 01 — imports",
+      "desc": "Lines 1-1. Markers: .",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/assets__lens-BwVvQcWW.pretty.js"
+    },
+    {
+      "file": "assets__lens-BwVvQcWW-tail-export.js",
+      "skipped": true,
+      "title": "assets__lens-BwVvQcWW — final export table (not sliced)",
+      "desc": "Lines 2-2. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2,
+      "endLine": 2,
+      "sourceFile": "readable/assets__lens-BwVvQcWW.pretty.js",
+      "firstLine": "export { e as Lens };",
+      "lastLine": "export { e as Lens };"
+    },
+    {
+      "file": "assets__lens-Csl3PMnC-01.js",
+      "title": "assets__lens-Csl3PMnC 01 — material",
+      "desc": "Lines 1-131. Markers: material(13), dispose(6).",
+      "startLine": 1,
+      "endLine": 131,
+      "sourceFile": "readable/assets__lens-Csl3PMnC.pretty.js"
+    },
+    {
+      "file": "assets__lens-Csl3PMnC-tail-export.js",
+      "skipped": true,
+      "title": "assets__lens-Csl3PMnC — final export table (not sliced)",
+      "desc": "Lines 132-132. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 132,
+      "endLine": 132,
+      "sourceFile": "readable/assets__lens-Csl3PMnC.pretty.js",
+      "firstLine": "export { p as t };",
+      "lastLine": "export { p as t };"
+    },
+    {
+      "file": "assets__missions-eXNMrvRm-01.js",
+      "title": "assets__missions-eXNMrvRm 01 — kind",
+      "desc": "Lines 1-10. Markers: kind(5).",
+      "startLine": 1,
+      "endLine": 10,
+      "sourceFile": "readable/assets__missions-eXNMrvRm.pretty.js"
+    },
+    {
+      "file": "assets__missions-eXNMrvRm-02.js",
+      "title": "assets__missions-eXNMrvRm 02 — kind",
+      "desc": "Oversized single declaration (kept whole). Lines 11-382. Markers: kind(37), kinds(10).",
+      "startLine": 11,
+      "endLine": 382,
+      "sourceFile": "readable/assets__missions-eXNMrvRm.pretty.js"
+    },
+    {
+      "file": "assets__missions-eXNMrvRm-03.js",
+      "title": "assets__missions-eXNMrvRm 03 — math",
+      "desc": "Lines 383-500. Markers: math(13), slots(10).",
+      "startLine": 383,
+      "endLine": 500,
+      "sourceFile": "readable/assets__missions-eXNMrvRm.pretty.js"
+    },
+    {
+      "file": "assets__missions-eXNMrvRm-tail-export.js",
+      "skipped": true,
+      "title": "assets__missions-eXNMrvRm — final export table (not sliced)",
+      "desc": "Lines 501-520. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 501,
+      "endLine": 520,
+      "sourceFile": "readable/assets__missions-eXNMrvRm.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__music-D6fpJLig-01.js",
+      "title": "assets__music-D6fpJLig 01 — connect",
+      "desc": "Lines 1-162. Markers: connect(13), gain(12).",
+      "startLine": 1,
+      "endLine": 162,
+      "sourceFile": "readable/assets__music-D6fpJLig.pretty.js"
+    },
+    {
+      "file": "assets__music-D6fpJLig-tail-export.js",
+      "skipped": true,
+      "title": "assets__music-D6fpJLig — final export table (not sliced)",
+      "desc": "Lines 163-163. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 163,
+      "endLine": 163,
+      "sourceFile": "readable/assets__music-D6fpJLig.pretty.js",
+      "firstLine": "export { E as startMusic };",
+      "lastLine": "export { E as startMusic };"
+    },
+    {
+      "file": "assets__outline-BufNikL2-01.js",
+      "title": "assets__outline-BufNikL2 01 — frustumculled",
+      "desc": "Lines 1-146. Markers: frustumculled(6), userdata(5).",
+      "startLine": 1,
+      "endLine": 146,
+      "sourceFile": "readable/assets__outline-BufNikL2.pretty.js"
+    },
+    {
+      "file": "assets__outline-BufNikL2-tail-export.js",
+      "skipped": true,
+      "title": "assets__outline-BufNikL2 — final export table (not sliced)",
+      "desc": "Lines 147-147. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 147,
+      "endLine": 147,
+      "sourceFile": "readable/assets__outline-BufNikL2.pretty.js",
+      "firstLine": "export { m as a, c as i, l as n, f as r, p as t };",
+      "lastLine": "export { m as a, c as i, l as n, f as r, p as t };"
+    },
+    {
+      "file": "assets__outline-DM9oZu0n-01.js",
+      "title": "assets__outline-DM9oZu0n 01 — imports",
+      "desc": "Lines 1-1. Markers: .",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/assets__outline-DM9oZu0n.pretty.js"
+    },
+    {
+      "file": "assets__outline-DM9oZu0n-tail-export.js",
+      "skipped": true,
+      "title": "assets__outline-DM9oZu0n — final export table (not sliced)",
+      "desc": "Lines 2-2. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2,
+      "endLine": 2,
+      "sourceFile": "readable/assets__outline-DM9oZu0n.pretty.js",
+      "firstLine": "export { e as addOutlines };",
+      "lastLine": "export { e as addOutlines };"
+    },
+    {
+      "file": "assets__padNav-a65kF6ol-01.js",
+      "title": "assets__padNav-a65kF6ol 01 — kind",
+      "desc": "Lines 1-350. Markers: kind(18), code(14).",
+      "startLine": 1,
+      "endLine": 350,
+      "sourceFile": "readable/assets__padNav-a65kF6ol.pretty.js"
+    },
+    {
+      "file": "assets__padNav-a65kF6ol-02.js",
+      "title": "assets__padNav-a65kF6ol 02 — look",
+      "desc": "Lines 351-646. Markers: look(6), math(6).",
+      "startLine": 351,
+      "endLine": 646,
+      "sourceFile": "readable/assets__padNav-a65kF6ol.pretty.js"
+    },
+    {
+      "file": "assets__padNav-a65kF6ol-03.js",
+      "title": "assets__padNav-a65kF6ol 03 — main",
+      "desc": "Oversized single declaration (kept whole). Lines 647-1238. Markers: main(23), nav(16).",
+      "startLine": 647,
+      "endLine": 1238,
+      "sourceFile": "readable/assets__padNav-a65kF6ol.pretty.js"
+    },
+    {
+      "file": "assets__padNav-a65kF6ol-04.js",
+      "title": "assets__padNav-a65kF6ol 04 — left",
+      "desc": "Lines 1239-1322. Markers: left(13), top(13).",
+      "startLine": 1239,
+      "endLine": 1322,
+      "sourceFile": "readable/assets__padNav-a65kF6ol.pretty.js"
+    },
+    {
+      "file": "assets__padNav-a65kF6ol-tail-export.js",
+      "skipped": true,
+      "title": "assets__padNav-a65kF6ol — final export table (not sliced)",
+      "desc": "Lines 1323-1362. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 1323,
+      "endLine": 1362,
+      "sourceFile": "readable/assets__padNav-a65kF6ol.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__palette-DQTkVEn_-01.js",
+      "title": "assets__palette-DQTkVEn_ 01 — paint",
+      "desc": "Lines 1-57. Markers: paint(11), concrete(5).",
+      "startLine": 1,
+      "endLine": 57,
+      "sourceFile": "readable/assets__palette-DQTkVEn_.pretty.js"
+    },
+    {
+      "file": "assets__palette-DQTkVEn_-tail-export.js",
+      "skipped": true,
+      "title": "assets__palette-DQTkVEn_ — final export table (not sliced)",
+      "desc": "Lines 58-69. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 58,
+      "endLine": 69,
+      "sourceFile": "readable/assets__palette-DQTkVEn_.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__parkMesh-CjoleZJz-01.js",
+      "title": "assets__parkMesh-CjoleZJz 01 — kind",
+      "desc": "Lines 1-278. Markers: kind(11), push(10).",
+      "startLine": 1,
+      "endLine": 278,
+      "sourceFile": "readable/assets__parkMesh-CjoleZJz.pretty.js"
+    },
+    {
+      "file": "assets__parkMesh-CjoleZJz-tail-export.js",
+      "skipped": true,
+      "title": "assets__parkMesh-CjoleZJz — final export table (not sliced)",
+      "desc": "Lines 279-279. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 279,
+      "endLine": 279,
+      "sourceFile": "readable/assets__parkMesh-CjoleZJz.pretty.js",
+      "firstLine": "export { _ as i, m as n, h as r, b as t };",
+      "lastLine": "export { _ as i, m as n, h as r, b as t };"
+    },
+    {
+      "file": "assets__parkModel-D9KlCEyZ-01.js",
+      "title": "assets__parkModel-D9KlCEyZ 01 — imports",
+      "desc": "Lines 1-1. Markers: .",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/assets__parkModel-D9KlCEyZ.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-D9KlCEyZ-tail-export.js",
+      "skipped": true,
+      "title": "assets__parkModel-D9KlCEyZ — final export table (not sliced)",
+      "desc": "Lines 2-2. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2,
+      "endLine": 2,
+      "sourceFile": "readable/assets__parkModel-D9KlCEyZ.pretty.js",
+      "firstLine": "export { e as loadPark };",
+      "lastLine": "export { e as loadPark };"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-01.js",
+      "title": "assets__parkModel-DmiMeogd 01 — imports",
+      "desc": "Lines 1-62. Markers: .",
+      "startLine": 1,
+      "endLine": 62,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-02.js",
+      "title": "assets__parkModel-DmiMeogd 02 — math",
+      "desc": "Lines 63-403. Markers: math(29), texture(10).",
+      "startLine": 63,
+      "endLine": 403,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-03.js",
+      "title": "assets__parkModel-DmiMeogd 03 — push",
+      "desc": "Lines 404-745. Markers: push(9), math(8).",
+      "startLine": 404,
+      "endLine": 745,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-04.js",
+      "title": "assets__parkModel-DmiMeogd 04 — math",
+      "desc": "Lines 746-1037. Markers: math(35), tri(18).",
+      "startLine": 746,
+      "endLine": 1037,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-05.js",
+      "title": "assets__parkModel-DmiMeogd 05 — math",
+      "desc": "Lines 1038-1382. Markers: math(28), beam(11).",
+      "startLine": 1038,
+      "endLine": 1382,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-06.js",
+      "title": "assets__parkModel-DmiMeogd 06 — math",
+      "desc": "Lines 1383-1641. Markers: math(18), accent(5).",
+      "startLine": 1383,
+      "endLine": 1641,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-07.js",
+      "title": "assets__parkModel-DmiMeogd 07 — math",
+      "desc": "Lines 1642-1975. Markers: math(23), pine(14).",
+      "startLine": 1642,
+      "endLine": 1975,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-08.js",
+      "title": "assets__parkModel-DmiMeogd 08 — math",
+      "desc": "Lines 1976-2208. Markers: math(26), push(17).",
+      "startLine": 1976,
+      "endLine": 2208,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-09.js",
+      "title": "assets__parkModel-DmiMeogd 09 — math",
+      "desc": "Lines 2209-2554. Markers: math(31), floor(20).",
+      "startLine": 2209,
+      "endLine": 2554,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-10.js",
+      "title": "assets__parkModel-DmiMeogd 10 — mesh",
+      "desc": "Lines 2555-2862. Markers: mesh(15), dispose(14).",
+      "startLine": 2555,
+      "endLine": 2862,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-11.js",
+      "title": "assets__parkModel-DmiMeogd 11 — dispose",
+      "desc": "Lines 2863-2962. Markers: dispose(8), geometry(6).",
+      "startLine": 2863,
+      "endLine": 2962,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js"
+    },
+    {
+      "file": "assets__parkModel-DmiMeogd-tail-export.js",
+      "skipped": true,
+      "title": "assets__parkModel-DmiMeogd — final export table (not sliced)",
+      "desc": "Lines 2963-2963. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2963,
+      "endLine": 2963,
+      "sourceFile": "readable/assets__parkModel-DmiMeogd.pretty.js",
+      "firstLine": "export { ln as t };",
+      "lastLine": "export { ln as t };"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-01.js",
+      "title": "assets__parks-C2dnYY6C 01 — blurb",
+      "desc": "Lines 1-185. Markers: blurb(6), color(6).",
+      "startLine": 1,
+      "endLine": 185,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-02.js",
+      "title": "assets__parks-C2dnYY6C 02 — kind",
+      "desc": "Oversized single declaration (kept whole). Lines 186-2958. Markers: kind(200), skin(165).",
+      "startLine": 186,
+      "endLine": 2958,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-03.js",
+      "title": "assets__parks-C2dnYY6C 03 — kind",
+      "desc": "Lines 2959-3308. Markers: kind(23), line(17).",
+      "startLine": 2959,
+      "endLine": 3308,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-04.js",
+      "title": "assets__parks-C2dnYY6C 04 — kind",
+      "desc": "Lines 3309-3353. Markers: kind(2), plan(2).",
+      "startLine": 3309,
+      "endLine": 3353,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-05.js",
+      "title": "assets__parks-C2dnYY6C 05 — kind",
+      "desc": "Oversized single declaration (kept whole). Lines 3354-3726. Markers: kind(20), skin(19).",
+      "startLine": 3354,
+      "endLine": 3726,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-06.js",
+      "title": "assets__parks-C2dnYY6C 06 — plan",
+      "desc": "Lines 3727-3916. Markers: plan(10), rises(9).",
+      "startLine": 3727,
+      "endLine": 3916,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-07.js",
+      "title": "assets__parks-C2dnYY6C 07 — kind",
+      "desc": "Oversized single declaration (kept whole). Lines 3917-4371. Markers: kind(24), rot(15).",
+      "startLine": 3917,
+      "endLine": 4371,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-08.js",
+      "title": "assets__parks-C2dnYY6C 08 — flatmap",
+      "desc": "Lines 4372-4425. Markers: flatmap(7), error(4).",
+      "startLine": 4372,
+      "endLine": 4425,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-09.js",
+      "title": "assets__parks-C2dnYY6C 09 — kind",
+      "desc": "Oversized single declaration (kept whole). Lines 4426-5643. Markers: kind(71), skin(71).",
+      "startLine": 4426,
+      "endLine": 5643,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-10.js",
+      "title": "assets__parks-C2dnYY6C 10 — arena",
+      "desc": "Lines 5644-5689. Markers: arena(5), box(5).",
+      "startLine": 5644,
+      "endLine": 5689,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js"
+    },
+    {
+      "file": "assets__parks-C2dnYY6C-tail-export.js",
+      "skipped": true,
+      "title": "assets__parks-C2dnYY6C — final export table (not sliced)",
+      "desc": "Lines 5690-5713. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 5690,
+      "endLine": 5713,
+      "sourceFile": "readable/assets__parks-C2dnYY6C.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__parks-vuvy8Lj9-01.js",
+      "title": "assets__parks-vuvy8Lj9 01 — add",
+      "desc": "Lines 1-316. Markers: add(19), park(17).",
+      "startLine": 1,
+      "endLine": 316,
+      "sourceFile": "readable/assets__parks-vuvy8Lj9.pretty.js"
+    },
+    {
+      "file": "assets__parks-vuvy8Lj9-02.js",
+      "title": "assets__parks-vuvy8Lj9 02 — startswith",
+      "desc": "Lines 317-372. Markers: startswith(5), addoutlines(3).",
+      "startLine": 317,
+      "endLine": 372,
+      "sourceFile": "readable/assets__parks-vuvy8Lj9.pretty.js"
+    },
+    {
+      "file": "assets__perfLab-Dt5WuMzb-01.js",
+      "title": "assets__perfLab-Dt5WuMzb 01 — tier",
+      "desc": "Lines 1-113. Markers: tier(11), off(4).",
+      "startLine": 1,
+      "endLine": 113,
+      "sourceFile": "readable/assets__perfLab-Dt5WuMzb.pretty.js"
+    },
+    {
+      "file": "assets__perfLab-Dt5WuMzb-tail-export.js",
+      "skipped": true,
+      "title": "assets__perfLab-Dt5WuMzb — final export table (not sliced)",
+      "desc": "Lines 114-114. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 114,
+      "endLine": 114,
+      "sourceFile": "readable/assets__perfLab-Dt5WuMzb.pretty.js",
+      "firstLine": "export { r as runPerfLab };",
+      "lastLine": "export { r as runPerfLab };"
+    },
+    {
+      "file": "assets__poses-DwKBijP_-01.js",
+      "title": "assets__poses-DwKBijP_ 01 — clip",
+      "desc": "Lines 1-121. Markers: clip(39), only(7).",
+      "startLine": 1,
+      "endLine": 121,
+      "sourceFile": "readable/assets__poses-DwKBijP_.pretty.js"
+    },
+    {
+      "file": "assets__poses-DwKBijP_-tail-export.js",
+      "skipped": true,
+      "title": "assets__poses-DwKBijP_ — final export table (not sliced)",
+      "desc": "Lines 122-122. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 122,
+      "endLine": 122,
+      "sourceFile": "readable/assets__poses-DwKBijP_.pretty.js",
+      "firstLine": "export { r as n, a as r, n as t };",
+      "lastLine": "export { r as n, a as r, n as t };"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-01.js",
+      "title": "assets__preload-helper-DR1MrGPZ 01 — math",
+      "desc": "Lines 1-334. Markers: math(28), len(22).",
+      "startLine": 1,
+      "endLine": 334,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-02.js",
+      "title": "assets__preload-helper-DR1MrGPZ 02 — math",
+      "desc": "Lines 335-683. Markers: math(23), error(9).",
+      "startLine": 335,
+      "endLine": 683,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-03.js",
+      "title": "assets__preload-helper-DR1MrGPZ 03 — math",
+      "desc": "Lines 684-1033. Markers: math(34), floor(12).",
+      "startLine": 684,
+      "endLine": 1033,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-04.js",
+      "title": "assets__preload-helper-DR1MrGPZ 04 — skin",
+      "desc": "Lines 1034-1270. Markers: skin(18), ledge(9).",
+      "startLine": 1034,
+      "endLine": 1270,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-05.js",
+      "title": "assets__preload-helper-DR1MrGPZ 05 — skin",
+      "desc": "Lines 1271-1510. Markers: skin(17), push(15).",
+      "startLine": 1271,
+      "endLine": 1510,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-06.js",
+      "title": "assets__preload-helper-DR1MrGPZ 06 — abs",
+      "desc": "Lines 1511-1850. Markers: abs(25), push(23).",
+      "startLine": 1511,
+      "endLine": 1850,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-07.js",
+      "title": "assets__preload-helper-DR1MrGPZ 07 — push",
+      "desc": "Lines 1851-2173. Markers: push(23), path(20).",
+      "startLine": 1851,
+      "endLine": 2173,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-08.js",
+      "title": "assets__preload-helper-DR1MrGPZ 08 — math",
+      "desc": "Lines 2174-2326. Markers: math(13), push(10).",
+      "startLine": 2174,
+      "endLine": 2326,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-09.js",
+      "title": "assets__preload-helper-DR1MrGPZ 09 — push",
+      "desc": "Lines 2327-2675. Markers: push(23), path(21).",
+      "startLine": 2327,
+      "endLine": 2675,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-10.js",
+      "title": "assets__preload-helper-DR1MrGPZ 10 — abs",
+      "desc": "Lines 2676-2996. Markers: abs(3), math(3).",
+      "startLine": 2676,
+      "endLine": 2996,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-11.js",
+      "title": "assets__preload-helper-DR1MrGPZ 11 — abs",
+      "desc": "Oversized single declaration (kept whole). Lines 2997-3754. Markers: abs(1), math(1).",
+      "startLine": 2997,
+      "endLine": 3754,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-12.js",
+      "title": "assets__preload-helper-DR1MrGPZ 12 — math",
+      "desc": "Lines 3755-4102. Markers: math(14), triangles(11).",
+      "startLine": 3755,
+      "endLine": 4102,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-13.js",
+      "title": "assets__preload-helper-DR1MrGPZ 13 — add",
+      "desc": "Lines 4103-4231. Markers: add(1), ceil(1).",
+      "startLine": 4103,
+      "endLine": 4231,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-14.js",
+      "title": "assets__preload-helper-DR1MrGPZ 14 — math",
+      "desc": "Lines 4232-4575. Markers: math(20), del(16).",
+      "startLine": 4232,
+      "endLine": 4575,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-15.js",
+      "title": "assets__preload-helper-DR1MrGPZ 15 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 4576-5002. Markers: math(40), push(18).",
+      "startLine": 4576,
+      "endLine": 5002,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-16.js",
+      "title": "assets__preload-helper-DR1MrGPZ 16 — push",
+      "desc": "Lines 5003-5324. Markers: push(23), math(15).",
+      "startLine": 5003,
+      "endLine": 5324,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-17.js",
+      "title": "assets__preload-helper-DR1MrGPZ 17 — math",
+      "desc": "Lines 5325-5670. Markers: math(23), next(17).",
+      "startLine": 5325,
+      "endLine": 5670,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-18.js",
+      "title": "assets__preload-helper-DR1MrGPZ 18 — math",
+      "desc": "Lines 5671-5911. Markers: math(11), map(6).",
+      "startLine": 5671,
+      "endLine": 5911,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js"
+    },
+    {
+      "file": "assets__preload-helper-DR1MrGPZ-tail-export.js",
+      "skipped": true,
+      "title": "assets__preload-helper-DR1MrGPZ — final export table (not sliced)",
+      "desc": "Lines 5912-5949. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 5912,
+      "endLine": 5949,
+      "sourceFile": "readable/assets__preload-helper-DR1MrGPZ.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__prims-CECOBLSv-01.js",
+      "title": "assets__prims-CECOBLSv 01 — math",
+      "desc": "Lines 1-316. Markers: math(28), push(12).",
+      "startLine": 1,
+      "endLine": 316,
+      "sourceFile": "readable/assets__prims-CECOBLSv.pretty.js"
+    },
+    {
+      "file": "assets__prims-CECOBLSv-02.js",
+      "title": "assets__prims-CECOBLSv 02 — math",
+      "desc": "Lines 317-633. Markers: math(32), map(14).",
+      "startLine": 317,
+      "endLine": 633,
+      "sourceFile": "readable/assets__prims-CECOBLSv.pretty.js"
+    },
+    {
+      "file": "assets__prims-CECOBLSv-03.js",
+      "title": "assets__prims-CECOBLSv 03 — map",
+      "desc": "Lines 634-834. Markers: map(9), math(8).",
+      "startLine": 634,
+      "endLine": 834,
+      "sourceFile": "readable/assets__prims-CECOBLSv.pretty.js"
+    },
+    {
+      "file": "assets__prims-CECOBLSv-tail-export.js",
+      "skipped": true,
+      "title": "assets__prims-CECOBLSv — final export table (not sliced)",
+      "desc": "Lines 835-864. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 835,
+      "endLine": 864,
+      "sourceFile": "readable/assets__prims-CECOBLSv.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__replay-_5kwzkRi-01.js",
+      "title": "assets__replay-_5kwzkRi 01 — stage",
+      "desc": "Lines 1-330. Markers: stage(15), cam(13).",
+      "startLine": 1,
+      "endLine": 330,
+      "sourceFile": "readable/assets__replay-_5kwzkRi.pretty.js"
+    },
+    {
+      "file": "assets__replay-_5kwzkRi-tail-export.js",
+      "skipped": true,
+      "title": "assets__replay-_5kwzkRi — final export table (not sliced)",
+      "desc": "Lines 331-331. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 331,
+      "endLine": 331,
+      "sourceFile": "readable/assets__replay-_5kwzkRi.pretty.js",
+      "firstLine": "export { O as replayLinkPage, k as replayPage };",
+      "lastLine": "export { O as replayLinkPage, k as replayPage };"
+    },
+    {
+      "file": "assets__scene-DiAs2bfK-01.js",
+      "title": "assets__scene-DiAs2bfK 01 — math",
+      "desc": "Lines 1-347. Markers: math(43), pool(11).",
+      "startLine": 1,
+      "endLine": 347,
+      "sourceFile": "readable/assets__scene-DiAs2bfK.pretty.js"
+    },
+    {
+      "file": "assets__scene-DiAs2bfK-02.js",
+      "title": "assets__scene-DiAs2bfK 02 — math",
+      "desc": "Lines 348-629. Markers: math(9), lamps(6).",
+      "startLine": 348,
+      "endLine": 629,
+      "sourceFile": "readable/assets__scene-DiAs2bfK.pretty.js"
+    },
+    {
+      "file": "assets__scene-DiAs2bfK-03.js",
+      "title": "assets__scene-DiAs2bfK 03 — renderer",
+      "desc": "Lines 630-914. Markers: renderer(16), sun(16).",
+      "startLine": 630,
+      "endLine": 914,
+      "sourceFile": "readable/assets__scene-DiAs2bfK.pretty.js"
+    },
+    {
+      "file": "assets__scene-DiAs2bfK-tail-export.js",
+      "skipped": true,
+      "title": "assets__scene-DiAs2bfK — final export table (not sliced)",
+      "desc": "Lines 915-959. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 915,
+      "endLine": 959,
+      "sourceFile": "readable/assets__scene-DiAs2bfK.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__secrets-Czes5esN-01.js",
+      "title": "assets__secrets-Czes5esN 01 — math",
+      "desc": "Lines 1-253. Markers: math(11), bal(10).",
+      "startLine": 1,
+      "endLine": 253,
+      "sourceFile": "readable/assets__secrets-Czes5esN.pretty.js"
+    },
+    {
+      "file": "assets__secrets-Czes5esN-02.js",
+      "title": "assets__secrets-Czes5esN 02 — acc",
+      "desc": "Lines 254-529. Markers: acc(18), bottom(18).",
+      "startLine": 254,
+      "endLine": 529,
+      "sourceFile": "readable/assets__secrets-Czes5esN.pretty.js"
+    },
+    {
+      "file": "assets__secrets-Czes5esN-tail-export.js",
+      "skipped": true,
+      "title": "assets__secrets-Czes5esN — final export table (not sliced)",
+      "desc": "Lines 530-557. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 530,
+      "endLine": 557,
+      "sourceFile": "readable/assets__secrets-Czes5esN.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-01.js",
+      "title": "assets__session-DxCN6jDh 01 — vite__mapdeps",
+      "desc": "Lines 1-219. Markers: vite__mapdeps(2), map(1).",
+      "startLine": 1,
+      "endLine": 219,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-02.js",
+      "title": "assets__session-DxCN6jDh 02 — math",
+      "desc": "Lines 220-566. Markers: math(57), pos(24).",
+      "startLine": 220,
+      "endLine": 566,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-03.js",
+      "title": "assets__session-DxCN6jDh 03 — air",
+      "desc": "Lines 567-840. Markers: air(11), math(11).",
+      "startLine": 567,
+      "endLine": 840,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-04.js",
+      "title": "assets__session-DxCN6jDh 04 — math",
+      "desc": "Lines 841-1179. Markers: math(17), yaw(10).",
+      "startLine": 841,
+      "endLine": 1179,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-05.js",
+      "title": "assets__session-DxCN6jDh 05 — vert",
+      "desc": "Lines 1180-1493. Markers: vert(13), vnx(13).",
+      "startLine": 1180,
+      "endLine": 1493,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-06.js",
+      "title": "assets__session-DxCN6jDh 06 — math",
+      "desc": "Lines 1494-1819. Markers: math(20), yaw(18).",
+      "startLine": 1494,
+      "endLine": 1819,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-07.js",
+      "title": "assets__session-DxCN6jDh 07 — raildir",
+      "desc": "Lines 1820-2160. Markers: raildir(19), math(18).",
+      "startLine": 1820,
+      "endLine": 2160,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-08.js",
+      "title": "assets__session-DxCN6jDh 08 — math",
+      "desc": "Lines 2161-2507. Markers: math(15), railt(11).",
+      "startLine": 2161,
+      "endLine": 2507,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-09.js",
+      "title": "assets__session-DxCN6jDh 09 — yaw",
+      "desc": "Lines 2508-2852. Markers: yaw(6), math(5).",
+      "startLine": 2508,
+      "endLine": 2852,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-10.js",
+      "title": "assets__session-DxCN6jDh 10 — count",
+      "desc": "Oversized single declaration (kept whole). Lines 2853-3420. Markers: count(18), classlist(17).",
+      "startLine": 2853,
+      "endLine": 3420,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-11.js",
+      "title": "assets__session-DxCN6jDh 11 — color",
+      "desc": "Lines 3421-3768. Markers: color(13), secret(11).",
+      "startLine": 3421,
+      "endLine": 3768,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-12.js",
+      "title": "assets__session-DxCN6jDh 12 — stage",
+      "desc": "Lines 3769-4029. Markers: stage(20), local(16).",
+      "startLine": 3769,
+      "endLine": 4029,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js"
+    },
+    {
+      "file": "assets__session-DxCN6jDh-tail-export.js",
+      "skipped": true,
+      "title": "assets__session-DxCN6jDh — final export table (not sliced)",
+      "desc": "Lines 4030-4051. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 4030,
+      "endLine": 4051,
+      "sourceFile": "readable/assets__session-DxCN6jDh.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__sfx-6jovSU2--01.js",
+      "title": "assets__sfx-6jovSU2- 01 — tutorial",
+      "desc": "Lines 1-72. Markers: tutorial(9), binds(3).",
+      "startLine": 1,
+      "endLine": 72,
+      "sourceFile": "readable/assets__sfx-6jovSU2-.pretty.js"
+    },
+    {
+      "file": "assets__sfx-6jovSU2--02.js",
+      "title": "assets__sfx-6jovSU2- 02 — tone",
+      "desc": "Oversized single declaration (kept whole). Lines 73-1327. Markers: tone(126), connect(102).",
+      "startLine": 73,
+      "endLine": 1327,
+      "sourceFile": "readable/assets__sfx-6jovSU2-.pretty.js"
+    },
+    {
+      "file": "assets__sfx-6jovSU2--03.js",
+      "title": "assets__sfx-6jovSU2- 03 — math",
+      "desc": "Lines 1328-1392. Markers: math(6), setuint32(5).",
+      "startLine": 1328,
+      "endLine": 1392,
+      "sourceFile": "readable/assets__sfx-6jovSU2-.pretty.js"
+    },
+    {
+      "file": "assets__sfx-6jovSU2--tail-export.js",
+      "skipped": true,
+      "title": "assets__sfx-6jovSU2- — final export table (not sliced)",
+      "desc": "Lines 1393-1393. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 1393,
+      "endLine": 1393,
+      "sourceFile": "readable/assets__sfx-6jovSU2-.pretty.js",
+      "firstLine": "export { o as a, c as i, _ as n, i as o, a as r, l as s, g as t };",
+      "lastLine": "export { o as a, c as i, _ as n, i as o, a as r, l as s, g as t };"
+    },
+    {
+      "file": "assets__skaterRig-CvzHL-r4-01.js",
+      "title": "assets__skaterRig-CvzHL-r4 01 — math",
+      "desc": "Lines 1-331. Markers: math(14), scene(13).",
+      "startLine": 1,
+      "endLine": 331,
+      "sourceFile": "readable/assets__skaterRig-CvzHL-r4.pretty.js"
+    },
+    {
+      "file": "assets__skaterRig-CvzHL-r4-02.js",
+      "title": "assets__skaterRig-CvzHL-r4 02 — copy",
+      "desc": "Lines 332-680. Markers: copy(21), math(21).",
+      "startLine": 332,
+      "endLine": 680,
+      "sourceFile": "readable/assets__skaterRig-CvzHL-r4.pretty.js"
+    },
+    {
+      "file": "assets__skaterRig-CvzHL-r4-03.js",
+      "title": "assets__skaterRig-CvzHL-r4 03 — find",
+      "desc": "Lines 681-690. Markers: find(2), fromarray(2).",
+      "startLine": 681,
+      "endLine": 690,
+      "sourceFile": "readable/assets__skaterRig-CvzHL-r4.pretty.js"
+    },
+    {
+      "file": "assets__skaterRig-CvzHL-r4-04.js",
+      "title": "assets__skaterRig-CvzHL-r4 04 — math",
+      "desc": "Oversized single declaration (kept whole). Lines 691-1787. Markers: math(54), copy(38).",
+      "startLine": 691,
+      "endLine": 1787,
+      "sourceFile": "readable/assets__skaterRig-CvzHL-r4.pretty.js"
+    },
+    {
+      "file": "assets__skaterRig-CvzHL-r4-tail-export.js",
+      "skipped": true,
+      "title": "assets__skaterRig-CvzHL-r4 — final export table (not sliced)",
+      "desc": "Lines 1788-1788. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 1788,
+      "endLine": 1788,
+      "sourceFile": "readable/assets__skaterRig-CvzHL-r4.pretty.js",
+      "firstLine": "export { pt as n, dt as r, Zt as t };",
+      "lastLine": "export { pt as n, dt as r, Zt as t };"
+    },
+    {
+      "file": "assets__skaterRig-CWjsS5UF-01.js",
+      "title": "assets__skaterRig-CWjsS5UF 01 — imports",
+      "desc": "Lines 1-1. Markers: .",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/assets__skaterRig-CWjsS5UF.pretty.js"
+    },
+    {
+      "file": "assets__skaterRig-CWjsS5UF-tail-export.js",
+      "skipped": true,
+      "title": "assets__skaterRig-CWjsS5UF — final export table (not sliced)",
+      "desc": "Lines 2-2. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2,
+      "endLine": 2,
+      "sourceFile": "readable/assets__skaterRig-CWjsS5UF.pretty.js",
+      "firstLine": "export { n as SkaterRigView, e as loadSkaterAssets, t as parseClips };",
+      "lastLine": "export { n as SkaterRigView, e as loadSkaterAssets, t as parseClips };"
+    },
+    {
+      "file": "assets__skaters-pUdq6stw-01.js",
+      "title": "assets__skaters-pUdq6stw 01 — kind",
+      "desc": "Lines 1-46. Markers: kind(7), look(4).",
+      "startLine": 1,
+      "endLine": 46,
+      "sourceFile": "readable/assets__skaters-pUdq6stw.pretty.js"
+    },
+    {
+      "file": "assets__skaters-pUdq6stw-02.js",
+      "title": "assets__skaters-pUdq6stw 02 — bottom",
+      "desc": "Oversized single declaration (kept whole). Lines 47-776. Markers: bottom(44), hat(44).",
+      "startLine": 47,
+      "endLine": 776,
+      "sourceFile": "readable/assets__skaters-pUdq6stw.pretty.js"
+    },
+    {
+      "file": "assets__skaters-pUdq6stw-03.js",
+      "title": "assets__skaters-pUdq6stw 03 — math",
+      "desc": "Lines 777-916. Markers: math(8), air(7).",
+      "startLine": 777,
+      "endLine": 916,
+      "sourceFile": "readable/assets__skaters-pUdq6stw.pretty.js"
+    },
+    {
+      "file": "assets__skaters-pUdq6stw-tail-export.js",
+      "skipped": true,
+      "title": "assets__skaters-pUdq6stw — final export table (not sliced)",
+      "desc": "Lines 917-933. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 917,
+      "endLine": 933,
+      "sourceFile": "readable/assets__skaters-pUdq6stw.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__skaterView-DCMhULBk-01.js",
+      "title": "assets__skaterView-DCMhULBk 01 — math",
+      "desc": "Lines 1-294. Markers: math(24), position(23).",
+      "startLine": 1,
+      "endLine": 294,
+      "sourceFile": "readable/assets__skaterView-DCMhULBk.pretty.js"
+    },
+    {
+      "file": "assets__skaterView-DCMhULBk-tail-export.js",
+      "skipped": true,
+      "title": "assets__skaterView-DCMhULBk — final export table (not sliced)",
+      "desc": "Lines 295-295. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 295,
+      "endLine": 295,
+      "sourceFile": "readable/assets__skaterView-DCMhULBk.pretty.js",
+      "firstLine": "export { g as i, x as n, k as r, A as t };",
+      "lastLine": "export { g as i, x as n, k as r, A as t };"
+    },
+    {
+      "file": "assets__songs-B3nWAdc6-01.js",
+      "title": "assets__songs-B3nWAdc6 01 — artist",
+      "desc": "Lines 1-45. Markers: artist(3), file(3).",
+      "startLine": 1,
+      "endLine": 45,
+      "sourceFile": "readable/assets__songs-B3nWAdc6.pretty.js"
+    },
+    {
+      "file": "assets__songs-B3nWAdc6-tail-export.js",
+      "skipped": true,
+      "title": "assets__songs-B3nWAdc6 — final export table (not sliced)",
+      "desc": "Lines 46-46. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 46,
+      "endLine": 46,
+      "sourceFile": "readable/assets__songs-B3nWAdc6.pretty.js",
+      "firstLine": "export { a, n as i, e as n, i as r, t };",
+      "lastLine": "export { a, n as i, e as n, i as r, t };"
+    },
+    {
+      "file": "assets__stickers-9pAHXWwr-01.js",
+      "title": "assets__stickers-9pAHXWwr 01 — includes",
+      "desc": "Lines 1-14. Markers: includes(1).",
+      "startLine": 1,
+      "endLine": 14,
+      "sourceFile": "readable/assets__stickers-9pAHXWwr.pretty.js"
+    },
+    {
+      "file": "assets__stickers-9pAHXWwr-tail-export.js",
+      "skipped": true,
+      "title": "assets__stickers-9pAHXWwr — final export table (not sliced)",
+      "desc": "Lines 15-15. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 15,
+      "endLine": 15,
+      "sourceFile": "readable/assets__stickers-9pAHXWwr.pretty.js",
+      "firstLine": "export { e as n, t as r, n as t };",
+      "lastLine": "export { e as n, t as r, n as t };"
+    },
+    {
+      "file": "assets__table-W1plLavt-01.js",
+      "title": "assets__table-W1plLavt 01 — unlock",
+      "desc": "Lines 1-313. Markers: unlock(63), secret(16).",
+      "startLine": 1,
+      "endLine": 313,
+      "sourceFile": "readable/assets__table-W1plLavt.pretty.js"
+    },
+    {
+      "file": "assets__table-W1plLavt-02.js",
+      "title": "assets__table-W1plLavt 02 — special_air",
+      "desc": "Lines 314-475. Markers: special_air(14), flip(13).",
+      "startLine": 314,
+      "endLine": 475,
+      "sourceFile": "readable/assets__table-W1plLavt.pretty.js"
+    },
+    {
+      "file": "assets__table-W1plLavt-tail-export.js",
+      "skipped": true,
+      "title": "assets__table-W1plLavt — final export table (not sliced)",
+      "desc": "Lines 476-550. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 476,
+      "endLine": 550,
+      "sourceFile": "readable/assets__table-W1plLavt.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__tag-BoiZZ9xV-01.js",
+      "title": "assets__tag-BoiZZ9xV 01 — append",
+      "desc": "Lines 1-82. Markers: append(5), assign(3).",
+      "startLine": 1,
+      "endLine": 82,
+      "sourceFile": "readable/assets__tag-BoiZZ9xV.pretty.js"
+    },
+    {
+      "file": "assets__tag-BoiZZ9xV-02.js",
+      "title": "assets__tag-BoiZZ9xV 02 — math",
+      "desc": "Lines 83-397. Markers: math(24), letters(18).",
+      "startLine": 83,
+      "endLine": 397,
+      "sourceFile": "readable/assets__tag-BoiZZ9xV.pretty.js"
+    },
+    {
+      "file": "assets__tag-BoiZZ9xV-03.js",
+      "title": "assets__tag-BoiZZ9xV 03 — append",
+      "desc": "Lines 398-665. Markers: append(11), rename(9).",
+      "startLine": 398,
+      "endLine": 665,
+      "sourceFile": "readable/assets__tag-BoiZZ9xV.pretty.js"
+    },
+    {
+      "file": "assets__tag-BoiZZ9xV-tail-export.js",
+      "skipped": true,
+      "title": "assets__tag-BoiZZ9xV — final export table (not sliced)",
+      "desc": "Lines 666-666. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 666,
+      "endLine": 666,
+      "sourceFile": "readable/assets__tag-BoiZZ9xV.pretty.js",
+      "firstLine": "export { z as tagPage };",
+      "lastLine": "export { z as tagPage };"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-01.js",
+      "title": "assets__tagPaint-BOEtbgNi 01 — entries",
+      "desc": "Lines 1-288. Markers: entries(12), clear(9).",
+      "startLine": 1,
+      "endLine": 288,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-02.js",
+      "title": "assets__tagPaint-BOEtbgNi 02 — fields",
+      "desc": "Oversized single declaration (kept whole). Lines 289-1026. Markers: fields(25), input_(25).",
+      "startLine": 289,
+      "endLine": 1026,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-03.js",
+      "title": "assets__tagPaint-BOEtbgNi 03 — push",
+      "desc": "Lines 1027-1128. Markers: push(5), collection(4).",
+      "startLine": 1027,
+      "endLine": 1128,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-04.js",
+      "title": "assets__tagPaint-BOEtbgNi 04 — smoothms",
+      "desc": "Oversized single declaration (kept whole). Lines 1129-2282. Markers: smoothms(41), snap(31).",
+      "startLine": 1129,
+      "endLine": 2282,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-05.js",
+      "title": "assets__tagPaint-BOEtbgNi 05 — float32",
+      "desc": "Lines 2283-2623. Markers: float32(37), uint8(36).",
+      "startLine": 2283,
+      "endLine": 2623,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-06.js",
+      "title": "assets__tagPaint-BOEtbgNi 06 — attachall",
+      "desc": "Lines 2624-2758. Markers: attachall(2), callbacks(2).",
+      "startLine": 2624,
+      "endLine": 2758,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-07.js",
+      "title": "assets__tagPaint-BOEtbgNi 07 — kind",
+      "desc": "Oversized single declaration (kept whole). Lines 2759-3415. Markers: kind(65), spots(16).",
+      "startLine": 2759,
+      "endLine": 3415,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-08.js",
+      "title": "assets__tagPaint-BOEtbgNi 08 — kind",
+      "desc": "Lines 3416-3760. Markers: kind(26), map(11).",
+      "startLine": 3416,
+      "endLine": 3760,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-09.js",
+      "title": "assets__tagPaint-BOEtbgNi 09 — kind",
+      "desc": "Lines 3761-4099. Markers: kind(18), level(14).",
+      "startLine": 3761,
+      "endLine": 4099,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-10.js",
+      "title": "assets__tagPaint-BOEtbgNi 10 — math",
+      "desc": "Lines 4100-4444. Markers: math(21), kind(12).",
+      "startLine": 4100,
+      "endLine": 4444,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-11.js",
+      "title": "assets__tagPaint-BOEtbgNi 11 — http",
+      "desc": "Lines 4445-4783. Markers: http(15), profile(15).",
+      "startLine": 4445,
+      "endLine": 4783,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-12.js",
+      "title": "assets__tagPaint-BOEtbgNi 12 — math",
+      "desc": "Lines 4784-5063. Markers: math(14), ctx(10).",
+      "startLine": 4784,
+      "endLine": 5063,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js"
+    },
+    {
+      "file": "assets__tagPaint-BOEtbgNi-tail-export.js",
+      "skipped": true,
+      "title": "assets__tagPaint-BOEtbgNi — final export table (not sliced)",
+      "desc": "Lines 5064-5205. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 5064,
+      "endLine": 5205,
+      "sourceFile": "readable/assets__tagPaint-BOEtbgNi.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__tapeRider-C0l9JrgL-01.js",
+      "title": "assets__tapeRider-C0l9JrgL 01 — run",
+      "desc": "Lines 1-245. Markers: run(15), tape(12).",
+      "startLine": 1,
+      "endLine": 245,
+      "sourceFile": "readable/assets__tapeRider-C0l9JrgL.pretty.js"
+    },
+    {
+      "file": "assets__tapeRider-C0l9JrgL-tail-export.js",
+      "skipped": true,
+      "title": "assets__tapeRider-C0l9JrgL — final export table (not sliced)",
+      "desc": "Lines 246-246. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 246,
+      "endLine": 246,
+      "sourceFile": "readable/assets__tapeRider-C0l9JrgL.pretty.js",
+      "firstLine": "export { w as n, E as t };",
+      "lastLine": "export { w as n, E as t };"
+    },
+    {
+      "file": "assets__toon-CycGToy9-01.js",
+      "title": "assets__toon-CycGToy9 01 — imports",
+      "desc": "Lines 1-86. Markers: .",
+      "startLine": 1,
+      "endLine": 86,
+      "sourceFile": "readable/assets__toon-CycGToy9.pretty.js"
+    },
+    {
+      "file": "assets__toon-CycGToy9-three-vendor.js",
+      "wholeFile": true,
+      "title": "assets__toon-CycGToy9 — bundled three.js r186 WebGLRenderer bundle (vendor region, whole-file, never sliced)",
+      "desc": "Lines 87-14154 of readable/assets__toon-CycGToy9.pretty.js: the minifier-merged three.js r186 renderer bundle the build inlined into this chunk (WebGLAnimation, WebGLAttributes/BindingStates/Geometries/Objects/Programs/State/Textures/Uniforms, PMREM DFG_LUT/CubeUV generation, shadow-map shader chunks, WebGLRenderer itself with its `WebGLRenderer:` warning strings and `THREE.WebGLRenderer` error labels, `window.__THREE__` consumption) — vendor, not app code. The region ends where the minifier merged the renderer class with the app's `Xr = { uSlab … }` toon uniform record in one var statement; that statement stays in the vendor region whole (statement-aligned cuts cannot split inside it). Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
+      "note": "whole-file region (vendor rule): indexed in readable/, never sliced",
+      "startLine": 87,
+      "endLine": 14154,
+      "sourceFile": "readable/assets__toon-CycGToy9.pretty.js"
+    },
+    {
+      "file": "assets__toon-CycGToy9-02.js",
+      "title": "assets__toon-CycGToy9 02 — float",
+      "desc": "Lines 14155-14417. Markers: float(21), kind(10).",
+      "startLine": 14155,
+      "endLine": 14417,
+      "sourceFile": "readable/assets__toon-CycGToy9.pretty.js"
+    },
+    {
+      "file": "assets__toon-CycGToy9-tail-export.js",
+      "skipped": true,
+      "title": "assets__toon-CycGToy9 — final export table (not sliced)",
+      "desc": "Lines 14418-14427. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 14418,
+      "endLine": 14427,
+      "sourceFile": "readable/assets__toon-CycGToy9.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__toon-L4_S6Akl-01.js",
+      "title": "assets__toon-L4_S6Akl 01 — imports",
+      "desc": "Lines 1-1. Markers: .",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/assets__toon-L4_S6Akl.pretty.js"
+    },
+    {
+      "file": "assets__toon-L4_S6Akl-tail-export.js",
+      "skipped": true,
+      "title": "assets__toon-L4_S6Akl — final export table (not sliced)",
+      "desc": "Lines 2-2. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 2,
+      "endLine": 2,
+      "sourceFile": "readable/assets__toon-L4_S6Akl.pretty.js",
+      "firstLine": "export { t as patchToon, e as toonMaterial };",
+      "lastLine": "export { t as patchToon, e as toonMaterial };"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-01.js",
+      "title": "assets__tuning-D4mSK766 01 — candidate",
+      "desc": "Lines 1-330. Markers: candidate(10), count(9).",
+      "startLine": 1,
+      "endLine": 330,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-02.js",
+      "title": "assets__tuning-D4mSK766 02 — offset",
+      "desc": "Lines 331-644. Markers: offset(11), float32array(10).",
+      "startLine": 331,
+      "endLine": 644,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-03.js",
+      "title": "assets__tuning-D4mSK766 03 — count",
+      "desc": "Lines 645-955. Markers: count(13), math(9).",
+      "startLine": 645,
+      "endLine": 955,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-04.js",
+      "title": "assets__tuning-D4mSK766 04 — start",
+      "desc": "Lines 956-1215. Markers: start(12), copy(10).",
+      "startLine": 956,
+      "endLine": 1215,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-05.js",
+      "title": "assets__tuning-D4mSK766 05 — copy",
+      "desc": "Lines 1216-1523. Markers: copy(54), start(29).",
+      "startLine": 1216,
+      "endLine": 1523,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-06.js",
+      "title": "assets__tuning-D4mSK766 06 — copy",
+      "desc": "Lines 1524-1857. Markers: copy(15), frombufferattribute(12).",
+      "startLine": 1524,
+      "endLine": 1857,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-07.js",
+      "title": "assets__tuning-D4mSK766 07 — geometry",
+      "desc": "Lines 1858-2187. Markers: geometry(8), getx(7).",
+      "startLine": 1858,
+      "endLine": 2187,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-08.js",
+      "title": "assets__tuning-D4mSK766 08 — applymatrix4",
+      "desc": "Lines 2188-2498. Markers: applymatrix4(14), copy(12).",
+      "startLine": 2188,
+      "endLine": 2498,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-09.js",
+      "title": "assets__tuning-D4mSK766 09 — copy",
+      "desc": "Lines 2499-2603. Markers: copy(10), point(10).",
+      "startLine": 2499,
+      "endLine": 2603,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-10.js",
+      "title": "assets__tuning-D4mSK766 10 — index",
+      "desc": "Lines 2604-2886. Markers: index(11), indirect(9).",
+      "startLine": 2604,
+      "endLine": 2886,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-11.js",
+      "title": "assets__tuning-D4mSK766 11 — center",
+      "desc": "Lines 2887-3191. Markers: center(14), surf(12).",
+      "startLine": 2887,
+      "endLine": 3191,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js"
+    },
+    {
+      "file": "assets__tuning-D4mSK766-tail-export.js",
+      "skipped": true,
+      "title": "assets__tuning-D4mSK766 — final export table (not sliced)",
+      "desc": "Lines 3192-3299. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 3192,
+      "endLine": 3299,
+      "sourceFile": "readable/assets__tuning-D4mSK766.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__types-DM-HODfo-01.js",
+      "title": "assets__types-DM-HODfo 01 — none",
+      "desc": "Lines 1-196. Markers: none(5), math(4).",
+      "startLine": 1,
+      "endLine": 196,
+      "sourceFile": "readable/assets__types-DM-HODfo.pretty.js"
+    },
+    {
+      "file": "assets__types-DM-HODfo-tail-export.js",
+      "skipped": true,
+      "title": "assets__types-DM-HODfo — final export table (not sliced)",
+      "desc": "Lines 197-216. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 197,
+      "endLine": 216,
+      "sourceFile": "readable/assets__types-DM-HODfo.pretty.js",
+      "firstLine": "export {",
+      "lastLine": "};"
+    },
+    {
+      "file": "assets__verlet-BVVzuOqv-01.js",
+      "title": "assets__verlet-BVVzuOqv 01 — console",
+      "desc": "Lines 1-238. Markers: console(16), error(15).",
+      "startLine": 1,
+      "endLine": 238,
+      "sourceFile": "readable/assets__verlet-BVVzuOqv.pretty.js"
+    },
+    {
+      "file": "assets__verlet-BVVzuOqv-02.js",
+      "title": "assets__verlet-BVVzuOqv 02 — math",
+      "desc": "Lines 239-572. Markers: math(16), hit(13).",
+      "startLine": 239,
+      "endLine": 572,
+      "sourceFile": "readable/assets__verlet-BVVzuOqv.pretty.js"
+    },
+    {
+      "file": "assets__verlet-BVVzuOqv-tail-export.js",
+      "skipped": true,
+      "title": "assets__verlet-BVVzuOqv — final export table (not sliced)",
+      "desc": "Lines 573-573. The chunk's final export {…} table — the exported bindings live in the earlier slices; a standalone tail carries no new statements, so it is indexed only.",
+      "startLine": 573,
+      "endLine": 573,
+      "sourceFile": "readable/assets__verlet-BVVzuOqv.pretty.js",
+      "firstLine": "export { i as n, o as r, p as t };",
+      "lastLine": "export { i as n, o as r, p as t };"
+    },
+    {
+      "file": "assets__Client-CpE02kO_-vendor.js",
+      "wholeFile": true,
+      "title": "assets__Client-CpE02kO_ — Colyseus SDK client (vendor, whole-file, never sliced)",
+      "desc": "Lines 1-9830 of readable/assets__Client-CpE02kO_.pretty.js: The bundled Colyseus multiplayer SDK client (Room/Client transport, schema encoding via @colyseus/schema, the /matchmake + /auth HTTP/WS handshake) that talks to the game's live backend — vendor, not app code; the backend itself is external (see README). Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
+      "note": "whole-file (vendor rule): indexed in readable/, never sliced",
+      "startLine": 1,
+      "endLine": 9830,
+      "sourceFile": "readable/assets__Client-CpE02kO_.pretty.js"
+    },
+    {
+      "file": "assets__GLTFLoader-BAb7LzOS-vendor.js",
+      "wholeFile": true,
+      "title": "assets__GLTFLoader-BAb7LzOS — three.js GLTFLoader addon (vendor, whole-file, never sliced)",
+      "desc": "Lines 1-2406 of readable/assets__GLTFLoader-BAb7LzOS.pretty.js: The bundled three.js examples/jsm GLTFLoader with its KHR_* extension callbacks plus the DRACO mesh compression path, the KTX2 texture loader hook and the meshopt decoder hook — vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
+      "note": "whole-file (vendor rule): indexed in readable/, never sliced",
+      "startLine": 1,
+      "endLine": 2406,
+      "sourceFile": "readable/assets__GLTFLoader-BAb7LzOS.pretty.js"
+    },
+    {
+      "file": "assets__lil-gui.esm-uYN4JE7y-vendor.js",
+      "wholeFile": true,
+      "title": "assets__lil-gui.esm-uYN4JE7y — lil-gui build (vendor, whole-file, never sliced)",
+      "desc": "Lines 1-1315 of readable/assets__lil-gui.esm-uYN4JE7y.pretty.js: The bundled lil-gui control panel library (Controller/BooleanController/… with its DOM controller tree) used by the park viewer's debug UI — vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
+      "note": "whole-file (vendor rule): indexed in readable/, never sliced",
+      "startLine": 1,
+      "endLine": 1315,
+      "sourceFile": "readable/assets__lil-gui.esm-uYN4JE7y.pretty.js"
+    },
+    {
+      "file": "assets__modulepreload-polyfill-P2Xu9kJm-vendor.js",
+      "wholeFile": true,
+      "title": "assets__modulepreload-polyfill-P2Xu9kJm — Vite modulepreload polyfill (build machinery, whole-file, never sliced)",
+      "desc": "Lines 1-31 of readable/assets__modulepreload-polyfill-P2Xu9kJm.pretty.js: The Vite-generated modulepreload polyfill (`link[rel=modulepreload]` relList.supports check + MutationObserver fetch warm-up) — build machinery, not app code. Indexed whole-file in readable/, never sliced.",
+      "note": "whole-file (vendor rule): indexed in readable/, never sliced",
+      "startLine": 1,
+      "endLine": 31,
+      "sourceFile": "readable/assets__modulepreload-polyfill-P2Xu9kJm.pretty.js"
+    },
+    {
+      "file": "assets__OrbitControls-CQWqkYLs-vendor.js",
+      "wholeFile": true,
+      "title": "assets__OrbitControls-CQWqkYLs — three.js OrbitControls addon (vendor, whole-file, never sliced)",
+      "desc": "Lines 1-854 of readable/assets__OrbitControls-CQWqkYLs.pretty.js: The bundled three.js examples/jsm OrbitControls (camera orbit/dolly/pan with pointer + touch handling) used by the park viewer — vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
+      "note": "whole-file (vendor rule): indexed in readable/, never sliced",
+      "startLine": 1,
+      "endLine": 854,
+      "sourceFile": "readable/assets__OrbitControls-CQWqkYLs.pretty.js"
+    },
+    {
+      "file": "assets__three.core-DVWDmH0S-vendor.js",
+      "wholeFile": true,
+      "title": "assets__three.core-DVWDmH0S — three.js r186 core build (vendor, whole-file, never sliced)",
+      "desc": "Lines 1-15349 of readable/assets__three.core-DVWDmH0S.pretty.js: The bundled three.js r186 core build (constants, math (Vector3/Matrix4/Quaternion), BufferGeometry, textures, materials, scene graph, loaders' shared machinery, the `window.__THREE__` revision 186 registration) — the renderer itself is split into the toon chunk by the build. Vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
+      "note": "whole-file (vendor rule): indexed in readable/, never sliced",
+      "startLine": 1,
+      "endLine": 15349,
+      "sourceFile": "readable/assets__three.core-DVWDmH0S.pretty.js"
+    },
+    {
+      "file": "assets__main-BefG6oT8.css",
+      "wholeFile": true,
+      "title": "assets__main-BefG6oT8 — stylesheet (whole-file, never sliced)",
+      "desc": "Lines 1-14465 of readable/assets__main-BefG6oT8.pretty.css. Whole-file (stylesheet rule): the capture stylesheet is indexed whole in readable/, never sliced.",
+      "note": "whole-file (stylesheet, not sliced): CSS is indexed whole in readable/",
+      "startLine": 1,
+      "endLine": 14465,
+      "sourceFile": "readable/assets__main-BefG6oT8.pretty.css"
+    },
+    {
+      "file": "fonts__fonts.css",
+      "wholeFile": true,
+      "title": "fonts__fonts — stylesheet (whole-file, never sliced)",
+      "desc": "Lines 1-20 of readable/fonts__fonts.pretty.css. Whole-file (stylesheet rule): the capture stylesheet is indexed whole in readable/, never sliced.",
+      "note": "whole-file (stylesheet, not sliced): CSS is indexed whole in readable/",
+      "startLine": 1,
+      "endLine": 20,
+      "sourceFile": "readable/fonts__fonts.pretty.css"
+    },
+    {
+      "file": "index-inline-1.css",
+      "wholeFile": true,
+      "title": "index-inline-1 — inline style block (whole-file, never sliced)",
+      "desc": "Lines 1-147 of readable/index-inline-1.pretty.css. Whole-file: the entry document's inline style block (2305 B at bytes 3314-5619 of index.html) is indexed whole and never sliced.",
+      "note": "whole-file (entry inline style block, not sliced)",
+      "startLine": 1,
+      "endLine": 147,
+      "sourceFile": "readable/index-inline-1.pretty.css"
+    },
+    {
+      "file": "index-inline-2.js",
+      "wholeFile": true,
+      "title": "index-inline-2 — inline script block (whole-file, never sliced)",
+      "desc": "Lines 1-6 of readable/index-inline-2.pretty.js. Whole-file: the entry document's inline script block (133 B at bytes 8696-8829 of index.html) is indexed whole and never sliced.",
+      "note": "whole-file (entry inline script block, not sliced)",
+      "startLine": 1,
+      "endLine": 6,
+      "sourceFile": "readable/index-inline-2.pretty.js"
+    },
+    {
+      "file": "parks__index-inline-1.css",
+      "wholeFile": true,
+      "title": "parks__index-inline-1 — inline style block (whole-file, never sliced)",
+      "desc": "Lines 1-22 of readable/parks__index-inline-1.pretty.css. Whole-file: the entry document's inline style block (270 B at bytes 327-597 of parks/index.html) is indexed whole and never sliced.",
+      "note": "whole-file (entry inline style block, not sliced)",
+      "startLine": 1,
+      "endLine": 22,
+      "sourceFile": "readable/parks__index-inline-1.pretty.css"
+    }
+  ],
+  "notRendered": [
+    {
+      "capture": "apple-touch-icon.png",
+      "kind": "payload",
+      "bytes": 44408,
+      "sha256": "d0b2b87a8d1e17c6ae7f37a054119d79380f63287ffafe8019dd85642fa7df69",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "favicon.png",
+      "kind": "payload",
+      "bytes": 14494,
+      "sha256": "ae747bd31eb2c481f4303dd368d7f0ab84dc06095367a28796f79b8b4f9c2353",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "fonts/baloo2.woff2",
+      "kind": "payload",
+      "bytes": 180336,
+      "sha256": "e2a02ae623d9d2bbdc8c464a3868566c4df5b46763388c03834982a48163685b",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "fonts/lilita-one.woff2",
+      "kind": "payload",
+      "bytes": 11272,
+      "sha256": "a16a39f50b88e7a2b4cc7ae50527344a1c9b9ff4dbfd87541817b654158eda86",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "fonts/sedgwick-ave-display.woff2",
+      "kind": "payload",
+      "bytes": 23960,
+      "sha256": "d67dcbbb9d65989ceac9664a9979b5f940822ee48344e02162e7c983161879de",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "logo.webp",
+      "kind": "payload",
+      "bytes": 61778,
+      "sha256": "f7dd8c370dec5fabef22c8973d7c297661090b96f57fe7a84fa4505b1c1facf0",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "music/recomecar.mp3",
+      "kind": "payload",
+      "bytes": 2089003,
+      "sha256": "0b6a45e5d05fe48cc3990ef558ff30d51853a362c3366aa666fe1ef78e3761ba",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "music/reencontrar.mp3",
+      "kind": "payload",
+      "bytes": 2995138,
+      "sha256": "3b5e322e1533c7427f169d7a2ee4e586cd229a5fa42849dc48958e2cf538355d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "music/sobre-voce.mp3",
+      "kind": "payload",
+      "bytes": 2887305,
+      "sha256": "7a886a84f0f308df98d510fab63821e4a9ec8971b60ae094e0aa9ca132e74532",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "og.jpg",
+      "kind": "payload",
+      "bytes": 190358,
+      "sha256": "169fd50f0fbe8f0ab8e9e5be4a5f8f80ea39fb2a5d074f38a1f2ff610e693e5b",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/beach.glb",
+      "kind": "payload",
+      "bytes": 1007344,
+      "sha256": "4fe61ea6691fd468f5d60dfd87e463055b59b207d89ab147ff515c67bcb0b3de",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/bridge.glb",
+      "kind": "payload",
+      "bytes": 937696,
+      "sha256": "b9405948178a18b48b793564e9982ace78cc670f28c695e33702fb087ea263ce",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/hangar.glb",
+      "kind": "payload",
+      "bytes": 978260,
+      "sha256": "4c436657ff9b14be18c9792eb9dbc7253152df4b4439da3c9effb8eb3673cdfd",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/mall.glb",
+      "kind": "payload",
+      "bytes": 881392,
+      "sha256": "8fe346e318201713586edb57fcdac3bebf1fd9afbb80a9ea52ea3b56d5984acb",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/pier.glb",
+      "kind": "payload",
+      "bytes": 863240,
+      "sha256": "7c27b2bf350ce7d7297f6734f7b18a242021c2b455f794c74a4ec8a95c442130",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/plaza.glb",
+      "kind": "payload",
+      "bytes": 846100,
+      "sha256": "8fa05a3ab5333a3eaf563dc3fbae85b628c1f9d9cb842733fb91b4bb2c6b4ebe",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/schoolyard.glb",
+      "kind": "payload",
+      "bytes": 632412,
+      "sha256": "1490d10da4e2cce94e647e447618ebf51d61d50e821401f24f269b322bf18c22",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/beach.webp",
+      "kind": "payload",
+      "bytes": 28544,
+      "sha256": "8810f35bfc1c0057f2431ec9955e86643ae3ff269069d3119f421a7244572012",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/bridge.webp",
+      "kind": "payload",
+      "bytes": 18024,
+      "sha256": "a267815dae37e426290bb5a94a78ebc54adf4716d305b8f9d35e628073477a69",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/city.webp",
+      "kind": "payload",
+      "bytes": 29412,
+      "sha256": "6b944cc0764dbe8eeacd25d41450588f975f8396d2b062b6e0a748af7f856e1e",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/hangar.webp",
+      "kind": "payload",
+      "bytes": 33938,
+      "sha256": "18cde2cf22085117957c5b6d2c8d40fd95457d1e82707902de0cf09aafbfcbc6",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/lab.webp",
+      "kind": "payload",
+      "bytes": 27712,
+      "sha256": "59a4f5370a00f81bf16a3ad4612e8e90c8560343ebbbeaa6207344c2afe58286",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/mall.webp",
+      "kind": "payload",
+      "bytes": 37626,
+      "sha256": "98a4c3e38f3aae713d419e50a2fc37f64f92066315be7cefcea4373c41d62618",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/pier.webp",
+      "kind": "payload",
+      "bytes": 33106,
+      "sha256": "bf34bce3037335f9131000d5b3db86c00819a0a9cf8c077dcbbf6e09be113111",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/plaza.webp",
+      "kind": "payload",
+      "bytes": 31404,
+      "sha256": "c7573b935f0f0f9eeefcd2ec77975e12f83bced4345f28707683682f87ea562d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/schoolyard.webp",
+      "kind": "payload",
+      "bytes": 34260,
+      "sha256": "e4b7bb6852cdb127d5859ecf6f6367dd47a088685f6b56d6c6943e46224bda50",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/thumbs/warehouse.webp",
+      "kind": "payload",
+      "bytes": 37898,
+      "sha256": "39f74268497eafce772845edcb3bdde695e6dbcc822ad2a6137dc6aeb983de82",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "parks/warehouse.glb",
+      "kind": "payload",
+      "bytes": 705700,
+      "sha256": "35d583d471c9a3c5db06ca3dbd001b5ee6bf3505d0c04571ec65a8968b05927e",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "props/props.glb",
+      "kind": "payload",
+      "bytes": 812356,
+      "sha256": "b11ee1b7e0f7e72f72abb3c9da3a947c642d27c69c66b72434e1a1ccbe98dd97",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "sfx/six-seven.mp3",
+      "kind": "payload",
+      "bytes": 21046,
+      "sha256": "b482610dfc4e1a1726ef9fd3dc398000453be89070019c0a5176ef3c4c8dff23",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/clips.json",
+      "kind": "payload",
+      "bytes": 2914922,
+      "sha256": "5b00aee3c725f71f8610a734af108721bb8a0e5519444a596fba18ec17b921ea",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/board.glb",
+      "kind": "payload",
+      "bytes": 19044,
+      "sha256": "a2d9e4cc8499c87f9e2660b130e4ac1f290ae8fb1cac96dd1bd19c97560b8ef0",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/body.glb",
+      "kind": "payload",
+      "bytes": 286900,
+      "sha256": "ccfccb9f6376ca3de82614d859809e1d243cbd9db49fb55733ff0b1cb973d9e7",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-alien.glb",
+      "kind": "payload",
+      "bytes": 199416,
+      "sha256": "719f80a134308fbeb9f5e40a73de990035fc3a2960dd4b068c3ce8141210733f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-axolotl.glb",
+      "kind": "payload",
+      "bytes": 221408,
+      "sha256": "628af8ade9e3cd6232cb088be7c02708c139e42f274535ced014bf90daa9f296",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-bat.glb",
+      "kind": "payload",
+      "bytes": 222848,
+      "sha256": "ced420e3b9d2f1e94ced1159f43d6fa495bbb2208c1cd2895a8615d3f82a6909",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-bear.glb",
+      "kind": "payload",
+      "bytes": 204572,
+      "sha256": "3dbdcb8eeec1335466edeeae7c0862c0fc9eb8c7bb79dc4d14db27f3dac62f19",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-camel.glb",
+      "kind": "payload",
+      "bytes": 213280,
+      "sha256": "3afea0878c68e04b712cbecd074a9ff146fd52b9ff5c5d00a1d00dde356c637d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-cat.glb",
+      "kind": "payload",
+      "bytes": 214824,
+      "sha256": "4b0c178981a0dd8938a83f20e05b4841d2ac23ca6ccfe660521a4bf32d2ab6a5",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-chupa.glb",
+      "kind": "payload",
+      "bytes": 220592,
+      "sha256": "36a3dd1884fc079806447e7b635e348e71132e62d9dd056fec5de4dc7083b99f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-collie.glb",
+      "kind": "payload",
+      "bytes": 221848,
+      "sha256": "42d16f76ace3197d16afc596b77f3870c7630bf549d792cb6fc03ee843d85830",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-duck.glb",
+      "kind": "payload",
+      "bytes": 198968,
+      "sha256": "a97b48253bb58e1d77868c2ef8b3326eb2d68c60275352c9899ffcbd3d940662",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-fox.glb",
+      "kind": "payload",
+      "bytes": 211920,
+      "sha256": "25b6f738835ed8c4b761ae1b8cb23396ee7d16d5a3bbea8f6d9b64d2d7d86a97",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-giraffe.glb",
+      "kind": "payload",
+      "bytes": 224664,
+      "sha256": "164ebf52f2645bad4b15b864b4286abf103218342f9f7c62b318f332461ce36f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-glider.glb",
+      "kind": "payload",
+      "bytes": 217424,
+      "sha256": "6df322c6d03c712c7656c830c5de52e482652293de1cccc1e9efddbc79fda300",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-goat.glb",
+      "kind": "payload",
+      "bytes": 216020,
+      "sha256": "f8a6e881de73173c5615c0c7de2f5023d3a09cda6d2d48890d54c9f13c6cbeeb",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-goose.glb",
+      "kind": "payload",
+      "bytes": 205604,
+      "sha256": "7915a90802a4acf74a45b43919bac939e42af13b5d30202811752d3f5f107789",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-hare.glb",
+      "kind": "payload",
+      "bytes": 212272,
+      "sha256": "c8c8030262a0cc807bd2e3f2bba88fbe8963615e4be180957643d4dd77ad5382",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-hawk.glb",
+      "kind": "payload",
+      "bytes": 219660,
+      "sha256": "5e6382a650cf93af3d20e30e89c79f24a8d8b0de23044490ada1039686404784",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-hyena.glb",
+      "kind": "payload",
+      "bytes": 214636,
+      "sha256": "d5a6b7e795a6269d7721ef41731b518b8cec7186c1342d6203b790a7bece4322",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-koala.glb",
+      "kind": "payload",
+      "bytes": 204200,
+      "sha256": "6cb505d6a20b4175e3686abff8ac232d0a26e0a75e7bcc5825e2de2e4a144dd1",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-muskrat.glb",
+      "kind": "payload",
+      "bytes": 208184,
+      "sha256": "ac8a7c022b9f056ddd3041ab72a8fd35c45efe19f9849f63095605cf90ada01b",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-otter.glb",
+      "kind": "payload",
+      "bytes": 204804,
+      "sha256": "465cbf1096ff64d6d4183e11a7d912695b70745a739d13edd0a7d319f555f271",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-pony.glb",
+      "kind": "payload",
+      "bytes": 217596,
+      "sha256": "70d926642328177855f6c79c364bf439c5eea54e6341dc2fac1ed0d2081b85b3",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-puffin.glb",
+      "kind": "payload",
+      "bytes": 209348,
+      "sha256": "b68f6d0531b89f1a7f95fec732ba6f438cc3964eaa7908620f730d77a3e6b8d4",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-ranger.glb",
+      "kind": "payload",
+      "bytes": 217864,
+      "sha256": "c975c180316fbe75ebbd4a8e87dafcbf1cfb214afb4969297fd7dd347c4571cc",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-sagui.glb",
+      "kind": "payload",
+      "bytes": 212704,
+      "sha256": "90b7e8f4fe4d871a1fb28c137ab7e98a88662c484c2d297c28b39eeec4009a92",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-seal.glb",
+      "kind": "payload",
+      "bytes": 204936,
+      "sha256": "67920182d6111e58aaf6adb5e0c34f069de39884440d65a3b22c5b8227cf3f7c",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-shrew.glb",
+      "kind": "payload",
+      "bytes": 209080,
+      "sha256": "5ed0aed29af61988923a311a524f07e4abbb2309b5aca71fba2520c8376a06cd",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-spider.glb",
+      "kind": "payload",
+      "bytes": 211448,
+      "sha256": "9e64279b27ad954dc4ea0a91fc8cedf6a6b66683f40cd0f3f4825c4292bc7969",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-tamarin.glb",
+      "kind": "payload",
+      "bytes": 221940,
+      "sha256": "2238b74a1d049c38e10576159b264ea1f35097f5353635c659b6446db718690d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-toad.glb",
+      "kind": "payload",
+      "bytes": 201892,
+      "sha256": "860834f0993eb3d1cb703194fde5c2ae6b63015c722ef21f48f387aef84e2d38",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-wolf.glb",
+      "kind": "payload",
+      "bytes": 213920,
+      "sha256": "e964fd6fc13a3d3974d344f495d471d12fedd26c999a3e1b37a05ceb5ef95573",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/head-yeti.glb",
+      "kind": "payload",
+      "bytes": 224960,
+      "sha256": "80d0a80df479b3ab3dd2e1ae44e36f18c5e1f7a67951e1cf974e21027d05f28e",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/kit/kit.json",
+      "kind": "payload",
+      "bytes": 74596,
+      "sha256": "c9e8f2d14c90655953647ea813a140d71da4a0a0f6273fa173b301097bf99306",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/andrew-reynfox.png",
+      "kind": "payload",
+      "bytes": 32840,
+      "sha256": "cc6b739606cc95b72739583f63b9ad8de01e2a469e5125e8db6e62bdcb7a010f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/arisa-shrew.png",
+      "kind": "payload",
+      "bytes": 35966,
+      "sha256": "f532571198f2de06338224024b8bcf2369dd6c72c91740135dfd459fc050adf1",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/aurelien-giraffe.png",
+      "kind": "payload",
+      "bytes": 35861,
+      "sha256": "dd668360c41a66ba1f2415a51260d08059f38201d82848f761dba2f95edcff11",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/bam-margoose.png",
+      "kind": "payload",
+      "bytes": 38763,
+      "sha256": "ba5f47f2244cd3ef988a9f338549fc4bab96dd4ade570a35bbd7b8048761a6a7",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/bob-burnquack.png",
+      "kind": "payload",
+      "bytes": 34008,
+      "sha256": "146ca8a6a590757f6c98c8d87b46e732358b4af1d34eb84b908e25ac86c811ed",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/chad-muskrat.png",
+      "kind": "payload",
+      "bytes": 33897,
+      "sha256": "25737cc9cb1ea6b9c27d73170e2c86f5ba91fd94ce5f444747ee3712a2e5b29f",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/chris-collie.png",
+      "kind": "payload",
+      "bytes": 35961,
+      "sha256": "5a48ab957feea70c3afb08953bba769112281adcd1d3a3429f4ad2912ea4b575",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/elissa-steamotter.png",
+      "kind": "payload",
+      "bytes": 34714,
+      "sha256": "6e573b43537efce4d142ed7caaac2a24e41277a4d999c320f4eb8be381d0bc3b",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/eric-koalston.png",
+      "kind": "payload",
+      "bytes": 35863,
+      "sha256": "0c6667a818283facb914c5a7a968379ec277b8a08b5a63fef17db01bf275b932",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/geoff-howley.png",
+      "kind": "payload",
+      "bytes": 36105,
+      "sha256": "be6e9b405cce73b676eb9985c77e32a3ab24a7a6d84296330195bc0de152ed7a",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/ishod-hare.png",
+      "kind": "payload",
+      "bytes": 34663,
+      "sha256": "0f6caab1edf1024775e5a6bd9be8d0c9bd98292bc3721ccc426641e75e6c51a1",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/jamie-tomcat.png",
+      "kind": "payload",
+      "bytes": 33140,
+      "sha256": "eab64d8226d498b24dc953e7137cb5810689d911920bbd1ab209d5901b80c640",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/kareem-camelbell.png",
+      "kind": "payload",
+      "bytes": 35051,
+      "sha256": "147a359172b5097d036a8bdb9c5f105e2dba4aea59c08043c7304da7c7b36210",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/leticia-puffoni.png",
+      "kind": "payload",
+      "bytes": 33608,
+      "sha256": "6acdb294d8bf173daa0221779e860e70d1744f6216734b957b4835ae1c79b8e0",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/nyjah-hustoad.png",
+      "kind": "payload",
+      "bytes": 32855,
+      "sha256": "d18fd8ad314c040b961861e69db1d4e59408d97b3d07e855c47fb91eeeda72bf",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/rayssa-seal.png",
+      "kind": "payload",
+      "bytes": 34769,
+      "sha256": "95e71532d9a24450d8c833fef0173c5a6693b23fbabeac8830becc5de2e98a59",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/rodney-mullet.png",
+      "kind": "payload",
+      "bytes": 37181,
+      "sha256": "b050b208508004dd2d9f31ffc5456b8e39db3628eba1797a7fba42413570f5dd",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/rune-glideberg.png",
+      "kind": "payload",
+      "bytes": 36503,
+      "sha256": "70a029d14cd3c7d7cdf2825d651149cafe468c030cd6f767b4b7b6ea17d25849",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/sky-bruin.png",
+      "kind": "payload",
+      "bytes": 36267,
+      "sha256": "99551659f87eed6c5cdfa55a906187c862a944dfc7a6495a8c1d32c872dcd0b8",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/steve-caballo.png",
+      "kind": "payload",
+      "bytes": 35584,
+      "sha256": "347cce8a059189bcf0ef98c9c066447d44361c29fdb3d27c9e5e61bfc0c2fc7d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/tawny-hawk.png",
+      "kind": "payload",
+      "bytes": 34930,
+      "sha256": "f49c5a04de431b21724677c44cf402a03f6b8a6840ae64e74e203731be63765d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "skaters/portraits/yuto-horigoat.png",
+      "kind": "payload",
+      "bytes": 34361,
+      "sha256": "bcf9ecf2c3c0d5e7590eb89671b96e00c1ca556542bd0a7c11dfb4f27a7078f7",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "splash/tall.webp",
+      "kind": "payload",
+      "bytes": 75488,
+      "sha256": "49a79ac12eeaadc959866930951ef79a841e2f6f3d046b30c483204467fccbbe",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "splash/wide.webp",
+      "kind": "payload",
+      "bytes": 72854,
+      "sha256": "7b86f216e0abe1e83ef9b829169846cd79c52da441c9a277fea8e841bac970c7",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/bag.webp",
+      "kind": "payload",
+      "bytes": 9902,
+      "sha256": "410c34274ea3612fce1deff56ed2ac7ae9b8b3d41b89af3b922e71eb2049587a",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/bubblewrap.webp",
+      "kind": "payload",
+      "bytes": 11166,
+      "sha256": "a92c396bf446b27d9f0268eb9b03140c49ff2038e31b5284f8452812d700dbf8",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/fish.webp",
+      "kind": "payload",
+      "bytes": 11676,
+      "sha256": "31242cd79ff1b6940d169124b8082d82ddad0fe987b3d0d26fad024aa6a64d40",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/homework.webp",
+      "kind": "payload",
+      "bytes": 14988,
+      "sha256": "1af8ace694e147e49d81ce9eab189b63efff7f3decc74b2a0b8f2b4b70d5c32d",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/rose.webp",
+      "kind": "payload",
+      "bytes": 10890,
+      "sha256": "5bdd75364cbbcf65abd7671fd75ebe1ae6860a0ac30bb2f5231b4ceeb690c5d5",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/shell.webp",
+      "kind": "payload",
+      "bytes": 15372,
+      "sha256": "1837f7eed3cb7c0dd01e1e266765c47450495fd64ddba8c764c1905970d1939c",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/tape.webp",
+      "kind": "payload",
+      "bytes": 8668,
+      "sha256": "2cbdfe3a2f2b7f649e451413111a1575f8d715b76c431d5068c5f58f9365d181",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/ticket.webp",
+      "kind": "payload",
+      "bytes": 9848,
+      "sha256": "98a471366b351a2686f20786141e37f3380c895445a4c3b4c86e9ad2f2c80d2e",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "stickers/wrench.webp",
+      "kind": "payload",
+      "bytes": 8426,
+      "sha256": "7e6cb7030ca69b94a402fdaca3a6349bace7a9a9b60472ae53787a7aa3fd35f1",
+      "rendered": false,
+      "reason": "non-code payload — recorded with bytes + sha256, no pretty/slice pass"
+    },
+    {
+      "capture": "index.html",
+      "kind": "inline-data",
+      "block": 1,
+      "type": "application/ld+json",
+      "byteStart": 1719,
+      "byteEnd": 2785,
+      "bytes": 1066,
+      "sha256": "8f66252ad5068d308377fd5621584fe6c1f3ee7f55a2b3d7c642cfa06489d177",
+      "rendered": false,
+      "reason": "typed data block (<script type=\"application/ld+json\">) — structured data, not JS; recorded with range + sha256, no pretty pass"
+    }
+  ]
+}

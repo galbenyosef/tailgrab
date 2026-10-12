@@ -1,0 +1,4744 @@
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = [
+      "assets/music-D6fpJLig.js",
+      "assets/sfx-6jovSU2-.js",
+      "assets/prims-CECOBLSv.js",
+      "assets/dmath-_BI8hNwF.js",
+      "assets/songs-B3nWAdc6.js",
+    ]),
+) => i.map((i) => d[i]);
+import {
+  A as e,
+  G as t,
+  Gn as n,
+  In as r,
+  K as i,
+  Kn as a,
+  Pn as o,
+  Rt as s,
+  S as c,
+  St as l,
+  V as u,
+  Vn as d,
+  Wn as f,
+  Zn as p,
+  ar as m,
+  bt as h,
+  c as g,
+  d as _,
+  er as v,
+  et as ee,
+  h as y,
+  l as te,
+  p as b,
+  st as ne,
+  tr as re,
+  vr as ie,
+  xt as x,
+  yr as S,
+} from "./three.core-DVWDmH0S.js";
+import { a as ae } from "./toon-CycGToy9.js";
+import { t as oe } from "./preload-helper-DR1MrGPZ.js";
+import { J as se, Ot as ce } from "./tuning-D4mSK766.js";
+import { n as C } from "./palette-DQTkVEn_.js";
+import { t as le } from "./outline-BufNikL2.js";
+import { K as w, c as T } from "./table-W1plLavt.js";
+import {
+  c as E,
+  d as ue,
+  g as de,
+  l as fe,
+  o as D,
+  s as pe,
+} from "./types-DM-HODfo.js";
+import {
+  A as me,
+  C as O,
+  Dt as he,
+  E as k,
+  J as ge,
+  K as _e,
+  Pt as ve,
+  Tt as A,
+  at as j,
+  k as ye,
+  v as be,
+  zt as xe,
+} from "./tagPaint-BOEtbgNi.js";
+import { p as Se, r as Ce } from "./juice-6UyTKeka.js";
+import { r as we } from "./secrets-Czes5esN.js";
+import { a as Te, o as M, t as N } from "./sfx-6jovSU2-.js";
+import { l as Ee, n as De, u as Oe } from "./skaters-pUdq6stw.js";
+import { u as P } from "./session-DxCN6jDh.js";
+import { n as ke } from "./verlet-BVVzuOqv.js";
+import { c as Ae, m as je, p as Me } from "./bailPhysics-C1H0uy1H.js";
+var F = 1200,
+  Ne = new Map(),
+  Pe = (e) => {
+    let t = Ne.get(e);
+    return (t || Ne.set(e, (t = new y(e))), t);
+  },
+  Fe = 16;
+function Ie(e, t, n, r, i, a) {
+  let o = Math.hypot(i.ux, i.uy, i.uz) || 1,
+    s = i.ux / o,
+    c = i.uy / o,
+    l = i.uz / o,
+    u = e[r],
+    d = t[r],
+    f = n[r],
+    p = Math.cos(a),
+    m = Math.sin(a),
+    h = (s * u + c * d + l * f) * (1 - p),
+    g = c * f - l * d,
+    _ = l * u - s * f,
+    v = s * d - c * u;
+  ((e[r] = u * p + g * m + s * h),
+    (t[r] = d * p + _ * m + c * h),
+    (n[r] = f * p + v * m + l * h));
+}
+var Le = class {
+    mesh;
+    geo;
+    aPos;
+    aCol;
+    aMisc;
+    px = new Float32Array(F);
+    py = new Float32Array(F);
+    pz = new Float32Array(F);
+    vx = new Float32Array(F);
+    vy = new Float32Array(F);
+    vz = new Float32Array(F);
+    life = new Float32Array(F);
+    max = new Float32Array(F);
+    s0 = new Float32Array(F);
+    s1 = new Float32Array(F);
+    grav = new Float32Array(F);
+    drag = new Float32Array(F);
+    shape = new Float32Array(F);
+    rot = new Float32Array(F);
+    spin = new Float32Array(F);
+    home = Array(F).fill(null);
+    homeY = new Float32Array(F);
+    anchor = Array(F).fill(null);
+    orbit = new Float32Array(F);
+    axis = Array(F).fill(null);
+    solid = new Uint8Array(F);
+    pop = new Float32Array(F);
+    shrink = new Float32Array(F);
+    free = new Uint16Array(F).map((e, t) => 1199 - t);
+    nFree = F;
+    hi = 0;
+    colLo = F;
+    colHi = -1;
+    scale = 1;
+    constructor() {
+      let n = new s(1, 1);
+      ((this.geo = new i()),
+        (this.geo.index = n.index),
+        this.geo.setAttribute(`position`, n.getAttribute(`position`)),
+        this.geo.setAttribute(`uv`, n.getAttribute(`uv`)),
+        (this.aPos = new t(new Float32Array(F * 3), 3).setUsage(e)),
+        (this.aCol = new t(new Float32Array(F * 3), 3).setUsage(e)),
+        (this.aMisc = new t(new Float32Array(F * 4), 4).setUsage(e)),
+        this.geo.setAttribute(`iPos`, this.aPos),
+        this.geo.setAttribute(`iCol`, this.aCol),
+        this.geo.setAttribute(`iMisc`, this.aMisc),
+        (this.geo.instanceCount = 0));
+      let r = new f({
+        transparent: !0,
+        depthWrite: !1,
+        blending: 1,
+        uniforms: { uInk: { value: new y(C) } },
+        vertexShader: `
+        attribute vec3 iPos; attribute vec3 iCol; attribute vec4 iMisc;
+        varying vec2 vUv; varying vec3 vCol; varying float vAlpha; varying float vShape; varying float vPhase; varying float vInk;
+        void main() {
+          float sh = mod(iMisc.z, 16.0);
+          vec4 mv = modelViewMatrix * vec4(iPos, 1.0);
+          float depth = -mv.z;
+          // the chase camera drives through what it leaves behind: fade out close up, never more than a tenth of the screen tall
+          vUv = uv; vCol = iCol; vAlpha = iMisc.y * smoothstep(1.4, 3.0, depth); vShape = sh; vPhase = iMisc.w; vInk = step(15.5, iMisc.z);
+          float size = min(iMisc.x, 0.2 * depth / projectionMatrix[1][1]);
+          // a bat stays upright (its angle is the wingbeat's phase), and so does a sprout
+          bool upright = (sh > 3.5 && sh < 4.5) || (sh > 10.5 && sh < 11.5);
+          float c = upright ? 1.0 : cos(iMisc.w), s = upright ? 0.0 : sin(iMisc.w);
+          vec2 p = mat2(c, -s, s, c) * position.xy;
+          if (sh > 2.5 && sh < 4.5) p.y *= 3.5; // sparks streak; bats keep the tall cut they shipped with
+          mv.xy += p * size;
+          gl_Position = projectionMatrix * mv;
+        }`,
+        fragmentShader: `
+        uniform vec3 uInk;
+        varying vec2 vUv; varying vec3 vCol; varying float vAlpha; varying float vShape; varying float vPhase; varying float vInk;
+        /** The rim's width, in the quad's -1..1 units. */
+        const float RIM = 0.14;
+        void main() {
+          vec2 q = (vUv - 0.5) * 2.0;
+          float r = length(q);
+          vec3 col = vCol;
+          float a;
+          if (vShape < 0.5) a = smoothstep(1.0, 0.2, r);
+          else if (vShape > 2.5 && vShape < 3.5) a = smoothstep(1.0, 0.0, r);
+          else if (vShape > 3.5 && vShape < 4.5) {
+            // bat: a round body, ears, and scalloped wings beating with the phase
+            float ax = abs(q.x), flap = sin(vPhase);
+            float top = 0.1 + ax * (0.15 + 0.55 * flap) - ax * ax * 0.25;
+            float bottom = top - 0.42 * (1.0 - ax) - 0.1 * abs(sin(ax * 9.42));
+            float wing = step(0.12, ax) * step(ax, 0.96) * step(bottom, q.y) * step(q.y, top);
+            float body = step(length(q / vec2(0.2, 0.32)), 1.0);
+            float ears = step(0.08, ax) * step(ax, 0.2) * step(0.2, q.y) * step(q.y, 0.42 - (ax - 0.08) * 1.5);
+            a = max(wing, max(body, ears));
+          } else {
+            // the rest are distance fields (q units, < 0 inside), so an ink rim can wrap any of them
+            if (vInk > 0.5) { q *= 1.0 + RIM; r *= 1.0 + RIM; }
+            float sd;
+            if (vShape > 11.5) sd = length(vec2(q.x, max(abs(q.y) - 0.72, 0.0))) - 0.22; // dash: a capsule down the quad
+            else if (vShape > 10.5) {
+              // sprout: a stem from the foot, two leaves fanned off its top
+              float stem = max(abs(q.x + 0.04 * q.y) - 0.07, max(-0.98 - q.y, q.y - 0.3));
+              vec2 l = vec2(abs(q.x), q.y) - vec2(0.42, 0.42);
+              l = mat2(0.866, -0.5, 0.5, 0.866) * l; // into the leaf's frame: it points up and out at 30°
+              float leaf = (length(l / vec2(0.46, 0.24)) - 1.0) * 0.24;
+              sd = min(stem, leaf);
+              if (abs(l.y) < 0.035 && abs(l.x) < 0.36) col *= 0.75; // a midrib
+            } else if (vShape > 9.5) {
+              // heart: two lobes over a point
+              vec2 h = vec2(abs(q.x), q.y);
+              float lobes = length(h - vec2(0.36, 0.28)) - 0.44;
+              float point = max((h.x - (q.y + 0.86) * 0.62) * 0.85, q.y - 0.4);
+              sd = min(lobes, point);
+            } else if (vShape > 8.5) {
+              // cloud: three puffs on a flat base, shaded underneath
+              float c = min(min(length(q - vec2(-0.48, -0.12)) - 0.38, length(q - vec2(0.02, 0.12)) - 0.52), length(q - vec2(0.5, -0.08)) - 0.4);
+              sd = max(c, -0.5 - q.y);
+              col *= mix(0.8, 1.0, smoothstep(-0.5, 0.05, q.y));
+            } else if (vShape < 1.5 || vShape > 7.5) sd = r - 0.92;
+            else if (vShape < 2.5) sd = max(abs(q.x), abs(q.y)) - 1.0;
+            else if (vShape < 5.5) sd = (abs(q.x) * 1.7 + abs(q.y) - 1.0) / 1.97; // harlequin diamond, taller than wide
+            else if (vShape < 6.5) {
+              // leaf: two arcs meeting at the tips, a darker midrib
+              sd = max(length(q - vec2(0.5, 0.0)), length(q + vec2(0.5, 0.0))) - 0.95;
+              if (abs(q.x) < 0.045 && abs(q.y) < 0.62) col *= 0.72;
+            } else {
+              // snowflake: six arms with a pair of twigs each, and a heart
+              float th = atan(q.y, q.x);
+              float seg = 1.0471976;
+              float k = th - seg * floor(th / seg + 0.5); // angle off the nearest arm
+              vec2 v = vec2(cos(k), sin(k)) * r; // along the arm, across it
+              float arm = max(abs(v.y) - 0.08, v.x - 0.95);
+              vec2 tw = vec2(v.x - 0.55, abs(v.y));
+              float twig = max(abs(dot(tw, vec2(-0.7071, 0.7071))) - 0.06, max(-tw.x, tw.x - 0.3));
+              sd = min(min(arm, twig), r - 0.26);
+            }
+            float aa = fwidth(sd) + 1e-4;
+            a = 1.0 - smoothstep(-aa, 0.0, sd);
+            if (vShape > 7.5 && vShape < 11.5) {
+              // toon ball: a shaded side away from the light, a hard highlight towards it
+              col *= mix(1.0, 0.7, step(0.55, dot(q, vec2(0.6, -0.8)) + 0.25 * r));
+              col = mix(col, vec3(1.0), 0.85 * (1.0 - smoothstep(0.17 - aa, 0.17, length((q - vec2(-0.34, 0.4)) * vec2(1.0, 1.4)))));
+            }
+            if (vInk > 0.5) {
+              float w = vShape > 6.5 && vShape < 7.5 ? 0.07 : RIM; // a flake's arms sit close: a thin rim keeps the gaps
+              col = mix(uInk, col, a);
+              a = 1.0 - smoothstep(w - aa, w, sd);
+            }
+          }
+          if (vAlpha * a < 0.01) discard;
+          gl_FragColor = vec4(col, vAlpha * a);
+          #include <colorspace_fragment>
+        }`,
+      });
+      ((this.mesh = new x(this.geo, r)),
+        (this.mesh.frustumCulled = !1),
+        (this.mesh.renderOrder = 3),
+        (this.mesh.visible = !1));
+    }
+    emit(e) {
+      let t = Math.max(1, Math.round(e.count * this.scale)),
+        n = Array.isArray(e.color) ? e.color : [e.color],
+        r = e.spread ?? 1,
+        [i, a, o] = e.dir ?? [0, 0, 0];
+      for (let s = 0; s < t && this.nFree; s++) {
+        let t = this.free[--this.nFree];
+        if (
+          (t >= this.hi && (this.hi = t + 1),
+          (this.px[t] = e.x),
+          (this.py[t] = e.y),
+          (this.pz[t] = e.z),
+          e.exact)
+        )
+          ((this.vx[t] = i * e.speed),
+            (this.vy[t] = a * e.speed),
+            (this.vz[t] = o * e.speed));
+        else {
+          let n = Math.random() * 2 - 1,
+            s = Math.random() * Math.PI * 2,
+            c = Math.sqrt(1 - n * n),
+            l = e.speed * (0.4 + Math.random() * 0.6);
+          ((this.vx[t] = (c * Math.cos(s) * r + i) * l),
+            (this.vy[t] = (Math.abs(n) * r * (e.up ?? 1) + a) * l),
+            (this.vz[t] = (c * Math.sin(s) * r + o) * l));
+        }
+        (e.vel &&
+          ((this.vx[t] += e.vel[0]),
+          (this.vy[t] += e.vel[1]),
+          (this.vz[t] += e.vel[2])),
+          (this.home[t] = e.home ?? null),
+          (this.homeY[t] = e.homeY ?? 0),
+          (this.anchor[t] = e.anchor ?? null),
+          (this.orbit[t] = e.orbit ?? 0),
+          (this.axis[t] = e.axis ?? null),
+          (this.solid[t] = +!!e.solid),
+          (this.pop[t] = e.pop ?? 0),
+          (this.shrink[t] = e.shrink ?? 0));
+        let [c, l] = e.life ?? [0.4, 0.8];
+        this.max[t] = this.life[t] = c + Math.random() * (l - c);
+        let [u, d] = e.size ?? [0.2, 0.5];
+        ((this.s0[t] = u),
+          (this.s1[t] = d),
+          (this.grav[t] = e.gravity ?? 0),
+          (this.drag[t] = e.drag ?? 2),
+          (this.shape[t] = (e.shape ?? 0) + (e.ink ? Fe : 0)),
+          (this.rot[t] = e.rot ?? Math.random() * 6.28),
+          (this.spin[t] =
+            e.spin === void 0
+              ? (Math.random() - 0.5) *
+                (e.shape === 2 || e.shape === 5 ? 14 : 3)
+              : e.spin * (0.8 + Math.random() * 0.4)));
+        let f = Pe(n[s % n.length]);
+        (this.aCol.setXYZ(t, f.r, f.g, f.b),
+          t < this.colLo && (this.colLo = t),
+          t > this.colHi && (this.colHi = t));
+      }
+    }
+    cut(e, t, n = -1) {
+      for (let r = 0; r < this.hi; r++)
+        this.life[r] <= t ||
+          (this.home[r] !== e && this.anchor[r] !== e) ||
+          (n >= 0 && this.shape[r] % Fe !== n) ||
+          this.end(r, t);
+    }
+    hurry(e) {
+      for (let t = 0; t < this.hi; t++) this.life[t] > e && this.end(t, e);
+    }
+    end(e, t) {
+      let n = 1 - this.life[e] / this.max[e];
+      ((this.max[e] = t / Math.max(0.001, 1 - Math.max(n, 0.9))),
+        (this.life[e] = t));
+    }
+    update(e) {
+      let t = 0;
+      for (let n = 0; n < this.hi; n++) {
+        if (this.life[n] <= 0) continue;
+        if (((this.life[n] -= e), this.life[n] <= 0)) {
+          (this.aMisc.setXYZW(n, 0, 0, 0, 0),
+            (this.home[n] = this.anchor[n] = this.axis[n] = null),
+            (this.free[this.nFree++] = n));
+          continue;
+        }
+        t = n + 1;
+        let r = Math.max(0, 1 - this.drag[n] * e);
+        ((this.vx[n] *= r),
+          (this.vy[n] = this.vy[n] * r - this.grav[n] * e),
+          (this.vz[n] *= r));
+        let i = this.home[n];
+        if (i) {
+          let t = i.x - this.px[n],
+            r = i.y + this.homeY[n] - this.py[n],
+            a = i.z - this.pz[n];
+          ((this.vx[n] += (81 * t - 18 * this.vx[n]) * e),
+            (this.vy[n] += (81 * r - 18 * this.vy[n]) * e),
+            (this.vz[n] += (81 * a - 18 * this.vz[n]) * e),
+            t * t + r * r + a * a < 0.06 &&
+              ((this.life[n] = Math.min(this.life[n], 0.05)),
+              (this.home[n] = null)));
+        }
+        ((this.px[n] += this.vx[n] * e),
+          (this.py[n] += this.vy[n] * e),
+          (this.pz[n] += this.vz[n] * e));
+        let a = this.anchor[n];
+        if (a) {
+          let t = this.orbit[n] * e,
+            r = this.axis[n];
+          if (t !== 0 && r)
+            (Ie(this.px, this.py, this.pz, n, r, t),
+              Ie(this.vx, this.vy, this.vz, n, r, t));
+          else if (t !== 0) {
+            let e = Math.cos(t),
+              r = Math.sin(t),
+              i = this.px[n],
+              a = this.pz[n],
+              o = this.vx[n],
+              s = this.vz[n];
+            ((this.px[n] = i * e + a * r),
+              (this.pz[n] = a * e - i * r),
+              (this.vx[n] = o * e + s * r),
+              (this.vz[n] = s * e - o * r));
+          }
+        } else
+          this.py[n] < 0.02 &&
+            this.grav[n] > 0 &&
+            ((this.py[n] = 0.02),
+            (this.vy[n] *= -0.3),
+            (this.vx[n] *= 0.6),
+            (this.vz[n] *= 0.6));
+        this.rot[n] += this.spin[n] * e;
+        let o = 1 - this.life[n] / this.max[n],
+          s = this.s0[n] + (this.s1[n] - this.s0[n]) * o;
+        if (this.pop[n] > 0) {
+          let e = Math.min(1, (this.max[n] - this.life[n]) / this.pop[n]);
+          s *=
+            e < 0.6
+              ? 1.2 * (1 - (1 - e / 0.6) ** 2)
+              : 1.2 - 0.2 * ((e - 0.6) / 0.4);
+        }
+        this.life[n] < this.shrink[n] && (s *= this.life[n] / this.shrink[n]);
+        let c = this.solid[n]
+          ? Math.min(1, (1 - o) / 0.08)
+          : o < 0.1
+            ? o * 10
+            : 1 - Math.max(0, (o - 0.55) / 0.45);
+        (a
+          ? this.aPos.setXYZ(
+              n,
+              a.x + this.px[n],
+              a.y + this.py[n],
+              a.z + this.pz[n],
+            )
+          : this.aPos.setXYZ(n, this.px[n], this.py[n], this.pz[n]),
+          this.aMisc.setXYZW(
+            n,
+            Math.max(0, s),
+            Math.max(0, c),
+            this.shape[n],
+            this.rot[n],
+          ));
+      }
+      ((this.hi = t),
+        (this.geo.instanceCount = t),
+        (this.mesh.visible = t > 0),
+        t &&
+          (this.aPos.addUpdateRange(0, t * 3),
+          (this.aPos.needsUpdate = !0),
+          this.aMisc.addUpdateRange(0, t * 4),
+          (this.aMisc.needsUpdate = !0),
+          this.colHi >= this.colLo &&
+            (this.aCol.addUpdateRange(
+              this.colLo * 3,
+              (this.colHi - this.colLo + 1) * 3,
+            ),
+            (this.aCol.needsUpdate = !0),
+            (this.colLo = F),
+            (this.colHi = -1))));
+    }
+    dispose() {
+      (this.mesh.removeFromParent(),
+        this.geo.dispose(),
+        this.mesh.material.dispose());
+    }
+  },
+  I = 200,
+  L = {
+    RING: 0,
+    FOOT: 1,
+    WEB: 2,
+    CLAW: 3,
+    CROP: 4,
+    FROST: 5,
+    SPIRAL: 6,
+    SPLAT: 7,
+  },
+  R = new y(),
+  Re = new y(C),
+  ze = class {
+    mesh;
+    geo;
+    aPos;
+    aU;
+    aV;
+    aCol;
+    aInk;
+    aMisc;
+    life = new Float32Array(I);
+    max = new Float32Array(I);
+    peak = new Float32Array(I);
+    pop = new Float32Array(I);
+    mirror = new Int8Array(I);
+    next = 0;
+    constructor() {
+      let n = new s(2, 2);
+      ((this.geo = new i()),
+        (this.geo.index = n.index),
+        this.geo.setAttribute(`position`, n.getAttribute(`position`)));
+      let r = (n) => new t(new Float32Array(I * n), n).setUsage(e);
+      ((this.aPos = r(3)),
+        (this.aU = r(3)),
+        (this.aV = r(3)),
+        (this.aCol = r(3)),
+        (this.aInk = r(3)),
+        (this.aMisc = r(4)),
+        this.geo.setAttribute(`iPos`, this.aPos),
+        this.geo.setAttribute(`iU`, this.aU),
+        this.geo.setAttribute(`iV`, this.aV),
+        this.geo.setAttribute(`iCol`, this.aCol),
+        this.geo.setAttribute(`iInk`, this.aInk),
+        this.geo.setAttribute(`iMisc`, this.aMisc),
+        (this.geo.instanceCount = I));
+      let a = new f({
+        transparent: !0,
+        depthWrite: !1,
+        polygonOffset: !0,
+        polygonOffsetFactor: -2,
+        polygonOffsetUnits: -4,
+        blending: 1,
+        vertexShader: `
+        attribute vec3 iPos; attribute vec3 iU; attribute vec3 iV; attribute vec3 iCol; attribute vec3 iInk; attribute vec4 iMisc;
+        varying vec2 vQ; varying vec3 vCol; varying vec3 vInk; varying vec4 vMisc;
+        void main() {
+          vQ = position.xy; vCol = iCol; vInk = iInk; vMisc = iMisc;
+          vec3 p = iPos + (iU * position.x + iV * position.y) * abs(iMisc.w);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+        }`,
+        fragmentShader: `
+        varying vec2 vQ; varying vec3 vCol; varying vec3 vInk; varying vec4 vMisc;
+        const float RIM = 0.07;
+        float sdEllipse(vec2 p, vec2 c, vec2 r) { return (length((p - c) / r) - 1.0) * min(r.x, r.y); }
+        float hash(float n) { return fract(sin(n * 127.1) * 43758.5453); }
+        float sdSeg(vec2 p, vec2 a, vec2 b) { vec2 pa = p - a, ba = b - a; return length(pa - ba * clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0)); }
+        void main() {
+          float kind = vMisc.x, t = vMisc.z;
+          vec2 q = vQ * (1.0 + RIM);
+          if (vMisc.w < 0.0) q.x = -q.x;
+          float r = length(q), a = atan(q.y, q.x);
+          float sd, rim = RIM;
+          // lines: ink drawn inside the fill (cracks); back: a faint ink disc behind open shapes (a web)
+          float lines = 1.0, back = 0.0;
+          if (kind < 0.5) {
+            // a ring that grows and thins as it goes
+            float rad = 0.35 + 0.6 * sqrt(t), w = 0.12 * (1.0 - t) + 0.03;
+            sd = abs(r - rad) - w;
+          } else if (kind < 1.5) {
+            // footprint (toes up the quad): sole, heel, the arch cut in, five round toes clear of the sole
+            sd = min(sdEllipse(q, vec2(0.0, 0.02), vec2(0.44, 0.45)), sdEllipse(q, vec2(-0.02, -0.55), vec2(0.36, 0.36)));
+            sd = max(sd, -(sdEllipse(q, vec2(-0.52, -0.12), vec2(0.2, 0.42))));
+            for (int i = 0; i < 5; i++) {
+              float fi = float(i);
+              vec2 c = vec2(-0.36 + fi * 0.18, 0.78 - abs(fi - 1.0) * 0.06);
+              sd = min(sd, sdEllipse(q, c, vec2(fi < 0.5 ? 0.13 : 0.095, fi < 0.5 ? 0.14 : 0.11)));
+            }
+          } else if (kind < 2.5) {
+            // web: eight spokes, a spiral of chords between them, on a faint disc so it reads on a pale wall
+            float k = (fract(a / 0.7853982 + 0.5) - 0.5) * 0.7853982;
+            float rc = r * cos(k) / cos(0.3926991);
+            float ring = abs(fract(rc * 4.8 - a / 6.2831853) - 0.5) / 4.8;
+            sd = min(abs(sin(k)) * r - 0.04, ring - 0.04);
+            sd = max(sd, r - 0.95);
+            rim = 0.03;
+            back = 0.35 * (1.0 - smoothstep(0.9, 0.95, r));
+          } else if (kind < 3.5) {
+            // a yeti's foot: a broad sole, four toes, a claw off each
+            sd = sdEllipse(q, vec2(0.0, -0.28), vec2(0.78, 0.62));
+            for (int i = 0; i < 4; i++) {
+              float x = -0.6 + float(i) * 0.4;
+              float y = 0.5 - abs(x) * 0.15;
+              sd = min(sd, sdEllipse(q, vec2(x, y), vec2(0.17, 0.2)));
+              sd = min(sd, sdEllipse(q, vec2(x * 1.08, y + 0.3), vec2(0.06, 0.13)));
+            }
+          } else if (kind < 4.5) {
+            // crop pattern: one ring, a trail of satellites on an arc off it
+            sd = abs(r - 0.6) - 0.07;
+            for (int i = 0; i < 4; i++) {
+              float an = 0.35 + float(i) * 0.42, rr = 0.6 + float(i) * 0.09;
+              sd = min(sd, length(q - vec2(cos(an), sin(an)) * (rr + 0.2)) - (0.14 - float(i) * 0.025));
+            }
+          } else if (kind < 5.5) {
+            // frost: an angular patch of ice, straight cracks across it
+            float seg = 0.6981317; // nine corners
+            float i0 = floor(a / seg), f0 = a / seg - i0;
+            float edge = mix(0.72 + 0.22 * hash(i0), 0.72 + 0.22 * hash(i0 + 1.0), f0);
+            sd = (r - edge) * 0.8;
+            for (int i = 0; i < 6; i++) {
+              float fi = float(i);
+              float an = fi * 1.0471976 + (hash(fi + 7.0) - 0.5) * 0.6;
+              vec2 dir = vec2(cos(an), sin(an)), side = vec2(-dir.y, dir.x);
+              vec2 mid = dir * (0.3 + 0.2 * hash(fi + 3.0)) + side * (hash(fi + 5.0) - 0.5) * 0.25;
+              vec2 end = dir * 0.9;
+              lines = min(lines, min(sdSeg(q, vec2(0.0), mid), sdSeg(q, mid, end)));
+            }
+            rim = 0.04;
+          } else if (kind < 6.5) {
+            // an Archimedean spiral, two turns out to the rim, thinning as it goes
+            float ap = a + 3.1415927;
+            float d = min(abs(r - 0.0716 * ap), abs(r - 0.0716 * (ap + 6.2831853)));
+            sd = max(d - 0.07 * (1.05 - r), r - 0.95);
+          } else {
+            // splash: a lumpy blob and a few drops thrown off it
+            float edge = 0.55 + 0.1 * sin(a * 3.0 + 1.0) + 0.07 * sin(a * 5.0 + 2.0) + 0.05 * sin(a * 8.0);
+            sd = (r - edge) * 0.8;
+            for (int i = 0; i < 5; i++) {
+              float an = float(i) * 1.2566371 + 0.4 + hash(float(i)) * 0.6;
+              sd = min(sd, length(q - vec2(cos(an), sin(an)) * (0.78 + 0.12 * hash(float(i) + 2.0))) - 0.06 - 0.05 * hash(float(i) + 4.0));
+            }
+          }
+          float aa = fwidth(sd) + 1e-4;
+          float fill = 1.0 - smoothstep(-aa, 0.0, sd);
+          float alpha = 1.0 - smoothstep(rim - aa, rim, sd);
+          vec3 col = mix(vInk, vCol, fill);
+          float la = fwidth(lines) + 1e-4;
+          col = mix(col, vInk, (1.0 - smoothstep(0.022 - la, 0.022, lines)) * fill);
+          float under = max(alpha, back);
+          col = mix(vInk, col, alpha / max(under, 1e-4));
+          alpha = under * vMisc.y;
+          if (alpha < 0.01) discard;
+          gl_FragColor = vec4(col, alpha);
+          #include <colorspace_fragment>
+        }`,
+      });
+      ((this.mesh = new x(this.geo, a)),
+        (this.mesh.frustumCulled = !1),
+        (this.mesh.renderOrder = 2));
+    }
+    lay(e) {
+      let t = this.next;
+      this.next = (this.next + 1) % I;
+      let n = Math.hypot(e.nx, e.ny, e.nz) || 1,
+        r = e.nx / n,
+        i = e.ny / n,
+        a = e.nz / n,
+        o = e.dx * r + e.dy * i + e.dz * a,
+        s = e.dx - o * r,
+        c = e.dy - o * i,
+        l = e.dz - o * a;
+      ((n = Math.hypot(s, c, l) || 1), (s /= n), (c /= n), (l /= n));
+      let u = c * a - l * i,
+        d = l * r - s * a,
+        f = s * i - c * r;
+      (this.aPos.setXYZ(t, e.x + r * 0.02, e.y + i * 0.02, e.z + a * 0.02),
+        this.aU.setXYZ(t, u * e.w, d * e.w, f * e.w),
+        this.aV.setXYZ(t, s * e.h, c * e.h, l * e.h),
+        R.set(e.color),
+        this.aCol.setXYZ(t, R.r, R.g, R.b),
+        e.ink ? R.set(e.ink) : R.copy(Re),
+        this.aInk.setXYZ(t, R.r, R.g, R.b),
+        this.aMisc.setXYZW(t, e.kind, 0, 0, 0),
+        (this.max[t] = this.life[t] = e.life),
+        (this.peak[t] = e.alpha ?? 1),
+        (this.pop[t] = e.pop ?? 0.12),
+        (this.mirror[t] = e.left ? -1 : 1),
+        (this.aPos.needsUpdate =
+          this.aU.needsUpdate =
+          this.aV.needsUpdate =
+          this.aCol.needsUpdate =
+          this.aInk.needsUpdate =
+            !0));
+    }
+    hurry(e) {
+      for (let t = 0; t < I; t++) {
+        if (this.life[t] <= e) continue;
+        let n = Math.min(1, (3 * this.life[t]) / this.max[t]);
+        ((this.life[t] = e), (this.max[t] = (3 * e) / Math.max(n, 0.001)));
+      }
+    }
+    update(e) {
+      for (let t = 0; t < I; t++) {
+        if (this.life[t] <= 0) {
+          this.aMisc.getW(t) !== 0 && this.aMisc.setXYZW(t, 0, 0, 0, 0);
+          continue;
+        }
+        this.life[t] = Math.max(0, this.life[t] - e);
+        let n = this.max[t] - this.life[t],
+          r = n / this.max[t],
+          i = Math.min(1, n / this.pop[t]),
+          a =
+            i < 0.6
+              ? 0.3 + 0.8 * (1 - (1 - i / 0.6) ** 2)
+              : 1.1 - 0.1 * ((i - 0.6) / 0.4);
+        this.aMisc.setXYZW(
+          t,
+          this.aMisc.getX(t),
+          this.peak[t] * Math.min(1, (1 - r) * 3),
+          r,
+          a * this.mirror[t],
+        );
+      }
+      this.aMisc.needsUpdate = !0;
+    }
+    dispose() {
+      (this.mesh.removeFromParent(),
+        this.geo.dispose(),
+        this.mesh.material.dispose());
+    }
+  },
+  Be = `Lilita One`,
+  Ve = 10,
+  He = class {
+    group = new u();
+    tex = new Map();
+    words = [];
+    constructor() {
+      for (let e = 0; e < Ve; e++) {
+        let e = new v(new re({ transparent: !0, depthWrite: !1 }));
+        ((e.visible = !1),
+          (e.renderOrder = 4),
+          this.group.add(e),
+          this.words.push({
+            sprite: e,
+            age: 0,
+            life: 0,
+            size: 0,
+            tilt: 0,
+            rise: 0,
+            anchor: null,
+            x: 0,
+            y: 0,
+            z: 0,
+            out: -1,
+            outS: 0,
+          }));
+      }
+      document.fonts?.load(`64px "${Be}"`).then(() => {
+        for (let [e, t] of this.tex) Ue(t.image, e, t.userData.fill);
+        for (let e of this.tex.values()) e.needsUpdate = !0;
+      });
+    }
+    say(e, t, n, r, i, a, o, s = 0.6, c = 0.6, l = null) {
+      let u = this.words.reduce((e, t) =>
+          e.life - e.age < t.life - t.age ? e : t,
+        ),
+        f = `${e}|${t}`,
+        p = this.tex.get(f);
+      if (!p) {
+        let n = document.createElement(`canvas`);
+        (Ue(n, e, t),
+          (p = new _(n)),
+          (p.colorSpace = d),
+          (p.minFilter = ne),
+          (p.userData.fill = t),
+          this.tex.set(f, p));
+      }
+      let m = u.sprite.material;
+      ((m.map = p),
+        (m.needsUpdate = !0),
+        Object.assign(u, {
+          age: 0,
+          life: s,
+          size: a,
+          tilt: o,
+          rise: c,
+          anchor: l,
+          x: n,
+          y: r,
+          z: i,
+          out: -1,
+        }),
+        (u.sprite.visible = !0));
+    }
+    hurry(e) {
+      for (let t of this.words)
+        t.sprite.visible &&
+          t.life - t.age > e &&
+          t.out < 0 &&
+          (t.out = t.outS = e);
+    }
+    update(e) {
+      for (let t of this.words) {
+        if (!t.sprite.visible) continue;
+        if (((t.age += e), t.out >= 0 && (t.out -= e) <= 0)) {
+          t.sprite.visible = !1;
+          continue;
+        }
+        if (t.age >= t.life) {
+          t.sprite.visible = !1;
+          continue;
+        }
+        let n = t.age / t.life,
+          r =
+            n < 0.2
+              ? 0.4 + 0.8 * Math.sin((n / 0.2) * Math.PI * 0.5)
+              : 1.2 - 0.2 * Math.min(1, (n - 0.2) / 0.15),
+          i = t.sprite.material.map.image;
+        t.sprite.scale.set(t.size * r * (i.width / i.height), t.size * r, 1);
+        let a = t.anchor;
+        t.sprite.position.set(
+          (a?.x ?? 0) + t.x,
+          (a?.y ?? 0) + t.y + t.rise * Math.sqrt(n),
+          (a?.z ?? 0) + t.z,
+        );
+        let o = t.sprite.material;
+        ((o.rotation = t.tilt),
+          (o.opacity =
+            (n > 0.7 ? 1 - (n - 0.7) / 0.3 : 1) *
+            (t.out > 0 ? t.out / t.outS : 1)));
+      }
+    }
+    dispose() {
+      this.group.removeFromParent();
+      for (let e of this.words) e.sprite.material.dispose();
+      for (let e of this.tex.values()) e.dispose();
+    }
+  };
+function Ue(e, t, n) {
+  let r = e.getContext(`2d`);
+  r.font = `99.84px "${Be}", system-ui, sans-serif`;
+  let i = Math.ceil(r.measureText(t).width) + 52;
+  ((e.width = i),
+    (e.height = 154),
+    (r.font = `99.84px "${Be}", system-ui, sans-serif`),
+    (r.textAlign = `center`),
+    (r.textBaseline = `middle`),
+    (r.lineJoin = `round`));
+  let a = i / 2,
+    o = e.height / 2 + 4;
+  ((r.strokeStyle = `#FFFFFF`),
+    (r.lineWidth = 30),
+    r.strokeText(t, a, o + 3),
+    (r.strokeStyle = C),
+    (r.lineWidth = 14),
+    r.strokeText(t, a, o + 5),
+    (r.strokeStyle = C),
+    (r.lineWidth = 14),
+    r.strokeText(t, a, o),
+    (r.fillStyle = n),
+    r.fillText(t, a, o));
+}
+var z = 14,
+  We = 0.07,
+  Ge = null;
+function Ke() {
+  return (Ge ??= new f({
+    transparent: !0,
+    depthWrite: !1,
+    side: 2,
+    uniforms: { uInk: { value: new y(C) }, uGap: { value: 0 } },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+    fragmentShader: `
+      uniform vec3 uInk; uniform float uGap;
+      varying vec2 vUv;
+      void main() {
+        if (abs(vUv.x - 0.5) < uGap) discard; // snapped: each half pulled back to its end
+        float across = abs(vUv.y - 0.5) * 2.0;
+        gl_FragColor = vec4(mix(vec3(1.0), uInk, step(0.62, across)), 1.0);
+        #include <colorspace_fragment>
+      }`,
+  }));
+}
+var qe = class {
+    mesh;
+    pos;
+    attr;
+    mat;
+    constructor() {
+      let t = new te();
+      ((this.pos = new Float32Array(90)),
+        (this.attr = new g(this.pos, 3).setUsage(e)),
+        t.setAttribute(`position`, this.attr));
+      let n = new Float32Array(60),
+        r = [];
+      for (let e = 0; e <= z; e++)
+        if ((n.set([e / z, 0, e / z, 1], e * 4), e < z)) {
+          let t = e * 2;
+          r.push(t, t + 1, t + 2, t + 1, t + 3, t + 2);
+        }
+      (t.setAttribute(`uv`, new g(n, 2)),
+        t.setIndex(r),
+        (this.mat = Ke().clone()),
+        (this.mesh = new x(t, this.mat)),
+        (this.mesh.frustumCulled = !1),
+        (this.mesh.renderOrder = 3));
+    }
+    set(e, t, n, r, i, a, o, s, c = 0) {
+      this.mat.uniforms.uGap.value = c;
+      let l = this.pos;
+      for (let c = 0; c <= z; c++) {
+        let u = c / z,
+          d = e + (r - e) * u,
+          f = t + (i - t) * u - o * 4 * u * (1 - u),
+          p = n + (a - n) * u,
+          m = r - e,
+          h = i - t - o * 4 * (1 - 2 * u),
+          g = a - n,
+          _ = s.x - d,
+          v = s.y - f,
+          ee = s.z - p,
+          y = h * ee - g * v,
+          te = g * _ - m * ee,
+          b = m * v - h * _,
+          ne = We / 2 / (Math.hypot(y, te, b) || 1);
+        ((y *= ne),
+          (te *= ne),
+          (b *= ne),
+          l.set([d - y, f - te, p - b, d + y, f + te, p + b], c * 6));
+      }
+      this.attr.needsUpdate = !0;
+    }
+    dispose() {
+      (this.mesh.removeFromParent(),
+        this.mesh.geometry.dispose(),
+        this.mat.dispose());
+    }
+  },
+  Je = `#C9D6F2`,
+  Ye = `#9FE6FF`,
+  Xe = `#A58BFF`,
+  Ze = new y(`#FFD21F`),
+  Qe = new y(`#C98A12`),
+  $e = `#B8FF5A`,
+  et = 6,
+  tt = null,
+  nt = null,
+  rt = 0,
+  it = -1;
+function at(e, t) {
+  let n = e.index ? e.toNonIndexed() : e,
+    r = typeof t == `string` ? new y(t) : t,
+    i = n.getAttribute(`position`).count,
+    a = new Float32Array(i * 3);
+  for (let e = 0; e < i; e++) a.set([r.r, r.g, r.b], e * 3);
+  return (n.setAttribute(`color`, new g(a, 3)), n);
+}
+function ot() {
+  let e = new u(),
+    t = new ee(
+      [
+        [0, -0.08],
+        [0.2, -0.075],
+        [0.36, -0.035],
+        [0.4, 0],
+        [0.37, 0.035],
+        [0.22, 0.065],
+        [0, 0.075],
+      ].map(([e, t]) => new ie(e, t)),
+      24,
+    ),
+    n = new p(0.17, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2).translate(
+      0,
+      0.06,
+      0,
+    ),
+    r = new m(0.39, 0.03, 6, 32).rotateX(Math.PI / 2),
+    i = new b(0.14, 20).rotateX(Math.PI / 2).translate(0, -0.082, 0),
+    a = ke([at(t, Je), at(n, Ye), at(r, Xe)]);
+  e.add(new x(a, ae({ vertexColors: !0 })));
+  let o = [];
+  for (let e = 0; e < et; e++) {
+    let t = (e / et) * Math.PI * 2;
+    o.push(
+      at(
+        new p(0.04, 8, 5).translate(Math.cos(t) * 0.41, 0, Math.sin(t) * 0.41),
+        Ze,
+      ),
+    );
+  }
+  return (
+    (rt = o[0].getAttribute(`position`).count),
+    o.push(at(i, $e)),
+    (nt = ke(o)),
+    e.add(new x(nt, new l({ vertexColors: !0 }))),
+    le(e),
+    e
+  );
+}
+function st() {
+  return ((tt ??= ot()), tt.clone(!0));
+}
+function ct(e) {
+  let t = Math.floor(e * 8) % et;
+  if (!nt || t === it) return;
+  it = t;
+  let n = nt.getAttribute(`color`);
+  for (let e = 0; e < et; e++) {
+    let r = (e - t + et) % 3 == 0 ? Ze : Qe;
+    for (let t = e * rt; t < (e + 1) * rt; t++) n.setXYZ(t, r.r, r.g, r.b);
+  }
+  n.needsUpdate = !0;
+}
+var lt = [`#B8FF5A`, `#22D3EE`],
+  ut = [`#EAF6FF`, `#DDF1FF`],
+  dt = [`#5BB8F0`, `#8FD3F5`],
+  ft = [`#FFFFFF`, `#F4EEDC`],
+  pt = `#FF4D6D`,
+  mt = [`#D9B98A`, `#C9A26B`, `#E8D3B0`],
+  ht = [`#2FD67B`, `#3BBF5C`],
+  gt = `#FF3B2F`,
+  _t = [`#3BBF5C`, `#1E9E5A`, `#3BBF5C`, `#1E9E5A`, `#FF8A1F`],
+  vt = `#2E8B57`,
+  yt = `#1E4D2B`,
+  bt = `#1FC7E8`,
+  xt = [`#3B3349`, `#1D1A3A`, `#2A2438`],
+  St = [`#D9203F`, `#FF4D6D`, `#FF8FB8`],
+  Ct = [`#A55BFF`, `#FFD21F`, `#FF3D7F`],
+  wt = [
+    [`#22C55E`, `#7CE3A0`, `#15803D`],
+    [`#2E6BFF`, `#8FB0FF`, `#1D4ED8`],
+    [`#FF2E2E`, `#FF8A80`, `#C81E1E`],
+    [`#FFC21F`, `#FFE27A`, `#E09A00`],
+    [`#FF5FA8`, `#FFB3D4`, `#D63A82`],
+  ],
+  Tt = 4.5,
+  Et = 0.6,
+  Dt = 2.9,
+  Ot = 0.08,
+  kt = {
+    park: {
+      ufoY: Dt,
+      zip: 6,
+      crop: 0.95,
+      rollK: 1,
+      print: 1,
+      printW: 1,
+      sprout: 3,
+      word: 1,
+      wordY: 1.75,
+      wordRise: 0.6,
+      wordOut: 0.95,
+      devil: 3.5,
+      devilSide: 0,
+      devilK: 1,
+      devilShrink: 0,
+      funnel: 1,
+      drainY: 0.9,
+      cloud: 1,
+      cloudY: 1.9,
+      rain: 1,
+      flakeY: 0.3,
+      flakeH: 0.9,
+      batOut: 2.2,
+      batUp: 1.6,
+      wool: 3,
+    },
+    close: {
+      ufoY: 1.85,
+      zip: 3,
+      crop: 0.7,
+      rollK: 0.8,
+      print: 1,
+      printW: 2,
+      sprout: 2,
+      word: 1.3,
+      wordY: 1.2,
+      wordRise: 0.3,
+      wordOut: 0.6,
+      devil: 2.4,
+      devilSide: 0.5,
+      devilK: 0.6,
+      devilShrink: 0.5,
+      funnel: 0.85,
+      drainY: 0.55,
+      cloud: 1.6,
+      cloudY: 1.65,
+      rain: 2.2,
+      flakeY: 0.15,
+      flakeH: 0.35,
+      batOut: 1.2,
+      batUp: 2.4,
+      wool: 1.6,
+    },
+  },
+  At = 0.15,
+  jt = 0.25,
+  Mt = 0.55,
+  Nt = 0.18,
+  Pt = 0.35,
+  Ft = 2.5,
+  It = 3,
+  Lt = 2,
+  Rt = 1.4,
+  zt = 0.3,
+  Bt = 0.1,
+  Vt = 0.2,
+  B = 0.6,
+  Ht = 0.7,
+  Ut = 0.6,
+  Wt = (8 * Ht) / (B * B),
+  Gt = 0.3,
+  Kt = 0.8,
+  qt = [
+    { c: 0, out: -3, near: -0.66, y: 0.4, k: 1, at: 0 },
+    { c: 4, out: 3, near: 0.66, y: 0.4, k: 1, at: 0 },
+    { c: 1, out: -1.4, near: -0.48, y: 1.3, k: 1, at: 0.1 },
+    { c: 3, out: 1.4, near: 0.48, y: 1.3, k: 1, at: 0.1 },
+    { c: 2, out: 0, near: 0, y: 1.75, k: 1.05, at: 0.2 },
+  ],
+  Jt = 0.2,
+  Yt = -0.1,
+  Xt = 0.05,
+  Zt = new c(0.35, 1, 1, 28, 1, !0).translate(0, 0.5, 0),
+  Qt = new c(1, 0.35, 2, 32, 8, !0).translate(0, 1, 0),
+  $t = `
+  uniform vec2 uLean; uniform float uWobble; uniform float uTime;
+  varying vec2 vUv; varying float vEdge; varying float vNear;
+  void main() {
+    vUv = uv;
+    vec3 p = position;
+    p.xz += uLean * uv.y; // the top follows a lagging saucer
+    p.x += sin(p.y * 2.7 - uTime * 6.0) * uWobble * p.y;
+    p.z += cos(p.y * 2.3 - uTime * 5.0) * uWobble * p.y;
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    vEdge = 1.0 - abs(dot(normalize(normalMatrix * normal), normalize(-mv.xyz)));
+    vNear = smoothstep(1.5, 3.5, -mv.z); // the chase camera passing through fades it
+    gl_Position = projectionMatrix * mv;
+  }`,
+  V = (e) => e === E.GROUND || e === E.MANUAL,
+  en = { x: 0, z: 0 },
+  tn = new S(0, 1, 0),
+  H = new S(),
+  U = new S(),
+  nn = new S(),
+  rn = [0, 0, 0],
+  W = { ax: 0, az: 1, lx: 1, lz: 0 };
+function an(e) {
+  (H.set(e.ux, e.uy, e.uz).normalize(),
+    U.set(0, 1, 0),
+    Math.abs(H.y) > 0.9 && U.set(1, 0, 0),
+    U.cross(H).normalize(),
+    nn.crossVectors(H, U));
+}
+function G(e) {
+  let t = Math.hypot(e.vx, e.vz);
+  return (
+    t > 0.3
+      ? ((en.x = e.vx / t), (en.z = e.vz / t))
+      : ((en.x = Math.sin(e.yaw)), (en.z = Math.cos(e.yaw))),
+    en
+  );
+}
+var on = class {
+    root = new u();
+    decals = new ze();
+    words = new He();
+    p;
+    riders = new Map();
+    drains = [];
+    devils = [];
+    tick = 0;
+    time = { value: 0 };
+    beamMat;
+    funnelMat;
+    cam = null;
+    close;
+    k;
+    upright = !1;
+    constructor(e, t = !1) {
+      ((this.p = e),
+        (this.close = t),
+        (this.k = t ? kt.close : kt.park),
+        this.root.add(this.decals.mesh, this.words.group));
+      let n = (e, t) =>
+        new f({
+          transparent: !0,
+          depthWrite: !1,
+          side: 2,
+          blending: 1,
+          uniforms: {
+            uTime: this.time,
+            uGlow: { value: 0 },
+            uWobble: { value: 0 },
+            uLean: { value: new ie() },
+            ...t,
+          },
+          vertexShader: $t,
+          fragmentShader: e,
+        });
+      ((this.beamMat = n(
+        `
+      uniform float uTime; uniform float uGlow; uniform float uHeight; uniform float uCut; uniform float uFront; uniform vec3 uRim; uniform vec3 uBody; uniform vec3 uBand;
+      varying vec2 vUv; varying float vEdge; varying float vNear;
+      void main() {
+        if (vUv.y < uCut) discard; // pulled up into the saucer
+        // three hard bands climbing at 2.5 m/s
+        float m = vUv.y * uHeight - uTime * 2.5;
+        float k = abs(fract(m / (uHeight / 3.0)) - 0.5) * uHeight / 3.0;
+        float aa = fwidth(k) + 1e-4;
+        float band = 1.0 - smoothstep(0.04 - aa, 0.04, k);
+        float rim = pow(vEdge, 2.0);
+        float fade = smoothstep(0.0, 0.12, vUv.y - uCut);
+        vec3 col = mix(mix(uBody, uRim, rim), uBand, band);
+        float front = gl_FrontFacing ? mix(1.0 - uFront, 1.0, rim) : 1.0; // close up, the near face crosses him
+        float a = uGlow * fade * vNear * front * max(mix(0.18, 0.8, rim), 0.7 * band) * mix(1.0, 0.5, smoothstep(0.6, 1.0, vUv.y));
+        if (a < 0.005) discard;
+        gl_FragColor = vec4(col, a);
+        #include <colorspace_fragment>
+      }`,
+        {
+          uHeight: { value: 2.8 },
+          uCut: { value: 0 },
+          uFront: { value: t ? 0.8 : 0 },
+          uRim: { value: new y(`#22D3EE`) },
+          uBody: { value: new y(`#B8FF5A`) },
+          uBand: { value: new y(`#EFFFD6`) },
+        },
+      )),
+        (this.funnelMat = n(
+          `
+      uniform float uGlow; uniform float uPhase; uniform vec3 uDust; uniform vec3 uEdge;
+      varying vec2 vUv; varying float vEdge; varying float vNear;
+      void main() {
+        // four helical streaks winding up, turning with him (1.5× his spin); clear between, so he shows
+        float w = vUv.x * 6.2831853 * 4.0 + vUv.y * 8.0 - uPhase * 4.0;
+        float s = sin(w);
+        float body = smoothstep(0.22, 0.32, s);
+        float core = smoothstep(0.45, 0.6, s);
+        float fade = smoothstep(0.0, 0.15, vUv.y) * smoothstep(1.0, 0.8, vUv.y);
+        float front = gl_FrontFacing ? mix(0.2, 1.0, vEdge * vEdge) : 1.0; // the near half crosses his face
+        float a = uGlow * fade * vNear * front * max(0.75 * body, 0.12 * pow(vEdge, 2.0));
+        if (a < 0.005) discard;
+        gl_FragColor = vec4(mix(uEdge, uDust, core), a);
+        #include <colorspace_fragment>
+      }`,
+          {
+            uPhase: { value: 0 },
+            uDust: { value: new y(`#B8895A`) },
+            uEdge: { value: new y(`#6E4A2A`) },
+          },
+        )),
+        (this.funnelMat.uniforms.uWobble.value = 0.05));
+    }
+    update(e, t) {
+      ((this.cam = t),
+        (this.time.value += e),
+        ct(this.time.value),
+        this.decals.update(e),
+        this.words.update(e));
+      for (let t of this.drains) {
+        t.left -= e;
+        for (let n = this.dueOf(t, 40, e); n > 0; n--) {
+          let e = t.from,
+            n = t.n++ % 4 == 0;
+          this.p.emit({
+            x: e.x + (Math.random() - 0.5) * 0.5,
+            y: e.y + 0.5 + Math.random() * 0.8,
+            z: e.z + (Math.random() - 0.5) * 0.5,
+            count: 1,
+            color: pt,
+            speed: 4,
+            up: 0.9,
+            size: n ? [0.24, 0.16] : [0.16, 0.1],
+            life: [0.7, 0.8],
+            drag: 0,
+            shape: n ? 10 : 1,
+            ink: !0,
+            spin: 0,
+            home: t.to,
+            homeY: this.k.drainY,
+          });
+        }
+      }
+      this.drains.some((e) => e.left <= 0) &&
+        (this.drains = this.drains.filter((e) => e.left > 0));
+      for (let t of this.devils) {
+        ((t.t += e),
+          t.t < Gt
+            ? ((t.x = t.f.x + t.ox), (t.y = t.f.y), (t.z = t.f.z + t.oz))
+            : ((t.x += (t.f.vx + t.sx * this.k.devil) * e),
+              (t.z += (t.f.vz + t.sz * this.k.devil) * e)));
+        let n = Math.max(0, (t.t - Gt) / 0.5);
+        (t.mesh.position.set(t.x, t.y, t.z),
+          t.mesh.scale.setScalar(
+            (1 + 0.2 * Math.min(1, t.t * 5)) *
+              (1 - this.k.devilShrink * n) *
+              this.k.devilK,
+          ));
+        let r = t.mesh.material;
+        ((r.uniforms.uPhase.value += t.spin * e),
+          (r.uniforms.uGlow.value = 1 - n * n));
+      }
+      if (this.devils.some((e) => e.t >= Kt)) {
+        for (let e of this.devils)
+          e.t >= Kt && (e.mesh.removeFromParent(), e.mesh.material.dispose());
+        this.devils = this.devils.filter((e) => e.t < Kt);
+      }
+    }
+    ride(e, t, n, r, i, a) {
+      let o = this.riders.get(e);
+      if (!o || o.look !== t) {
+        let r = we(t);
+        if ((o && this.drop(o), !r)) {
+          this.riders.delete(e);
+          return;
+        }
+        ((o = {
+          skin: r.key,
+          f: n,
+          look: t,
+          seen: 0,
+          mode: n.mode,
+          trick: n.trickId,
+          trickT: n.trickT,
+          spin: n.spin,
+          turn: 0,
+          airTurn: 0,
+          popped: !1,
+          a: 0,
+          b: 0,
+          c: 0,
+          gx: n.x,
+          gy: n.y,
+          gz: n.z,
+          gnx: 0,
+          gny: 1,
+          gnz: 0,
+          column: null,
+          glow: 0,
+          phase: 0,
+          ufo: null,
+          ufoT: 0,
+          leave: -1,
+          silk: null,
+          wall: n.mode === E.WALLRIDE,
+          hold: !1,
+          webAt: -99,
+          offAt: -99,
+          wnx: 0,
+          wnz: 0,
+          sx: 0,
+          sy: 0,
+          sz: 0,
+          snap: -1,
+          rain: -1,
+          stride: 0,
+          foot: 1,
+          prints: 0,
+          flips: 0,
+          juggle: !1,
+          hand: 1,
+          ball: 0,
+          special: 0,
+          roll: -1,
+          rfx: 0,
+          rfz: 1,
+        }),
+          this.riders.set(e, o));
+      }
+      if (((o.f = n), (o.seen = this.tick), r <= 0)) return;
+      let s = o.mode,
+        c = n.mode,
+        l = n.trickId !== o.trick || n.trickT < o.trickT - 0.05,
+        u = c === E.AIR && s === E.AIR ? n.spin - o.spin : 0;
+      ((o.turn +=
+        ((Math.abs(u) > 1.5 ? 0 : u / r) - o.turn) * Math.min(1, r * 12)),
+        c === E.AIR &&
+          s !== E.AIR &&
+          ((o.airTurn = 0), (o.popped = V(s) && n.vy > 0.5)),
+        c === E.AIR && (o.airTurn = Math.abs(n.spin)));
+      let d = (n.x - i) ** 2 + (n.z - a) ** 2 < 2025;
+      switch (o.skin) {
+        case `varginha`:
+          this.saucer(o, s, d, r);
+          break;
+        case `abominollie`:
+          d && this.snow(o, s, r);
+          break;
+        case `saci`:
+          this.whirl(o, s, d, r);
+          break;
+        case `curupira`:
+          d && this.forest(o, l, r);
+          break;
+        case `itsy`:
+          this.web(o, s, d, r);
+          break;
+        case `grindula`:
+          d && this.bats(o, s, r);
+          break;
+        case `jester`:
+          d && this.jest(o, s, l, r);
+          break;
+        case `sentai`:
+          this.rollCall(o, s, l, d, r);
+      }
+      (V(c) &&
+        ((o.gx = n.x),
+        (o.gy = n.y),
+        (o.gz = n.z),
+        (o.gnx = n.ux),
+        (o.gny = n.uy),
+        (o.gnz = n.uz)),
+        (o.mode = c),
+        (o.trick = n.trickId),
+        (o.trickT = n.trickT),
+        (o.spin = n.spin));
+    }
+    sweep() {
+      for (let [e, t] of this.riders)
+        t.seen !== this.tick && (this.drop(t), this.riders.delete(e));
+      this.tick++;
+    }
+    dispose() {
+      this.root.removeFromParent();
+      for (let e of this.riders.values()) this.drop(e);
+      this.riders.clear();
+      for (let e of this.devils) e.mesh.material.dispose();
+      ((this.devils = []),
+        (this.drains = []),
+        this.beamMat.dispose(),
+        this.funnelMat.dispose(),
+        this.decals.dispose(),
+        this.words.dispose());
+    }
+    skinAt(e) {
+      for (let t of this.riders.values()) if (t.f === e) return t.skin;
+      return null;
+    }
+    skinOf(e) {
+      return this.riders.get(e)?.skin ?? null;
+    }
+    tag(e, t) {
+      let n = this.riders.get(e);
+      n?.skin === `chupacabra` &&
+        (this.p.emit({
+          x: t.x,
+          y: t.y + 0.8,
+          z: t.z,
+          count: 9,
+          color: ft,
+          speed: this.k.wool,
+          up: 0.6,
+          vel: [t.vx * 0.7, 0.4, t.vz * 0.7],
+          size: [0.3, 0.5],
+          life: [0.8, 1],
+          drag: 3,
+          gravity: -0.5,
+          shape: 9,
+          ink: !0,
+          spin: 0.6,
+        }),
+        this.drains.push({ from: t, to: n.f, left: Et, acc: 0, n: 0 }));
+    }
+    perform(e) {
+      let t = this.riders.get(e);
+      if (!t) return;
+      let n = t.f,
+        { ax: r, az: i, lx: a, lz: o } = this.fromCam(n);
+      switch (t.skin) {
+        case `sentai`:
+          this.callRoll(t);
+          break;
+        case `grindula`:
+          for (let e = 0; e < 8; e++) {
+            let t = e < (this.upright ? 3 : 5) ? 1 : -1,
+              s = r * 0.5 + a * t * 0.85,
+              c = i * 0.5 + o * t * 0.85;
+            this.bat(
+              n.x + a * t * 0.25 + r * 0.1,
+              n.y + 0.75,
+              n.z + o * t * 0.25 + i * 0.1,
+              s,
+              c,
+              1.6,
+            );
+          }
+          break;
+        case `chupacabra`:
+          this.tag(e, {
+            ...n,
+            x: n.x + a * 0.5 + r * 0.4,
+            z: n.z + o * 0.5 + i * 0.4,
+            vx: 0,
+            vz: 0,
+          });
+          break;
+        case `itsy`: {
+          let e = n.x + a * 0.5 + r * 0.85,
+            s = n.y + 1,
+            c = n.z + o * 0.5 + i * 0.85;
+          (this.decals.lay({
+            x: e,
+            y: s,
+            z: c,
+            nx: -r * 0.87 - a * 0.5,
+            ny: 0,
+            nz: -i * 0.87 - o * 0.5,
+            dx: 0,
+            dy: 1,
+            dz: 0,
+            w: 0.6,
+            h: 0.6,
+            kind: L.WEB,
+            color: `#FFFFFF`,
+            ink: `#4A3F6B`,
+            life: 2.6,
+            pop: 0.18,
+          }),
+            (t.sx = e),
+            (t.sy = s),
+            (t.sz = c),
+            (t.webAt = this.time.value),
+            (t.silk ??= new qe()),
+            this.root.add(t.silk.mesh),
+            (t.snap = -1),
+            (t.rain = -1),
+            (t.hold = t.wall = !0));
+          break;
+        }
+      }
+    }
+    drop(e) {
+      ((e.column &&=
+        (e.column.removeFromParent(), e.column.material.dispose(), null)),
+        e.ufo?.removeFromParent(),
+        (e.ufo = null),
+        e.silk?.dispose(),
+        (e.silk = null));
+    }
+    due(e, t, n, r) {
+      e[t] += n * this.p.scale * r;
+      let i = Math.floor(e[t]);
+      return ((e[t] -= i), i);
+    }
+    dueOf(e, t, n) {
+      e.acc += t * this.p.scale * n;
+      let r = Math.floor(e.acc);
+      return ((e.acc -= r), r);
+    }
+    columnOf(e, t) {
+      if (!e.column) {
+        let n = t.clone();
+        ((n.uniforms.uTime = this.time),
+          (e.column = new x(t === this.funnelMat ? Qt : Zt, n)),
+          (e.column.renderOrder = 3),
+          (e.column.frustumCulled = !1),
+          this.root.add(e.column));
+      }
+      return e.column;
+    }
+    saucer(e, t, n, r) {
+      let i = e.f,
+        a = this.p,
+        o = i.mode === E.AIR;
+      if (!n) {
+        (e.ufo && (e.ufo.visible = !1),
+          e.column && (e.column.visible = !1),
+          (e.leave = -1));
+        return;
+      }
+      if (o && (t !== E.AIR || !e.ufo?.visible)) {
+        let t = G(i);
+        (this.decals.lay({
+          x: e.gx,
+          y: e.gy,
+          z: e.gz,
+          nx: e.gnx,
+          ny: e.gny,
+          nz: e.gnz,
+          dx: t.x,
+          dy: 0,
+          dz: t.z,
+          w: this.k.crop * (this.upright ? 0.75 : 1),
+          h: this.k.crop * (this.upright ? 0.75 : 1),
+          kind: L.CROP,
+          color: `#9BFF3D`,
+          ink: `#1E9E5A`,
+          alpha: 0.55,
+          life: 1.4,
+          pop: 0.15,
+        }),
+          e.ufo || ((e.ufo = st()), this.root.add(e.ufo)),
+          (e.ufo.visible = !0),
+          e.ufo.position.set(i.x, i.y + this.k.ufoY, i.z),
+          (e.ufoT = 0),
+          (e.leave = -1),
+          (e.glow = 0));
+      }
+      let s = e.ufo;
+      if (!s || !s.visible) return;
+      ((e.ufoT += r),
+        o
+          ? (e.leave = -1)
+          : e.leave < 0
+            ? ((e.leave = 0), this.p.cut(s.position, 0.12))
+            : (e.leave += r));
+      let c = 1 - Math.exp(-r / Ot),
+        l = e.leave > At ? (e.leave - At) / jt : 0,
+        u = this.close ? (this.upright ? 3 : 1.5) * l * l : 0;
+      (u && this.fromCam(i),
+        (s.position.x += (i.x - W.lx * u - s.position.x) * c),
+        (s.position.z += (i.z - W.lz * u - s.position.z) * c),
+        l > 0
+          ? (s.position.y =
+              e.gy +
+              this.k.ufoY +
+              this.k.zip * (this.upright ? 0.3 : 1) * l * l)
+          : (s.position.y += (i.y + this.k.ufoY - s.position.y) * c));
+      let d = Math.min(1, e.ufoT / 0.15);
+      if (
+        (s.scale.setScalar(
+          (d < 0.7
+            ? 1.15 * Math.sin((d / 0.7) * Math.PI * 0.5)
+            : 1.15 - (0.15 * (d - 0.7)) / 0.3) *
+            (this.close ? 1 - 0.7 * Math.min(1, l) : 1),
+        ),
+        s.rotation.set(
+          Math.sin(e.ufoT * 5) * 0.14,
+          s.rotation.y + r * 2,
+          Math.cos(e.ufoT * 4) * 0.12,
+        ),
+        l >= 1)
+      ) {
+        ((s.visible = !1), e.column && (e.column.visible = !1));
+        return;
+      }
+      let f = this.columnOf(e, this.beamMat),
+        p = f.material;
+      e.glow += (1 - e.glow) * Math.min(1, r * 14);
+      let m = this.close ? Math.min(i.y, e.gy) : i.y,
+        h = Math.max(0.5, s.position.y - 0.09 - m);
+      if (
+        ((f.visible = !0),
+        f.position.set(i.x, m, i.z),
+        f.scale.set(1, h, 1),
+        (p.uniforms.uHeight.value = h),
+        (p.uniforms.uGlow.value = e.glow),
+        (p.uniforms.uCut.value = e.leave >= 0 ? Math.min(1, e.leave / At) : 0),
+        p.uniforms.uLean.value.set(s.position.x - i.x, s.position.z - i.z),
+        o)
+      )
+        for (let t = this.due(e, `a`, 12, r); t > 0; t--) {
+          let e = Math.random() * Math.PI * 2,
+            t = 0.3 + Math.random() * 0.45;
+          a.emit({
+            x: i.x + Math.sin(e) * t,
+            y: i.y + 0.1,
+            z: i.z + Math.cos(e) * t,
+            count: 1,
+            color: lt,
+            exact: !0,
+            speed: 1,
+            dir: [i.vx, i.vy + 2, i.vz],
+            drag: 0,
+            size: [0.12, 0.09],
+            life: [0.9, 1.1],
+            shape: 1,
+            ink: !0,
+            home: s.position,
+            homeY: -0.05,
+          });
+        }
+    }
+    snow(e, t, n) {
+      let r = e.f,
+        i = this.p,
+        a = (t, n, a, o, s) => {
+          let c = G(r),
+            l = c.z,
+            u = -c.x;
+          this.decals.lay({
+            x: t,
+            y: n,
+            z: a,
+            nx: e.gnx,
+            ny: e.gny,
+            nz: e.gnz,
+            dx: c.x,
+            dy: 0,
+            dz: c.z,
+            w: o / 2,
+            h: o / 2,
+            kind: L.FROST,
+            color: `#DDF1FF`,
+            ink: `#3E86C6`,
+            alpha: 0.6,
+            life: 1.6,
+            pop: 0.12,
+          });
+          for (let r of [-1, 1]) {
+            let i = Math.cos(s * r),
+              o = Math.sin(s * r);
+            this.decals.lay({
+              x: t + l * r * 0.32,
+              y: n,
+              z: a + u * r * 0.32,
+              nx: e.gnx,
+              ny: e.gny,
+              nz: e.gnz,
+              dx: c.x * i + l * o,
+              dy: 0,
+              dz: c.z * i + u * o,
+              w: 0.175,
+              h: 0.3,
+              kind: L.CLAW,
+              color: `#3E86C6`,
+              ink: `#1D3F66`,
+              alpha: 0.85,
+              life: 1.8,
+              pop: 0.12,
+            });
+          }
+          let d = this.close ? c.x : l,
+            f = this.close ? c.z : u;
+          for (let e = 0; e < 7; e++) {
+            let t = e % 2 ? 1 : -1,
+              a = 1.5 + Math.random() * 1.3;
+            i.emit({
+              x: r.x + d * t * 0.3,
+              y: n + 0.2,
+              z: r.z + f * t * 0.3,
+              count: 1,
+              color: ut,
+              exact: !0,
+              speed: 1,
+              dir: [
+                r.vx + d * t * a + c.x * (Math.random() - 0.5),
+                0.5 + Math.random(),
+                r.vz + f * t * a + c.z * (Math.random() - 0.5),
+              ],
+              drag: 4,
+              size: [0.5, 0.9],
+              life: [0.5, 0.65],
+              shape: 9,
+              ink: !0,
+              spin: 0.5,
+            });
+          }
+          for (let e = 0; e < 4; e++)
+            i.emit({
+              x: r.x - c.x * 0.45,
+              y: n + 0.15,
+              z: r.z - c.z * 0.45,
+              count: 1,
+              color: ut,
+              exact: !0,
+              speed: 1,
+              dir: [
+                r.vx * 0.8 + (Math.random() - 0.5) * 0.6,
+                2 + Math.random() * 1.2,
+                r.vz * 0.8 + (Math.random() - 0.5) * 0.6,
+              ],
+              drag: 3,
+              size: [0.3, 0.6],
+              life: [0.45, 0.6],
+              shape: 9,
+              ink: !0,
+              spin: 0.5,
+            });
+        },
+        o = this.close && this.upright ? 0.3 : 0,
+        s = o ? this.fromCam(r) : null,
+        c = s ? s.ax * o : 0,
+        l = s ? s.az * o : 0;
+      if (
+        (r.mode === E.AIR &&
+          t !== E.AIR &&
+          e.popped &&
+          a(e.gx + c, e.gy, e.gz + l, 1.2, 0),
+        r.mode === E.AIR && e.popped)
+      )
+        for (let t = this.due(e, `a`, 9, n); t > 0; t--) {
+          let t = Math.random() * Math.PI * 2;
+          i.emit({
+            x: Math.sin(t) * 0.6,
+            y: this.k.flakeY + Math.random() * this.k.flakeH,
+            z: Math.cos(t) * 0.6,
+            count: 1,
+            color: dt,
+            exact: !0,
+            speed: 1,
+            dir: [0, 0.15, 0],
+            drag: 0,
+            size: [0.26, 0.26],
+            life: [0.9, 0.9],
+            shape: 7,
+            ink: !0,
+            spin: 1.5,
+            anchor: e.f,
+            orbit: 3,
+          });
+        }
+      else e.a = 0;
+      V(r.mode) &&
+        t === E.AIR &&
+        e.popped &&
+        ((e.popped = !1), a(r.x + c, r.y, r.z + l, 1.4, 0.2));
+    }
+    whirl(e, t, n, r) {
+      let i = e.f,
+        a = this.p,
+        o = Math.abs(e.turn),
+        s = e.turn < 0 ? -1 : 1,
+        c = n && i.mode === E.AIR && o > Tt;
+      if (
+        ((e.glow += (+!!c - e.glow) * Math.min(1, r * (c ? 10 : 5))),
+        e.column || c)
+      ) {
+        let t = this.columnOf(e, this.funnelMat),
+          n = t.material;
+        ((e.phase += e.turn * 1.5 * r),
+          (n.uniforms.uPhase.value = e.phase),
+          (n.uniforms.uGlow.value = e.glow),
+          t.position.set(i.x, i.y, i.z),
+          t.quaternion.setFromUnitVectors(tn, H.set(i.ux, i.uy, i.uz)),
+          t.scale.setScalar((0.85 + 0.15 * e.glow) * this.k.funnel),
+          (t.visible = e.glow > 0.01));
+      }
+      if (c) {
+        let t = 4 * Math.PI * s,
+          n = (e, t, n) => {
+            let r = Math.random() * Math.PI * 2,
+              a = Math.cos(r) * e,
+              o = Math.sin(r) * e;
+            return (
+              (n[0] = U.x * a + nn.x * o + i.ux * t),
+              (n[1] = U.y * a + nn.y * o + i.uy * t),
+              (n[2] = U.z * a + nn.z * o + i.uz * t),
+              n
+            );
+          };
+        an(i);
+        for (let o = this.due(e, `a`, 11, r); o > 0; o--) {
+          let [e, r, o] = n(
+            0.8 + Math.random() * 0.2,
+            0.2 + Math.random() * 1.2,
+            rn,
+          );
+          a.emit({
+            x: e,
+            y: r,
+            z: o,
+            count: 1,
+            color: ht,
+            exact: !0,
+            speed: 0.6,
+            dir: [i.ux, i.uy, i.uz],
+            drag: 0,
+            size: [0.22, 0.22],
+            life: [0.6, 0.75],
+            shape: 6,
+            ink: !0,
+            spin: 6,
+            anchor: i,
+            orbit: t,
+            axis: i,
+          });
+        }
+        for (let o = this.due(e, `b`, 4, r); o > 0; o--) {
+          let [e, r, o] = n(
+            0.8 + Math.random() * 0.2,
+            0.4 + Math.random() * 1,
+            rn,
+          );
+          a.emit({
+            x: e,
+            y: r,
+            z: o,
+            count: 1,
+            color: gt,
+            exact: !0,
+            speed: 0.6,
+            dir: [i.ux, i.uy, i.uz],
+            drag: 0,
+            size: [0.14, 0.14],
+            life: [0.6, 0.75],
+            shape: 2,
+            ink: !0,
+            spin: 8,
+            anchor: i,
+            orbit: t,
+            axis: i,
+          });
+        }
+        for (let o = this.due(e, `c`, 8, r); o > 0; o--) {
+          let [e, r, o] = n(
+            0.45 + Math.random() * 0.25,
+            Math.random() * 0.4,
+            rn,
+          );
+          a.emit({
+            x: e,
+            y: r,
+            z: o,
+            count: 1,
+            color: mt,
+            exact: !0,
+            speed: 0.2,
+            dir: [i.ux, i.uy, i.uz],
+            drag: 0,
+            size: [0.22, 0.32],
+            life: [0.45, 0.55],
+            shape: 9,
+            ink: !0,
+            spin: 1,
+            anchor: i,
+            orbit: t,
+            axis: i,
+          });
+        }
+      } else e.a = e.b = e.c = 0;
+      if (V(i.mode) && t === E.AIR && e.airTurn >= Math.PI * 2.9 && n) {
+        let t = G(i),
+          n = this.cam,
+          r = t.z,
+          a = -t.x;
+        n && (i.x - n.x) * r + (i.z - n.z) * a < 0 && ((r = -r), (a = -a));
+        let o = 0,
+          c = 0;
+        if (n && this.close) {
+          let e = this.fromCam(i);
+          ((r = (e.lx + e.ax * 0.7) / 1.22), (a = (e.lz + e.az * 0.7) / 1.22));
+          let t = this.k.devilSide * (this.upright ? 0.7 : 1);
+          ((o = e.lx * t),
+            (c = e.lz * t),
+            this.upright &&
+              ((r = (e.lx * 0.5 + e.ax) / 1.12),
+              (a = (e.lz * 0.5 + e.az) / 1.12)));
+        }
+        let l = this.funnelMat.clone();
+        ((l.uniforms.uTime = this.time),
+          (l.uniforms.uPhase.value = e.phase),
+          (l.uniforms.uGlow.value = 1));
+        let u = new x(Qt, l);
+        ((u.renderOrder = 3),
+          (u.frustumCulled = !1),
+          u.quaternion.setFromUnitVectors(tn, H.set(i.ux, i.uy, i.uz)),
+          this.root.add(u),
+          this.devils.push({
+            mesh: u,
+            f: i,
+            t: 0,
+            x: i.x + o,
+            y: i.y,
+            z: i.z + c,
+            sx: r,
+            sz: a,
+            ox: o,
+            oz: c,
+            spin: 18 * s,
+          }),
+          (e.glow = 0),
+          e.column && (e.column.visible = !1),
+          this.decals.lay({
+            x: i.x,
+            y: i.y,
+            z: i.z,
+            nx: i.ux,
+            ny: i.uy,
+            nz: i.uz,
+            dx: t.x,
+            dy: 0,
+            dz: t.z,
+            w: 0.6,
+            h: 0.6,
+            kind: L.SPIRAL,
+            color: `#C9A26B`,
+            ink: `#7A5A34`,
+            alpha: 0.6,
+            life: 1,
+            pop: 0.15,
+            left: s < 0,
+          }));
+      }
+    }
+    forest(e, t, n) {
+      let r = e.f,
+        i = this.p;
+      if (!r.fakie || r.mode === E.BAIL || r.mode === E.WALK) {
+        ((e.a = 0), (e.stride = 0));
+        return;
+      }
+      let a = G(r),
+        o = a.z,
+        s = -a.x;
+      if (t && r.trickId) {
+        for (let t of [-1, 1])
+          this.footprint({
+            x: e.gx + o * t * 0.2,
+            y: e.gy,
+            z: e.gz + s * t * 0.2,
+            nx: e.gnx,
+            ny: e.gny,
+            nz: e.gnz,
+            dx: -a.x,
+            dy: 0,
+            dz: -a.z,
+            w: 0.12 * this.k.printW,
+            h: 0.26 * this.k.print,
+            kind: L.FOOT,
+            color: vt,
+            ink: yt,
+            alpha: 0.85,
+            life: 2.5,
+            left: t < 0,
+          });
+        for (let e = 0; e < 10; e++) {
+          let t = (e / 10) * Math.PI * 2,
+            n = 0.35 + Math.random() * 0.65;
+          i.emit({
+            x: r.x,
+            y: r.y + 0.3,
+            z: r.z,
+            count: 1,
+            color: _t,
+            exact: !0,
+            speed: 1,
+            dir: [
+              r.vx * 0.9 + Math.cos(t) * Math.cos(n) * 3,
+              r.vy * 0.9 + Math.sin(n) * 3,
+              r.vz * 0.9 + Math.sin(t) * Math.cos(n) * 3,
+            ],
+            drag: 2,
+            gravity: 1,
+            size: [0.2, 0.2],
+            life: [0.8, 1.1],
+            shape: 6,
+            ink: !0,
+            spin: 7,
+          });
+        }
+      }
+      if (!V(r.mode) || r.speed < 2) {
+        e.a = 0;
+        return;
+      }
+      if (((e.stride += r.speed * n), e.stride >= Mt)) {
+        ((e.stride -= Mt), (e.foot = -e.foot));
+        let t = r.x + o * e.foot * Nt * this.k.print,
+          n = r.z + s * e.foot * Nt * this.k.print,
+          c = this.close ? 0.47 * e.foot : 0,
+          l = Math.cos(c),
+          u = Math.sin(c);
+        (this.footprint({
+          x: t,
+          y: r.y,
+          z: n,
+          nx: r.ux,
+          ny: r.uy,
+          nz: r.uz,
+          dx: -a.x * l + o * u,
+          dy: 0,
+          dz: -a.z * l + s * u,
+          w: 0.1 * this.k.printW,
+          h: 0.21 * this.k.print,
+          kind: L.FOOT,
+          color: vt,
+          ink: yt,
+          alpha: 0.8,
+          life: 2.5,
+          left: e.foot < 0,
+        }),
+          ++e.prints % this.k.sprout === 0 &&
+            i.emit({
+              x: t,
+              y: r.y + Pt / 2,
+              z: n,
+              count: 1,
+              color: `#2FD67B`,
+              exact: !0,
+              speed: 0,
+              size: [Pt, Pt],
+              life: [2, 2],
+              shape: 11,
+              ink: !0,
+              spin: 0,
+              solid: !0,
+              pop: 0.2,
+            }));
+      }
+      for (let t = this.due(e, `a`, 5, n); t > 0; t--) {
+        let e = Math.random() < 0.5 ? -1 : 1,
+          t = 0.3 + Math.random() * 0.15;
+        i.emit({
+          x: r.x + a.x * 0.3 + o * e * t,
+          y: r.y + 0.7,
+          z: r.z + a.z * 0.3 + s * e * t,
+          count: 1,
+          color: _t,
+          exact: !0,
+          speed: 1,
+          dir: [
+            r.vx * 0.6 + o * e * Math.random() * 0.8,
+            0.6,
+            r.vz * 0.6 + s * e * Math.random() * 0.8,
+          ],
+          gravity: 0.8,
+          drag: 1.5,
+          size: [0.28, 0.28],
+          life: [0.9, 1.2],
+          shape: 6,
+          ink: !0,
+          spin: 7,
+        });
+      }
+    }
+    web(e, t, n, r) {
+      let i = e.f,
+        a = this.p;
+      e.hold && !V(i.mode) && (e.hold = !1);
+      let o = i.mode === E.WALLRIDE || e.hold,
+        s = Math.hypot(i.ux, i.uz) || 1,
+        c = i.ux / s,
+        l = i.uz / s;
+      if (o && !e.wall && n) {
+        let t = i.x + c * 0.04,
+          n = i.y + 0.35,
+          r = i.z + l * 0.04,
+          a = this.time.value;
+        (a - e.offAt < zt ||
+          (a - e.webAt < Lt && Math.hypot(t - e.sx, n - e.sy, r - e.sz) < Rt) ||
+          ((e.sx = t),
+          (e.sy = n),
+          (e.sz = r),
+          (e.webAt = this.time.value),
+          this.decals.lay({
+            x: t,
+            y: n,
+            z: r,
+            nx: c,
+            ny: 0,
+            nz: l,
+            dx: 0,
+            dy: 1,
+            dz: 0,
+            w: 0.8,
+            h: 0.8,
+            kind: L.WEB,
+            color: `#FFFFFF`,
+            ink: `#4A3F6B`,
+            life: 2.6,
+            pop: 0.18,
+          }),
+          (e.wnx = c),
+          (e.wnz = l),
+          this.corner(e, 0.6, 3),
+          (e.stride = 0),
+          (e.prints = 1)),
+          (e.silk ??= new qe()),
+          this.root.add(e.silk.mesh),
+          (e.snap = -1),
+          (e.rain = -1));
+      }
+      o &&
+        ((e.wnx = c),
+        (e.wnz = l),
+        (e.stride += i.speed * r),
+        e.stride >= Ft &&
+          e.prints < It &&
+          n &&
+          ((e.stride -= Ft), e.prints++, this.corner(e, 0.45, 2)));
+      let u = e.silk;
+      if (u?.mesh.parent) {
+        (!o && e.snap < 0 && (e.snap = 0), e.snap >= 0 && (e.snap += r));
+        let t = e.snap >= 0 ? Math.min(0.5, (e.snap / 0.15) * 0.5) : 0;
+        if (t >= 0.5 || !n) u.mesh.removeFromParent();
+        else if (this.cam) {
+          let n = i.x + i.ux * 0.55,
+            r = i.y + i.uy * 0.55 + 0.25,
+            a = i.z + i.uz * 0.55,
+            o = Math.hypot(n - e.sx, r - e.sy, a - e.sz);
+          u.set(e.sx, e.sy, e.sz, n, r, a, 0.125 * o, this.cam, t);
+        }
+      }
+      if (
+        (!o && e.wall && (e.offAt = this.time.value),
+        !o && e.wall && n && (e.rain = 0),
+        (e.wall = o),
+        o && (e.rain = -1),
+        e.rain >= 0)
+      ) {
+        let n = e.rain;
+        if (((e.rain += r), n < Bt && e.rain >= Bt)) {
+          let t = this.fromCam(i);
+          for (let n of this.close ? [0, -1, 1] : [0]) {
+            let r = this.k.cloud * (n ? 0.8 : 1);
+            a.emit({
+              x: e.wnx * 0.7 + t.lx * n * 0.22,
+              y: this.k.cloudY + (n ? -0.1 : 0.05),
+              z: e.wnz * 0.7 + t.lz * n * 0.22,
+              count: 1,
+              color: `#B9C6E8`,
+              exact: !0,
+              speed: 0,
+              size: [1.1 * r, 1.15 * r],
+              life: [0.6, 0.6],
+              shape: 9,
+              ink: !0,
+              spin: 0,
+              anchor: i,
+              solid: !0,
+            });
+          }
+        }
+        if (e.rain >= Bt && e.rain < 0.6)
+          for (let t = this.due(e, `a`, 48 * this.k.rain, r); t > 0; t--)
+            a.emit({
+              x: i.x + e.wnx * 0.7 + (Math.random() - 0.5) * 0.8,
+              y: i.y + this.k.cloudY - 0.2,
+              z: i.z + e.wnz * 0.7 + (Math.random() - 0.5) * 0.8,
+              count: 1,
+              color: bt,
+              exact: !0,
+              speed: 1,
+              dir: [i.vx, i.vy - 9, i.vz],
+              drag: 0,
+              size: [0.08, 0.07],
+              life: [0.25, 0.35],
+              shape: 3,
+              spin: 0,
+            });
+        if (V(i.mode) && !V(t) && e.rain >= Bt) {
+          let t = G(i);
+          this.decals.lay({
+            x: i.x,
+            y: i.y,
+            z: i.z,
+            nx: i.ux,
+            ny: i.uy,
+            nz: i.uz,
+            dx: t.x,
+            dy: 0,
+            dz: t.z,
+            w: 0.55,
+            h: 0.55,
+            kind: L.SPLAT,
+            color: bt,
+            ink: `#1A6F8E`,
+            life: 1,
+            pop: 0.1,
+          });
+          for (let e = 0; e < 7; e++) {
+            let e = Math.random() * Math.PI * 2;
+            a.emit({
+              x: i.x,
+              y: i.y + 0.1,
+              z: i.z,
+              count: 1,
+              color: bt,
+              exact: !0,
+              speed: 1,
+              dir: [
+                i.vx * 0.8 + Math.cos(e),
+                2.5 + Math.random(),
+                i.vz * 0.8 + Math.sin(e),
+              ],
+              gravity: 12,
+              drag: 0.5,
+              size: [0.1, 0.08],
+              life: [0.35, 0.45],
+              shape: 1,
+              ink: !0,
+            });
+          }
+          e.rain = -1;
+        } else e.rain > 1.5 && (e.rain = -1);
+      }
+    }
+    footprint(e) {
+      let t = this.cam;
+      if (this.close && t) {
+        let n = t.x - e.x,
+          r = t.z - e.z,
+          i = Math.hypot(n, r) || 1;
+        ((e.nx += (n / i) * 0.58),
+          (e.nz += (r / i) * 0.58),
+          (e.y += e.w * 0.5));
+      }
+      this.decals.lay(e);
+    }
+    corner(e, t, n) {
+      let r = e.f,
+        i = G(r),
+        a = e.wnx || r.ux,
+        o = e.wnz || r.uz;
+      this.decals.lay({
+        x: r.x + i.x * 1.3 + t * 0.7 * a,
+        y: e.gy + t * 0.75,
+        z: r.z + i.z * 1.3 + t * 0.7 * o,
+        nx: -i.x * 0.75 + a * 0.55,
+        ny: 0.35,
+        nz: -i.z * 0.75 + o * 0.55,
+        dx: 0,
+        dy: 1,
+        dz: 0,
+        w: t,
+        h: t,
+        kind: L.WEB,
+        color: `#FFFFFF`,
+        ink: `#4A3F6B`,
+        life: n,
+        pop: 0.18,
+      });
+    }
+    bats(e, t, n) {
+      let r = e.f;
+      if (r.mode !== E.GRIND) {
+        e.a = 0;
+        return;
+      }
+      if (t !== E.GRIND)
+        for (let e = 0; e < 5; e++) this.bat(r.x, r.y + 0.2, r.z);
+      this.due(e, `a`, 2.5, n) > 0 && this.bat(r.x, r.y + 0.2, r.z);
+    }
+    bat(e, t, n, r = 0, i = 0, a = 3.5) {
+      let o =
+        r || i
+          ? Math.atan2(r, i) + (Math.random() - 0.5) * a
+          : Math.random() * Math.PI * 2;
+      this.p.emit({
+        x: e,
+        y: t,
+        z: n,
+        count: 1,
+        color: xt,
+        exact: !0,
+        speed: 1,
+        dir: [
+          Math.sin(o) * this.k.batOut,
+          this.k.batUp + Math.random() * 1.4,
+          Math.cos(o) * this.k.batOut,
+        ],
+        gravity: -1.2,
+        drag: 0.7,
+        size: [0.34, 0.42],
+        life: [1, 1.6],
+        shape: 4,
+        spin: 24,
+      });
+    }
+    jest(e, t, n, r) {
+      let i = e.f,
+        a = this.p,
+        o = G(i),
+        s = o.z,
+        c = -o.x;
+      if (
+        (i.mode === E.BAIL &&
+          t !== E.BAIL &&
+          this.words.say(`HAHAHA`, `#FFD21F`, 0, 2, 0, 0.55, 0, 0.9, 0.5, i),
+        i.mode !== E.AIR)
+      ) {
+        (e.juggle && a.cut(i, 0.12, 8),
+          (e.flips = 0),
+          (e.juggle = !1),
+          (e.a = 0));
+        return;
+      }
+      let l = (s + o.x * 0.7) / 1.22,
+        u = (c + o.z * 0.7) / 1.22;
+      if (n && w[i.trickId]?.kind === T.FLIP) {
+        (e.flips++, (e.juggle = !0));
+        let t = e.flips % 2 ? 1 : -1,
+          n = e.flips === 3,
+          r = this.close ? this.fromCam(i) : null,
+          d = r ? r.lx : l,
+          f = r ? r.lz : u;
+        this.words.say(
+          n ? `HA HA!` : `HA`,
+          `#FFD21F`,
+          d * t * this.k.wordOut,
+          this.k.wordY,
+          f * t * this.k.wordOut,
+          (n ? 0.6 : 0.45) * this.k.word,
+          t * 0.44,
+          0.7,
+          this.k.wordRise,
+          i,
+        );
+        for (let e = 0; e < 10; e++) {
+          let t = e % 2 ? 1 : -1,
+            n = (Math.random() - 0.5) * 1.6,
+            r = s * t * Math.cos(n) + o.x * Math.sin(n),
+            l = c * t * Math.cos(n) + o.z * Math.sin(n);
+          a.emit({
+            x: i.x,
+            y: i.y + 0.6,
+            z: i.z,
+            count: 1,
+            color: Ct,
+            exact: !0,
+            speed: 1,
+            dir: [i.vx + r * 2.5, i.vy + 0.8, i.vz + l * 2.5],
+            drag: 2.5,
+            gravity: 4,
+            size: [0.16, 0.13],
+            life: [0.6, 0.75],
+            shape: e % 3 ? 5 : 2,
+            ink: !0,
+          });
+        }
+      }
+      if (e.juggle)
+        for (e.a += r; e.a >= Vt; e.a -= Vt) {
+          e.hand = -e.hand;
+          let t = (4 * Ht) / B,
+            n = (Ut / B) * -e.hand;
+          a.emit({
+            x: (l * e.hand * Ut) / 2,
+            y: 0.95,
+            z: (u * e.hand * Ut) / 2,
+            count: 1,
+            color: Ct[e.ball++ % 3],
+            exact: !0,
+            speed: 1,
+            dir: [l * n, t, u * n],
+            gravity: Wt,
+            drag: 0,
+            size: [0.22, 0.22],
+            life: [B, B],
+            shape: 8,
+            ink: !0,
+            spin: 0,
+            anchor: i,
+            solid: !0,
+          });
+        }
+    }
+    rollCall(e, t, n, r, i) {
+      let a = e.f,
+        o = w[a.trickId]?.kind ?? 0;
+      if (
+        (n &&
+          (o === T.SPECIAL_AIR ||
+            o === T.SPECIAL_GRIND ||
+            o === T.SPECIAL_MANUAL) &&
+          (e.special = o),
+        e.special &&
+          a.mode !== t &&
+          (a.mode === E.BAIL
+            ? (e.special = 0)
+            : (e.special !== T.SPECIAL_AIR || V(a.mode)) &&
+              ((e.special = 0), r && this.callRoll(e))),
+        e.roll === -1)
+      )
+        return;
+      let s = e.roll;
+      e.roll += i;
+      for (let t of qt)
+        (s < t.at && e.roll >= t.at && this.flash(e, t),
+          s < t.at + Xt && e.roll >= t.at + Xt && this.smoke(e, t));
+      e.roll > qt[qt.length - 1].at + Xt && (e.roll = -1);
+    }
+    get rollK() {
+      return this.k.rollK * (this.close && this.upright ? 0.8 : 1);
+    }
+    callRoll(e) {
+      let t = e.f,
+        n = this.cam,
+        r = n ? t.x - n.x : 0,
+        i = n ? t.z - n.z : 0,
+        a = Math.hypot(r, i),
+        o = G(t);
+      ((e.rfx = a > 0.5 ? r / a : o.x),
+        (e.rfz = a > 0.5 ? i / a : o.z),
+        (e.roll = -1e-4));
+    }
+    settle(e) {
+      (this.decals.hurry(e), this.words.hurry(e), this.p.hurry(e));
+      for (let t of this.devils) t.t = Math.max(t.t, Kt - e);
+    }
+    fromCam(e) {
+      let t = this.cam,
+        n = t ? e.x - t.x : 0,
+        r = t ? e.z - t.z : 0,
+        i = Math.hypot(n, r);
+      if (i > 0.5) ((n /= i), (r /= i));
+      else {
+        let t = G(e);
+        ((n = t.x), (r = t.z));
+      }
+      return ((W.ax = n), (W.az = r), (W.lx = r), (W.lz = -n), W);
+    }
+    blastAt(e, t) {
+      let n = e.rfx,
+        r = e.rfz,
+        i = r,
+        a = -n,
+        o = this.close ? t.near : t.out,
+        s = o ? Math.abs(o) * Jt : Yt;
+      return [i * o + n * s, t.y, a * o + r * s, i, a];
+    }
+    flash(e, t) {
+      let n = e.f,
+        r = this.p,
+        i = t.k * this.rollK,
+        [a, o, s, c, l] = this.blastAt(e, t);
+      r.emit({
+        x: a,
+        y: o,
+        z: s,
+        count: 1,
+        color: `#FFFFFF`,
+        exact: !0,
+        speed: 0,
+        size: [1.5 * i, 1.5 * i],
+        life: [0.1, 0.1],
+        shape: 5,
+        ink: !0,
+        spin: 0,
+        rot: 0,
+        anchor: n,
+        pop: 0.05,
+        solid: !0,
+      });
+      for (let e = 0; e < 3; e++) {
+        let u = Math.PI / 6 + (e + 0.2 + Math.random() * 0.6) * (Math.PI / 4.5),
+          d = 7 + Math.random() * 2,
+          f = c * Math.cos(u),
+          p = Math.sin(u),
+          m = l * Math.cos(u),
+          h = 0.5 * i;
+        r.emit({
+          x: a + f * h,
+          y: o + p * h,
+          z: s + m * h,
+          count: 1,
+          color: wt[t.c][0],
+          exact: !0,
+          speed: 1,
+          dir: [f * d, p * d, m * d],
+          drag: 2,
+          gravity: 6,
+          size: [0.42 * i, 0.34 * i],
+          life: [0.2, 0.26],
+          shape: 12,
+          ink: !0,
+          spin: 0,
+          rot: u - Math.PI / 2,
+          anchor: n,
+        });
+      }
+    }
+    smoke(e, t) {
+      let n = e.f,
+        r = this.p,
+        i = t.k * this.rollK,
+        [a, o, s, c, l] = this.blastAt(e, t),
+        [u, d, f] = wt[t.c];
+      for (let e = 0; e < 6; e++) {
+        let t = e < 2,
+          p = e === 2,
+          m = e === 5,
+          h = t
+            ? Math.PI / 2 + (e ? 0.35 : -0.35) + (Math.random() - 0.5) * 0.2
+            : Math.PI / 18 + ((Math.PI * 8) / 9) * Math.random(),
+          g = t
+            ? 2.2 + Math.random() * 0.4
+            : p
+              ? 0.6
+              : m
+                ? 0
+                : 1.6 + Math.random() * 0.8,
+          _ = t ? 1.2 : p ? 1.25 : m ? 0.5 : 0.7 + Math.random() * 0.3;
+        r.emit({
+          x: a,
+          y: m ? o - 0.1 * i : o,
+          z: s,
+          count: 1,
+          color: t ? d : m ? f : u,
+          exact: !0,
+          speed: 1,
+          dir: [
+            c * Math.cos(h) * g,
+            Math.sin(h) * g + (m ? 0.3 : 0.6),
+            l * Math.cos(h) * g,
+          ],
+          drag: 5,
+          gravity: t || p || m ? -6 : -4,
+          size: [0.4 * i, _ * i],
+          life: m ? [0.58, 0.64] : [0.62, 0.72],
+          shape: t ? 9 : 1,
+          ink: !0,
+          spin: 0,
+          anchor: n,
+          pop: 0.06,
+          solid: !0,
+          shrink: 0.14,
+        });
+      }
+    }
+  },
+  sn = { host: null, feature: null };
+function cn() {
+  let e = he(_e.profile);
+  if (!e) return null;
+  let t = e.keys.filter((e) => e.startsWith(`color:`)),
+    n = e.keys.filter((e) => !e.startsWith(`color:`)).map(xe);
+  return (
+    t.length && n.push(t.length === 1 ? xe(t[0]) : `${t.length} new colors`),
+    `LV ${e.level}: ${n.join(`, `)}`
+  );
+}
+function ln(e) {
+  return Math.round(Oe(Ee(e)) * 100);
+}
+function un(e) {
+  return e >= De.full
+    ? null
+    : `Riding at ${ln(e)}% speed & pop · full at LV ${De.full}`;
+}
+var dn = [
+  { min: 1, name: `Grom` },
+  { min: 5, name: `Local` },
+  { min: 10, name: `Ripper` },
+  { min: 15, name: `Am` },
+  { min: 20, name: `Flow` },
+  { min: 30, name: `Pro` },
+];
+function fn(e) {
+  let t = 0;
+  return (
+    dn.forEach((n, r) => {
+      e >= n.min && (t = r);
+    }),
+    t
+  );
+}
+function pn(e) {
+  let t = fn(e),
+    n = dn[t + 1],
+    { min: r, name: i } = dn[t];
+  return {
+    name: i,
+    range: n
+      ? `LV ${r}–${n.min - 1}, ${n.name} at LV ${n.min}`
+      : `LV ${r} and up`,
+  };
+}
+var mn = `cx="66" cy="52" rx="58" ry="19"`,
+  hn = `M0-11C1.2-2.5 2.5-1.2 11 0C2.5 1.2 1.2 2.5 0 11C-1.2 2.5-2.5 1.2-11 0C-2.5-1.2-1.2-2.5 0-11Z`,
+  gn = 0;
+function _n(e) {
+  let t = fn(e),
+    n = ++gn,
+    r = t === dn.length - 1,
+    i = `<ellipse ${mn} class="orbit-ink"/><ellipse ${mn} class="orbit"${r ? ` style="stroke:url(#lvh${n})"` : ``}/><ellipse ${mn} class="comet" pathLength="100"/>`,
+    a = [72, 58, 46][Math.min(2, String(e).length - 1)],
+    o = (e) => (e + a * 0.35).toFixed(1),
+    s = k(`b`, `lvl-badge`);
+  return (
+    (s.dataset.tier = String(t)),
+    s.setAttribute(`role`, `img`),
+    s.setAttribute(`aria-label`, `Level ${e}`),
+    (s.innerHTML =
+      `<svg viewBox="0 0 132 100" aria-hidden="true"><defs><clipPath id="lvc${n}"><rect x="-30" y="52" width="200" height="60"/></clipPath>` +
+      (r
+        ? `<linearGradient id="lvh${n}" x1="0" y1="0" x2="1" y2="1" spreadMethod="reflect"><stop offset="0" stop-color="#ff9cbd"/><stop offset=".25" stop-color="#ffe489"/><stop offset=".5" stop-color="#93f0bc"/><stop offset=".75" stop-color="#9aaaff"/><stop offset="1" stop-color="#ff9cbd"/><animateTransform attributeName="gradientTransform" type="translate" from="-1 -1" to="1 1" dur="5s" repeatCount="indefinite"/></linearGradient>`
+        : ``) +
+      `</defs><g transform="rotate(-12 66 52)">${i}</g><g class="numg"><g transform="translate(68 0) skewX(-9) translate(-68 0)"><text x="71" y="${o(57)}" font-size="${a}" stroke-width="13" class="drop">${e}</text><text x="68" y="${o(52)}" font-size="${a}" stroke-width="13" class="num">${e}</text></g></g><g transform="rotate(-12 66 52)" clip-path="url(#lvc${n})">${i}</g><text x="22" y="30" font-size="22" stroke-width="7" class="lv" transform="rotate(-12 22 30)">LV</text></svg><i class="lvl-spark"><svg viewBox="-13 -13 26 26" aria-hidden="true"><path class="spark" d="${hn}"/></svg></i>`),
+    s
+  );
+}
+function vn() {
+  let { level: e, into: t, span: n } = A(_e.profile?.xp ?? 0),
+    r = k(`div`, `level-row`),
+    i = k(`div`, `xp-bar`),
+    a = k(`i`, ``);
+  ((a.style.width = `${Math.round((t / n) * 100)}%`),
+    i.append(
+      a,
+      k(`span`, `xp-txt`, `${(n - t).toLocaleString()} XP to LV ${e + 1}`),
+    ),
+    r.append(_n(e), i));
+  let o = cn();
+  return (
+    (r.title = `Level ${e} (${pn(e).name}) · ${(n - t).toLocaleString()} XP to go${o ? ` · next unlock: ${o}` : ``}`),
+    r
+  );
+}
+var yn = class {
+    el;
+    badgeBox = k(`span`, `xp-meter-badge`);
+    fill = k(`i`, ``);
+    txt = k(`span`, `xp-txt`);
+    xp = 0;
+    run = 0;
+    constructor(e) {
+      this.el = k(`div`, `level-row xp-meter`);
+      let t = k(`div`, `xp-bar`);
+      (t.append(this.fill, this.txt),
+        this.el.append(this.badgeBox, t),
+        this.set(e));
+    }
+    get shown() {
+      return this.xp;
+    }
+    set(e) {
+      (this.run++, this.show(e));
+    }
+    show(e) {
+      this.xp = e;
+      let { level: t, into: n, span: r } = A(e);
+      (this.badgeBox.dataset.level !== String(t) &&
+        ((this.badgeBox.dataset.level = String(t)),
+        this.badgeBox.replaceChildren(_n(t))),
+        (this.fill.style.width = `${(n / r) * 100}%`),
+        (this.txt.textContent = `${(r - n).toLocaleString()} XP to LV ${t + 1}`));
+    }
+    animateTo(e, t = () => !1, n) {
+      let r = this.xp;
+      if (e <= r) return (this.set(e), Promise.resolve());
+      let i = ++this.run,
+        a = A(r).level,
+        o = Math.min(1400, 450 + (e - r) / 4),
+        s = performance.now();
+      return new Promise((c) => {
+        let l = (u) => {
+          if (i !== this.run) {
+            c();
+            return;
+          }
+          let d = t() || me() ? 1 : Math.min(1, (u - s) / o),
+            f = Math.round(r + (e - r) * (1 - (1 - d) ** 3)),
+            p = A(f);
+          if ((this.show(f), p.level > a)) {
+            for (; a < p.level;) n?.(++a);
+            (ye(this.badgeBox, `lvl-go`), N.ui(`letter`));
+          } else d < 1 && N.ui(`tick`, p.into / p.span);
+          d < 1 ? requestAnimationFrame(l) : c();
+        };
+        requestAnimationFrame(l);
+      });
+    }
+  },
+  bn = class {
+    el;
+    badge;
+    fill;
+    gain;
+    pts;
+    ptsN;
+    off;
+    sum = 0;
+    sumUntil = 0;
+    burst = null;
+    lastFree = -1;
+    flying = 0;
+    constructor(e, t) {
+      ((this.el = k(`div`, `lv-chip off`)),
+        (this.badge = k(`div`, `lv-chip-badge`)));
+      let n = k(`div`, `xp-bar`);
+      ((this.fill = k(`i`, ``)),
+        n.append(this.fill),
+        (this.gain = k(`span`, `xp-gain`)),
+        (this.pts = k(`button`, `lv-pts`)),
+        (this.pts.type = `button`),
+        (this.pts.hidden = !0),
+        this.pts.addEventListener(`click`, t),
+        (this.ptsN = k(`span`, ``)),
+        this.pts.append(be(`star`), this.ptsN),
+        this.el.append(this.badge, n, this.pts, this.gain),
+        e.prepend(this.el),
+        (this.off = ge((e, t) => this.render(t))),
+        this.render([]));
+    }
+    paint() {
+      let e = _e.profile;
+      if (!e || this.burst) return;
+      let { level: t, into: n, span: r } = A(e.xp);
+      (this.badge.dataset.level !== String(t) &&
+        ((this.badge.dataset.level = String(t)),
+        this.badge.replaceChildren(_n(t))),
+        (this.fill.style.width = `${Math.round((n / r) * 100)}%`));
+    }
+    levelUp() {
+      (this.burst && clearTimeout(this.burst),
+        (this.fill.style.width = `100%`),
+        (this.burst = setTimeout(() => {
+          ((this.burst = null),
+            (this.fill.style.transition = `none`),
+            (this.fill.style.width = `0%`),
+            this.fill.offsetWidth,
+            (this.fill.style.transition = ``),
+            this.paint(),
+            ye(this.el, `lvl-burst`),
+            ye(this.badge, `lvl-go`));
+        }, 450)));
+    }
+    showPoints(e) {
+      ((this.pts.hidden = e <= 0),
+        (this.ptsN.textContent = String(e)),
+        this.pts.setAttribute(
+          `aria-label`,
+          `${e} stat point${e === 1 ? `` : `s`} to spend`,
+        ));
+    }
+    flyPoint() {
+      (this.flying++, (this.pts.hidden = !1));
+      let e = Ce(2600),
+        t = new DOMRect(innerWidth / 2 - 30, innerHeight * 0.3 - 30, 60, 60);
+      e.wait(450)
+        .then(() => e.fly(t, this.pts, `star`, 0, 650))
+        .then(() => {
+          (this.flying--,
+            this.showPoints(this.lastFree),
+            ye(this.pts, `pop`),
+            N.ui(`star`));
+        });
+    }
+    render(e) {
+      let t = _e.profile;
+      if ((this.el.classList.toggle(`off`, !t), !t)) return;
+      let { level: n, into: r, span: i } = A(t.xp);
+      (e.some((e) => e.kind === `levelUp`) && this.badge.dataset.level && !me()
+        ? this.levelUp()
+        : this.paint(),
+        (this.el.title = `${(i - r).toLocaleString()} XP to LV ${n + 1}`));
+      let a = ve(t).free,
+        o =
+          this.lastFree >= 0 &&
+          a > this.lastFree &&
+          e.some((e) => e.kind === `goal`);
+      ((this.lastFree = a),
+        o ? this.flyPoint() : this.flying || this.showPoints(a));
+      let s = e.reduce((e, t) => e + (t.kind === `xp` ? t.gained : 0), 0);
+      if (s) {
+        let e = performance.now();
+        ((this.sum = e < this.sumUntil ? this.sum + s : s),
+          (this.sumUntil = e + 1200),
+          (this.gain.textContent = `+${this.sum.toLocaleString()} XP`),
+          this.gain.classList.remove(`on`),
+          this.gain.offsetWidth,
+          this.gain.classList.add(`on`));
+      }
+    }
+    dispose() {
+      (this.off(), this.burst && clearTimeout(this.burst), this.el.remove());
+    }
+  },
+  xn = class {
+    root;
+    toasts;
+    queue = [];
+    busyUntil = 0;
+    holdUntil = 0;
+    hideLive = null;
+    constructor(e) {
+      ((this.root = k(`div`, `announcer`)),
+        (this.toasts = k(`div`, `toasts`)),
+        e.append(this.root, this.toasts));
+      let t = document.querySelector(`#boot:not(.fade):not(.gone)`);
+      if (t) {
+        let e = this.setbackEl(`BAILED!`, `Lost balance!`, 1e3);
+        this.root.append(e);
+        let n = setTimeout(() => e.classList.add(`out`), 700),
+          r = new MutationObserver(() => i()),
+          i = () => {
+            (clearTimeout(n), e.remove(), r.disconnect());
+          };
+        (r.observe(t, { attributes: !0, attributeFilter: [`class`] }),
+          setTimeout(i, 1200));
+      }
+    }
+    big(e, t = `gold`, n, r = 1100, i = !1, a) {
+      this.push({
+        text: e,
+        sub: n,
+        tone: t,
+        ms: r,
+        hold: i,
+        at: performance.now(),
+        icon: a,
+      });
+    }
+    landing(e, t, n, r, i) {
+      this.push({
+        text: e,
+        sub: n,
+        tone: t,
+        ms: r,
+        hold: !1,
+        at: performance.now(),
+        fly: i,
+      });
+    }
+    setback(e, t, n, r, i) {
+      this.push({
+        text: e,
+        tone: `white`,
+        ms: r,
+        hold: !1,
+        at: performance.now(),
+        render: () => this.setbackEl(e, t, n),
+        onShow: i && (() => i(!0)),
+        onHide: i && (() => i(!1)),
+      });
+    }
+    setbackEl(e, t, n) {
+      let r = k(`div`, `shout setback`),
+        i = k(`div`, `setback-word`);
+      i.append(k(`div`, `setback-text`, e));
+      for (let e of [`l`, `r`])
+        for (let t of [`p1`, `p2`, `p3`]) i.append(k(`i`, `puff ${e} ${t}`));
+      let a = k(`div`, `setback-sub`);
+      return (
+        t && a.append(k(`span`, ``, t)),
+        n > 0 && a.append(k(`span`, `lost`, `-${n.toLocaleString()}`)),
+        r.append(i, a),
+        r
+      );
+    }
+    level(e, t, n) {
+      this.push({
+        text: `LEVEL ${e}!`,
+        tone: `gold`,
+        ms: 3e3,
+        hold: !0,
+        at: performance.now(),
+        render: () => {
+          let n = k(`div`, `shout shout-level`),
+            r = k(`div`, `lvl-shield`);
+          r.append(_n(Math.max(1, e - 1)));
+          let i = k(`div`, `lvl-perks`);
+          return (
+            t.forEach((e, t) => {
+              let n = k(`span`, `lvl-perk`, e.toUpperCase());
+              (n.style.setProperty(`--i`, String(t)), i.append(n));
+            }),
+            n.append(
+              k(`div`, `rays`),
+              k(`div`, `lvl-kicker ribbon`, `LEVEL UP!`),
+              r,
+              i,
+            ),
+            setTimeout(() => {
+              (r.replaceChildren(_n(e)), r.classList.add(`turned`, `lvl-go`));
+            }, 380),
+            n
+          );
+        },
+        onShow: n,
+      });
+    }
+    push(e) {
+      for (this.queue.push(e); this.queue.length > 3;) {
+        let e = this.queue.findIndex((e) => !e.hold);
+        this.queue.splice(e < 0 ? 0 : e, 1);
+      }
+    }
+    busy() {
+      return (
+        performance.now() < this.holdUntil || this.queue.some((e) => e.hold)
+      );
+    }
+    toast(e, t = `white`, n = 3200, r) {
+      let i = k(`div`, `toast tone-${t}`, e);
+      for (
+        r && i.prepend(typeof r == `string` ? be(r, `lead`) : r),
+          this.toasts.append(i),
+          setTimeout(() => i.classList.add(`out`), n),
+          setTimeout(() => i.remove(), n + 400);
+        this.toasts.children.length > 4;
+      )
+        this.toasts.firstElementChild?.remove();
+    }
+    update(e) {
+      if (
+        e < this.busyUntil ||
+        ((this.queue = this.queue.filter((t) => t.hold || e - t.at < 1200)),
+        !this.queue.length)
+      )
+        return;
+      let t = this.queue.shift();
+      ((this.busyUntil =
+        e + (t.hold ? t.ms : t.fly ? 650 : Math.min(450, t.ms * 0.4))),
+        t.hold && (this.holdUntil = e + t.ms + 450));
+      for (let e of this.root.querySelectorAll(`.shout:not(.out)`))
+        e.classList.add(`out`);
+      this.hideLive?.();
+      let n;
+      if (t.render) n = t.render();
+      else if (
+        ((n = k(`div`, `shout tone-${t.tone}`)),
+        n.append(k(`div`, `shout-text`, t.text)),
+        t.sub)
+      ) {
+        let e = k(`div`, `shout-sub`, t.sub);
+        (t.icon && e.prepend(be(t.icon, `lead`)), n.append(e));
+      }
+      (this.root.append(n), t.onShow?.());
+      let r = t.onHide,
+        i = (this.hideLive = () => {
+          (r?.(), (r = void 0));
+        });
+      if (t.fly) {
+        let e = t.fly;
+        setTimeout(() => this.flyOff(n, e), 380);
+      }
+      (setTimeout(() => {
+        (n.classList.add(`out`), i());
+      }, t.ms),
+        setTimeout(() => n.remove(), t.ms + 450));
+    }
+    flyOff(e, t) {
+      let n = e.querySelector(`.shout-text`),
+        r = t.to();
+      if (!n || !r || !e.isConnected || me()) {
+        t.land();
+        return;
+      }
+      let i = n.getBoundingClientRect(),
+        a = r.getBoundingClientRect(),
+        o = i.left + i.width / 2,
+        s = i.top + i.height / 2,
+        c = a.left + a.width / 2 - o,
+        l = a.top + a.height / 2 - s,
+        u = k(`div`, `shout-fly`, n.textContent ?? ``);
+      ((u.style.cssText = `left:${o}px;top:${s}px;color:${getComputedStyle(n).color}`),
+        this.root.after(u),
+        (n.style.visibility = `hidden`));
+      let d = () => {
+        (u.remove(), t.land());
+      };
+      u.animate(
+        [
+          { transform: `translate(-50%, -50%) rotate(-4deg)` },
+          {
+            transform: `translate(calc(-50% + ${c * 0.2}px), calc(-50% + ${l * 0.1 - 40}px)) rotate(-4deg) scale(.85)`,
+            offset: 0.3,
+          },
+          {
+            transform: `translate(calc(-50% + ${c}px), calc(-50% + ${l}px)) scale(.35)`,
+            opacity: 0.85,
+          },
+        ],
+        {
+          duration: 560,
+          easing: `cubic-bezier(.55, 0, .75, .35)`,
+          fill: `forwards`,
+        },
+      ).finished.then(d, d);
+    }
+    dispose() {
+      (this.hideLive?.(), this.root.remove(), this.toasts.remove());
+    }
+  };
+function Sn(e) {
+  return e >= 5e4
+    ? { text: `INSANE!!`, tone: `pink` }
+    : e >= 2e4
+      ? { text: `GNARLY!`, tone: `pink` }
+      : e >= 8e3
+        ? { text: `SICK!`, tone: `gold` }
+        : e >= 2500
+          ? { text: `SWEET!`, tone: `mint` }
+          : e >= 600
+            ? { text: `NICE!`, tone: `sky` }
+            : null;
+}
+var Cn = 1300,
+  wn = class {
+    top;
+    bot;
+    timer = 0;
+    constructor(e) {
+      ((this.top = k(`div`, `cine-bar top`)),
+        (this.bot = k(`div`, `cine-bar bot`)),
+        e.append(this.top, this.bot));
+    }
+    show(e) {
+      let t = k(`span`, `cine-tag`);
+      t.append(be(`star`), `SPECIAL`);
+      let n = k(`div`, `cine-text`);
+      (n.append(t, e.toUpperCase()),
+        this.bot.replaceChildren(n),
+        document.body.classList.add(`cine-on`),
+        clearTimeout(this.timer),
+        (this.timer = window.setTimeout(() => this.hide(), Cn)));
+    }
+    hide() {
+      (clearTimeout(this.timer), document.body.classList.remove(`cine-on`));
+    }
+  },
+  Tn = `#FFD21F`,
+  En = `#2FD67B`,
+  Dn = `#FFF6C0`,
+  On = null;
+function kn() {
+  if (On) return On;
+  let e = document.createElement(`canvas`);
+  ((e.width = 4), (e.height = 128));
+  let t = e.getContext(`2d`),
+    n = t.createLinearGradient(0, 128, 0, 0);
+  return (
+    n.addColorStop(0, `rgba(255,255,255,1)`),
+    n.addColorStop(0.3, `rgba(255,255,255,0.55)`),
+    n.addColorStop(1, `rgba(255,255,255,0)`),
+    (t.fillStyle = n),
+    t.fillRect(0, 0, 4, 128),
+    (On = new _(e)),
+    (On.colorSpace = d),
+    On
+  );
+}
+var An = 1.7,
+  jn = class {
+    group = new u();
+    beams = [];
+    beamGeo = new c(1, 1, 1, 24, 1, !0).translate(0, 0.5, 0);
+    ringGeo = new r(0.88, 1, 48).rotateX(-Math.PI / 2);
+    spawn(e, t = !0) {
+      let n = e();
+      if (!n) return;
+      let r = (e) =>
+          new l({
+            map: kn(),
+            color: e,
+            transparent: !0,
+            depthWrite: !1,
+            blending: 2,
+            side: 2,
+            forceSinglePass: !0,
+          }),
+        i = new x(this.beamGeo, r(Tn)),
+        a = new x(this.beamGeo, r(Dn)),
+        o = [Tn, En].map(
+          (e) =>
+            new x(
+              this.ringGeo,
+              new l({
+                color: e,
+                transparent: !0,
+                depthWrite: !1,
+                side: 2,
+                forceSinglePass: !0,
+              }),
+            ),
+        );
+      for (let e of [i, a, ...o]) e.renderOrder = 6;
+      let s = new u();
+      for (
+        s.add(i, a, ...o),
+          s.position.set(n.x, n.y, n.z),
+          this.group.add(s),
+          this.beams.push({
+            pos: e,
+            t: 0,
+            scale: t ? 1 : 0.6,
+            root: s,
+            beam: i,
+            core: a,
+            rings: o,
+          });
+        this.beams.length > 6;
+      )
+        this.drop(0);
+    }
+    update(e) {
+      for (let t = this.beams.length - 1; t >= 0; t--) {
+        let n = this.beams[t];
+        n.t += e;
+        let r = n.t,
+          i = n.scale;
+        if (r >= An) {
+          this.drop(t);
+          continue;
+        }
+        let a = n.pos();
+        a && n.root.position.set(a.x, a.y, a.z);
+        let o = 1 - (1 - Math.min(1, r / 0.2)) ** 3,
+          s = r < 0.5 ? 1 : Math.max(0, 1 - (r - 0.5) / 1.1),
+          c = 9 * i * o,
+          l = 0.6 * i * (0.5 + 0.5 * s) * (1 + 0.2 * Math.max(0, 1 - r / 0.3));
+        (n.beam.scale.set(l, c, l),
+          n.core.scale.set(l * 0.3, c * 1.06, l * 0.3),
+          (n.beam.material.opacity = 0.45 * s),
+          (n.core.material.opacity = 0.8 * s),
+          n.rings.forEach((e, t) => {
+            let n = r - t * 0.12,
+              a = Math.max(0, Math.min(1, n / 0.6)),
+              o = 0.4 + 3.6 * i * (1 - (1 - a) ** 2);
+            ((e.visible = n > 0 && a < 1),
+              e.scale.set(o, 1, o),
+              (e.position.y = 0.06 + t * 0.01),
+              (e.material.opacity = 0.75 * (1 - a)));
+          }));
+      }
+    }
+    drop(e) {
+      let t = this.beams[e];
+      for (let e of [t.beam, t.core, ...t.rings]) e.material.dispose();
+      (t.root.removeFromParent(), this.beams.splice(e, 1));
+    }
+    dispose() {
+      for (; this.beams.length;) this.drop(0);
+      (this.beamGeo.dispose(),
+        this.ringGeo.dispose(),
+        this.group.removeFromParent());
+    }
+  },
+  K = 64,
+  Mn = 0.5,
+  Nn = new y(`#FFFFFF`),
+  Pn = new y(`#6A5F8C`),
+  Fn = new y(`#FFF1A0`),
+  In = new y(`#E09A12`),
+  Ln = class {
+    mesh;
+    scale = 1;
+    geo;
+    aTail;
+    aSpan;
+    aAlpha;
+    peak = new Float32Array(K);
+    life = new Float32Array(K);
+    max = new Float32Array(K);
+    core;
+    rim;
+    next = 0;
+    acc = 0;
+    constructor() {
+      let n = new s(1, 1, 8, 1);
+      ((this.geo = new i()),
+        (this.geo.index = n.index),
+        this.geo.setAttribute(`position`, n.getAttribute(`position`)),
+        this.geo.setAttribute(`uv`, n.getAttribute(`uv`)),
+        (this.aTail = new t(new Float32Array(192), 3).setUsage(e)),
+        (this.aSpan = new t(new Float32Array(256), 4).setUsage(e)),
+        (this.aAlpha = new t(new Float32Array(K), 1).setUsage(e)),
+        this.geo.setAttribute(`iTail`, this.aTail),
+        this.geo.setAttribute(`iSpan`, this.aSpan),
+        this.geo.setAttribute(`iAlpha`, this.aAlpha),
+        (this.geo.instanceCount = K),
+        (this.core = Nn.clone()),
+        (this.rim = Pn.clone()));
+      let r = new f({
+        transparent: !0,
+        depthWrite: !1,
+        blending: 1,
+        uniforms: { uCore: { value: this.core }, uRim: { value: this.rim } },
+        vertexShader: `
+        attribute vec3 iTail; attribute vec4 iSpan; attribute float iAlpha;
+        varying vec2 vUv; varying float vAlpha;
+        void main() {
+          vUv = uv;
+          vec4 a = modelViewMatrix * vec4(iTail, 1.0);
+          vec4 b = modelViewMatrix * vec4(iTail + iSpan.xyz, 1.0);
+          // an end at or behind the camera would smear across the screen
+          vAlpha = (a.z > -0.4 || b.z > -0.4) ? 0.0 : iAlpha;
+          vec2 ax = b.xy / -b.z - a.xy / -a.z;
+          vec2 side = dot(ax, ax) > 1e-10 ? normalize(vec2(-ax.y, ax.x)) : vec2(0.0, 1.0);
+          vec4 p = mix(a, b, uv.x);
+          p.xy += side * (uv.y - 0.5) * iSpan.w * sqrt(sin(3.14159265 * uv.x));
+          gl_Position = projectionMatrix * p;
+        }`,
+        fragmentShader: `
+        uniform vec3 uCore; uniform vec3 uRim;
+        varying vec2 vUv; varying float vAlpha;
+        void main() {
+          float along = sin(3.14159265 * vUv.x);
+          float across = 1.0 - abs(vUv.y - 0.5) * 2.0;
+          float a = vAlpha * along * smoothstep(0.0, 0.2, across);
+          if (a < 0.004) discard;
+          gl_FragColor = vec4(mix(uRim, uCore, smoothstep(0.3, 0.55, across)), a);
+          #include <colorspace_fragment>
+        }`,
+      });
+      ((this.mesh = new x(this.geo, r)),
+        (this.mesh.frustumCulled = !1),
+        (this.mesh.renderOrder = 3));
+    }
+    update(e, t, n, r, i, a, o, s, c) {
+      let l = 1 - Math.exp(-6 * e);
+      (this.core.lerp(c ? Fn : Nn, l), this.rim.lerp(c ? In : Pn, l));
+      let u = Math.hypot(i, a, o);
+      if (s > 0 && u > 1)
+        for (this.acc += e * s * 45 * this.scale; this.acc >= 1;)
+          (--this.acc, this.spawn(t, n, r, i / u, a / u, o / u, u, s));
+      else this.acc = 0;
+      for (let t = 0; t < K; t++) {
+        if (this.life[t] <= 0) {
+          this.aAlpha.setX(t, 0);
+          continue;
+        }
+        this.life[t] = Math.max(0, this.life[t] - e);
+        let n = 1 - this.life[t] / this.max[t];
+        this.aAlpha.setX(t, this.peak[t] * Math.sin(Math.PI * n));
+      }
+      this.aAlpha.needsUpdate = !0;
+    }
+    spawn(e, t, n, r, i, a, o, s) {
+      let c = a,
+        l = -r,
+        u = Math.hypot(c, l);
+      u < 0.2 ? ((c = 1), (l = 0)) : ((c /= u), (l /= u));
+      let d = l * i,
+        f = c * a - l * r,
+        p = -c * i,
+        m = Math.random() * 12,
+        h = (1.6 + Math.random() * 2.8) * (Math.random() < 0.5 ? -1 : 1),
+        g = -0.3 + Math.random() * 2.8,
+        _ = o * (0.07 + Math.random() * 0.05),
+        v = this.next;
+      ((this.next = (this.next + 1) % K),
+        this.aTail.setXYZ(
+          v,
+          e + r * m + c * h + d * g,
+          t + i * m + f * g,
+          n + a * m + l * h + p * g,
+        ),
+        this.aSpan.setXYZW(v, r * _, i * _, a * _, 0.05 + Math.random() * 0.04),
+        (this.aTail.needsUpdate = !0),
+        (this.aSpan.needsUpdate = !0),
+        (this.max[v] = this.life[v] = 0.5 + Math.random() * 0.3),
+        (this.peak[v] = Mn * (0.5 + 0.5 * s) * (0.6 + Math.random() * 0.4)));
+    }
+    dispose() {
+      (this.mesh.removeFromParent(),
+        this.geo.dispose(),
+        this.mesh.material.dispose());
+    }
+  },
+  Rn = [`both`, `target`, `rider`, `off`],
+  zn = (e) => ({
+    marker: e === `both` || e === `target`,
+    glow: e === `both` || e === `rider`,
+  }),
+  Bn = [`#FFFFFF`, `#6EDCA8`, `#FFD45C`, `#FF6B6B`],
+  q = Bn.map((e) => new y(e)),
+  Vn = new y(`#FFFFFF`),
+  Hn = 0.55,
+  Un = 2.2,
+  Wn = 2.4,
+  Gn = 0.25,
+  Kn = 0.25,
+  J = null;
+function qn() {
+  if (J) return J;
+  let e = document.createElement(`canvas`);
+  ((e.width = 512), (e.height = 160));
+  let t = () => {
+    let t = e.getContext(`2d`);
+    (t.clearRect(0, 0, 512, 160),
+      (t.font = `96px "Lilita One", system-ui, sans-serif`),
+      (t.textAlign = `center`),
+      (t.textBaseline = `middle`),
+      (t.lineJoin = `round`),
+      (t.lineWidth = 16),
+      (t.strokeStyle = C),
+      t.strokeText(`LET GO!`, 256, 84),
+      (t.fillStyle = `#FFD45C`),
+      t.fillText(`LET GO!`, 256, 84));
+  };
+  return (
+    t(),
+    (J = new _(e)),
+    (J.colorSpace = d),
+    document.fonts?.load(`96px "Lilita One"`).then(() => {
+      (t(), (J.needsUpdate = !0));
+    }),
+    J
+  );
+}
+var Jn = null;
+function Yn() {
+  if (Jn) return Jn;
+  let e = document.createElement(`canvas`);
+  ((e.width = 2), (e.height = 32));
+  let t = e.getContext(`2d`);
+  return (
+    (t.fillStyle = `#fff`),
+    t.fillRect(0, 0, 2, 18),
+    (Jn = new _(e)),
+    (Jn.wrapT = o),
+    Jn
+  );
+}
+function Y(e, t) {
+  return new l({
+    color: e,
+    transparent: !0,
+    opacity: t,
+    depthWrite: !1,
+    side: 2,
+    forceSinglePass: !0,
+    fog: !1,
+    polygonOffset: !0,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -4,
+  });
+}
+function Xn(e, t, r) {
+  let i = new n(),
+    a = e / 2,
+    o = t / 2;
+  return (
+    i.moveTo(-a, -o + r),
+    i.lineTo(-a, o - r),
+    i.absarc(-a + r, o - r, r, Math.PI, 0, !0),
+    i.lineTo(a, -o + r),
+    i.absarc(a - r, -o + r, r, 0, -Math.PI, !0),
+    i
+  );
+}
+var Zn = 0.28,
+  Qn = new S(0, 1, 0),
+  $n = new h(),
+  X = new S(),
+  er = new S(),
+  Z = new S(),
+  tr = new S(),
+  nr = (e) => 1 - (1 - e) ** 3,
+  rr = (e) => e - Math.PI * Math.round(e / Math.PI),
+  ir = class {
+    root = new u();
+    onCall = () => {};
+    target = new u();
+    spin = new u();
+    ring;
+    rim;
+    spot;
+    spotRim;
+    lane = [];
+    ghost = new u();
+    word;
+    drop;
+    geos = [];
+    mats = [];
+    decals = [];
+    air = -1;
+    shown = !1;
+    call = P.NONE;
+    t = 0;
+    punchT = 9;
+    phase = 0;
+    ttl = 0;
+    ghostA = 0;
+    resolving = -1;
+    resolveKind = `fade`;
+    tinted = null;
+    at = new S();
+    n = new S(0, 1, 0);
+    constructor() {
+      let e = (e) => (this.geos.push(e), e),
+        t = (e) => (this.mats.push(e), e),
+        n = (t) => e(t.rotateX(-Math.PI / 2));
+      ((this.rim = new x(n(new r(0.94, 1.03, 64)), t(Y(C, 0.18)))),
+        (this.ring = new x(n(new r(0.955, 1, 64)), t(Y(q[1], 0.6)))),
+        (this.spot = new x(n(new b(0.5, 40)), t(Y(q[1], 0.14)))),
+        (this.spotRim = new x(n(new r(0.47, 0.51, 40)), t(Y(q[1], 0.55)))));
+      let i = n(new a(Xn(0.06, 0.24, 0.03))),
+        o = t(Y(q[1], 0.45));
+      for (let e of [-1.15, -0.75, 0.75, 1.15]) {
+        let t = new x(i, o);
+        ((t.position.z = e), this.lane.push(t));
+      }
+      let s = Xn(0.24, 0.84, 0.11),
+        u = new x(n(new a(s)), t(Y(Vn, 0.45))),
+        d = Xn(0.3, 0.9, 0.14);
+      d.holes.push(Xn(0.24, 0.84, 0.11));
+      let f = new x(n(new a(d)), t(Y(C, 0.4)));
+      (this.ghost.add(u, f),
+        [
+          this.rim,
+          this.ring,
+          this.spot,
+          this.spotRim,
+          ...this.lane,
+          u,
+          f,
+        ].forEach((e, t) => {
+          e.renderOrder = 3 + t * 0.01;
+        }),
+        this.spin.add(this.spot, this.spotRim, ...this.lane, this.ghost),
+        this.target.add(this.rim, this.ring, this.spin));
+      let p = t(
+        new l({
+          color: q[1],
+          alphaMap: Yn(),
+          transparent: !0,
+          opacity: 0.35,
+          depthWrite: !1,
+          fog: !1,
+        }),
+      );
+      ((this.drop = new x(e(new c(1, 1, 1, 6, 1, !0).translate(0, 0.5, 0)), p)),
+        (this.drop.renderOrder = 3),
+        (this.drop.visible = !1));
+      for (let e of this.mats)
+        e instanceof l && this.decals.push({ mat: e, base: e.opacity });
+      ((this.word = new v(
+        t(
+          new re({
+            map: qn(),
+            transparent: !0,
+            depthTest: !1,
+            depthWrite: !1,
+            sizeAttenuation: !1,
+            fog: !1,
+          }),
+        ),
+      )),
+        (this.word.renderOrder = 7),
+        (this.target.visible = !1),
+        (this.word.visible = !1),
+        this.root.add(this.target, this.word, this.drop));
+    }
+    resolve(e) {
+      this.shown &&
+        ((this.shown = !1),
+        (this.resolving = 0),
+        (this.resolveKind = e ? `clean` : `bail`));
+    }
+    update(e, t, n, r, i) {
+      let a = !!t && t.call !== P.NONE && (r.marker || r.glow);
+      (a &&
+        t.air !== this.air &&
+        ((this.air = t.air), (this.shown = !1), (this.resolving = -1)),
+        a &&
+          !this.shown &&
+          this.resolving < 0 &&
+          (t.stake || t.call !== P.CLEAN) &&
+          ((this.shown = !0),
+          (this.t = 0),
+          (this.phase = 0),
+          (this.punchT = 9),
+          (this.call = P.NONE),
+          (this.ttl = t.ticks * ce)),
+        this.shown &&
+          !a &&
+          ((this.shown = !1),
+          (this.resolving = 0),
+          (this.resolveKind = `fade`)),
+        this.shown
+          ? this.show(e, t, n, r.marker, r.glow, i)
+          : this.resolving >= 0
+            ? this.fadeOut(e, i)
+            : ((this.target.visible = !1),
+              (this.word.visible = !1),
+              (this.drop.visible = !1),
+              this.tint(null, 0)));
+    }
+    show(e, t, n, r, i, a) {
+      if (t.call !== this.call) {
+        let e = this.call;
+        ((this.call = t.call),
+          e !== P.NONE && (this.punchT = 0),
+          this.paint(q[t.call]),
+          this.onCall(e, t.call, t));
+      }
+      ((this.t += e), (this.punchT += e));
+      let o = t.ticks * ce;
+      this.ttl = Math.abs(this.ttl - o) > 0.05 ? o : Math.max(0, this.ttl - e);
+      let s = t.call !== P.CLEAN,
+        c = 1 - Math.min(1, this.ttl);
+      this.phase += e * Math.PI * 2 * (1.2 + 2.5 * c);
+      let l = s && !a ? 0.5 + 0.5 * Math.sin(this.phase) : 1;
+      if (((this.target.visible = r), r)) {
+        (this.target.scale.setScalar(1),
+          this.at.set(t.x, t.y, t.z),
+          this.n.set(t.nx, t.ny, t.nz));
+        let n = t.tx !== 0 || t.ty !== 0 || t.tz !== 0;
+        (Z.set(n ? t.tx : t.fx, n ? t.ty : t.fy, n ? t.tz : t.fz),
+          X.crossVectors(this.n, Z).normalize(),
+          Z.crossVectors(X, this.n),
+          $n.makeBasis(X, er.copy(this.n), Z),
+          this.target.quaternion.setFromRotationMatrix($n),
+          this.target.position.copy(this.at).addScaledVector(this.n, 0.04));
+        for (let e of this.lane) e.visible = n;
+        let r = n
+          ? Math.atan2(
+              t.fx * X.x + t.fy * X.y + t.fz * X.z,
+              t.fx * Z.x + t.fy * Z.y + t.fz * Z.z,
+            )
+          : 0;
+        ((this.ghostA += rr(r - this.ghostA) * (a ? 1 : 1 - Math.exp(-25 * e))),
+          (this.ghost.rotation.y = this.ghostA));
+        let i = a ? 1 : nr(Math.min(1, this.t / Gn)),
+          o = a ? 1 : 1 + 0.08 * Math.exp(-this.punchT * 12),
+          c = Math.min(Wn, Hn + Un * this.ttl),
+          u = i * o;
+        (this.ring.scale.setScalar(c * u),
+          this.rim.scale.setScalar(c * u),
+          this.spin.scale.setScalar(u),
+          this.opacity(i * (s ? 0.8 + 0.2 * l : 1)));
+      }
+      if (((this.drop.visible = r && !!n), this.drop.visible)) {
+        tr.copy(n.root.position).sub(this.target.position);
+        let e = tr.length() - 0.25;
+        e > 0.3
+          ? (this.drop.position.copy(this.target.position),
+            this.drop.quaternion.setFromUnitVectors(Qn, tr.normalize()),
+            this.drop.scale.set(0.018, e, 0.018),
+            this.drop.material.alphaMap.repeat.set(1, e / Zn))
+          : (this.drop.visible = !1);
+      }
+      let u = i && (s || !r) ? t.call : P.NONE;
+      if (
+        (u === P.NONE
+          ? this.tint(null, 0)
+          : this.tint(n, s ? (a ? 0.15 : 0.1 + 0.1 * l) : 0.1, Bn[u]),
+        (this.word.visible = t.call === P.LET_GO),
+        this.word.visible)
+      ) {
+        (i && n
+          ? (n.headAnchor(tr).y -= 0.25)
+          : tr.copy(this.at).addScaledVector(this.n, 0.9),
+          this.word.position.copy(tr));
+        let e = a ? 1 : nr(Math.min(1, Math.min(this.t, this.punchT) / Gn));
+        (this.word.scale.set(0.22 * e, 0.069 * e, 1),
+          (this.word.material.opacity = 0.9 * e));
+      }
+    }
+    fadeOut(e, t) {
+      (this.tint(null, 0),
+        (this.word.visible = !1),
+        (this.drop.visible = !1),
+        (this.resolving += e));
+      let n = Math.min(
+        1,
+        this.resolving / (this.resolveKind === `fade` ? 0.15 : Kn),
+      );
+      if (n >= 1 || !this.target.visible) {
+        ((this.resolving = -1),
+          (this.target.visible = !1),
+          this.target.scale.setScalar(1));
+        return;
+      }
+      if (this.resolveKind === `clean` && !t) {
+        let e = Hn + 0.6 * Math.sqrt(n);
+        (this.ring.scale.setScalar(e),
+          this.rim.scale.setScalar(e),
+          this.spin.scale.setScalar(1 + 0.1 * n));
+      } else
+        this.resolveKind === `bail` &&
+          !t &&
+          this.target.scale.setScalar(1 - 0.2 * n);
+      this.opacity(1 - n);
+    }
+    paint(e) {
+      for (let t of [
+        this.ring,
+        this.spot,
+        this.spotRim,
+        this.lane[0],
+        this.drop,
+      ])
+        t.material.color.copy(e);
+    }
+    opacity(e) {
+      for (let t of this.decals) t.mat.opacity = t.base * e;
+    }
+    tint(e, t, n) {
+      (this.tinted && this.tinted !== e && this.tinted.setTint?.(null, 0),
+        (this.tinted = e && t > 0 ? e : null),
+        e?.setTint?.(n ?? null, t));
+    }
+    dispose() {
+      (this.tint(null, 0), this.root.removeFromParent());
+      for (let e of this.geos) e.dispose();
+      for (let e of this.mats) e.dispose();
+    }
+  },
+  Q = [`#E9E1F2`, `#D8CFEA`, `#F3EEF8`],
+  ar = [`#D3C9E2`, `#C2B7D5`, `#E2DAEC`],
+  or = [`#9A90AE`, `#857B9A`, `#B1A8C2`],
+  sr = [`#FFE27A`, `#FFB347`, `#FFF6C0`],
+  cr = [`#FFD21F`, `#FFF1A0`, `#FFFFFF`],
+  lr = [`#FF3D7F`, `#FFD21F`, `#2FD67B`, `#1FC7E8`, `#A55BFF`, `#FF8A1F`],
+  ur = [`#1FC7E8`, `#FF5A4F`, `#FFFFFF`, `#FFD21F`],
+  dr = [`#6EDCA8`, `#C9F3E0`, `#FFFFFF`],
+  $ = { x: 0, y: 0, z: 0 },
+  fr =
+    typeof location > `u`
+      ? void 0
+      : Rn.find((e) => e === new URLSearchParams(location.search).get(`cue`)),
+  pr = fr ? zn(fr) : null,
+  mr = { marker: !0, glow: !1 },
+  hr = (je.speed * je.cycle) / 2,
+  gr = (Me.speed * Me.cycle) / 2,
+  _r = new (class {
+    session = null;
+    watch = !1;
+    announcer = null;
+    airOutTold = !1;
+    particles = null;
+    skins = null;
+    lastPushAt = 0;
+    sparkAcc = 0;
+    stepAcc = 0;
+    planted = !1;
+    crouch = 0;
+    mode = E.GROUND;
+    comboHasSpecial = !1;
+    beams = null;
+    wind = null;
+    skidding = !1;
+    skidAcc = 0;
+    skidSide = 1;
+    dragAcc = 0;
+    lastFlat = 0;
+    decel = 0;
+    guide = null;
+    edge = null;
+    lit = !1;
+    cine = null;
+    pendingLevel = null;
+    bind(e, t, n = !1) {
+      (this.unbind(),
+        (this.session = e),
+        (this.watch = n),
+        (this.announcer = t),
+        (this.particles = new Le()),
+        (this.particles.scale = e.stage.tier.particles),
+        e.stage.scene.add(this.particles.mesh),
+        (this.skins = new on(this.particles)),
+        e.stage.scene.add(this.skins.root),
+        (this.beams = new jn()),
+        e.stage.scene.add(this.beams.group),
+        (this.wind = new Ln()),
+        (this.wind.scale = e.stage.tier.particles),
+        e.stage.scene.add(this.wind.mesh),
+        (this.guide = new ir()),
+        (this.guide.onCall = (e, t, n) => this.landingCall(e, t, n)),
+        e.stage.scene.add(this.guide.root),
+        (e.cam.shakeEnabled = M.shake && !M.reducedMotion),
+        (e.onRemoteMode = (e, t, n, r) =>
+          this.remoteMode(e, t, n, r.x, r.y, r.z)),
+        (Ae.bump = (e, t, n, r, i, a) => this.bailBump(e, t, n, r, i, a)),
+        this.edge ||
+          ((this.edge = document.createElement(`div`)),
+          (this.edge.className = `special-edge`),
+          document.getElementById(`ui`)?.prepend(this.edge)));
+      let r = document.getElementById(`ui`);
+      !this.cine && r && (this.cine = new wn(r));
+    }
+    remoteMode(e, t, n, r, i, a) {
+      let o = this.particles;
+      o &&
+        (n === E.GROUND && t !== E.BAIL && t !== E.WALK
+          ? o.emit({
+              x: r,
+              y: i + 0.05,
+              z: a,
+              count: 8,
+              color: Q,
+              speed: 2,
+              size: [0.2, 0.6],
+              life: [0.3, 0.7],
+              drag: 3,
+              up: 0.35,
+            })
+          : n === E.GRIND
+            ? o.emit({
+                x: r,
+                y: i + 0.05,
+                z: a,
+                count: 10,
+                color: this.skins?.skinOf(e) === `grindula` ? St : sr,
+                speed: 4,
+                size: [0.06, 0.02],
+                life: [0.2, 0.4],
+                gravity: 9,
+                shape: 3,
+              })
+            : n === E.BAIL
+              ? o.emit({
+                  x: r,
+                  y: i + 0.2,
+                  z: a,
+                  count: 14,
+                  color: Q,
+                  speed: 2.5,
+                  size: [0.25, 0.7],
+                  life: [0.5, 0.9],
+                  drag: 2.5,
+                  up: 0.6,
+                })
+              : (n === E.WALK || t === E.WALK) &&
+                o.emit({
+                  x: r,
+                  y: i + 0.05,
+                  z: a,
+                  count: 4,
+                  color: Q,
+                  speed: 0.8,
+                  size: [0.15, 0.35],
+                  life: [0.3, 0.5],
+                  drag: 3,
+                  up: 0.3,
+                }));
+    }
+    bailBump(e, t, n, r, i, a) {
+      let o = this.particles;
+      if (o) {
+        if (i === `pop`) {
+          o.emit({
+            x: e,
+            y: t + 0.1,
+            z: n,
+            count: 10,
+            color: Q,
+            speed: 2,
+            size: [0.2, 0.6],
+            life: [0.3, 0.6],
+            drag: 3,
+            up: 0.4,
+          });
+          return;
+        }
+        (o.emit({
+          x: e,
+          y: t + 0.03,
+          z: n,
+          count: 2 + Math.round(r * (i === `body` ? 9 : 5)),
+          color: Q,
+          speed: 1 + r * 2,
+          size: [0.15, 0.5],
+          life: [0.3, 0.6],
+          drag: 3,
+          up: 0.3,
+        }),
+          a === this.session?.localView &&
+            (i === `board` ? N.clatter(r) : N.slam(r)));
+      }
+    }
+    unbind() {
+      (this.fireLevel(),
+        (Ae.bump = null),
+        this.particles?.dispose(),
+        (this.particles = null),
+        this.skins?.dispose(),
+        (this.skins = null),
+        this.beams?.dispose(),
+        (this.beams = null),
+        this.wind?.dispose(),
+        (this.wind = null),
+        this.guide?.dispose(),
+        (this.guide = null),
+        this.setLit(!1),
+        this.cine?.hide(),
+        (this.session = null),
+        (this.watch = !1),
+        (this.comboHasSpecial = !1),
+        (this.skidding = !1),
+        (this.lastFlat = this.decel = 0),
+        N.silence());
+    }
+    enterPark(e) {
+      oe(
+        () => import(`./music-D6fpJLig.js`).then((e) => e.startMusic()),
+        __vite__mapDeps([0, 1, 2, 3, 4]),
+      );
+    }
+    update(e) {
+      let t = this.session;
+      if (!t) return;
+      (this.particles && (this.particles.scale = t.stage.tier.particles),
+        this.wind && (this.wind.scale = t.stage.tier.particles),
+        this.particles?.update(e),
+        this.beams?.update(e));
+      let n = this.skins;
+      if (n) {
+        let r = t.stage.camera.position;
+        (n.update(e, r),
+          t.stage.tier.skinFx &&
+            t.eachRider?.((t, i, a) => n.ride(t, a, i, e, r.x, r.z)),
+          n.sweep());
+      }
+      let r = t.local.state;
+      ((this.crouch = r.crouch),
+        (this.mode = r.mode),
+        this.pendingLevel &&
+          (r.mode === E.GROUND ||
+            r.mode === E.WALK ||
+            performance.now() - this.pendingLevel.at > 1500) &&
+          this.fireLevel());
+      let i = Math.hypot(r.vx, r.vy, r.vz),
+        a = r.mode === E.GROUND || r.mode === E.MANUAL,
+        o = r.mode === E.GRIND,
+        s = o && w[r.trickId]?.kind === T.SLIDE,
+        c = r.mode === E.GROUND && r.xfer & ue.SLIDE ? Math.min(1, i / 14) : 0,
+        l = c > 0 && !this.skidding;
+      if (
+        (l && N.skidStart(i),
+        (this.skidding = c > 0),
+        N.drive(i, a, o, s, o ? (t.rails.segs[r.rail]?.kind ?? -1) : -1, c),
+        N.wallride(
+          r.mode === E.WALLRIDE,
+          i,
+          r.vy,
+          Math.min(1, (r.simTick - r.modeTick) / 36),
+        ),
+        this.setLit(r.special >= 200),
+        this.wind)
+      ) {
+        let n = r.mode === E.AIR ? Math.min(1, Math.max(0, -r.vy - 7) / 6) : 0,
+          a = M.reducedMotion
+            ? 0
+            : Math.max(Math.min(1, Math.max(0, i - 12) / 4.5), n),
+          o = t.localFrame;
+        this.wind.update(e, o.x, o.y + 0.8, o.z, r.vx, r.vy, r.vz, a, this.lit);
+      }
+      if (this.guide) {
+        let n = M.tutorial >= 0;
+        ((mr.marker = pr?.marker ?? (n || M.landingMarker)),
+          (mr.glow = pr?.glow ?? (n || M.landingGlow)),
+          this.guide.update(
+            e,
+            this.watch ? null : (t.local.landing?.() ?? null),
+            t.localView,
+            mr,
+            M.reducedMotion,
+          ));
+      }
+      if (o && this.particles) {
+        this.sparkAcc += e * (8 + i * 2);
+        let n = t.localFrame;
+        for (; this.sparkAcc > 1;) {
+          (--this.sparkAcc, de(n.yaw, n.ux, n.uy, n.uz, $));
+          let e = r.railDir >= 0 ? -1 : 1;
+          this.particles.emit({
+            x: n.x,
+            y: n.y + 0.05,
+            z: n.z,
+            count: 2,
+            color: s ? Q : this.sparks(n),
+            speed: s ? 1.5 : 4,
+            dir: [r.vx * 0.05 * e * -1, 0.6, r.vz * 0.05 * e * -1],
+            spread: 0.8,
+            size: s ? [0.12, 0.3] : [0.05, 0.02],
+            life: [0.2, 0.45],
+            gravity: s ? 0 : 9,
+            drag: 1.5,
+            shape: s ? 0 : 3,
+          });
+        }
+      }
+      if (
+        (this.brakeDust(e, t, l, c > 0),
+        r.mode === E.GROUND &&
+          i > 1 &&
+          i < 8 &&
+          performance.now() - this.lastPushAt > 650)
+      ) {
+        this.lastPushAt = performance.now();
+        let e = t.localFrame;
+        (this.particles?.emit({
+          x: e.x,
+          y: 0.05 + e.y,
+          z: e.z,
+          count: 3,
+          color: Q,
+          speed: 0.6,
+          size: [0.15, 0.4],
+          life: [0.3, 0.6],
+          drag: 3,
+          up: 0.3,
+        }),
+          N.push());
+      }
+      if (r.mode === E.WALK && r.vy === 0) {
+        let n = t.localFrame;
+        de(n.yaw, n.ux, n.uy, n.uz, $);
+        let i = r.vx * $.x + r.vz * $.z < 0 ? gr : hr;
+        ((this.stepAcc += Math.hypot(r.vx, r.vz) * e),
+          this.stepAcc >= i && ((this.stepAcc -= i), N.step()));
+      } else this.stepAcc = 0;
+      let u = t.localFrame.planted;
+      (u && !this.planted && N.step(), (this.planted = u));
+    }
+    brakeDust(e, t, n, r) {
+      let i = this.particles,
+        a = t.local.state,
+        o = Math.hypot(a.vx, a.vz),
+        s = e > 0 ? (o - this.lastFlat) / e : 0;
+      if (
+        ((this.decel += (s - this.decel) * Math.min(1, e * 6)),
+        (this.lastFlat = o),
+        !i || a.mode !== E.GROUND || o < 0.8)
+      ) {
+        this.skidAcc = this.dragAcc = 0;
+        return;
+      }
+      let c = t.localFrame,
+        l = a.vx / o,
+        u = a.vz / o;
+      if (
+        (n &&
+          i.emit({
+            x: c.x,
+            y: c.y + 0.05,
+            z: c.z,
+            count: 10,
+            color: ar,
+            speed: 2.2,
+            dir: [l * 0.8, 0.2, u * 0.8],
+            size: [0.2, 0.6],
+            life: [0.4, 0.8],
+            drag: 3,
+            up: 0.5,
+          }),
+        r)
+      ) {
+        this.skidAcc += e * (40 + o * 5);
+        let t = Math.floor(this.skidAcc);
+        this.skidAcc -= t;
+        for (let n = 0; n < t; n++) {
+          let r = o * e * (n / t),
+            a = (this.skidSide = -this.skidSide) * 0.2,
+            s = c.x - l * r - u * a,
+            d = c.z - u * r + l * a;
+          (i.emit({
+            x: s,
+            y: c.y + 0.04,
+            z: d,
+            count: 1,
+            color: ar,
+            speed: 1.6,
+            dir: [l * 1.2, 0.3, u * 1.2],
+            spread: 0.7,
+            size: [0.12, 0.45],
+            life: [0.35, 0.7],
+            drag: 3,
+            up: 0.4,
+          }),
+            Math.random() < 0.3 && this.grit(i, s, c.y, d, l, u));
+        }
+      } else if (this.decel < -6 && a.uy > 0.97 && a.simTick - a.modeTick > 6) {
+        (de(c.yaw, c.ux, c.uy, c.uz, $), (this.dragAcc += e * (24 + o * 3)));
+        let t = Math.floor(this.dragAcc);
+        this.dragAcc -= t;
+        for (let n = 0; n < t; n++) {
+          let r = o * e * (n / t),
+            a = c.x - $.x * 0.36 - l * r,
+            s = c.z - $.z * 0.36 - u * r;
+          (i.emit({
+            x: a,
+            y: c.y + 0.03,
+            z: s,
+            count: 1,
+            color: ar,
+            speed: 0.8,
+            dir: [l * 0.6, 0.2, u * 0.6],
+            spread: 0.6,
+            size: [0.15, 0.5],
+            life: [0.35, 0.7],
+            drag: 3,
+            up: 0.3,
+          }),
+            Math.random() < 0.5 && this.grit(i, a, c.y, s, l, u));
+        }
+      }
+    }
+    grit(e, t, n, r, i, a) {
+      e.emit({
+        x: t,
+        y: n + 0.04,
+        z: r,
+        count: 1,
+        color: or,
+        speed: 1.4,
+        dir: [i * 0.4, 1.1, a * 0.4],
+        spread: 0.6,
+        size: [0.05, 0.03],
+        life: [0.2, 0.35],
+        gravity: 9,
+        drag: 1,
+        shape: 1,
+      });
+    }
+    get haptics() {
+      return M.haptics && !this.watch;
+    }
+    scuff(e) {
+      (N.skidStart(Math.hypot(e.vx, e.vy, e.vz)),
+        this.particles?.emit({
+          x: e.x,
+          y: e.y + 0.05,
+          z: e.z,
+          count: 10,
+          color: Q,
+          speed: 2,
+          size: [0.2, 0.55],
+          life: [0.3, 0.6],
+          drag: 3,
+          up: 0.3,
+        }));
+    }
+    sparks(e) {
+      return this.skins?.skinAt(e) === `grindula` ? St : sr;
+    }
+    simEvents(e, t, n) {
+      if (n !== this.session || !e.flags) return;
+      let r = this.particles,
+        i = n.localFrame,
+        a = n.cam;
+      if (e.flags & D.OLLIE) {
+        let e = this.mode,
+          n = e === E.GRIND || e === E.WALLRIDE ? 0 : e === E.LIP ? 0.5 : 1;
+        (N.pop(Math.min(1, this.crouch / 12), Math.hypot(t.vx, t.vz), n),
+          r?.emit({
+            x: t.x,
+            y: t.y + 0.05,
+            z: t.z,
+            count: 6,
+            color: Q,
+            speed: 1.2,
+            size: [0.15, 0.45],
+            life: [0.3, 0.6],
+            drag: 3,
+            up: 0.4,
+          }));
+      }
+      if (e.flags & D.TRICK) {
+        t.comboMult >= 67 && t.comboMult - e.tricks.length < 67 && N.sixSeven();
+        for (let o of e.tricks) {
+          let e = w[o & 255];
+          e &&
+            ((e.kind === T.FLIP ||
+              e.kind === T.GRAB ||
+              e.kind === T.SPECIAL_AIR) &&
+              N.whoosh(e.kind === T.SPECIAL_AIR),
+            e.kind === T.PIVOT && t.mode === E.GRIND
+              ? (N.grindOn(
+                  n.rails.segs[t.rail]?.kind ?? -1,
+                  w[t.trickId]?.kind === T.SLIDE,
+                  Math.hypot(t.vx, t.vy, t.vz),
+                ),
+                r?.emit({
+                  x: t.x,
+                  y: t.y + 0.05,
+                  z: t.z,
+                  count: 10,
+                  color: this.sparks(i),
+                  speed: 4,
+                  spread: 1,
+                  size: [0.06, 0.02],
+                  life: [0.2, 0.4],
+                  gravity: 9,
+                  shape: 3,
+                }))
+              : (e.kind === T.REVERT || e.kind === T.PIVOT) && this.scuff(t),
+            (e.kind === T.SPECIAL_AIR ||
+              e.kind === T.SPECIAL_GRIND ||
+              e.kind === T.SPECIAL_MANUAL) &&
+              ((this.comboHasSpecial = !0),
+              N.ui(`specialTrick`),
+              this.cine?.show(e.name),
+              this.flare(),
+              r?.emit({
+                x: t.x,
+                y: t.y + 0.8,
+                z: t.z,
+                count: 26,
+                color: lr,
+                speed: 5,
+                size: [0.12, 0.08],
+                life: [0.6, 1.1],
+                gravity: 6,
+                drag: 1.2,
+                shape: 2,
+              }),
+              a.kickFov(6)));
+        }
+      }
+      if (
+        (e.flags & D.TURN && this.scuff(t),
+        e.flags & D.GRIND_START &&
+          (N.grindOn(
+            n.rails.segs[e.rail]?.kind ?? -1,
+            w[t.trickId]?.kind === T.SLIDE,
+            Math.hypot(t.vx, t.vy, t.vz),
+          ),
+          r?.emit({
+            x: t.x,
+            y: t.y + 0.05,
+            z: t.z,
+            count: 14,
+            color: this.sparks(i),
+            speed: 5,
+            spread: 1,
+            size: [0.06, 0.02],
+            life: [0.2, 0.4],
+            gravity: 9,
+            shape: 3,
+          }),
+          a.addTrauma(0.12)),
+        e.flags & D.LIP && N.clank(),
+        e.flags & D.BOARD &&
+          (N.clatter(0.3),
+          r?.emit({
+            x: i.x,
+            y: i.y + 0.05,
+            z: i.z,
+            count: 5,
+            color: Q,
+            speed: 0.8,
+            size: [0.15, 0.35],
+            life: [0.3, 0.5],
+            drag: 3,
+            up: 0.3,
+          })),
+        e.flags & (D.LAND | D.BAIL) && this.guide?.resolve(!(e.flags & D.BAIL)),
+        e.flags & D.LAND)
+      ) {
+        let t = Math.min(1, e.impact / 12);
+        if (
+          (N.land(e.impact),
+          r?.emit({
+            x: i.x,
+            y: i.y + 0.05,
+            z: i.z,
+            count: 6 + Math.round(t * 12),
+            color: Q,
+            speed: 1.5 + t * 3,
+            size: [0.2, 0.7],
+            life: [0.35, 0.8],
+            drag: 3,
+            up: 0.35,
+          }),
+          a.addTrauma(0.08 + t * 0.25),
+          this.haptics && j.haptic(12 + Math.round(t * 25)),
+          e.grade)
+        ) {
+          n.localView.landGrade?.(e.grade);
+          let t = e.grade === pe.PERFECT;
+          (N.ui(t ? `perfect` : `sloppy`),
+            n.hud?.grade(
+              t ? `perfect` : `sloppy`,
+              t ? `PERFECT +${se.toLocaleString()}` : `SLOPPY -500`,
+              t ? se : -500,
+            ),
+            t &&
+              r?.emit({
+                x: i.x,
+                y: i.y + 0.1,
+                z: i.z,
+                count: 10,
+                color: cr,
+                speed: 2.6,
+                up: 0.8,
+                size: [0.1, 0.04],
+                life: [0.3, 0.55],
+                gravity: 5,
+                drag: 2,
+                shape: 2,
+              }));
+        }
+      }
+      if (e.flags & D.BAIL) {
+        let i = e.comboScore;
+        (N.bail(
+          Math.min(
+            1,
+            Math.max(e.impact / 12, Math.hypot(t.vx, t.vy, t.vz) / 14),
+          ),
+          i,
+        ),
+          r?.emit({
+            x: t.x,
+            y: t.y + 0.2,
+            z: t.z,
+            count: 20,
+            color: Q,
+            speed: 3,
+            size: [0.25, 0.8],
+            life: [0.5, 1],
+            drag: 2.5,
+            up: 0.6,
+          }),
+          a.addTrauma(0.45));
+        let o =
+          [
+            ``,
+            `Still grabbing!`,
+            `Mid-flip!`,
+            `Sketchy landing!`,
+            `Crooked landing!`,
+            `Lost balance!`,
+          ][e.bailWhy] ?? ``;
+        (this.announcer?.setback(`BAILED!`, o, i, 1100, (e) =>
+          n.stage.drain(e),
+        ),
+          this.haptics && j.haptic([30, 40, 60]));
+      }
+      if (
+        (e.flags & D.WALL && e.impact > 3 && N.wall(e.impact),
+        e.flags & D.FLAIL &&
+          (r?.emit({
+            x: i.x,
+            y: i.y + 0.3,
+            z: i.z,
+            count: 14,
+            color: Q,
+            speed: 2.5,
+            size: [0.2, 0.6],
+            life: [0.4, 0.7],
+            drag: 2.5,
+            up: 0.5,
+          }),
+          a.addTrauma(0.3),
+          this.haptics && (O(0.5, 0.7, 140), j.haptic([25, 20, 35]))),
+        e.flags & D.SPECIAL_READY && this.specialReady(),
+        e.flags & D.WALLRIDE && N.wallOn(Math.hypot(t.vx, t.vy, t.vz)),
+        e.flags & D.RESPAWN)
+      ) {
+        a.inited = !1;
+        let t =
+          e.respawnWhy === fe.GRASS
+            ? `KEEP OFF THE GRASS!`
+            : e.respawnWhy === fe.OUT
+              ? `OUT OF BOUNDS!`
+              : ``;
+        if (t) {
+          let r = e.flags & D.COMBO_LOST ? e.comboScore : 0;
+          (this.announcer?.setback(
+            t,
+            r > 0 ? `` : `back to the start`,
+            r,
+            1300,
+            (e) => n.stage.drain(e),
+          ),
+            N.ui(e.respawnWhy === fe.GRASS ? `grass` : `queueOut`),
+            n.cut());
+        }
+      }
+      (e.flags & (D.COMBO_LOST | D.RESPAWN) &&
+        ((this.comboHasSpecial = !1), this.cine?.hide()),
+        !this.watch &&
+          !M.airOut &&
+          e.flags & D.LAUNCH &&
+          t.vert &&
+          t.y < 1 &&
+          !this.airOutTold &&
+          ((this.airOutTold = !0),
+          this.announcer?.toast(
+            `Tap ${Se(`ollie`)} on the way up to air out of the pool`,
+            `mint`,
+            4200,
+          )),
+        e.flags & D.TRANSFER &&
+          (N.pop(0.5, Math.hypot(t.vx, t.vz), 0.5),
+          !this.watch &&
+            !M.airOut &&
+            t.xfer & ue.OUT &&
+            ((M.airOut = !0), Te())));
+    }
+    landingCall(e, t, n) {
+      t === P.LET_GO
+        ? (N.ui(`landWarn`, 1), this.haptics && O(0.1, 0.2, 50))
+        : t === P.BAIL && n.ticks <= 15
+          ? (N.ui(`landWarn`, 0), this.haptics && O(0.2, 0.12, 70))
+          : t === P.CLEAN &&
+            e !== P.NONE &&
+            (N.ui(`landOk`),
+            this.particles?.emit({
+              x: n.x,
+              y: n.y + 0.1,
+              z: n.z,
+              count: 6,
+              color: dr,
+              speed: 2,
+              up: 0.6,
+              size: [0.09, 0.04],
+              life: [0.25, 0.45],
+              gravity: 5,
+              drag: 2.5,
+              shape: 2,
+            }));
+    }
+    specialReady() {
+      (N.ui(`special`),
+        this.session?.hud?.specialReady(),
+        this.setLit(!0),
+        this.haptics && (O(0.5, 0.8, 180), j.haptic([25, 30, 45])));
+      let e = this.session;
+      if (!e) return;
+      let t = e.localFrame,
+        n = this.particles;
+      (M.reducedMotion || (e.cam.kickFov(6), e.cam.addTrauma(0.15)),
+        n?.emit({
+          x: t.x,
+          y: t.y + 0.9,
+          z: t.z,
+          count: 36,
+          color: sr,
+          speed: 7,
+          size: [0.08, 0.03],
+          life: [0.4, 0.8],
+          gravity: 3,
+          drag: 1.2,
+          shape: 3,
+        }));
+      for (let e = 0; e < 12; e++) {
+        let r = (e * Math.PI) / 6;
+        n?.emit({
+          x: t.x,
+          y: t.y + 0.3,
+          z: t.z,
+          count: 2,
+          color: cr,
+          speed: 5,
+          dir: [Math.cos(r), 0.25, Math.sin(r)],
+          spread: 0.15,
+          up: 0.2,
+          size: [0.14, 0.06],
+          life: [0.4, 0.7],
+          gravity: 2,
+          drag: 2,
+          shape: 2,
+        });
+      }
+    }
+    flare() {
+      let e = this.edge;
+      e &&
+        this.lit &&
+        (e.classList.remove(`ignite`),
+        e.offsetWidth,
+        e.classList.add(`ignite`));
+    }
+    setLit(e) {
+      if (e === this.lit) return;
+      this.lit = e;
+      let t = this.edge;
+      t &&
+        (t.classList.toggle(`on`, e),
+        t.classList.remove(`ignite`),
+        e && (t.offsetWidth, t.classList.add(`ignite`)));
+    }
+    landed(e) {
+      (N.ui(this.comboHasSpecial ? `specialLand` : `combo`, e),
+        (this.comboHasSpecial = !1));
+      let t = this.session;
+      if (!t) return;
+      let n = t.localFrame;
+      (e >= 2500 && t.cam.kickFov(Math.min(8, 2 + e / 5e3)),
+        e >= 8e3 &&
+          this.particles?.emit({
+            x: n.x,
+            y: n.y + 1.2,
+            z: n.z,
+            count: 40,
+            color: lr,
+            speed: 6,
+            size: [0.14, 0.1],
+            life: [0.8, 1.4],
+            gravity: 5,
+            drag: 1,
+            shape: 2,
+          }));
+    }
+    paint(e, t, n, r) {
+      (this.particles?.emit({
+        x: e,
+        y: 0.5,
+        z: t,
+        count: r ? 40 : 20,
+        color: [n, n, `#FFFFFF`],
+        speed: 5,
+        size: [0.25, 0.1],
+        life: [0.5, 1],
+        gravity: 8,
+        drag: 1.5,
+        shape: 1,
+      }),
+        r && N.ui(`letter`));
+    }
+    burst(e, t, n, r) {
+      this.particles?.emit({
+        x: e,
+        y: t,
+        z: n,
+        count: 30,
+        color: r,
+        speed: 4,
+        size: [0.2, 0.05],
+        life: [0.5, 0.9],
+        gravity: 2,
+        drag: 2,
+        shape: 1,
+      });
+    }
+    dust(e, t, n, r = 12, i = 3) {
+      this.particles?.emit({
+        x: e,
+        y: t + 0.1,
+        z: n,
+        count: r,
+        color: Q,
+        speed: i,
+        size: [0.3, 0.9],
+        life: [0.4, 0.9],
+        drag: 3,
+        up: 0.35,
+      });
+    }
+    ui(e, t = 0) {
+      N.ui(e, t);
+    }
+    queue(e, t, n) {
+      let r = this.session;
+      if (
+        (N.ui(e === `in` ? `queueIn` : `queueOut`),
+        this.haptics &&
+          (O(
+            e === `in` ? 0.35 : 0.2,
+            e === `in` ? 0.7 : 0.35,
+            e === `in` ? 150 : 90,
+          ),
+          j.haptic(e === `in` ? [20, 30, 35] : 15)),
+        !r)
+      )
+        return;
+      let i = r.localFrame,
+        a = [t, t, `#FFFFFF`, `#FFD21F`];
+      if (e === `in`) {
+        if (
+          (r.cam.kickFov(5),
+          this.particles?.emit({
+            x: i.x,
+            y: i.y + 1.4,
+            z: i.z,
+            count: 44,
+            color: a,
+            speed: 6.5,
+            up: 0.6,
+            size: [0.16, 0.08],
+            life: [0.7, 1.2],
+            gravity: 6,
+            drag: 1.2,
+            shape: 2,
+          }),
+          n)
+        )
+          for (let e = 0; e < 16; e++) {
+            let t = (e * Math.PI) / 8;
+            this.particles?.emit({
+              x: n.x,
+              y: n.y + 0.1,
+              z: n.z,
+              count: 2,
+              color: a,
+              speed: 6,
+              dir: [Math.cos(t), 0.35, Math.sin(t)],
+              spread: 0.12,
+              up: 0.2,
+              size: [0.14, 0.06],
+              life: [0.4, 0.7],
+              gravity: 3,
+              drag: 2,
+              shape: 2,
+            });
+          }
+      } else
+        this.particles?.emit({
+          x: i.x,
+          y: i.y + 1.6,
+          z: i.z,
+          count: 18,
+          color: [t, `#FFFFFF`],
+          speed: 2.5,
+          size: [0.14, 0.06],
+          life: [0.5, 0.9],
+          gravity: 7,
+          drag: 1.5,
+          shape: 2,
+        });
+    }
+    get levelPending() {
+      return !!this.pendingLevel;
+    }
+    levelUp(e, t) {
+      ((this.pendingLevel = { level: e, perks: t, at: performance.now() }),
+        this.session || this.fireLevel());
+    }
+    fireLevel() {
+      let e = this.pendingLevel;
+      e &&
+        ((this.pendingLevel = null),
+        this.announcer
+          ? this.announcer.level(e.level, e.perks, () => this.levelShow())
+          : this.levelShow());
+    }
+    levelShow() {
+      (N.ui(`levelUp`), this.haptics && j.haptic([20, 40, 20, 40, 70]));
+      let e = this.session;
+      if (!e) return;
+      if (!M.reducedMotion) {
+        let t = document.createElement(`div`);
+        ((t.className = `lvl-flash`),
+          document.getElementById(`ui`)?.append(t),
+          setTimeout(() => t.remove(), 700),
+          e.cam.kickFov(7),
+          e.cam.addTrauma(0.22));
+      }
+      this.beams?.spawn(() => e.localFrame, !0);
+      let t = e.localFrame,
+        n = this.particles;
+      if (n) {
+        (n.emit({
+          x: t.x,
+          y: t.y + 0.2,
+          z: t.z,
+          count: 40,
+          color: sr,
+          speed: 9,
+          dir: [0, 1, 0],
+          spread: 0.35,
+          size: [0.08, 0.03],
+          life: [0.6, 1.1],
+          gravity: 6,
+          drag: 0.8,
+          shape: 3,
+        }),
+          n.emit({
+            x: t.x,
+            y: t.y + 1.8,
+            z: t.z,
+            count: 70,
+            color: lr,
+            speed: 7,
+            size: [0.16, 0.1],
+            life: [1, 1.7],
+            gravity: 5,
+            drag: 1,
+            shape: 2,
+          }));
+        for (let e = 0; e < 8; e++) {
+          let r = (e * Math.PI) / 4;
+          n.emit({
+            x: t.x,
+            y: t.y + 0.05,
+            z: t.z,
+            count: 3,
+            color: Q,
+            speed: 4,
+            dir: [Math.cos(r), 0.15, Math.sin(r)],
+            spread: 0.25,
+            up: 0.2,
+            size: [0.25, 0.6],
+            life: [0.4, 0.8],
+            drag: 2.5,
+          });
+        }
+      }
+    }
+    levelUpAt(e) {
+      let t = this.session,
+        n = t?.posOf(e);
+      if (!t || !n) return;
+      let r = t.localFrame;
+      Math.hypot(n.x - r.x, n.z - r.z) > 60 ||
+        (this.beams?.spawn(() => t.posOf(e), !1),
+        this.particles?.emit({
+          x: n.x,
+          y: n.y + 1.6,
+          z: n.z,
+          count: 30,
+          color: lr,
+          speed: 5,
+          size: [0.14, 0.1],
+          life: [0.8, 1.4],
+          gravity: 5,
+          drag: 1,
+          shape: 2,
+        }),
+        N.ui(`levelUpFar`));
+    }
+    tag(e, t) {
+      let n = this.session,
+        r = this.particles,
+        i = t !== `other`;
+      (r?.emit({
+        x: e.x,
+        y: e.y + 0.9,
+        z: e.z,
+        count: i ? 46 : 26,
+        color: ur,
+        speed: i ? 8 : 6,
+        size: [0.16, 0.08],
+        life: [0.5, 1],
+        gravity: 6,
+        drag: 1.6,
+        shape: 2,
+      }),
+        r?.emit({
+          x: e.x,
+          y: e.y + 0.9,
+          z: e.z,
+          count: i ? 22 : 12,
+          color: sr,
+          speed: 10,
+          size: [0.07, 0.03],
+          life: [0.2, 0.45],
+          gravity: 4,
+          drag: 1,
+          shape: 3,
+        }));
+      for (let t = 0; t < 10; t++) {
+        let n = (t * Math.PI) / 5;
+        r?.emit({
+          x: e.x,
+          y: e.y + 0.05,
+          z: e.z,
+          count: 2,
+          color: Q,
+          speed: 5,
+          dir: [Math.cos(n), 0.1, Math.sin(n)],
+          spread: 0.15,
+          up: 0.1,
+          size: [0.25, 0.6],
+          life: [0.3, 0.6],
+          drag: 3,
+        });
+      }
+      if (!n) return;
+      if (t === `other`) {
+        let t = n.localFrame,
+          r = Math.hypot(e.x - t.x, e.z - t.z);
+        (r < 12 && n.cam.addTrauma(0.15 * (1 - r / 12)),
+          r < 40 && N.ui(`tagFar`));
+        return;
+      }
+      let a = t === `victim`;
+      if (
+        (N.ui(a ? `tagged` : `bonk`),
+        n.cam.addTrauma(a ? 0.55 : 0.35),
+        n.cam.kickFov(a ? 10 : 7),
+        this.haptics &&
+          (O(a ? 1 : 0.6, a ? 0.8 : 0.5, a ? 260 : 160),
+          j.haptic(a ? [40, 30, 80] : 35)),
+        M.reducedMotion)
+      )
+        return;
+      n.hitStop(a ? 70 : 55);
+      let o = document.createElement(`div`);
+      ((o.className = `tag-flash ${a ? `victim` : `tagger`}`),
+        document.getElementById(`ui`)?.append(o),
+        setTimeout(() => o.remove(), 450));
+    }
+    skinTag(e, t) {
+      let n = this.session?.posOf(t);
+      n && this.skins?.tag(e, n);
+    }
+    skinPerform(e) {
+      this.skins?.perform(e);
+    }
+    celebrate() {
+      N.ui(`mission`);
+      let e = this.session;
+      if (!e) return;
+      let t = e.localFrame;
+      this.particles?.emit({
+        x: t.x,
+        y: t.y + 1.6,
+        z: t.z,
+        count: 60,
+        color: lr,
+        speed: 7,
+        size: [0.16, 0.1],
+        life: [1, 1.6],
+        gravity: 5,
+        drag: 1,
+        shape: 2,
+      });
+    }
+  })();
+export {
+  yn as a,
+  cn as c,
+  sn as d,
+  on as f,
+  bn as i,
+  un as l,
+  xn as n,
+  vn as o,
+  Le as p,
+  Sn as r,
+  fn as s,
+  _r as t,
+  pn as u,
+};

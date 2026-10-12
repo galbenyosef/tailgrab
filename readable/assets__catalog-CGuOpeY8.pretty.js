@@ -1,0 +1,1229 @@
+import { v as e } from "./preload-helper-DR1MrGPZ.js";
+import { D as t, T as n } from "./prims-CECOBLSv.js";
+import { o as r } from "./compose-C1tLg9l9.js";
+import "./secrets-Czes5esN.js";
+var i = [
+    { id: `ramps`, label: `Ramps`, piece: `quarter` },
+    { id: `street`, label: `Street`, piece: `stairs` },
+    { id: `rails`, label: `Rails`, piece: `downrail` },
+    { id: `levels`, label: `Levels`, piece: `platform` },
+    { id: `pools`, label: `Pools`, piece: `kidney` },
+    { id: `props`, label: `Props`, piece: `bench` },
+  ],
+  a = { x: { dir: `x` }, y: { dir: `up` }, z: { dir: `z` } },
+  o = [
+    `concrete`,
+    `concreteDark`,
+    `wood`,
+    `woodSide`,
+    `metal`,
+    `brick`,
+    `grass`,
+    `bubblegum`,
+    `mint`,
+    `lemon`,
+    `peach`,
+    `lilac`,
+    `coral`,
+    `sky`,
+  ],
+  s = [
+    `concrete`,
+    `concreteDark`,
+    `wood`,
+    `brick`,
+    `grass`,
+    `sky`,
+    `mint`,
+    `peach`,
+  ],
+  c = Math.PI,
+  l = c / 4,
+  u = (e, t, n, r, i = 0.1) => ({ key: e, label: t, min: n, max: r, step: i }),
+  d = (e, t, n = ``) => ({
+    x: e.split(` `),
+    y: t.split(` `),
+    z: n ? n.split(` `) : [],
+  });
+function f(r, i, a, o = !0) {
+  let s = e(r),
+    c = n(t(s)),
+    l = Math.min(
+      ...s.segs.map((e) => (e.type === `arc` && e.da > 0 ? e.R : 1 / 0)),
+    ),
+    u = (e) => Math.ceil((e + 0.65) * 2) / 2,
+    d = 2 * u(Math.max(-c.x0, c.x1)),
+    f = 2 * u(Math.max(-c.z0, c.z1));
+  return {
+    kind: `bowl`,
+    shape: r,
+    h: i,
+    r: Math.min(i, 2.4, l - 1),
+    w: d,
+    d: f,
+    sunk: o,
+    tileSkin: a === `mint` ? `sky` : `mint`,
+    deckSkin: `concrete`,
+  };
+}
+function p(e, t) {
+  let n = t / Math.ceil(t / 6),
+    r = e < 2.5;
+  return {
+    every: n,
+    from: n / 2,
+    u: r ? [0] : [-(e / 2 - 0.5), e / 2 - 0.5],
+    size: r ? 0.5 : 0.8,
+  };
+}
+var m = { type: `railing`, h: 1.1 };
+function h(e, t, n, i) {
+  let {
+    id: a,
+    x: o,
+    y: s,
+    z: c,
+    rot: l,
+    ground: u,
+    name: d,
+    skin: f,
+    ...m
+  } = r(0, {
+    x: 0,
+    z: 0,
+    y: 0,
+    w: e,
+    d: t,
+    t: i.t,
+    nx: i.nx,
+    px: i.px,
+    nz: i.ends,
+    pz: i.ends,
+    pillars: i.pillars === !1 ? void 0 : p(e, t),
+    skin: n,
+    topSkin: n,
+  });
+  return m;
+}
+function g(e, t, n, r, i = !1) {
+  return {
+    knobs: [u(`s`, `Size`, 0.8, 1.4, 0.05)],
+    axes: d(`s`, `s`),
+    build: (a) => ({
+      kind: `prop`,
+      prop: e,
+      w: F(t * a.s),
+      d: F(n * a.s),
+      h: F(r * a.s),
+      s: a.s,
+      ...(i ? { grind: i } : {}),
+    }),
+    tag: !1,
+  };
+}
+var _ = (e) => Math.min(e, 2.6),
+  v = (e) => Math.max(e.len, Math.ceil((e.h / 1.2) * 2) / 2),
+  y = [
+    u(`w`, `Width`, 2, 8, 0.5),
+    u(`steps`, `Steps`, 2, 18, 1),
+    u(`top`, `Landing`, 1, 4, 0.5),
+  ],
+  b = {
+    quarter: {
+      knobs: [
+        u(`w`, `Width`, 3, 16, 0.5),
+        u(`h`, `Height`, 0.8, 3.6),
+        u(`deck`, `Deck`, 1, 3, 0.5),
+      ],
+      axes: d(`w`, `h`, `deck`),
+      build: (e) => ({
+        kind: `quarter`,
+        w: e.w,
+        h: e.h,
+        r: _(e.h),
+        deck: e.deck,
+      }),
+      anchor: (e) => [-e.w / 2, _(e.h)],
+    },
+    kicker: {
+      knobs: [
+        u(`w`, `Width`, 1.5, 6, 0.5),
+        u(`h`, `Height`, 0.3, 1.4),
+        u(`len`, `Length`, 1, 3.5),
+      ],
+      axes: d(`w`, `h`, `len`),
+      build: (e) => ({ kind: `kicker`, w: e.w, h: e.h, len: e.len }),
+      anchor: (e) => [-e.w / 2, e.len],
+    },
+    bank: {
+      knobs: [
+        u(`w`, `Width`, 2, 12, 0.5),
+        u(`h`, `Height`, 0.4, 6, 0.05),
+        u(`len`, `Length`, 1.5, 12, 0.5),
+      ],
+      axes: d(`w`, `h`, `len`),
+      build: (e) => ({ kind: `wedge`, w: e.w, h: e.h, len: v(e) }),
+      anchor: (e) => [-e.w / 2, v(e)],
+    },
+    bankCorner: {
+      knobs: [u(`h`, `Height`, 0.4, 6, 0.05), u(`len`, `Length`, 1.5, 12, 0.5)],
+      axes: d(`len`, `h`),
+      build: (e) => ({ kind: `cone`, h: e.h, len: v(e) }),
+    },
+    escalator: {
+      knobs: [
+        u(`w`, `Width`, 2, 5, 0.5),
+        u(`h`, `Rise`, 1, 6, 0.05),
+        u(`len`, `Length`, 2, 14, 0.5),
+      ],
+      axes: d(`w`, `h`, `len`),
+      build: (e) => ({ kind: `wedge`, w: e.w, h: e.h, len: v(e), hubbas: !0 }),
+      anchor: (e) => [-e.w / 2, v(e)],
+    },
+    funbox: {
+      knobs: [
+        u(`w`, `Width`, 2, 10, 0.5),
+        u(`d`, `Top`, 1, 6, 0.5),
+        u(`h`, `Height`, 0.4, 1.4),
+      ],
+      axes: d(`w`, `h`, `d`),
+      build: (e) => ({
+        kind: `funbox`,
+        w: e.w,
+        d: e.d,
+        h: e.h,
+        slope: Math.max(1.6, Math.ceil((e.h / 0.55) * 10) / 10),
+      }),
+    },
+    spine: {
+      knobs: [u(`w`, `Width`, 3, 14, 0.5), u(`h`, `Height`, 1, 3.2)],
+      axes: d(`w`, `h`),
+      build: (e) => ({ kind: `spine`, w: e.w, h: e.h, r: _(e.h) }),
+      anchor: (e) => [-e.w / 2, 0],
+    },
+    pyramid: {
+      knobs: [
+        u(`w`, `Width`, 2, 6, 0.5),
+        u(`d`, `Depth`, 2, 6, 0.5),
+        u(`h`, `Height`, 0.4, 1.4),
+      ],
+      axes: d(`w`, `h`, `d`),
+      build: (e) => ({
+        kind: `pyramid`,
+        w: e.w,
+        d: e.d,
+        h: e.h,
+        slope: Math.max(1.6, Math.ceil((e.h / 0.6) * 10) / 10),
+      }),
+    },
+    volcano: {
+      knobs: [
+        u(`r`, `Top`, 1, 3, 0.1),
+        u(`h`, `Height`, 0.4, 1.4),
+        u(`len`, `Slope`, 1.2, 3),
+      ],
+      axes: d(`r`, `h`, `len`),
+      build: (e) => ({ kind: `volcano`, r: e.r, h: e.h, len: e.len }),
+    },
+    hip: {
+      knobs: [u(`h`, `Height`, 1.6, 3.2), u(`R`, `Radius`, 2.5, 5, 0.5)],
+      axes: d(`R`, `h`),
+      build: (e) => ({
+        kind: `curve`,
+        R: e.R,
+        sweep: c / 2,
+        r: _(e.h),
+        h: e.h,
+        deck: 1.5,
+        back: `fill`,
+      }),
+    },
+    pocket: {
+      knobs: [
+        u(`h`, `Height`, 1.6, 3.2),
+        u(`R`, `Radius`, 4, 8, 0.5),
+        u(`deck`, `Deck`, 1, 3, 0.5),
+      ],
+      axes: d(`R`, `h`),
+      build: (e, t, n) => ({
+        kind: `curve`,
+        R: e.R,
+        sweep: c / 2,
+        r: _(e.h),
+        h: e.h,
+        deck: e.deck,
+        pocket: !0,
+        ...(n % 2 ? { back: `square` } : {}),
+      }),
+    },
+    ledge: {
+      knobs: [
+        u(`w`, `Length`, 1.5, 12, 0.5),
+        u(`h`, `Height`, 0.3, 1),
+        u(`d`, `Depth`, 0.5, 1.6),
+      ],
+      axes: d(`w`, `h`, `d`),
+      build: (e) => ({ kind: `ledge`, w: e.w, d: e.d, h: e.h }),
+      anchor: (e) => [-e.w / 2, -e.d / 2],
+    },
+    box: {
+      knobs: [
+        u(`w`, `Width`, 1, 10, 0.5),
+        u(`d`, `Depth`, 1, 10, 0.5),
+        u(`h`, `Height`, 0.2, 2.4),
+      ],
+      axes: d(`w`, `h`, `d`),
+      build: (e) => ({ kind: `box`, w: e.w, d: e.d, h: e.h }),
+      anchor: (e) => [-e.w / 2, -e.d / 2],
+    },
+    stairs: {
+      knobs: y,
+      axes: d(`w`, `steps`, `top`),
+      build: (e) => ({
+        kind: `stairs`,
+        w: e.w,
+        steps: e.steps,
+        rise: 0.25,
+        run: 0.45,
+        top: e.top,
+      }),
+    },
+    railStairs: {
+      knobs: y,
+      axes: d(`w`, `steps`, `top`),
+      build: (e) => ({
+        kind: `stairs`,
+        w: e.w,
+        steps: e.steps,
+        rise: 0.25,
+        run: 0.45,
+        top: e.top,
+        rails: [0],
+      }),
+    },
+    hubbaStairs: {
+      knobs: y,
+      axes: d(`w`, `steps`, `top`),
+      build: (e) => ({
+        kind: `stairs`,
+        w: e.w,
+        steps: e.steps,
+        rise: 0.25,
+        run: 0.45,
+        top: e.top,
+        hubbas: !0,
+      }),
+    },
+    hubba: {
+      knobs: [u(`len`, `Length`, 2, 6, 0.5), u(`h`, `Height`, 1, 4.5)],
+      axes: d(`len`, `h`),
+      grips: { x: { dir: `z` }, y: { dir: `up`, at: `-z` } },
+      build: (e) => ({ kind: `hubba`, len: e.len, d: 0.8, h: e.h, h2: 0.5 }),
+    },
+    wall: {
+      knobs: [u(`w`, `Length`, 2, 20, 0.5), u(`h`, `Height`, 0.8, 4)],
+      axes: d(`w`, `h`),
+      build: (e) => ({ kind: `wall`, w: e.w, d: 0.6, h: e.h }),
+      tag: !1,
+    },
+    rail: {
+      knobs: [
+        u(`len`, `Length`, 2, 14, 0.5),
+        u(`h`, `Start`, 0.3, 1.6),
+        u(`h2`, `End`, 0.3, 1.6),
+      ],
+      axes: d(`len`, `h h2`, `h2`),
+      grips: { y: { dir: `up`, label: `Height` }, z: { dir: `up`, at: `+x` } },
+      build: (e) => ({ kind: `rail`, len: e.len, h: e.h, h2: e.h2 }),
+    },
+    polejam: {
+      knobs: [u(`len`, `Length`, 1.5, 3.5), u(`h2`, `Height`, 0.5, 1.2)],
+      axes: d(`len`, `h2`),
+      grips: { y: { dir: `up`, at: `+x` } },
+      build: (e) => ({ kind: `polejam`, len: e.len, h2: e.h2 }),
+    },
+    curvedLedge: {
+      knobs: [
+        u(`R`, `Radius`, 2, 12, 0.5),
+        u(`deg`, `Sweep°`, 30, 180, 15),
+        u(`h`, `Height`, 0.3, 1),
+        u(`w`, `Depth`, 0.4, 1.2),
+      ],
+      axes: d(`R`, `h`, `deg`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => ({
+        kind: `path`,
+        path: {
+          plan: [{ arc: e.R, turn: (e.deg * c) / 180 }],
+          anchor: `center`,
+        },
+        section: { type: `ledge`, w: e.w, h: e.h },
+      }),
+    },
+    sLedge: {
+      knobs: [
+        u(`R`, `Radius`, 2, 10, 0.5),
+        u(`deg`, `Sweep°`, 30, 120, 15),
+        u(`h`, `Height`, 0.3, 1),
+        u(`w`, `Depth`, 0.4, 1.2),
+      ],
+      axes: d(`R`, `h`, `deg`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => ({
+        kind: `path`,
+        path: {
+          plan: [
+            { arc: e.R, turn: (e.deg * c) / 180 },
+            { arc: e.R, turn: -(e.deg * c) / 180 },
+          ],
+          anchor: `center`,
+        },
+        section: { type: `ledge`, w: e.w, h: e.h },
+      }),
+    },
+    planter: {
+      knobs: [
+        u(`R`, `Radius`, 1.5, 5, 0.5),
+        u(`h`, `Height`, 0.3, 0.8),
+        u(`w`, `Rim`, 0.4, 0.8),
+      ],
+      axes: d(`R`, `h`, `w`),
+      build: (e) => ({
+        kind: `path`,
+        path: {
+          plan: [{ arc: e.R, turn: 2 * c }],
+          closed: !0,
+          anchor: `center`,
+        },
+        section: { type: `ledge`, w: e.w, h: e.h, fill: `grass` },
+      }),
+    },
+    curvedRail: {
+      knobs: [
+        u(`R`, `Radius`, 3, 10, 0.5),
+        u(`deg`, `Sweep°`, 30, 180, 15),
+        u(`h`, `Height`, 0.3, 1.2),
+        u(`drop`, `Drop`, 0, 1),
+      ],
+      axes: d(`R`, `h`, `deg`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => {
+        let t = Math.min(
+          e.drop,
+          Number(((0.35 * e.R * (e.deg * c)) / 180).toFixed(3)),
+        );
+        return {
+          kind: `path`,
+          path: {
+            plan: [{ arc: e.R, turn: (e.deg * c) / 180 }],
+            grade: { y0: t, rise: -t },
+            anchor: `center`,
+          },
+          section: { type: `rail`, h: e.h },
+        };
+      },
+    },
+    snake: {
+      knobs: [
+        u(`R`, `Radius`, 5, 10, 0.5),
+        u(`deg`, `Sweep°`, 30, 90, 15),
+        u(`h`, `Height`, 1, 2.4),
+      ],
+      axes: d(`R`, `h`, `deg`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => ({
+        kind: `path`,
+        path: {
+          plan: [
+            { line: 2 },
+            { arc: e.R, turn: (e.deg * c) / 180 },
+            { arc: e.R, turn: -(e.deg * c) / 180 },
+            { line: 2 },
+          ],
+          anchor: `center`,
+        },
+        section: {
+          type: `quarter`,
+          r: Math.min(e.h, 2.2),
+          h: e.h,
+          deck: 1.2,
+          side: `left`,
+        },
+      }),
+    },
+    berm: {
+      knobs: [
+        u(`R`, `Radius`, 4, 10, 0.5),
+        u(`deg`, `Sweep°`, 30, 120, 15),
+        u(`h`, `Height`, 0.4, 0.8),
+      ],
+      axes: d(`R`, `h`, `deg`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => ({
+        kind: `path`,
+        path: {
+          plan: [{ arc: e.R, turn: (e.deg * c) / 180 }],
+          anchor: `center`,
+        },
+        section: {
+          type: `quarter`,
+          r: 4.5 * e.h,
+          h: e.h,
+          deck: 1,
+          side: `left`,
+        },
+      }),
+    },
+    miniDitch: {
+      knobs: [
+        u(`len`, `Length`, 6, 16, 1),
+        u(`depth`, `Depth`, 1, 2),
+        u(`w`, `Width`, 1, 3, 0.5),
+      ],
+      axes: d(`len`, `depth`, `w`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => ({
+        kind: `path`,
+        path: { plan: [{ line: e.len }], anchor: `center` },
+        section: {
+          type: `channel`,
+          w: e.w,
+          r: Math.min(1.4, e.depth - 0.2),
+          lip: { y0: e.depth },
+          apron: 1,
+        },
+      }),
+      groundOnly: !0,
+    },
+    jersey: {
+      knobs: [u(`len`, `Length`, 2, 16, 0.5), u(`h`, `Height`, 0.6, 1.1, 0.05)],
+      axes: d(`len`, `h`),
+      grips: { x: { dir: `z` } },
+      build: (e) => ({
+        kind: `path`,
+        path: { plan: [{ line: e.len }], anchor: `center` },
+        section: { type: `ledge`, w: 0.6, h: e.h, profile: `jersey` },
+      }),
+    },
+    fullPipe: {
+      knobs: [
+        u(`len`, `Length`, 4, 12, 1),
+        u(`depth`, `Walls`, 1.2, 2),
+        u(`w`, `Floor`, 1, 2.5, 0.5),
+      ],
+      axes: d(`len`, `depth`, `w`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      build: (e) => ({
+        kind: `path`,
+        path: { plan: [{ line: e.len }], anchor: `center` },
+        section: {
+          type: `channel`,
+          w: e.w,
+          r: Math.min(1.4, e.depth - 0.2),
+          lip: { y0: e.depth },
+          apron: 1,
+          roof: { cover: 0.5 },
+        },
+        ends: [`cap`, `cap`],
+      }),
+      groundOnly: !0,
+    },
+    hangLight: {
+      knobs: [u(`len`, `Length`, 2, 10, 0.5), u(`drop`, `Cable`, 1.3, 3, 0.1)],
+      axes: d(`len`, `drop`),
+      grips: { y: { dir: `down` } },
+      build: (e) => ({ kind: `rail`, len: e.len, h: 0, h2: 0, hang: e.drop }),
+      lift: (e) => -e.drop,
+      hang: !0,
+    },
+    platform: {
+      knobs: [
+        u(`w`, `Width`, 2, 16, 1),
+        u(`d`, `Length`, 2, 16, 1),
+        u(`h`, `Height`, 2.75, 6.5, 0.25),
+      ],
+      axes: d(`w`, `h`, `d`),
+      lift: (e) => e.h,
+      sink: 0,
+      build: (e, t) => h(e.w, e.d, t, {}),
+    },
+    balcony: {
+      knobs: [
+        u(`w`, `Width`, 2, 16, 1),
+        u(`d`, `Length`, 2, 16, 1),
+        u(`h`, `Height`, 2.75, 6.5, 0.25),
+      ],
+      axes: d(`d`, `h`, `w`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      lift: (e) => e.h,
+      sink: 0,
+      build: (e, t) => h(e.w, e.d, t, { px: m }),
+    },
+    catwalk: {
+      knobs: [
+        u(`w`, `Width`, 1.5, 3, 0.5),
+        u(`d`, `Length`, 4, 24, 1),
+        u(`h`, `Height`, 2.75, 6.5, 0.25),
+      ],
+      axes: d(`d`, `h`, `w`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      lift: (e) => e.h,
+      sink: 0,
+      build: (e, t) => h(e.w, e.d, t, { nx: m, px: m }),
+    },
+    beam: {
+      knobs: [
+        u(`len`, `Length`, 2, 16, 0.5),
+        u(`t`, `Thickness`, 0.3, 0.8),
+        u(`w`, `Width`, 0.4, 1.2),
+      ],
+      axes: d(`len`, `t`, `w`),
+      grips: { x: { dir: `z` }, z: { dir: `x` } },
+      lift: (e) => e.t,
+      sink: 2.3,
+      build: (e, t) => h(e.w, e.len, t, { ends: `cap`, t: e.t, pillars: !1 }),
+    },
+    bench: g(`bench`, 1.6, 0.52, 0.49, !0),
+    trashCan: g(`trash_can`, 0.63, 0.63, 0.89),
+    cone: g(`cone`, 0.44, 0.44, 0.56),
+    crate: g(`crate`, 1, 1, 1, !0),
+    fence: g(`fence`, 2, 0.1, 0.92),
+    planterBox: g(`planter`, 1.3, 0.6, 0.5, !0),
+    lamp: g(`lamp`, 0.4, 0.4, 4),
+    roundPool: {
+      knobs: [u(`R`, `Size`, 3.6, 6, 0.2), u(`h`, `Depth`, 1.8, 3.4)],
+      axes: d(`R`, `h`),
+      grips: { y: { dir: `down` } },
+      build: (e) => f({ type: `round`, R: e.R }, e.h, `sky`),
+      quarterOnly: !0,
+      groundOnly: !0,
+    },
+    kidneyPool: {
+      knobs: [u(`s`, `Size`, 0.9, 1.4, 0.05), u(`h`, `Depth`, 1.8, 3.4)],
+      axes: d(`s`, `h`),
+      grips: { y: { dir: `down` } },
+      build: (e) =>
+        f(
+          {
+            type: `kidney`,
+            R1: 4 * e.s,
+            R2: 3.5 * e.s,
+            D: 3.5 * e.s,
+            Rh: 1.5 * e.s,
+          },
+          e.h,
+          `lilac`,
+        ),
+      quarterOnly: !0,
+      groundOnly: !0,
+    },
+    ovalPool: {
+      knobs: [
+        u(`L`, `Length`, 2, 8, 0.5),
+        u(`R`, `Size`, 3.6, 5, 0.2),
+        u(`h`, `Depth`, 1.8, 3.4),
+      ],
+      axes: d(`L`, `h`, `R`),
+      grips: { y: { dir: `down` } },
+      build: (e) => f({ type: `oval`, L: e.L, R: e.R }, e.h, `sky`),
+      quarterOnly: !0,
+      groundOnly: !0,
+    },
+    raisedBowl: {
+      knobs: [u(`R`, `Size`, 3.6, 6, 0.2), u(`h`, `Height`, 1.6, 3.2)],
+      axes: d(`R`, `h`),
+      build: (e) => f({ type: `round`, R: e.R }, e.h, `lilac`, !1),
+      quarterOnly: !0,
+      groundOnly: !0,
+    },
+    cloverPool: {
+      knobs: [u(`s`, `Size`, 0.9, 1.3, 0.05), u(`h`, `Depth`, 1.8, 3.2)],
+      axes: d(`s`, `h`),
+      grips: { y: { dir: `down` } },
+      build: (e) =>
+        f(
+          {
+            type: `clover`,
+            n: 4,
+            rho: 2.2 * e.s,
+            Rl: 3.6 * e.s,
+            Rh: 1.2 * e.s,
+            phi: c / 4,
+          },
+          e.h,
+          `wood`,
+        ),
+      quarterOnly: !0,
+      groundOnly: !0,
+    },
+  },
+  x = [
+    {
+      id: `mini`,
+      label: `Mini Ramp`,
+      cat: `ramps`,
+      shape: `quarter`,
+      kn: { w: 6, h: 1.4, deck: 1.5 },
+      skin: `woodSide`,
+    },
+    {
+      id: `quarter`,
+      label: `Quarter Pipe`,
+      cat: `ramps`,
+      shape: `quarter`,
+      kn: { w: 8, h: 2.6, deck: 2 },
+      skin: `woodSide`,
+    },
+    {
+      id: `vert`,
+      label: `Vert Wall`,
+      cat: `ramps`,
+      shape: `quarter`,
+      kn: { w: 10, h: 3.4, deck: 2 },
+      skin: `sky`,
+    },
+    {
+      id: `kicker`,
+      label: `Kicker`,
+      cat: `ramps`,
+      shape: `kicker`,
+      kn: { w: 2.5, h: 0.8, len: 2 },
+      skin: `lemon`,
+    },
+    {
+      id: `launch`,
+      label: `Launch Ramp`,
+      cat: `ramps`,
+      shape: `kicker`,
+      kn: { w: 3, h: 1.2, len: 2.6 },
+      skin: `coral`,
+    },
+    {
+      id: `bank`,
+      label: `Bank`,
+      cat: `ramps`,
+      shape: `bank`,
+      kn: { w: 6, h: 1.2, len: 3 },
+      skin: `concrete`,
+    },
+    {
+      id: `bankcorner`,
+      label: `Bank Corner`,
+      cat: `ramps`,
+      shape: `bankCorner`,
+      kn: { h: 1.2, len: 3 },
+      skin: `concrete`,
+    },
+    {
+      id: `funbox`,
+      label: `Funbox`,
+      cat: `ramps`,
+      shape: `funbox`,
+      kn: { w: 5, d: 3, h: 0.8 },
+      skin: `lilac`,
+    },
+    {
+      id: `spine`,
+      label: `Spine`,
+      cat: `ramps`,
+      shape: `spine`,
+      kn: { w: 8, h: 1.8 },
+      skin: `woodSide`,
+    },
+    {
+      id: `pyramid`,
+      label: `Pyramid`,
+      cat: `ramps`,
+      shape: `pyramid`,
+      kn: { w: 4, d: 4, h: 1 },
+      skin: `coral`,
+    },
+    {
+      id: `volcano`,
+      label: `Volcano`,
+      cat: `ramps`,
+      shape: `volcano`,
+      kn: { r: 2, h: 0.9, len: 2.2 },
+      skin: `bubblegum`,
+    },
+    {
+      id: `hip`,
+      label: `Hip`,
+      cat: `ramps`,
+      shape: `hip`,
+      kn: { h: 2.6, R: 3 },
+      skin: `mint`,
+    },
+    {
+      id: `pocket`,
+      label: `Pocket`,
+      cat: `ramps`,
+      shape: `pocket`,
+      kn: { h: 2.6, R: 5, deck: 1.5 },
+      skin: `lilac`,
+    },
+    {
+      id: `snake`,
+      label: `Snake Run`,
+      cat: `ramps`,
+      shape: `snake`,
+      kn: { R: 7, deg: 60, h: 1.8 },
+      skin: `woodSide`,
+    },
+    {
+      id: `berm`,
+      label: `Berm`,
+      cat: `ramps`,
+      shape: `berm`,
+      kn: { R: 6, deg: 90, h: 0.7 },
+      skin: `concrete`,
+    },
+    {
+      id: `ditch`,
+      label: `Mini Ditch`,
+      cat: `ramps`,
+      shape: `miniDitch`,
+      kn: { len: 10, depth: 1.6, w: 2 },
+      skin: `concrete`,
+    },
+    {
+      id: `fullpipe`,
+      label: `Full Pipe`,
+      cat: `ramps`,
+      shape: `fullPipe`,
+      kn: { len: 8, depth: 1.6, w: 1.5 },
+      skin: `concrete`,
+    },
+    {
+      id: `ledge`,
+      label: `Ledge`,
+      cat: `street`,
+      shape: `ledge`,
+      kn: { w: 6, h: 0.45, d: 0.8 },
+      skin: `concrete`,
+    },
+    {
+      id: `manny`,
+      label: `Manual Pad`,
+      cat: `street`,
+      shape: `box`,
+      kn: { w: 4, d: 2.5, h: 0.3 },
+      skin: `peach`,
+    },
+    {
+      id: `block`,
+      label: `Grind Box`,
+      cat: `street`,
+      shape: `box`,
+      kn: { w: 3, d: 1.5, h: 0.6 },
+      skin: `wood`,
+    },
+    {
+      id: `deck`,
+      label: `Deck`,
+      cat: `street`,
+      shape: `box`,
+      kn: { w: 6, d: 4, h: 1.2 },
+      skin: `concreteDark`,
+    },
+    {
+      id: `stairs`,
+      label: `Stair Set`,
+      cat: `street`,
+      shape: `stairs`,
+      kn: { w: 4, steps: 5, top: 2 },
+      skin: `concreteDark`,
+    },
+    {
+      id: `railstairs`,
+      label: `Handrail Stairs`,
+      cat: `street`,
+      shape: `railStairs`,
+      kn: { w: 4, steps: 8, top: 2 },
+      skin: `concreteDark`,
+    },
+    {
+      id: `hubbastairs`,
+      label: `Hubba Stairs`,
+      cat: `street`,
+      shape: `hubbaStairs`,
+      kn: { w: 4, steps: 6, top: 2 },
+      skin: `peach`,
+    },
+    {
+      id: `hubba`,
+      label: `Hubba`,
+      cat: `street`,
+      shape: `hubba`,
+      kn: { len: 3, h: 1.7 },
+      skin: `peach`,
+    },
+    {
+      id: `wall`,
+      label: `Wall`,
+      cat: `street`,
+      shape: `wall`,
+      kn: { w: 8, h: 2 },
+      skin: `brick`,
+    },
+    {
+      id: `curvedledge`,
+      label: `Curved Ledge`,
+      cat: `street`,
+      shape: `curvedLedge`,
+      kn: { R: 5, deg: 90, h: 0.5, w: 0.7 },
+      skin: `peach`,
+    },
+    {
+      id: `sledge`,
+      label: `S-Ledge`,
+      cat: `street`,
+      shape: `sLedge`,
+      kn: { R: 4, deg: 60, h: 0.45, w: 0.7 },
+      skin: `concrete`,
+    },
+    {
+      id: `planter`,
+      label: `Planter`,
+      cat: `street`,
+      shape: `planter`,
+      kn: { R: 2.5, h: 0.5, w: 0.5 },
+      skin: `lilac`,
+    },
+    {
+      id: `jersey`,
+      label: `Jersey Barrier`,
+      cat: `street`,
+      shape: `jersey`,
+      kn: { len: 6, h: 0.8 },
+      skin: `concrete`,
+    },
+    {
+      id: `rail`,
+      label: `Flat Rail`,
+      cat: `rails`,
+      shape: `rail`,
+      kn: { len: 6, h: 0.5, h2: 0.5 },
+      skin: `metal`,
+    },
+    {
+      id: `downrail`,
+      label: `Down Rail`,
+      cat: `rails`,
+      shape: `rail`,
+      kn: { len: 6, h: 1.2, h2: 0.4 },
+      skin: `metal`,
+    },
+    {
+      id: `polejam`,
+      label: `Pole Jam`,
+      cat: `rails`,
+      shape: `polejam`,
+      kn: { len: 2.2, h2: 0.9 },
+      skin: `metal`,
+    },
+    {
+      id: `curvedrail`,
+      label: `Curved Rail`,
+      cat: `rails`,
+      shape: `curvedRail`,
+      kn: { R: 6, deg: 90, h: 0.5, drop: 0 },
+      skin: `metal`,
+    },
+    {
+      id: `hanglight`,
+      label: `Hanging Light`,
+      cat: `rails`,
+      shape: `hangLight`,
+      kn: { len: 6, drop: 2 },
+      skin: `metal`,
+    },
+    {
+      id: `platform`,
+      label: `Platform`,
+      cat: `levels`,
+      shape: `platform`,
+      kn: { w: 8, d: 6, h: 3.5 },
+      skin: `concrete`,
+    },
+    {
+      id: `balcony`,
+      label: `Balcony`,
+      cat: `levels`,
+      shape: `balcony`,
+      kn: { w: 6, d: 10, h: 3.5 },
+      skin: `peach`,
+    },
+    {
+      id: `catwalk`,
+      label: `Catwalk`,
+      cat: `levels`,
+      shape: `catwalk`,
+      kn: { w: 2, d: 12, h: 4 },
+      skin: `metal`,
+    },
+    {
+      id: `beam`,
+      label: `Beam`,
+      cat: `levels`,
+      shape: `beam`,
+      kn: { len: 6, t: 0.4, w: 0.6 },
+      skin: `metal`,
+    },
+    {
+      id: `escalator`,
+      label: `Escalator`,
+      cat: `levels`,
+      shape: `escalator`,
+      kn: { w: 3, h: 3.5, len: 7 },
+      skin: `metal`,
+    },
+    {
+      id: `bench`,
+      label: `Bench`,
+      cat: `props`,
+      shape: `bench`,
+      kn: { s: 1 },
+      skin: `wood`,
+    },
+    {
+      id: `trashcan`,
+      label: `Trash Can`,
+      cat: `props`,
+      shape: `trashCan`,
+      kn: { s: 1 },
+      skin: `metal`,
+    },
+    {
+      id: `cone`,
+      label: `Cone`,
+      cat: `props`,
+      shape: `cone`,
+      kn: { s: 1 },
+      skin: `coral`,
+    },
+    {
+      id: `crate`,
+      label: `Crate`,
+      cat: `props`,
+      shape: `crate`,
+      kn: { s: 1 },
+      skin: `wood`,
+    },
+    {
+      id: `fence`,
+      label: `Fence`,
+      cat: `props`,
+      shape: `fence`,
+      kn: { s: 1 },
+      skin: `metal`,
+    },
+    {
+      id: `planterbox`,
+      label: `Planter Box`,
+      cat: `props`,
+      shape: `planterBox`,
+      kn: { s: 1 },
+      skin: `wood`,
+    },
+    {
+      id: `lamp`,
+      label: `Lamp`,
+      cat: `props`,
+      shape: `lamp`,
+      kn: { s: 1 },
+      skin: `metal`,
+    },
+    {
+      id: `roundpool`,
+      label: `Round Pool`,
+      cat: `pools`,
+      shape: `roundPool`,
+      kn: { R: 4, h: 2.8 },
+      skin: `sky`,
+    },
+    {
+      id: `kidney`,
+      label: `Kidney Pool`,
+      cat: `pools`,
+      shape: `kidneyPool`,
+      kn: { s: 1, h: 2.8 },
+      skin: `lilac`,
+    },
+    {
+      id: `clover`,
+      label: `Clover Pool`,
+      cat: `pools`,
+      shape: `cloverPool`,
+      kn: { s: 1, h: 2.6 },
+      skin: `wood`,
+    },
+    {
+      id: `ovalpool`,
+      label: `Oval Pool`,
+      cat: `pools`,
+      shape: `ovalPool`,
+      kn: { L: 4, R: 4, h: 2.8 },
+      skin: `sky`,
+    },
+    {
+      id: `bowlblock`,
+      label: `Raised Bowl`,
+      cat: `pools`,
+      shape: `raisedBowl`,
+      kn: { R: 4, h: 2.2 },
+      skin: `lilac`,
+    },
+  ],
+  S = new Map(x.map((e) => [e.id, e]));
+function C(e) {
+  return S.get(e);
+}
+function w(e) {
+  return b[e.shape].knobs;
+}
+function T(e) {
+  return b[e.shape].axes;
+}
+function E(e) {
+  return { ...a, ...b[e.shape].grips };
+}
+function D(e) {
+  return !!b[e.shape].quarterOnly;
+}
+function O(e) {
+  return !!b[e.shape].groundOnly;
+}
+function k(e) {
+  return !!b[e.shape].hang;
+}
+function A(e) {
+  return b[e.shape].build({}, `concrete`, 0).kind !== `prop`;
+}
+var j = (e) => Math.round(e * 2) / 2;
+function M(e, t, n) {
+  let r = typeof t == `number` && Number.isFinite(t) ? t : n,
+    i =
+      e.min +
+      Math.round((Math.min(e.max, Math.max(e.min, r)) - e.min) / e.step) *
+        e.step;
+  return Number(Math.min(e.max, i).toFixed(3));
+}
+function N(e) {
+  let t = ((Math.round(e) % 8) + 8) % 8;
+  return t === 0 ? 0 : t * l;
+}
+function P(e) {
+  return Number(
+    (typeof e == `number` && Number.isFinite(e)
+      ? Math.min(12, Math.max(0, e))
+      : 0
+    ).toFixed(2),
+  );
+}
+var F = (e) => Number(e.toFixed(3));
+function I(e) {
+  return ((Math.round((e ?? 0) / l) % 8) + 8) % 8;
+}
+function L(e) {
+  let t = S.get(e.pre);
+  if (!t) return null;
+  let n = b[t.shape],
+    r = {};
+  for (let i of n.knobs) r[i.key] = M(i, e.kn?.[i.key], t.kn[i.key]);
+  let i = Number(e.r8),
+    a = Number.isFinite(i) ? ((Math.round(i) % 8) + 8) % 8 : 0;
+  return (n.quarterOnly && (a &= -2), { pre: t, shape: n, kn: r, r8: a });
+}
+var R = Math.SQRT1_2,
+  z = [1, R, 0, -R, -1, -R, 0, R],
+  B = [0, R, 1, R, 0, -R, -1, -R];
+function V(e, t, n, r, i) {
+  let [a, o] = e.anchor?.(t) ?? [0, 0];
+  if (!a && !o) return [j(r), j(i)];
+  let s = z[n],
+    c = B[n],
+    l = a * s + o * c,
+    u = -a * c + o * s;
+  return [F(j(r + l) - l), F(j(i + u) - u)];
+}
+function H(e) {
+  let t = L(e);
+  if (!t || !Number.isFinite(e.x) || !Number.isFinite(e.z)) return e;
+  let [n, r] = V(t.shape, t.kn, t.r8, e.x, e.z);
+  return { ...e, x: n, z: r };
+}
+function U(e, t, n) {
+  let r = L(e);
+  if (
+    !r ||
+    !Number.isInteger(t) ||
+    t < 2 ||
+    t > 9999 ||
+    !Number.isFinite(e.x) ||
+    !Number.isFinite(e.z)
+  )
+    return null;
+  let { pre: i, shape: a, kn: s, r8: c } = r,
+    l = o.includes(e.skin) ? e.skin : i.skin,
+    u = a.groundOnly ? 0 : P(e.y),
+    [d, f] = n ? V(a, s, c, e.x, e.z) : [e.x, e.z],
+    p = {
+      ...a.build(s, l, c),
+      id: t,
+      x: d,
+      z: f,
+      rot: N(c),
+      skin: l,
+      name: i.label,
+      pre: i.id,
+      kn: s,
+    },
+    m = F(u + (a.lift?.(s) ?? 0));
+  if ((m && (p.y = m), a.sink !== void 0 && p.kind === `path`)) {
+    let e = F(u - a.sink);
+    e && (p.ground = e);
+  }
+  return (u && (p.lv = u), a.tag === !1 && (p.tag = !1), p);
+}
+function W(e, t) {
+  return U(e, t, !0);
+}
+function G(e, t = 2) {
+  return U({ ...e, x: 0, z: 0, y: 0 }, t, !1);
+}
+function K(e) {
+  let t = {
+    pre: e.pre,
+    x: e.x,
+    z: e.z,
+    r8: I(e.rot),
+    kn: { ...e.kn },
+    skin: e.skin,
+  };
+  return (e.lv && (t.y = e.lv), t);
+}
+var q = /^[A-Z2-9]{6}$/;
+export {
+  K as _,
+  o as a,
+  j as b,
+  E as c,
+  w as d,
+  P as f,
+  D as g,
+  C as h,
+  x as i,
+  O as l,
+  G as m,
+  q as n,
+  T as o,
+  W as p,
+  s as r,
+  M as s,
+  i as t,
+  k as u,
+  N as v,
+  H as x,
+  A as y,
+};
