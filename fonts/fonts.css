@@ -1,0 +1,20 @@
+/* Self-hosted Google Fonts — Poki forbids loading external resources, so the
+   googleapis/gstatic <link> in index.html is replaced by this local sheet.
+   Baloo 2 is a variable font (one file covers weights 600–800); Lilita One is
+   a single 400. Refresh: re-download the woff2 the CSS2 API points at (see the
+   urls below) — latin subset only. url()s are relative to THIS file (/fonts/),
+   so they resolve correctly under any base (Vercel root or Poki subpath). */
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 600 800; /* variable weight axis — covers 600/700/800 */
+  font-display: swap;
+  src: url(baloo2.woff2) format('woff2'); /* fonts.gstatic.com/s/baloo2/v23/wXKrE3kTposypRyd11rWB-wq.woff2 */
+}
+@font-face {
+  font-family: 'Lilita One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(lilita-one.woff2) format('woff2'); /* fonts.gstatic.com/s/lilitaone/v17/i7dPIFZ9Zz-WBtRtedDbUEN2Qlq6.woff2 */
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual" />
+  <title>Tailgrab — Free Online Multiplayer Skateboarding Game</title>
+  <meta name="description" content="A free multiplayer skateboarding game in your browser, inspired by Tony Hawk's Pro Skater. Skate with friends as animal pros and build your own parks." />
+  <!-- ?park= / ?party= / ?replay= all serve this page: index it once -->
+  <link rel="canonical" href="https://tailgrab.io/" />
+  <meta name="theme-color" content="#7EC8F5" />
+  <meta property="og:site_name" content="Tailgrab" />
+  <meta property="og:title" content="Tailgrab — Free Multiplayer Skateboarding Game" />
+  <meta property="og:description" content="Skate with friends as a crew of animal pros: a Skate Hub full of riders, a career to clear and parks you build yourself. A THPS-inspired multiplayer skater in your browser, built with Colyseus." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tailgrab.io/" />
+  <meta property="og:image" content="https://tailgrab.io/og.jpg?v=3" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Tailgrab Freeskater: a hawk in a red helmet tail-grabs over a sunset quarter pipe while his crew airs behind him, a Ferris wheel in the distance" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- WebSite gives Google the site name for results; VideoGame says what the page is -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebSite", "@id": "https://tailgrab.io/#site", "name": "Tailgrab", "url": "https://tailgrab.io/" },
+      {
+        "@type": "VideoGame",
+        "name": "Tailgrab",
+        "url": "https://tailgrab.io/",
+        "description": "A free multiplayer skateboarding game in your browser, inspired by Tony Hawk's Pro Skater. Skate with friends as animal pros, clear the career and build your own parks.",
+        "image": "https://tailgrab.io/og.jpg?v=3",
+        "genre": ["Sports", "Skateboarding"],
+        "gamePlatform": "Web browser",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "playMode": ["MultiPlayer", "SinglePlayer"],
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "inLanguage": "en",
+        "author": { "@type": "Person", "name": "Endel Dreyer", "url": "https://x.com/endel" },
+        "isPartOf": { "@id": "https://tailgrab.io/#site" }
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/lilita-one.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/baloo2.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <!-- Critical CSS: the app's stylesheets arrive with its JS, so the root size and the
+       splash are styled here or the first frames show an unstyled logo. -->
+  <style>html{font-size:clamp(8.5px,min(.78125vw,1.38889dvh),20px)}@media (orientation:portrait){html{font-size:clamp(8.4px,min(2.5vw,1.16279dvh),16px)}}html,body{background:#ffe3ec;height:100%;margin:0;overflow:hidden}.boot{z-index:50;color:#fff;grid-template-columns:min(50rem,42vw);place-content:center start;justify-items:center;gap:2.2rem;padding-left:7vw;font:700 1.8rem "Baloo 2",system-ui,sans-serif;display:grid;position:fixed;inset:0}.boot:before{content:"";z-index:-1;background:linear-gradient(#9d86da,#e9a3bd);transition:opacity .45s;position:absolute;inset:0}.boot-art{z-index:-1;transition:opacity .45s;position:absolute;inset:0;overflow:hidden}.boot-art img{object-fit:cover;object-position:70% 35%;width:100%;height:100%;animation:14s cubic-bezier(.2,.6,.3,1) both boot-push;display:block}.boot-art:after{content:"";background:linear-gradient(100deg,#22181c59,#22181c14 38%,#22181c00 55%);position:absolute;inset:0}@keyframes boot-push{0%{transform:scale(1.1)}}.boot-title{display:contents}.boot:has(.boot-noscript) .boot-bar{display:none}.boot:has(.boot-noscript) .boot-msg:not(.boot-noscript){display:none}.boot-logo{filter:drop-shadow(.3rem 0 #fff)drop-shadow(-.3rem 0 #fff)drop-shadow(0 .3rem #fff)drop-shadow(0 -.3rem #fff)drop-shadow(0 .8rem #22181c40);width:100%;height:auto;margin-bottom:1.6rem;display:block;transform:rotate(-4deg)}.boot-bar{background:#fff;border-radius:99rem;width:min(36rem,70vw);height:2.2rem;transition:opacity .2s;overflow:hidden;box-shadow:0 0 0 .4rem #22181c,0 .5rem 0 .4rem #22181c}.boot-fill{background:repeating-linear-gradient(-45deg,#feb82a 0 1.4rem,#ffd35e 1.4rem 2.8rem);width:0;height:100%;transition:width .25s}.boot-msg{text-align:center;-webkit-text-stroke:.5rem #22181c;paint-order:stroke fill;padding:0 2.4rem;font-size:2rem;transition:opacity .2s}.boot.gone{pointer-events:none}.boot.gone:before,.boot.gone .boot-art,.boot.gone .boot-bar,.boot.gone .boot-msg{opacity:0}.boot.fade{opacity:0;transition:opacity .35s}@media (orientation:portrait){.boot{grid-template-columns:min(46rem,84vw);place-content:end center;padding:0 0 9vh}.boot-art img{object-position:70% 50%}.boot-art:after{background:linear-gradient(#22181c00 58%,#22181c80)}}@media (prefers-reduced-motion:reduce){.boot-art img{animation:none}}.reduce-motion .boot-art img{animation:none}</style>
+  <script type="module" crossorigin src="/assets/main-CzsUDvlE.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="modulepreload" crossorigin href="/assets/three.core-DVWDmH0S.js">
+  <link rel="modulepreload" crossorigin href="/assets/palette-DQTkVEn_.js">
+  <link rel="modulepreload" crossorigin href="/assets/toon-CycGToy9.js">
+  <link rel="modulepreload" crossorigin href="/assets/dmath-_BI8hNwF.js">
+  <link rel="modulepreload" crossorigin href="/assets/tuning-D4mSK766.js">
+  <link rel="modulepreload" crossorigin href="/assets/prims-CECOBLSv.js">
+  <link rel="modulepreload" crossorigin href="/assets/preload-helper-DR1MrGPZ.js">
+  <link rel="modulepreload" crossorigin href="/assets/outline-BufNikL2.js">
+  <link rel="modulepreload" crossorigin href="/assets/scene-DiAs2bfK.js">
+  <link rel="modulepreload" crossorigin href="/assets/table-W1plLavt.js">
+  <link rel="modulepreload" crossorigin href="/assets/types-DM-HODfo.js">
+  <link rel="modulepreload" crossorigin href="/assets/skaterView-DCMhULBk.js">
+  <link rel="modulepreload" crossorigin href="/assets/Client-CpE02kO_.js">
+  <link rel="modulepreload" crossorigin href="/assets/compose-C1tLg9l9.js">
+  <link rel="modulepreload" crossorigin href="/assets/parks-C2dnYY6C.js">
+  <link rel="modulepreload" crossorigin href="/assets/secrets-Czes5esN.js">
+  <link rel="modulepreload" crossorigin href="/assets/sfx-6jovSU2-.js">
+  <link rel="modulepreload" crossorigin href="/assets/skaters-pUdq6stw.js">
+  <link rel="modulepreload" crossorigin href="/assets/missions-eXNMrvRm.js">
+  <link rel="modulepreload" crossorigin href="/assets/tagPaint-BOEtbgNi.js">
+  <link rel="modulepreload" crossorigin href="/assets/poses-DwKBijP_.js">
+  <link rel="modulepreload" crossorigin href="/assets/catalog-CGuOpeY8.js">
+  <link rel="modulepreload" crossorigin href="/assets/juice-6UyTKeka.js">
+  <link rel="modulepreload" crossorigin href="/assets/padNav-a65kF6ol.js">
+  <link rel="modulepreload" crossorigin href="/assets/parkMesh-CjoleZJz.js">
+  <link rel="modulepreload" crossorigin href="/assets/session-DxCN6jDh.js">
+  <link rel="modulepreload" crossorigin href="/assets/verlet-BVVzuOqv.js">
+  <link rel="modulepreload" crossorigin href="/assets/bailPhysics-C1H0uy1H.js">
+  <link rel="modulepreload" crossorigin href="/assets/fxHooks-Cvx_8YWC.js">
+  <link rel="modulepreload" crossorigin href="/assets/kit-C-OErpbU.js">
+  <link rel="modulepreload" crossorigin href="/assets/songs-B3nWAdc6.js">
+  <link rel="modulepreload" crossorigin href="/assets/stickers-9pAHXWwr.js">
+  <link rel="modulepreload" crossorigin href="/assets/GLTFLoader-BAb7LzOS.js">
+  <link rel="modulepreload" crossorigin href="/assets/decor-Tyb8Za1u.js">
+  <link rel="modulepreload" crossorigin href="/assets/OrbitControls-CQWqkYLs.js">
+  <link rel="modulepreload" crossorigin href="/assets/ground-ufcYH9Hx.js">
+  <link rel="stylesheet" crossorigin href="/assets/main-BefG6oT8.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX4BWPK6T5"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HX4BWPK6T5');</script>
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div id="ui"></div>
+  <div id="boot" class="boot">
+    <picture class="boot-art">
+      <source media="(orientation: portrait) and (max-aspect-ratio: 5/8)" srcset="/splash/tall.webp" />
+      <img src="/splash/wide.webp" alt="" width="1600" height="900" fetchpriority="high" />
+    </picture>
+    <h1 class="boot-title"><img class="boot-logo" src="/logo.webp" alt="Tailgrab" width="1000" height="381" /></h1>
+    <div class="boot-bar"><div class="boot-fill"></div></div>
+    <div class="boot-msg">Loading</div>
+    <!-- for crawlers that don't run scripts, and the few people who turned them off -->
+    <noscript><p class="boot-msg boot-noscript">Tailgrab is a free multiplayer skateboarding game you play in your browser. Turn on JavaScript to skate.</p></noscript>
+  </div>
+</body>
+</html>
