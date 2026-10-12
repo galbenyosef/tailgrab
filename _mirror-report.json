@@ -1,0 +1,872 @@
+{
+  "start": "https://tailgrab.io/",
+  "origin": "https://tailgrab.io",
+  "gated": false,
+  "sessionRenewal": "none",
+  "requests": 352,
+  "fetched": 177,
+  "bytes": 30046159,
+  "paths": [
+    "apple-touch-icon.png",
+    "assets/Client-CpE02kO_.js",
+    "assets/GLTFLoader-BAb7LzOS.js",
+    "assets/OrbitControls-CQWqkYLs.js",
+    "assets/bailPhysics-C1H0uy1H.js",
+    "assets/bestTv-zah2thYf.js",
+    "assets/catalog-CGuOpeY8.js",
+    "assets/compose-C1tLg9l9.js",
+    "assets/debug-BVnJLfS4.js",
+    "assets/decor-EQ8VRNuO.js",
+    "assets/decor-Tyb8Za1u.js",
+    "assets/dmath-_BI8hNwF.js",
+    "assets/fxHooks-Cvx_8YWC.js",
+    "assets/ground-ufcYH9Hx.js",
+    "assets/juice-6UyTKeka.js",
+    "assets/kit-C-OErpbU.js",
+    "assets/lens-BwVvQcWW.js",
+    "assets/lens-Csl3PMnC.js",
+    "assets/lil-gui.esm-uYN4JE7y.js",
+    "assets/main-BefG6oT8.css",
+    "assets/main-CzsUDvlE.js",
+    "assets/missions-eXNMrvRm.js",
+    "assets/modulepreload-polyfill-P2Xu9kJm.js",
+    "assets/music-D6fpJLig.js",
+    "assets/outline-BufNikL2.js",
+    "assets/outline-DM9oZu0n.js",
+    "assets/padNav-a65kF6ol.js",
+    "assets/palette-DQTkVEn_.js",
+    "assets/parkMesh-CjoleZJz.js",
+    "assets/parkModel-D9KlCEyZ.js",
+    "assets/parkModel-DmiMeogd.js",
+    "assets/parks-C2dnYY6C.js",
+    "assets/parks-vuvy8Lj9.js",
+    "assets/perfLab-Dt5WuMzb.js",
+    "assets/poses-DwKBijP_.js",
+    "assets/preload-helper-DR1MrGPZ.js",
+    "assets/prims-CECOBLSv.js",
+    "assets/replay-_5kwzkRi.js",
+    "assets/scene-DiAs2bfK.js",
+    "assets/secrets-Czes5esN.js",
+    "assets/session-DxCN6jDh.js",
+    "assets/sfx-6jovSU2-.js",
+    "assets/skaterRig-CWjsS5UF.js",
+    "assets/skaterRig-CvzHL-r4.js",
+    "assets/skaterView-DCMhULBk.js",
+    "assets/skaters-pUdq6stw.js",
+    "assets/songs-B3nWAdc6.js",
+    "assets/stickers-9pAHXWwr.js",
+    "assets/table-W1plLavt.js",
+    "assets/tag-BoiZZ9xV.js",
+    "assets/tagPaint-BOEtbgNi.js",
+    "assets/tapeRider-C0l9JrgL.js",
+    "assets/three.core-DVWDmH0S.js",
+    "assets/toon-CycGToy9.js",
+    "assets/toon-L4_S6Akl.js",
+    "assets/tuning-D4mSK766.js",
+    "assets/types-DM-HODfo.js",
+    "assets/verlet-BVVzuOqv.js",
+    "favicon.png",
+    "fonts/baloo2.woff2",
+    "fonts/fonts.css",
+    "fonts/lilita-one.woff2",
+    "fonts/sedgwick-ave-display.woff2",
+    "index.html",
+    "logo.webp",
+    "music/recomecar.mp3",
+    "music/reencontrar.mp3",
+    "music/sobre-voce.mp3",
+    "og.jpg",
+    "parks/beach.glb",
+    "parks/bridge.glb",
+    "parks/hangar.glb",
+    "parks/index.html",
+    "parks/mall.glb",
+    "parks/pier.glb",
+    "parks/plaza.glb",
+    "parks/schoolyard.glb",
+    "parks/thumbs/beach.webp",
+    "parks/thumbs/bridge.webp",
+    "parks/thumbs/city.webp",
+    "parks/thumbs/hangar.webp",
+    "parks/thumbs/lab.webp",
+    "parks/thumbs/mall.webp",
+    "parks/thumbs/pier.webp",
+    "parks/thumbs/plaza.webp",
+    "parks/thumbs/schoolyard.webp",
+    "parks/thumbs/warehouse.webp",
+    "parks/warehouse.glb",
+    "props/props.glb",
+    "sfx/six-seven.mp3",
+    "skaters/clips.json",
+    "skaters/kit/board.glb",
+    "skaters/kit/body.glb",
+    "skaters/kit/head-alien.glb",
+    "skaters/kit/head-axolotl.glb",
+    "skaters/kit/head-bat.glb",
+    "skaters/kit/head-bear.glb",
+    "skaters/kit/head-camel.glb",
+    "skaters/kit/head-cat.glb",
+    "skaters/kit/head-chupa.glb",
+    "skaters/kit/head-collie.glb",
+    "skaters/kit/head-duck.glb",
+    "skaters/kit/head-fox.glb",
+    "skaters/kit/head-giraffe.glb",
+    "skaters/kit/head-glider.glb",
+    "skaters/kit/head-goat.glb",
+    "skaters/kit/head-goose.glb",
+    "skaters/kit/head-hare.glb",
+    "skaters/kit/head-hawk.glb",
+    "skaters/kit/head-hyena.glb",
+    "skaters/kit/head-koala.glb",
+    "skaters/kit/head-muskrat.glb",
+    "skaters/kit/head-otter.glb",
+    "skaters/kit/head-pony.glb",
+    "skaters/kit/head-puffin.glb",
+    "skaters/kit/head-ranger.glb",
+    "skaters/kit/head-sagui.glb",
+    "skaters/kit/head-seal.glb",
+    "skaters/kit/head-shrew.glb",
+    "skaters/kit/head-spider.glb",
+    "skaters/kit/head-tamarin.glb",
+    "skaters/kit/head-toad.glb",
+    "skaters/kit/head-wolf.glb",
+    "skaters/kit/head-yeti.glb",
+    "skaters/kit/kit.json",
+    "skaters/portraits/andrew-reynfox.png",
+    "skaters/portraits/arisa-shrew.png",
+    "skaters/portraits/aurelien-giraffe.png",
+    "skaters/portraits/bam-margoose.png",
+    "skaters/portraits/bob-burnquack.png",
+    "skaters/portraits/chad-muskrat.png",
+    "skaters/portraits/chris-collie.png",
+    "skaters/portraits/elissa-steamotter.png",
+    "skaters/portraits/eric-koalston.png",
+    "skaters/portraits/geoff-howley.png",
+    "skaters/portraits/ishod-hare.png",
+    "skaters/portraits/jamie-tomcat.png",
+    "skaters/portraits/kareem-camelbell.png",
+    "skaters/portraits/leticia-puffoni.png",
+    "skaters/portraits/nyjah-hustoad.png",
+    "skaters/portraits/rayssa-seal.png",
+    "skaters/portraits/rodney-mullet.png",
+    "skaters/portraits/rune-glideberg.png",
+    "skaters/portraits/sky-bruin.png",
+    "skaters/portraits/steve-caballo.png",
+    "skaters/portraits/tawny-hawk.png",
+    "skaters/portraits/yuto-horigoat.png",
+    "splash/tall.webp",
+    "splash/wide.webp",
+    "stickers/bag.webp",
+    "stickers/board.webp",
+    "stickers/bubblewrap.webp",
+    "stickers/coin.webp",
+    "stickers/fish.webp",
+    "stickers/flag.webp",
+    "stickers/flame.webp",
+    "stickers/hammer.webp",
+    "stickers/hand-clap.webp",
+    "stickers/hand-horns.webp",
+    "stickers/hand-palm.webp",
+    "stickers/hand-point.webp",
+    "stickers/hand-shake.webp",
+    "stickers/hand-you.webp",
+    "stickers/homework.webp",
+    "stickers/horseshoe.webp",
+    "stickers/letters.webp",
+    "stickers/oops.webp",
+    "stickers/popper.webp",
+    "stickers/rose.webp",
+    "stickers/shell.webp",
+    "stickers/sparkle.webp",
+    "stickers/spray.webp",
+    "stickers/star.webp",
+    "stickers/tape.webp",
+    "stickers/ticket.webp",
+    "stickers/trophy.webp",
+    "stickers/wrench.webp"
+  ],
+  "unresolved": [],
+  "unreachable": [
+    {
+      "status": 404,
+      "path": "iap/token",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "iap/claim",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": ".ico",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "assets/.ico",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/parks",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/parks/:code",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/daily",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/:code/doc",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "baloo2.woff2",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "lilita-one.woff2",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "assets/index.html",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": ".css",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "assets/.css",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "@colyseus/schema",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "assets/@colyseus/schema",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "auth",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": ".proxy",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "assets/skaterRig.ts",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "auth/poki",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/stats",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/look",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/name",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/ad-unlock",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/cheat",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/shop/buy",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/shop/ad-coins",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/missions/claim",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/missions/crate",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/missions/reroll",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "me/delete",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "boards/:id",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "replays/:id",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "boards/:id/best",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "assets/parkModel.ts",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": ",",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "g,",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/vert.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/street.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/tech.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/allround.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/varginha.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/abominollie.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/chupacabra.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/saci.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/curupira.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/itsy.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/grindula.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/jester.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "skaters/portraits/sentai.png",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/air.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/bolt.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/spin.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/balance.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/deck.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/play.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/menu.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/close.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/party.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/user.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/invite.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/home.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/clock.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/career.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/skaters.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/missions.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/parks.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/ranks.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/chest.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/gear.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "stickers/help.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/test.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/test.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/lab.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/pathlab.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/pathlab.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/hills.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/hills.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/downtown.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/downtown.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/hill.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/hill.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/ditch.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/ditch.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/garage.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/garage.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/overpass.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/overpass.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/underpass.glb",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/thumbs/underpass.webp",
+      "probes": 1
+    },
+    {
+      "status": 404,
+      "path": "parks/city.glb",
+      "probes": 1
+    }
+  ],
+  "external": [
+    {
+      "url": "https://backend.tailgrab.io/me",
+      "note": "live multiplayer backend — auth endpoint, stays external (HTTP 200 to the running client)"
+    },
+    {
+      "url": "https://backend.tailgrab.io/matchmake/joinOrCreate/hub",
+      "note": "Colyseus matchmaking — live backend, stays external (HTTP 200 to the running client)"
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-HX4BWPK6T5",
+      "note": "Google Tag Manager — external, never backfilled"
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect",
+      "note": "Google Analytics — external, never backfilled"
+    }
+  ],
+  "probeMisses": [
+    {
+      "status": 404,
+      "path": "stickers/fuck.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/shit.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/bitch.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/cunt.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/dick.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/pussy.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/asshole.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/bastard.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/slut.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/whore.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/fag.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/nigg.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/retard.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/high.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/skate.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/tapes.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/crategap.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/transfer.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/dockrail.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/containergap.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/vert720.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/bags.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/escalator.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/atrium.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/special.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/tickets.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/handrail.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/barrier.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/wallride.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/freeway.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/terrace.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/pipe.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/speed.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/top.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/bottom.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/hat.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/acc.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/xp.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/stars.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    },
+    {
+      "status": 404,
+      "path": "stickers/feat.webp",
+      "note": "heuristic id-array probe miss — not a runtime reference"
+    }
+  ],
+  "notes": [
+    "Capture method: closure-to-fixpoint from the live origin (entry fetched live, byte-identical to the recon copy) — script/link/srcset refs, import/import()/new URL specifiers, Vite __vite__mapDeps tables, asset-path literals, CSS url()/@import, plus data-table-driven dynamic asset trees (kit.json heads, roster/skin keys, sticker ids, song table, built-in park defs).",
+    "Network-log cross-check during actual gameplay: 78 same-origin requests, zero outside the capture, zero 404s; the only off-origin hosts were the backend and analytics (this cross-check caught and fixed a 15-icon sticker bank the static scan missed).",
+    "Parks route: /parks is stored as parks/index.html (origin serves /parks 200, /parks/ 308, /parks/index.html 404) — update.mjs probes it as /parks.",
+    "unreachable lists declared references that 404 upstream (API endpoints needing a session/verb, two stale dev-branch .ts imports, icon ids that render as inline SVG, and scan noise); probeMisses lists heuristic id-array probes."
+  ]
+}
