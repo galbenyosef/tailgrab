@@ -318,7 +318,7 @@ so this section is entirely about `readable/`, `src/`, `split-spec.json`,
   (`readable/index-inline-1.pretty.css`, `readable/index-inline-2.pretty.js`,
   `readable/parks/index-inline-1.pretty.css`) with
   `readable/index-inline-map.json` at the root. Before/after counts:
-  `readable/` 61 flat pretties + map → 61 under `readable/assets/` (58),
+  `readable/` 61 flat pretties + map → 61 under `readable/assets/` (57),
   `readable/fonts/` (1), `readable/parks/` (1) + the two root twins + map
   (bytes unchanged, path-only re-rooting); `src/` 214 flat slices → 214 under
   `src/assets/`; the section count is unchanged (273). The superseded layer
