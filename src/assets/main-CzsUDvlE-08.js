@@ -107,7 +107,7 @@ function ps(e) {
     t
   );
 }
-var ms = {
+var swatchColors = {
     noads: [`#ffd21f`, `#ff8a1f`],
     pros: [`#1fc7e8`, `#4f6bff`],
     secrets: [`#a55bff`, `#3a1d7a`],
@@ -135,7 +135,7 @@ function gs(e) {
               `div`,
               `pack-card pack-${r.kind} ${s ? `` : `in`} ${t === e ? `focus` : ``}`,
             );
-          ((c.style.cssText = `--c1:${ms[t][0]};--c2:${ms[t][1]};--i:${n}`),
+          ((c.style.cssText = `--c1:${swatchColors[t][0]};--c2:${swatchColors[t][1]};--i:${n}`),
             (c.dataset.pack = t));
           let l = Lt(i),
             d = j(`div`, `pack-art`),
@@ -266,7 +266,7 @@ function gs(e) {
     },
   };
 }
-var _s = [
+var styleSlots = [
     { id: `head`, label: `Critter`, word: `Critter`, ico: `face` },
     { id: `top`, label: `Top`, word: `Top`, ico: `tee` },
     { id: `bottom`, label: `Bottoms`, word: `Bottoms`, ico: `shorts` },
@@ -274,8 +274,8 @@ var _s = [
     { id: `acc`, label: `Gear`, word: `Gear`, ico: `backpack` },
     { id: `riding`, label: `Riding`, word: `Riding style`, ico: `deck` },
   ],
-  vs = new Map(_s.map((e) => [e.id, e])),
-  ys = {
+  vs = new Map(styleSlots.map((e) => [e.id, e])),
+  styleGroups = {
     fur: `Fur`,
     accent: `Markings`,
     hair: `Hair & spots`,

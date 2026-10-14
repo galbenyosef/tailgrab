@@ -228,7 +228,7 @@ function rd(e, t) {
     line: `${n.length} here${r ? ` · ${r} building` : ``}`,
   };
 }
-var id = class {
+var ScreenWipe = class {
   el;
   card;
   constructor(e) {

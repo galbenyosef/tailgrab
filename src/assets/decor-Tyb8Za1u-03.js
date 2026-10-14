@@ -1,6 +1,6 @@
 // assets/decor-Tyb8Za1u 03 — math
 // Lines 393-903 of readable/assets/decor-Tyb8Za1u.pretty.js (statement-aligned).
-var Ce = class {
+var LooseBodies = class {
   group = new t();
   bodies = [];
   meshes = [];

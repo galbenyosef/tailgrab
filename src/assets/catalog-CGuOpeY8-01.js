@@ -4,7 +4,7 @@ import { v as e } from "./preload-helper-DR1MrGPZ.js";
 import { D as t, T as n } from "./prims-CECOBLSv.js";
 import { o as r } from "./compose-C1tLg9l9.js";
 import "./secrets-Czes5esN.js";
-var i = [
+var rampTable = [
     { id: `ramps`, label: `Ramps`, piece: `quarter` },
     { id: `street`, label: `Street`, piece: `stairs` },
     { id: `rails`, label: `Rails`, piece: `downrail` },
@@ -13,7 +13,7 @@ var i = [
     { id: `props`, label: `Props`, piece: `bench` },
   ],
   a = { x: { dir: `x` }, y: { dir: `up` }, z: { dir: `z` } },
-  o = [
+  materialTable = [
     `concrete`,
     `concreteDark`,
     `wood`,
@@ -29,7 +29,7 @@ var i = [
     `coral`,
     `sky`,
   ],
-  s = [
+  zoneMaterials = [
     `concrete`,
     `concreteDark`,
     `wood`,
@@ -47,7 +47,7 @@ var i = [
     y: t.split(` `),
     z: n ? n.split(` `) : [],
   });
-function f(r, i, a, o = !0) {
+function buildPiece(r, i, a, o = !0) {
   let s = e(r),
     c = n(t(s)),
     l = Math.min(

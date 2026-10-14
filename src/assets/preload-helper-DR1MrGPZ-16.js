@@ -8,7 +8,7 @@ function nr(e, t, n) {
     e.f.w / 2 + (e.f.walk ?? 0) + 0.4
   );
 }
-function rr(e, t, n, r, i, a, o) {
+function checkMeshTris(e, t, n, r, i, a, o) {
   let s = 0,
     c = new Map();
   for (let r = 0; r < n.length; r += 3) {
@@ -64,13 +64,13 @@ var sr = 0.05,
   cr = 0.05,
   lr = new WeakMap();
 function ur(e, t) {
-  if (t.kind !== `terrain`) return Kr(e) ? Xr(t) : Pt(t);
+  if (t.kind !== `terrain`) return Kr(e) ? Xr(t) : pieceDefaults(t);
   let r = lr.get(e.pieces);
   if (!r) {
-    let t = we(e),
+    let t = checkSingleTerrain(e),
       a = [];
     for (let t of e.pieces) {
-      let e = t.kind === `terrain` ? void 0 : Pt(t).holeLoop;
+      let e = t.kind === `terrain` ? void 0 : pieceDefaults(t).holeLoop;
       if (!e) continue;
       let r = n(t.rot ?? 0),
         o = i(t.rot ?? 0),
@@ -96,7 +96,7 @@ function dr(e, t, n, r, i, a) {
     c = e.z;
   return [o + r * t + a * n, s + i, c - r * n + a * t];
 }
-function fr(e) {
+function checkFloorHole(e) {
   let t = [];
   for (let r of e.pieces) {
     let o = ur(e, r).hole;
@@ -155,8 +155,8 @@ function mr(e, t) {
     n.prim(`none`)
   );
 }
-function hr(e) {
-  let t = fr(e),
+function checkFloorMesh(e) {
+  let t = checkFloorHole(e),
     r = e.pieces.filter((e) => e.kind === `floor`),
     a = (e, t) =>
       (
@@ -179,7 +179,7 @@ function hr(e) {
       o.push({ piece: r, prim: t, cos: c, sin: l, id: e });
     }
   }
-  if (we(e))
+  if (checkSingleTerrain(e))
     for (let e of r) {
       if (e.kind !== `floor`) continue;
       let t = new y(),
@@ -208,7 +208,7 @@ function gr(e) {
     r = [],
     i = [],
     a = [];
-  for (let { piece: o, prim: s, cos: c, sin: l, id: u } of hr(e))
+  for (let { piece: o, prim: s, cos: c, sin: l, id: u } of checkFloorMesh(e))
     s.type !== `tube` &&
       s.collide &&
       (s.type === `extrude`

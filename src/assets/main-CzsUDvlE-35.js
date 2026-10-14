@@ -3,13 +3,13 @@
 function Yf() {
   try {
     let [e, t] = (localStorage.getItem(qf) ?? ``).split(`@`);
-    return Kf.includes(e) && Date.now() - Number(t) < Jf ? e : null;
+    return qualityTiers.includes(e) && Date.now() - Number(t) < Jf ? e : null;
   } catch {
     return null;
   }
 }
 function Xf(e) {
-  let t = Kf.find((t) => O[t] === e);
+  let t = qualityTiers.find((t) => O[t] === e);
   try {
     t && localStorage.setItem(qf, `${t}@${Date.now()}`);
   } catch {}
@@ -34,13 +34,13 @@ function ep(e = Gf()) {
   if (e === `low` || e === `med` || e === `high`) return O[e];
   let t = $f(),
     n = Yf();
-  return n && Kf.indexOf(n) < Kf.findIndex((e) => O[e] === t) ? O[n] : t;
+  return n && qualityTiers.indexOf(n) < qualityTiers.findIndex((e) => O[e] === t) ? O[n] : t;
 }
 var tp = new r(),
   np = new v(),
   rp = new te(),
   ip = new T(),
-  ap = class extends Va {
+  MapControls = class extends Va {
     constructor(e, t) {
       (super(e, t),
         (this.screenSpacePanning = !1),

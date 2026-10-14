@@ -2,7 +2,7 @@
 // Lines 11406-11750 of readable/assets/main-CzsUDvlE.pretty.js (statement-aligned).
 var If = (e, t, n) =>
     e[0] < t[2] + n && t[0] < e[2] + n && e[1] < t[3] + n && t[1] < e[3] + n,
-  Lf = class {
+  EdgeMarkers = class {
     root;
     badges = new Map();
     hud = [];
@@ -220,7 +220,7 @@ var If = (e, t, n) =>
     }
   },
   Rf = 2e3,
-  zf = class {
+  PingPill = class {
     el = j(`div`, `ping-pill`);
     room;
     timer;
@@ -248,7 +248,7 @@ var If = (e, t, n) =>
   },
   Bf = 4096,
   Vf = 500,
-  Hf = class {
+  PerfMeter = class {
     el = j(`div`, `perf-meter`);
     forced = new URLSearchParams(location.search).has(`perf`);
     dt = new Float32Array(Bf);
@@ -342,6 +342,6 @@ var If = (e, t, n) =>
 function Gf() {
   return Wf ?? J.quality;
 }
-var Kf = [`low`, `med`, `high`],
+var qualityTiers = [`low`, `med`, `high`],
   qf = `freeskater-quality-settled`,
   Jf = 6048e5;

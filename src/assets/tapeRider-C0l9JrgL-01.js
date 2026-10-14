@@ -17,7 +17,7 @@ import {
   v,
   y,
 } from "./session-DxCN6jDh.js";
-var b = class {
+var TapeSim = class {
   tape;
   world;
   sim = t();
@@ -78,12 +78,12 @@ var b = class {
       this.i++);
   }
 };
-function* x(e, t, n = 30) {
+function* tapeChecksum(e, t, n = 30) {
   let i = [],
     a = [];
   if (e.tickHz !== 30 || e.subSteps !== 2)
     return { ok: !1, why: `version`, landed: i, keys: a };
-  let o = new b(e, t);
+  let o = new TapeSim(e, t);
   for (; !o.done;)
     (n > 0 && o.i % n === 0 && a.push(o.key()),
       o.step(),
@@ -99,7 +99,7 @@ function* x(e, t, n = 30) {
     : { ok: !1, why: `hash`, landed: i, keys: a };
 }
 async function S(e, t, n, r = 2, i = 30) {
-  let a = x(e, t, i),
+  let a = tapeChecksum(e, t, i),
     o = performance.now();
   for (let e = 1; ; e++) {
     let t = a.next();
@@ -115,7 +115,7 @@ var C = (e) =>
       ? n(new DOMException(`aborted`, `AbortError`))
       : requestAnimationFrame(() => t());
   });
-async function w(e, t, n) {
+async function compressTape(e, t, n) {
   let r = performance.now(),
     i = n ?? (await s(e)),
     a = performance.now(),
@@ -144,7 +144,7 @@ async function w(e, t, n) {
   };
 }
 var T = 3,
-  E = class {
+  TapeRunner = class {
     run;
     frame = a();
     view;
@@ -157,7 +157,7 @@ var T = 3,
     ended = !1;
     constructor(e) {
       ((this.loaded = e),
-        (this.run = new b(e.tape, e.world)),
+        (this.run = new TapeSim(e.tape, e.world)),
         (this.view = o(l(e.tape.skater, e.tape.look))),
         (this.view.col = e.world.col),
         this.keep());

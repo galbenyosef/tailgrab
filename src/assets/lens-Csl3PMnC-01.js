@@ -21,7 +21,7 @@ var c = new r(-1, 1, 1, -1, 0, 1),
         this.setAttribute(`uv`, new t([0, 2, 0, 0, 2, 0], 2)));
     }
   })(),
-  u = class {
+  LensMaterial = class {
     constructor(e) {
       this._mesh = new s(l, e);
     }
@@ -97,7 +97,7 @@ function f(e) {
       }`,
   });
 }
-var p = class {
+var Lens = class {
   target = new e(1, 1, { type: n, samples: 4 });
   material;
   quad;
@@ -105,7 +105,7 @@ var p = class {
   constructor(e) {
     ((this.material = f(e)),
       (this.material.uniforms.tDiffuse.value = this.target.texture),
-      (this.quad = new u(this.material)));
+      (this.quad = new LensMaterial(this.material)));
   }
   setSize(e, t) {
     (this.target.setSize(e, t),

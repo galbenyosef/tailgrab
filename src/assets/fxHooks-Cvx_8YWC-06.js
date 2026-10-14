@@ -1,6 +1,6 @@
 // assets/fxHooks-Cvx_8YWC 06 — append
 // Lines 2640-3006 of readable/assets/fxHooks-Cvx_8YWC.pretty.js (statement-aligned).
-var yn = class {
+var XpMeter = class {
     el;
     badgeBox = k(`span`, `xp-meter-badge`);
     fill = k(`i`, ``);
@@ -55,7 +55,7 @@ var yn = class {
       });
     }
   },
-  bn = class {
+  LevelChip = class {
     el;
     badge;
     fill;
@@ -160,7 +160,7 @@ var yn = class {
       (this.off(), this.burst && clearTimeout(this.burst), this.el.remove());
     }
   },
-  xn = class {
+  Announcer = class {
     root;
     toasts;
     queue = [];

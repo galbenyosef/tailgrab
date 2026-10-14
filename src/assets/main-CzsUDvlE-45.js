@@ -83,7 +83,7 @@ async function uh() {
     lh(0.45, `Loading skaters`),
     await fn(),
     lh(0.8, `Loading the Skate Hub`));
-  let i = new th(sh, ch);
+  let i = new GameApp(sh, ch);
   ((window.__skate = {
     app: i,
     get ready() {

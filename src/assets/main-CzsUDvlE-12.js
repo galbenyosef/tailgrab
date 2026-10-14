@@ -47,7 +47,7 @@ function ec(e, t, n, r, i) {
     a
   );
 }
-var tc = {
+var careerStats = {
     wins: `wins`,
     matches: `matches`,
     runs: `runs`,
@@ -70,7 +70,7 @@ function rc(e) {
               ? (R(n.level)?.name ?? n.level)
               : n.kind === `complete`
                 ? `100%`
-                : `${nc.format(n.n)} ${tc[n.stat]}`),
+                : `${nc.format(n.n)} ${careerStats[n.stat]}`),
     t
   );
 }
@@ -107,7 +107,7 @@ function oc(e) {
     : n.kind === `stars`
       ? `${t(e.have)} of ${t(e.need)} stars`
       : n.kind === `feat`
-        ? `${t(e.have)} of ${t(e.need)} ${tc[n.stat]}`
+        ? `${t(e.have)} of ${t(e.need)} ${careerStats[n.stat]}`
         : `${e.have} of ${e.need} goals`;
 }
 function sc(e) {

@@ -4,19 +4,21 @@
 //   node tools/propose-names.mjs            # propose + merge into tools/names.json
 //   node tools/propose-names.mjs --dry      # print proposals, write nothing
 //
-// Evidence used (never guesses):
+// Evidence used (never guesses). Tailgrab's build keeps a couple of re-export
+// FACADES next to their real chunks (e.g. skaterRig-CWjsS5UF.js imports from
+// skaterRig-CvzHL-r4.js and re-exports with semantic public names), so the
+// facade chain is the strongest evidence in this capture:
 //
 //   1. A chunk's own export table. `export { <local> as <SemanticName> }` ties a
 //      minified local binding to the semantic name its consumers use — so the
 //      LOCAL gets renamed (the public name is the served API and never changes).
-//      A public name is treated as semantic when it looks like one (length ≥ 4
-//      or contains `_`), which keeps minified publics (`C`, `At`, `_`) untouched.
-//
-//   2. Other chunks' import clauses. `import { <Public> as <local> } from "./x.js"`
-//      where `<Public>` is a semantic public name of x.js (evidence 1) means the
-//      importing local binding IS that thing — rename the local to the public
-//      name. This is how a name learned from one chunk's export table reaches
-//      every consumer of that chunk.
+//   2. Facade flow: when a chunk imports `{ P as L }` from chunk T and exports
+//      `{ L as Semantic }`, then T's public name P IS `Semantic`; the local in
+//      the facade and the local bound to P in T both get renamed.
+//   3. Any other chunk's import clauses: `import { P as L } from "./T.js"` where
+//      (T, P) is known semantic — rename the importing local to that name.
+//   4. A public name that already reads as a semantic name (length ≥ 4 or an
+//      underscore) is semantic wherever it appears.
 //
 // Curated entries already present in names.json are never overwritten.
 import fs from "node:fs";
@@ -40,12 +42,17 @@ const semantic = (n) =>
   !/^[A-Z]{2,3}$/.test(n) &&
   !/^(default|arguments|eval|undefined|NaN|Infinity)$/.test(n);
 
-// ── pass 1: semantic public names per chunk ─────────────────────────────
-const chunkOf = new Map(); // capture rel -> { sourceFile, publics:Set, imports:[…] }
+// ── pass 1: parse every app chunk; collect its export table + imports ───
+const chunkOf = new Map(); // capture rel -> { sourceFile, publics:Map(public->local), imports:[{imported,local,fromRel}] }
+const relOfSpec = (from, capRel) => {
+  if (!from.startsWith(".")) return null;
+  const dir = path.posix.dirname(capRel);
+  return path.posix.normalize(path.posix.join(dir, from));
+};
 for (const src of spec.sources) {
   if (!/\.pretty\.js$/.test(src.sourceFile || "") || !src.capture.endsWith(".js")) continue;
   if (!src.derived.startsWith("readable +")) continue; // app chunks only — vendor stays minified
-  const code = fs.readFileSync(path.join(proj, src.sourceFile), "utf8");
+  const code = fs.readFileSync(path.join(proj, ...src.sourceFile.split("/")), "utf8");
   let ast;
   try {
     ast = acorn.parse(code, { ecmaVersion: 2023, sourceType: "module" });
@@ -57,7 +64,8 @@ for (const src of spec.sources) {
   for (const st of ast.body) {
     if (st.type === "ImportDeclaration") {
       for (const s of st.specifiers) {
-        if (s.type === "ImportSpecifier") imports.push({ imported: s.imported.name, local: s.local.name, from: st.source.value });
+        if (s.type === "ImportSpecifier")
+          imports.push({ imported: s.imported.name, local: s.local.name, fromRel: relOfSpec(st.source.value, src.capture) });
       }
     } else if (st.type === "ExportNamedDeclaration") {
       for (const s of st.specifiers || []) {
@@ -68,28 +76,57 @@ for (const src of spec.sources) {
   chunkOf.set(src.capture, { sourceFile: src.sourceFile, publics, imports });
 }
 
-// public name -> semantic public name (only when the public name itself reads)
-const semanticPublics = new Set();
-for (const { publics } of chunkOf.values()) for (const p of publics.keys()) if (semantic(p)) semanticPublics.add(p);
+// ── pass 2: facade flow — (chunk, public) -> semantic name ──────────────
+const semanticPublic = new Map(); // `${capRel}|${public}` -> semantic
+const notePublic = (capRel, publicName, semanticName) => {
+  if (!capRel) return;
+  const k = `${capRel}|${publicName}`;
+  if (!semanticPublic.has(k)) semanticPublic.set(k, semanticName);
+};
+// (4) public names that already read as semantic names
+const semanticNameSet = new Set();
+for (const { publics } of chunkOf.values()) for (const p of publics.keys()) if (semantic(p)) semanticNameSet.add(p);
+for (const [capRel, { publics }] of chunkOf)
+  for (const [publicName] of publics) if (semantic(publicName)) notePublic(capRel, publicName, publicName);
+// (2) facade flow: import { P as L } from T; export { L as Semantic } => T's P is Semantic
+for (const [capRel, { publics, imports }] of chunkOf) {
+  const importByLocal = new Map(imports.map((i) => [i.local, i]));
+  for (const [publicName, local] of publics) {
+    if (!semantic(publicName)) continue;
+    const imp = importByLocal.get(local);
+    if (!imp) continue;
+    notePublic(imp.fromRel, imp.imported, publicName); // the imported public name in T
+    notePublic(capRel, publicName, publicName); // and this chunk's own export
+  }
+}
 
-// ── pass 2: propose per chunk ───────────────────────────────────────────
-const added = new Map(); // capture -> { name: target, evidence }
+// ── pass 3: propose per chunk ───────────────────────────────────────────
+const added = new Map(); // capture -> Map(name -> {to, why})
 const note = (capture, from, to, why) => {
+  if (!capture || from === to) return;
   if (!added.has(capture)) added.set(capture, new Map());
-  added.get(capture).set(from, { to, why });
+  const m = added.get(capture);
+  if (!m.has(from)) m.set(from, { to, why });
 };
 for (const [capture, info] of chunkOf) {
-  // evidence 1: own export table, local side
+  // evidence 1 + 2 + 4: own export table, local side
   for (const [publicName, local] of info.publics) {
-    if (!semantic(publicName)) continue;
-    if (local === publicName) continue;
-    note(capture, local, publicName, `own export table: local \`${local}\` is exported as \`${publicName}\``);
+    const known = semanticPublic.get(`${capture}|${publicName}`);
+    const target = known || (semantic(publicName) ? publicName : null);
+    if (!target || local === target) continue;
+    note(capture, local, target, `own export table: local \`${local}\` is exported as \`${target}\``);
   }
-  // evidence 2: imports whose public name is a known semantic public
+  // evidence 3: imports whose (source chunk, public name) is known semantic
   for (const imp of info.imports) {
-    if (!semanticPublics.has(imp.imported)) continue;
-    if (imp.local === imp.imported) continue;
-    note(capture, imp.local, imp.imported, `import { ${imp.imported} as ${imp.local} } from "${imp.from}" — public name is semantic`);
+    const known = imp.fromRel ? semanticPublic.get(`${imp.fromRel}|${imp.imported}`) : null;
+    const target = known || (semanticNameSet.has(imp.imported) ? imp.imported : null);
+    if (!target || imp.local === target) continue;
+    note(
+      capture,
+      imp.local,
+      target,
+      `import { ${imp.imported} as ${imp.local} } from "${imp.fromRel}" — public name is semantic`,
+    );
   }
 }
 
@@ -103,7 +140,7 @@ for (const [capture, rules] of [...added].sort()) {
       continue;
     }
     names[capture] = {
-      note: "evidence-driven proposals (tools/propose-names.mjs): own export table + semantic imports",
+      note: "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
       renames: {},
     };
   }

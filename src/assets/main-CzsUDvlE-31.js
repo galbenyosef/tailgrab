@@ -152,7 +152,7 @@ function ef(e, t) {
   return s;
 }
 var tf = new n(0.86, 1, 64),
-  nf = class {
+  GatePopup = class {
     group = new c();
     items = new Map();
     waves = [];

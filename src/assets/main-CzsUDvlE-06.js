@@ -3,7 +3,7 @@
 var jo = Math.random().toString(36).slice(2),
   Mo = () => matchMedia(`(orientation: portrait)`).matches,
   No = () => matchMedia(`(pointer: coarse)`).matches,
-  Po = class {
+  TabNav = class {
     root;
     head;
     extra;
@@ -84,7 +84,7 @@ var jo = Math.random().toString(36).slice(2),
       for (let e of this.offs.splice(0)) e();
     }
   },
-  Fo = class {
+  AppRouter = class {
     el;
     stage;
     scrim;
@@ -316,7 +316,7 @@ var jo = Math.random().toString(36).slice(2),
           r.append(i));
       }
       r.append(o);
-      let s = new Po(this, r, i, a, o, !this.home),
+      let s = new TabNav(this, r, i, a, o, !this.home),
         c = !1,
         l = {
           kind: t,

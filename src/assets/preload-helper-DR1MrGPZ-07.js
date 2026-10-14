@@ -1,6 +1,6 @@
 // assets/preload-helper-DR1MrGPZ 07 — push
 // Lines 1851-2173 of readable/assets/preload-helper-DR1MrGPZ.pretty.js (statement-aligned).
-function vt(e) {
+function bowlProfiles(e) {
   switch (e.type) {
     case `round`:
       return f(e.R);
@@ -12,11 +12,11 @@ function vt(e) {
       return m(e.n, e.rho, e.Rl, e.Rh, e.phi ?? 0);
   }
 }
-function yt(e) {
+function checkBowl(e) {
   let { h: t, r: n, w: r, d: i } = e;
   if (t < n - 1e-6)
     throw Error(`bowl ${e.id}: h ${t} < r ${n} (the lip must go vert)`);
-  let a = vt(e.shape);
+  let a = bowlProfiles(e.shape);
   p(a, n);
   let o = d(a),
     s = { x0: -r / 2, x1: r / 2, z0: -i / 2, z1: i / 2 },
@@ -191,7 +191,7 @@ function Dt(e, t, n, r, i, a) {
   for (let t = 0; t < u.length; t += 3)
     e.tri(l[u[t]], l[u[t + 1]], l[u[t + 2]], a);
 }
-function Ot(e) {
+function checkBack(e) {
   let { R: t, sweep: n, r, h: o, back: s } = e;
   if (o < r - 1e-6) throw Error(`curve ${e.id}: h ${o} < r ${r}`);
   let c = !!e.pocket;

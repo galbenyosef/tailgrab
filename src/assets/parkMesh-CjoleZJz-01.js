@@ -8,7 +8,7 @@ import {
   xt as i,
   yr as a,
 } from "./three.core-DVWDmH0S.js";
-import { a as o, i as s } from "./toon-CycGToy9.js";
+import { a as toonMaterial, i as patchToon } from "./toon-CycGToy9.js";
 import { f as c, l, m as u } from "./preload-helper-DR1MrGPZ.js";
 import { y as d } from "./prims-CECOBLSv.js";
 import { a as f, o as p } from "./palette-DQTkVEn_.js";
@@ -26,7 +26,7 @@ function _(e) {
 }
 var v = new n(),
   y = new Map();
-function b(n) {
+function parkVertexAttrs(n) {
   let a = new Map(),
     d = (e) => {
       let t = a.get(e);
@@ -48,7 +48,7 @@ function b(n) {
     let n = _[e].piece,
       r = m?.get(n),
       i = r === void 0 ? void 0 : (h.get(r) ?? f.now.get(r) ?? f.last.get(r));
-    ((i ||= x(_.slice(e, t))),
+    ((i ||= extrudePiece(_.slice(e, t))),
       r !== void 0 && h.set(r, i),
       g.push({ piece: n, chunk: i }),
       (e = t));
@@ -82,12 +82,12 @@ function b(n) {
     D.setAttribute(`zone`, new t(w, 1)),
     D.setAttribute(`kind`, new t(T, 1)),
     D.computeBoundingSphere());
-  let O = new i(D, s(o({ vertexColors: !0 }), { rim: 0, kind: !0 }));
+  let O = new i(D, patchToon(toonMaterial({ vertexColors: !0 }), { rim: 0, kind: !0 }));
   ((O.receiveShadow = !0), (O.name = `park`));
   let k = new e();
   return (k.add(O), { group: k, zoneOf: (e) => a.get(e) ?? 0 });
 }
-function x(e) {
+function extrudePiece(e) {
   let t = { pos: [], nrm: [], col: [], zone: [], kind: [] },
     n = !1;
   for (let { piece: r, prim: i, cos: a, sin: o, id: s } of e) {

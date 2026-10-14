@@ -27,7 +27,7 @@ var o = 60 / 88 / 4,
   C = !1,
   w = new Set(),
   T = (e) => 440 * 2 ** ((e - 69) / 12);
-function E() {
+function startMusic() {
   t.onUnlock(D);
 }
 function D() {

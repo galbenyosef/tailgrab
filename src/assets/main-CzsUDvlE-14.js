@@ -18,7 +18,7 @@ function Dc(e, t) {
     l = j(`div`, `pf-meta`);
   a.append(o, s, c, l);
   let u = j(`div`, `pf-main`),
-    d = new wc(),
+    d = new StatPointsBank(),
     f = `+${+(Zi * 100).toFixed(1)}%`;
   u.append(
     d.el,
@@ -29,7 +29,7 @@ function Dc(e, t) {
     ),
   );
   let p = j(`div`, `pf-nums`),
-    m = Ec.map(([e]) => {
+    m = profileStats.map(([e]) => {
       let t = j(`div`, `pf-num`),
         n = j(`b`, ``);
       return (t.append(n, j(`span`, ``, e)), p.append(t), n);
@@ -60,7 +60,7 @@ function Dc(e, t) {
       let e = j(`span`, `pf-next`);
       (e.append(j(`b`, ``, `Next unlock`), ` ${a}`), l.append(e));
     }
-    Ec.forEach(([, t], n) => {
+    profileStats.forEach(([, t], n) => {
       m[n].textContent = t(e);
     });
   };
@@ -135,7 +135,7 @@ function Ac(e, t) {
           ),
         );
   } else {
-    let t = o ? `with ${jc[o]}` : `as ${n.email ?? `your account`}`;
+    let t = o ? `with ${oauthProviders[o]}` : `as ${n.email ?? `your account`}`;
     e.append(
       W(`Account`),
       j(
@@ -169,17 +169,17 @@ function Ac(e, t) {
       e.append(Pc(`SIGN IN`, Cn))),
     e.querySelector(`input`)?.focus());
 }
-var jc = { apple: `Apple`, google: `Google` };
+var oauthProviders = { apple: `Apple`, google: `Google` };
 function Mc(e, t, n = !1) {
   let r = V(
-    `${n ? `LINK` : `SIGN IN WITH`} ${jc[e].toUpperCase()}`,
+    `${n ? `LINK` : `SIGN IN WITH`} ${oauthProviders[e].toUpperCase()}`,
     `signin-${e}`,
     async () => {
       ((t.textContent = ``), (r.disabled = !0));
       try {
         await lt(e);
       } catch (n) {
-        t.textContent = `${jc[e]} sign-in didn't finish: ${P(n)}`;
+        t.textContent = `${oauthProviders[e]} sign-in didn't finish: ${P(n)}`;
       }
       r.disabled = !1;
     },

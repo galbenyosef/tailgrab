@@ -1,6 +1,6 @@
 // assets/padNav-a65kF6ol 02 — look
 // Lines 351-646 of readable/assets/padNav-a65kF6ol.pretty.js (statement-aligned).
-function Me() {
+function fakeAdOverlay() {
   return new Promise((e) => {
     let t = i(`div`, `fake-ad`),
       n = i(`b`, `fake-ad-count`, String(ke)),
@@ -71,10 +71,10 @@ function Ve() {
       ? C.name
       : h(String(Math.random()));
 }
-var He = `freeskater-seen-unlocks-3`;
+var seenUnlocks = `freeskater-seen-unlocks-3`;
 function q() {
   try {
-    let e = localStorage.getItem(He);
+    let e = localStorage.getItem(seenUnlocks);
     return e ? new Set(JSON.parse(e)) : null;
   } catch {
     return null;
@@ -82,7 +82,7 @@ function q() {
 }
 function Ue(e) {
   try {
-    localStorage.setItem(He, JSON.stringify([...e]));
+    localStorage.setItem(seenUnlocks, JSON.stringify([...e]));
   } catch {}
 }
 function J() {
@@ -243,13 +243,13 @@ var Z = {
     ArrowRight: `right`,
     KeyD: `right`,
   },
-  at = new Set([`Enter`, `NumpadEnter`, `Space`]),
+  confirmKeys = new Set([`Enter`, `NumpadEnter`, `Space`]),
   ot = 400,
   st = 110,
   ct = 0.5,
   lt = 0.3,
   ut = 1400,
-  dt = {
+  padLabels = {
     xbox: {
       a: `A`,
       b: `B`,
@@ -294,5 +294,5 @@ var Z = {
     },
   };
 function ft() {
-  return dt[_ ?? `xbox`];
+  return padLabels[_ ?? `xbox`];
 }

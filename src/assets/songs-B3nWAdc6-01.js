@@ -1,6 +1,6 @@
 // assets/songs-B3nWAdc6 01 — artist
 // Lines 1-45 of readable/assets/songs-B3nWAdc6.pretty.js (statement-aligned).
-var e = [
+var songs = [
     {
       id: `recomecar`,
       title: `Recomeçar`,

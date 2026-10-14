@@ -42,11 +42,11 @@ import {
   xt as x,
   yr as S,
 } from "./three.core-DVWDmH0S.js";
-import { a as ae } from "./toon-CycGToy9.js";
+import { a as toonMaterial } from "./toon-CycGToy9.js";
 import { t as oe } from "./preload-helper-DR1MrGPZ.js";
 import { J as se, Ot as ce } from "./tuning-D4mSK766.js";
 import { n as C } from "./palette-DQTkVEn_.js";
-import { t as le } from "./outline-BufNikL2.js";
+import { t as addOutlines } from "./outline-BufNikL2.js";
 import { K as w, c as T } from "./table-W1plLavt.js";
 import {
   c as E,

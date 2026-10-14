@@ -1,6 +1,6 @@
 // assets/poses-DwKBijP_ 01 — clip
 // Lines 1-121 of readable/assets/poses-DwKBijP_.pretty.js (statement-aligned).
-var e = {
+var emotePoses = {
     greet: [
       { clip: `emote-wave` },
       { clip: `greet-salute` },
@@ -40,7 +40,7 @@ var e = {
       { clip: `carry-look` },
     ],
   },
-  t = {
+  victoryPoses = {
     hawk: [`victory-360`, `greet-flap`],
     duck: [`greet-flap`, `fidget-tap`],
     axolotl: [`fidget-shake`, `greet-nod`],
@@ -73,7 +73,7 @@ var e = {
     chupa: [`fidget-look`, `lose-stomp`],
     ranger: [`victory-sentai`, `greet-salute`],
   },
-  n = {
+  standPoses = {
     hawk: `stand-kick`,
     duck: `stand-wave`,
     axolotl: `stand-sit`,
@@ -108,8 +108,8 @@ var e = {
   },
   r = 0.5;
 function i(n, r) {
-  let i = t[r] ?? [];
-  return e[n]
+  let i = victoryPoses[r] ?? [];
+  return emotePoses[n]
     .filter((e) => !e.only || i.includes(e.clip))
     .map((e) => ({ clip: e.clip, w: i.includes(e.clip) ? 3 : 1 }));
 }

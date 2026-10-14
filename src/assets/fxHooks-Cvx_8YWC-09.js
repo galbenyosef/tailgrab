@@ -9,7 +9,7 @@ var Zn = 0.28,
   tr = new S(),
   nr = (e) => 1 - (1 - e) ** 3,
   rr = (e) => e - Math.PI * Math.round(e / Math.PI),
-  ir = class {
+  TrickCallout = class {
     root = new u();
     onCall = () => {};
     target = new u();
@@ -308,17 +308,17 @@ var Zn = 0.28,
         (this.session = e),
         (this.watch = n),
         (this.announcer = t),
-        (this.particles = new Le()),
+        (this.particles = new Particles()),
         (this.particles.scale = e.stage.tier.particles),
         e.stage.scene.add(this.particles.mesh),
-        (this.skins = new on(this.particles)),
+        (this.skins = new FunnelRide(this.particles)),
         e.stage.scene.add(this.skins.root),
-        (this.beams = new jn()),
+        (this.beams = new BeamBurst()),
         e.stage.scene.add(this.beams.group),
-        (this.wind = new Ln()),
+        (this.wind = new TrailBeam()),
         (this.wind.scale = e.stage.tier.particles),
         e.stage.scene.add(this.wind.mesh),
-        (this.guide = new ir()),
+        (this.guide = new TrickCallout()),
         (this.guide.onCall = (e, t, n) => this.landingCall(e, t, n)),
         e.stage.scene.add(this.guide.root),
         (e.cam.shakeEnabled = M.shake && !M.reducedMotion),
@@ -330,7 +330,7 @@ var Zn = 0.28,
           (this.edge.className = `special-edge`),
           document.getElementById(`ui`)?.prepend(this.edge)));
       let r = document.getElementById(`ui`);
-      !this.cine && r && (this.cine = new wn(r));
+      !this.cine && r && (this.cine = new CineBars(r));
     }
     remoteMode(e, t, n, r, i, a) {
       let o = this.particles;

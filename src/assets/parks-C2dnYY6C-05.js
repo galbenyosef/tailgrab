@@ -1,7 +1,7 @@
 // assets/parks-C2dnYY6C 05 — kind
 // Lines 3354-3726 of readable/assets/parks-C2dnYY6C.pretty.js (statement-aligned).
 var O = Math.PI,
-  k = {
+  downtownPark = {
     id: `downtown`,
     name: `Downtown`,
     range: [1e3, 1999],

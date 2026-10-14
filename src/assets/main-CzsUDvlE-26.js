@@ -1,7 +1,7 @@
 // assets/main-CzsUDvlE 26 — append
 // Lines 7738-8221 of readable/assets/main-CzsUDvlE.pretty.js (statement-aligned).
 var Gu = (e) => e[0].toUpperCase() + e.slice(1),
-  Ku = class {
+  PortalPrompts = class {
     prompt;
     card;
     chip;

@@ -3,7 +3,7 @@
 import { n as e } from "./scene-DiAs2bfK.js";
 var t = 1500,
   n = 3e3;
-async function r(r) {
+async function runPerfLab(r) {
   let s = r.stage,
     c = s.renderer;
   for (; !r.session;) await o(250);
@@ -48,7 +48,7 @@ async function r(r) {
     p = document.createElement(`div`);
   ((p.style.cssText = `position:fixed;z-index:200;left:8px;top:8px;max-width:calc(100% - 16px);max-height:calc(100% - 16px);overflow:auto;padding:8px 10px;border-radius:8px;background:rgba(10,6,20,.82);color:#fff;font:600 11px/1.35 ui-monospace,Menlo,monospace;white-space:pre-wrap;pointer-events:auto`),
     document.body.append(p));
-  let m = a(r),
+  let m = rendererInfo(r),
     h = [],
     g = (e) => {
       let t = h.map(
@@ -100,7 +100,7 @@ function i(e, t, n) {
     cpu: n.reduce((e, t) => e + t, 0) / n.length,
   };
 }
-function a(e) {
+function rendererInfo(e) {
   let t = e.stage.renderer.getContext(),
     n = t.getExtension(`WEBGL_debug_renderer_info`),
     r = String(

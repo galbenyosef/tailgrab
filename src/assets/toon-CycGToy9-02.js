@@ -173,7 +173,7 @@ var si = `
     float edge = min(min(uv.x, 1.0 - uv.x), min(uv.y, 1.0 - uv.y));
     return mix(1.0, shadow, smoothstep(0.0, 0.125, edge));
   }`;
-function ci(e = {}) {
+function toonMaterial(e = {}) {
   return new c({ gradientMap: ii(), ...e });
 }
 var li = {
@@ -181,7 +181,7 @@ var li = {
   uRimSun: { value: new H(1, 0.86, 0.72) },
   uLampGlow: { value: 0 },
 };
-function ui(e, t = {}) {
+function patchToon(e, t = {}) {
   let n = t.rim ?? 0.35,
     r = !!t.ao,
     i = !!t.glow,

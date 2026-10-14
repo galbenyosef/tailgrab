@@ -48,11 +48,11 @@ var B = null;
 function V() {
   if (B) return B;
   let e = () => {
-      let e = g(h({ vertexColors: !0 }), { rim: 0.12, kind: !0, glow: !0 });
+      let e = patchToon(toonMaterial({ vertexColors: !0 }), { rim: 0.12, kind: !0, glow: !0 });
       return (Le(e), e);
     },
     t = (e) => {
-      let t = g(h({ vertexColors: !0 }), { rim: e, kind: !0 });
+      let t = patchToon(toonMaterial({ vertexColors: !0 }), { rim: e, kind: !0 });
       return (Ie(t, `apron`), (t.depthWrite = !1), t);
     };
   return (
@@ -204,7 +204,7 @@ function Be() {
   });
 }
 function Ve(e, t) {
-  let n = new z(t.floorY),
+  let n = new ParkBuilder(t.floorY),
     r = e.rect,
     i = t.floorY,
     a = t.sea ? D(e, t.sea) : null,

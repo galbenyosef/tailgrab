@@ -8,7 +8,7 @@ function a(e, t, n) {
   let [r, a, o] = e;
   return r * i((t - a) / (o - a)) * i((-0.05 - n) / 0.06);
 }
-function o(n, r) {
+function kitSlots(n, r) {
   let i = (e) => e in r.items,
     a = [`top:${n.top}`, `bottom:${n.bottom}`];
   (e.has(n.bottom) || a.push(`shoes`),

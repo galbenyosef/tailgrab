@@ -1,6 +1,6 @@
 // assets/main-CzsUDvlE 04 — math
 // Lines 819-1241 of readable/assets/main-CzsUDvlE.pretty.js (statement-aligned).
-var Oo = class {
+var ParkStage = class {
     stage;
     park = null;
     parkId = `plaza`;

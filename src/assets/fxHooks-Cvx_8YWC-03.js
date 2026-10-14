@@ -1,6 +1,6 @@
 // assets/fxHooks-Cvx_8YWC 03 — math
 // Lines 784-1110 of readable/assets/fxHooks-Cvx_8YWC.pretty.js (statement-aligned).
-function Ue(e, t, n) {
+function makeTextSprite(e, t, n) {
   let r = e.getContext(`2d`);
   r.font = `99.84px "${Be}", system-ui, sans-serif`;
   let i = Math.ceil(r.measureText(t).width) + 52;
@@ -47,7 +47,7 @@ function Ke() {
       }`,
   }));
 }
-var qe = class {
+var TrailMesh = class {
     mesh;
     pos;
     attr;
@@ -143,7 +143,7 @@ function ot() {
     r = new m(0.39, 0.03, 6, 32).rotateX(Math.PI / 2),
     i = new b(0.14, 20).rotateX(Math.PI / 2).translate(0, -0.082, 0),
     a = ke([at(t, Je), at(n, Ye), at(r, Xe)]);
-  e.add(new x(a, ae({ vertexColors: !0 })));
+  e.add(new x(a, toonMaterial({ vertexColors: !0 })));
   let o = [];
   for (let e = 0; e < et; e++) {
     let t = (e / et) * Math.PI * 2;
@@ -159,7 +159,7 @@ function ot() {
     o.push(at(i, $e)),
     (nt = ke(o)),
     e.add(new x(nt, new l({ vertexColors: !0 }))),
-    le(e),
+    addOutlines(e),
     e
   );
 }

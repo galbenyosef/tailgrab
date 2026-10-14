@@ -1,7 +1,7 @@
 // apply-names.mjs — apply the hand-authored semantic rename list to ONE chunk's
-// slices, at identifier-token spans (the campaign writer, PLAN §5). AELORIA
-// (https://aeloria.pokeable.app/) — adapted from the fleet precedent
-// (zombie-game-made-by-claude / taipei-rush-tokyo tools/apply-names.mjs).
+// slices, at identifier-token spans (the campaign writer, PLAN §5). TAILGRAB
+// (https://tailgrab.io/) — adapted from the fleet precedent
+// (aeloria / zombie-game-made-by-claude / taipei-rush-tokyo tools/apply-names.mjs).
 //
 //   node tools/apply-names.mjs <capture rel> [names.json]
 //   node tools/apply-names.mjs --all [names.json]
@@ -31,9 +31,9 @@
 // free/global name used in the chunk, a reserved word, or another rule's source
 // (no chained renames).
 //
-// AELORIA region rule (this mirror has in-chunk wholeFile regions: the Vite
-// modulepreload polyfill and the inlined pmndrs/postprocessing region inside
-// the app entry chunk; the bundled three.js core inside the worker chunk):
+// TAILGRAB region rule (this mirror has an in-chunk wholeFile region: the
+// minifier-merged three.js r186 WebGLRenderer bundle inside toon-CycGToy9,
+// content-anchored in split-spec):
 // wholeFile regions are indexed in readable/ and never rewritten, so
 //   · a rule's OLD name may not appear (word-boundary) in any wholeFile region
 //     of the chunk — references there would be orphaned, and
@@ -528,7 +528,9 @@ for (const [capture, value] of todo) {
       failed++;
       continue;
     }
-    fs.writeFileSync(path.join(proj, "src", sec.file), text);
+    const outAbs = path.join(proj, "src", ...sec.file.split("/"));
+    fs.mkdirSync(path.dirname(outAbs), { recursive: true });
+    fs.writeFileSync(outAbs, text);
     written++;
   }
   console.log(`  wrote ${written}/${chunkSections.length} slice(s) for ${source.sourceFile}`);

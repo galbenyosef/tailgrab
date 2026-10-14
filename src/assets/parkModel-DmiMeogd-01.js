@@ -1,4 +1,4 @@
-// assets/parkModel-DmiMeogd 01 — imports
+// assets/parkModel-DmiMeogd 01 — addoutlines
 // Lines 1-62 of readable/assets/parkModel-DmiMeogd.pretty.js (statement-aligned).
 import {
   I as e,
@@ -17,7 +17,7 @@ import {
   xt as p,
   yr as m,
 } from "./three.core-DVWDmH0S.js";
-import { a as h, i as g } from "./toon-CycGToy9.js";
+import { a as toonMaterial, i as patchToon } from "./toon-CycGToy9.js";
 import { n as _, r as v } from "./preload-helper-DR1MrGPZ.js";
 import {
   A as y,
@@ -56,7 +56,7 @@ import {
   z as ye,
 } from "./scene-DiAs2bfK.js";
 import { a as be, r as N } from "./palette-DQTkVEn_.js";
-import { a as P, t as xe } from "./outline-BufNikL2.js";
+import { a as P, t as addOutlines } from "./outline-BufNikL2.js";
 import { s as Se } from "./missions-eXNMrvRm.js";
 import { i as F, n as Ce, t as we } from "./parkMesh-CjoleZJz.js";
 import { t as Te } from "./GLTFLoader-BAb7LzOS.js";

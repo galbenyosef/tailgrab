@@ -21,14 +21,14 @@ function tt(e, t, n, r = `grade`) {
         `${n}: ${r} ${i.g.toFixed(3)} at s ${i.s.toFixed(1)} is over ${t}`,
       );
 }
-function nt(e) {
+function checkPosts(e) {
   let t = `path ${e.id}`,
     n = e.section;
   if (n.posts !== void 0 && !(n.posts > 0.5))
     throw Error(`${t}: posts must be > 0.5 m apart`);
   if (n.pillars && !(n.pillars.every > 1))
     throw Error(`${t}: pillars must be > 1 m apart`);
-  let r = q(e.path),
+  let r = checkPlan(e.path),
     i = re(r),
     a = e.section;
   if (a.type !== `deck` && e.path.bank) throw Error(`${t}: only decks bank`);
@@ -36,15 +36,15 @@ function nt(e) {
     throw Error(`${t}: only a deck has lip ends`);
   switch (a.type) {
     case `ledge`:
-      return (tt(i, ze.grade.ledge, t), ot(e, a, r, i, t));
+      return (tt(i, ze.grade.ledge, t), checkLedgeFill(e, a, r, i, t));
     case `rail`:
-      return (tt(i, ze.grade.rail, t), st(e, a, r, i, t));
+      return (tt(i, ze.grade.rail, t), checkRail(e, a, r, i, t));
     case `deck`:
-      return (tt(i, ze.grade.deck, t), ut(e, a, r, i, t));
+      return (tt(i, ze.grade.deck, t), checkBankSurface(e, a, r, i, t));
     case `quarter`:
-      return (tt(i, ze.grade.quarter, t), dt(e, a, i, t));
+      return (tt(i, ze.grade.quarter, t), checkBerm(e, a, i, t));
     case `channel`:
-      return (tt(i, ze.grade.channel, t), ft(e, a, i, t));
+      return (tt(i, ze.grade.channel, t), checkDitchLip(e, a, i, t));
   }
 }
 var rt = (e) => (e.ground ?? 0) - (e.y ?? 0),
@@ -56,7 +56,7 @@ function at(e, t, n, r, i, a) {
   (o === `cap` && N(t, n[0], r, -1, i, a),
     s === `cap` && N(t, n[n.length - 1], r, 1, i, a));
 }
-function ot(e, t, n, r, i) {
+function checkLedgeFill(e, t, n, r, i) {
   let { w: a, h: o } = t,
     s = a / 2,
     c = t.skirt ?? 0,
@@ -119,7 +119,7 @@ function ot(e, t, n, r, i) {
     ...(it(e, r) ? { outline: Ze(f, S, -S, d) } : {}),
   };
 }
-function st(e, t, n, r, i) {
+function checkRail(e, t, n, r, i) {
   let { h: o } = t,
     s = t.skirt ?? 0,
     c = !!e.path.closed,
@@ -169,7 +169,7 @@ function st(e, t, n, r, i) {
     { prims: d, rails: [Ye(l, 0, o, w.RAIL, 0, c)] }
   );
 }
-function ct(e) {
+function checkLipProfile(e) {
   if (!e) return { shape: [[0, 0]], rails: [] };
   switch (e.type) {
     case `lip`:

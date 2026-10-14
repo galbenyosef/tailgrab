@@ -1,6 +1,6 @@
-// assets/stickers-9pAHXWwr 01 — includes
+// assets/stickers-9pAHXWwr 01 — stickerids
 // Lines 1-14 of readable/assets/stickers-9pAHXWwr.pretty.js (statement-aligned).
-var e = [
+var stickerIds = [
     `homework`,
     `bubblewrap`,
     `fish`,
@@ -11,6 +11,6 @@ var e = [
     `shell`,
     `rose`,
   ],
-  t = (t) => e.includes(t);
-[...e];
+  t = (t) => stickerIds.includes(t);
+[...stickerIds];
 var n = (e) => `piece-${e}`;

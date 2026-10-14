@@ -1,7 +1,7 @@
 // assets/sfx-6jovSU2- 01 — tutorial
 // Lines 1-72 of readable/assets/sfx-6jovSU2-.pretty.js (statement-aligned).
 import { i as e } from "./prims-CECOBLSv.js";
-var t = `freeskater-settings-v1`,
+var settingsKey = `freeskater-settings-v1`,
   n = {
     name: ``,
     skater: 0,
@@ -32,7 +32,7 @@ var t = `freeskater-settings-v1`,
   };
 function r() {
   try {
-    let e = localStorage.getItem(t);
+    let e = localStorage.getItem(settingsKey);
     if (!e) return { ...n };
     let r = JSON.parse(e);
     return (
@@ -54,14 +54,14 @@ function r() {
 var i = r(),
   a = (() => {
     try {
-      return !localStorage.getItem(t);
+      return !localStorage.getItem(settingsKey);
     } catch {
       return !0;
     }
   })();
 function o() {
   try {
-    localStorage.setItem(t, JSON.stringify(i));
+    localStorage.setItem(settingsKey, JSON.stringify(i));
   } catch {}
 }
 var s = [];

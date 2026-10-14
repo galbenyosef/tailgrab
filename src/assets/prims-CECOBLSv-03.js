@@ -1,6 +1,6 @@
 // assets/prims-CECOBLSv 03 — map
 // Lines 634-834 of readable/assets/prims-CECOBLSv.pretty.js (statement-aligned).
-function N(e, t, r, i, a = {}) {
+function checkSweep(e, t, r, i, a = {}) {
   let o = t.length,
     s = a.who ?? `path`,
     c = t.map((e, t) => i(t)),
@@ -174,7 +174,7 @@ function B(e, t, r, o) {
   return c;
 }
 function V(e, t, n, r) {
-  let i = new b(),
+  let i = new TriBuilder(),
     a = H / 2,
     o = (e, t, n, r, a) => i.v(e, t, n, r, 0, a);
   for (let s of [-a, a]) {

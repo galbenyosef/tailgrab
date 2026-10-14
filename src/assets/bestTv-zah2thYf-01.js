@@ -11,15 +11,15 @@ import {
   xt as s,
   yr as c,
 } from "./three.core-DVWDmH0S.js";
-import { a as l, i as u } from "./toon-CycGToy9.js";
+import { a as toonMaterial, i as patchToon } from "./toon-CycGToy9.js";
 import { c as d, n as f, p } from "./scene-DiAs2bfK.js";
-import { t as m } from "./outline-BufNikL2.js";
+import { t as addOutlines } from "./outline-BufNikL2.js";
 import { nt as h } from "./tagPaint-BOEtbgNi.js";
 import { i as g } from "./parks-C2dnYY6C.js";
 import { s as _ } from "./missions-eXNMrvRm.js";
 import { b as v, c as y } from "./session-DxCN6jDh.js";
-import { r as b } from "./decor-Tyb8Za1u.js";
-import { t as x } from "./lens-Csl3PMnC.js";
+import { r as loadProps } from "./decor-Tyb8Za1u.js";
+import { t as Lens } from "./lens-Csl3PMnC.js";
 import { n as S, t as C } from "./tapeRider-C0l9JrgL.js";
 var w = 384,
   T = 288,
@@ -70,12 +70,12 @@ function j(e) {
       }`,
   });
 }
-var M = class {
+var BestTv = class {
   root = new r();
   best = null;
   stage;
   rt = new e(w, T);
-  lens = new x(d.lens);
+  lens = new Lens(d.lens);
   cam = new t(d.cam.fov, w / T, 0.1, 1e3);
   chase = new v();
   owned = [];
@@ -170,13 +170,13 @@ var M = class {
       (this.chase.inited = !1));
   }
   async build() {
-    let e = await b(),
+    let e = await loadProps(),
       t = e.get(`tv`),
       r = e.get(`crate`),
       i = e.get(`tv_screen`);
     if (this.dead || !t || !i) return;
-    let a = l({ vertexColors: !0 });
-    if ((u(a, { rim: 0.3, ao: !0 }), this.owned.push(a), r)) {
+    let a = toonMaterial({ vertexColors: !0 });
+    if ((patchToon(a, { rim: 0.3, ao: !0 }), this.owned.push(a), r)) {
       let e = new s(r, a);
       (e.scale.setScalar(D),
         (e.castShadow = e.receiveShadow = !0),
@@ -201,7 +201,7 @@ var M = class {
       o.add(p),
       (this.screen = p),
       (this.glass = f));
-    for (let e of m(this.root)) this.owned.push(e.material);
+    for (let e of addOutlines(this.root)) this.owned.push(e.material);
   }
   async loadStill(e, t) {
     let n = document.createElement(`canvas`);

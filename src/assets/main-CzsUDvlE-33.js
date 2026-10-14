@@ -29,7 +29,7 @@ function Sf(e, t) {
   }
   return j(`kbd`, ``, or(e, t));
 }
-var Cf = class {
+var Coach = class {
     el;
     dots;
     title;
@@ -159,7 +159,7 @@ var Cf = class {
       (delete document.body.dataset.coach, this.el.remove());
     }
   },
-  wf = class {
+  GoalsPanel = class {
     el;
     list;
     chip;
@@ -229,7 +229,7 @@ var Cf = class {
       (this.panel?.(), this.off(), this.el.remove());
     }
   },
-  Tf = class {
+  MissionsDock = class {
     el;
     btn;
     corner = Jo();

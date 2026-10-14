@@ -51,6 +51,6 @@ function Pt() {
     letters: W.flatMap((e) => e.letters ?? []),
     botPaths: W.flatMap((e) => e.botPaths ?? []),
     props: W.flatMap((e) => e.props ?? []),
-    arenas: Mt,
+    arenas: cityModes,
   };
 }

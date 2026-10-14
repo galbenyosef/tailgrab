@@ -44,7 +44,7 @@ import {
   xt as f,
   yr as p,
 } from "./three.core-DVWDmH0S.js";
-import { a as m } from "./toon-CycGToy9.js";
+import { a as toonMaterial } from "./toon-CycGToy9.js";
 import {
   a as h,
   c as g,

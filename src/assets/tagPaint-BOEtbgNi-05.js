@@ -14,7 +14,7 @@
     },
     `MoveInput`,
   ));
-var Kt = n(
+var Skater = n(
     {
       x: v.float32(),
       y: v.float32(),
@@ -87,7 +87,7 @@ var Kt = n(
       `.`,
     ),
   Jt = { IDLE: 0, FILLING: 1, LAUNCHING: 2 },
-  Yt = n(
+  Portal = n(
     {
       count: v.uint8().default(0),
       status: v.uint8().default(0),
@@ -96,16 +96,16 @@ var Kt = n(
     },
     `Portal`,
   ),
-  Xt = n(
+  HubState = n(
     {
       code: v.string().default(``),
       parkId: v.string().default(``),
-      skaters: v.map(Kt),
-      portals: v.map(Yt),
+      skaters: v.map(Skater),
+      portals: v.map(Portal),
     },
     `HubState`,
   ),
-  Zt = n(
+  Competitor = n(
     {
       name: v.string().default(``),
       skater: v.uint8().default(0),
@@ -132,12 +132,12 @@ var Kt = n(
     },
     `Competitor`,
   ),
-  Qt = n(
+  Piece = n(
     { owner: v.string().default(``), score: v.uint32().default(0) },
     `Piece`,
   ),
   $t = { SETUP: 0, ACTIVE: 1, RESULT: 2 },
-  en = n(
+  HorseState = n(
     {
       activeId: v.string().default(``),
       setterId: v.string().default(``),
@@ -153,7 +153,7 @@ var Kt = n(
     },
     `HorseState`,
   ),
-  tn = n(
+  LetterSpot = n(
     {
       x: v.float32().default(0),
       y: v.float32().default(0),
@@ -161,7 +161,7 @@ var Kt = n(
     },
     `LetterSpot`,
   ),
-  nn = n(
+  TagState = n(
     {
       itId: v.string().default(``),
       graceUntil: v.number().default(0),
@@ -170,7 +170,7 @@ var Kt = n(
     },
     `TagState`,
   ),
-  rn = n(
+  CareerGoal = n(
     {
       id: v.string().default(``),
       done: v.boolean().default(!1),
@@ -178,7 +178,7 @@ var Kt = n(
     },
     `CareerGoal`,
   ),
-  an = n(
+  CareerSpot = n(
     {
       x: v.float32().default(0),
       y: v.float32().default(0),
@@ -188,16 +188,16 @@ var Kt = n(
     },
     `CareerSpot`,
   ),
-  on = n(
+  CareerState = n(
     {
       level: v.string().default(``),
-      goals: v.array(rn),
-      spots: v.array(an),
+      goals: v.array(CareerGoal),
+      spots: v.array(CareerSpot),
       got: v.uint32().default(0),
     },
     `CareerState`,
   ),
-  sn = n(
+  MatchState = n(
     {
       mode: v.string().default(`trick`),
       parkId: v.string().default(``),
@@ -207,17 +207,17 @@ var Kt = n(
       playStartsAt: v.number().default(0),
       freezeAt: v.number().default(0),
       hubCode: v.string().default(``),
-      skaters: v.map(Kt),
-      roster: v.map(Zt),
-      graffiti: v.map(Qt),
-      letters: v.array(tn),
-      horse: v.ref(en),
-      tag: v.ref(nn),
-      career: v.ref(on),
+      skaters: v.map(Skater),
+      roster: v.map(Competitor),
+      graffiti: v.map(Piece),
+      letters: v.array(LetterSpot),
+      horse: v.ref(HorseState),
+      tag: v.ref(TagState),
+      career: v.ref(CareerState),
     },
     `MatchState`,
   ),
-  cn = n(
+  ParkState = n(
     {
       code: v.string().default(``),
       parkId: v.string().default(``),
@@ -232,11 +232,11 @@ var Kt = n(
       builders: v.map(`boolean`),
       daily: v.boolean().default(!1),
       editing: v.map(`boolean`),
-      skaters: v.map(Kt),
+      skaters: v.map(Skater),
     },
     `ParkState`,
   ),
-  ln = n(
+  Ghost = n(
     {
       x: v.float32().default(0),
       y: v.float32().default(0),
@@ -264,10 +264,10 @@ var Kt = n(
     },
     `Ghost`,
   ),
-  un = n({ skaters: v.map(ln) }, `GhostState`),
-  dn = `wss://backend.tailgrab.io`,
-  P = new g(dn),
-  fn = dn.replace(/^ws/, `http`).replace(/\/$/, ``),
+  GhostState = n({ skaters: v.map(Ghost) }, `GhostState`),
+  backendUrl = `wss://backend.tailgrab.io`,
+  P = new g(backendUrl),
+  createClient = backendUrl.replace(/^ws/, `http`).replace(/\/$/, ``),
   pn = 220;
 function mn(e) {
   let t = { mode: `lerp`, delay: e, snap: 5, smoothMs: 20 },
@@ -288,7 +288,7 @@ var hn = mn(110),
 async function gn(e = {}) {
   let t = { ...F(), spectate: e.spectate };
   return _n(
-    e.id ? await P.joinById(e.id, t, Xt) : await P.joinOrCreate(`hub`, t, Xt),
+    e.id ? await P.joinById(e.id, t, HubState) : await P.joinOrCreate(`hub`, t, HubState),
   );
 }
 async function _n(t) {
@@ -326,10 +326,10 @@ function yn(e) {
       });
 }
 async function bn(e) {
-  return Sn(await P.consumeSeatReservation(e, sn));
+  return Sn(await P.consumeSeatReservation(e, MatchState));
 }
 async function xn(e) {
-  return Sn(await P.create(`career`, { level: e, ...F() }, sn));
+  return Sn(await P.create(`career`, { level: e, ...F() }, MatchState));
 }
 async function Sn(t) {
   await yn(t);

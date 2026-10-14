@@ -11,7 +11,7 @@ import {
 } from "./three.core-DVWDmH0S.js";
 import { n as s } from "./palette-DQTkVEn_.js";
 var c = { uOutline: { value: 0.0032 } };
-function l(e) {
+function expandOutline(e) {
   if (e.getAttribute(`outlineNormal`)) return;
   let t = e.getAttribute(`position`),
     r = e.getAttribute(`normal`);
@@ -51,7 +51,7 @@ var u = `
   }
 `,
   d = new Map();
-function f(t, n = s, i = 1, a = !1) {
+function makeOutlineMaterial(t, n = s, i = 1, a = !1) {
   let o = `${t}|${n}|${i}|${a}`,
     l = d.get(o);
   return (
@@ -95,7 +95,7 @@ void main() {
     l)
   );
 }
-function p(e, n = 1, r = s, o = !1) {
+function addOutlines(e, n = 1, r = s, o = !1) {
   let c = [],
     u = [];
   e.traverse((e) => {
@@ -103,19 +103,19 @@ function p(e, n = 1, r = s, o = !1) {
     t.isMesh && !t.userData.outlineShell && !t.userData.noOutline && u.push(t);
   });
   for (let e of u) {
-    l(e.geometry);
+    expandOutline(e.geometry);
     let s;
     if (e.isSkinnedMesh) {
       let i = e,
         a = i.geometry,
         o = a.userData.inkHeadStart,
-        c = f(!0, r, n);
+        c = makeOutlineMaterial(!0, r, n);
       o !== void 0 &&
         a.index &&
         (a.clearGroups(),
         a.addGroup(0, o, 0),
         a.addGroup(o, a.index.count - o, 1),
-        (c = [f(!0, r, n), f(!0, r, n, !0)]));
+        (c = [makeOutlineMaterial(!0, r, n), makeOutlineMaterial(!0, r, n, !0)]));
       let l = new t(a, c);
       (l.bind(i.skeleton, i.bindMatrix),
         (l.bindMode = i.bindMode),
@@ -124,10 +124,10 @@ function p(e, n = 1, r = s, o = !1) {
         (s = l));
     } else if (e.isInstancedMesh) {
       let t = e,
-        a = new i(t.geometry, f(!1, r, n), t.count);
+        a = new i(t.geometry, makeOutlineMaterial(!1, r, n), t.count);
       ((a.instanceMatrix = t.instanceMatrix), (a.frustumCulled = !1), (s = a));
     } else
-      ((s = new a(e.geometry, f(!1, r, n))),
+      ((s = new a(e.geometry, makeOutlineMaterial(!1, r, n))),
         (s.frustumCulled = e.frustumCulled));
     ((s.userData.outlineShell = !0),
       s.layers.set(1),

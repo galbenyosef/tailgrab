@@ -226,7 +226,7 @@ function Ls(e) {
             t = Os(),
             n = bt(N.profile);
           C.replaceChildren(
-            ..._s.map((r) => {
+            ...styleSlots.map((r) => {
               let i = j(`button`, `cas-tab ${r.id === d ? `on` : ``}`);
               ((i.type = `button`),
                 i.append(
@@ -369,7 +369,7 @@ function Ls(e) {
             c = null;
           for (let e of t) {
             let t = f === e,
-              l = ys[e],
+              l = styleGroups[e],
               u = l === `Color` ? `${vs.get(d).label} color` : l,
               p = j(
                 `button`,

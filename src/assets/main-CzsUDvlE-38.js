@@ -8,7 +8,7 @@ var pm = class {
     ghostBase = [];
     ghostShown = !0;
     riders = new Map();
-    ghostMat = E({
+    ghostMat = toonMaterial({
       vertexColors: !0,
       transparent: !0,
       opacity: 0.62,
@@ -24,7 +24,7 @@ var pm = class {
       forceSinglePass: !0,
     });
     sel = null;
-    selMat = E({
+    selMat = toonMaterial({
       vertexColors: !0,
       transparent: !0,
       opacity: 0.45,
@@ -36,7 +36,7 @@ var pm = class {
     selFoot;
     hov = null;
     hovKey = ``;
-    hovMat = E({
+    hovMat = toonMaterial({
       vertexColors: !0,
       transparent: !0,
       opacity: 0.3,

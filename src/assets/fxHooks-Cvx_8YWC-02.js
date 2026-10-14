@@ -1,6 +1,6 @@
 // assets/fxHooks-Cvx_8YWC 02 — math
 // Lines 103-783 of readable/assets/fxHooks-Cvx_8YWC.pretty.js (statement-aligned).
-var Le = class {
+var Particles = class {
     mesh;
     geo;
     aPos;
@@ -354,7 +354,7 @@ var Le = class {
   },
   R = new y(),
   Re = new y(C),
-  ze = class {
+  Decals = class {
     mesh;
     geo;
     aPos;
@@ -575,7 +575,7 @@ var Le = class {
   },
   Be = `Lilita One`,
   Ve = 10,
-  He = class {
+  SpriteText = class {
     group = new u();
     tex = new Map();
     words = [];
@@ -601,7 +601,7 @@ var Le = class {
           }));
       }
       document.fonts?.load(`64px "${Be}"`).then(() => {
-        for (let [e, t] of this.tex) Ue(t.image, e, t.userData.fill);
+        for (let [e, t] of this.tex) makeTextSprite(t.image, e, t.userData.fill);
         for (let e of this.tex.values()) e.needsUpdate = !0;
       });
     }
@@ -613,7 +613,7 @@ var Le = class {
         p = this.tex.get(f);
       if (!p) {
         let n = document.createElement(`canvas`);
-        (Ue(n, e, t),
+        (makeTextSprite(n, e, t),
           (p = new _(n)),
           (p.colorSpace = d),
           (p.minFilter = ne),

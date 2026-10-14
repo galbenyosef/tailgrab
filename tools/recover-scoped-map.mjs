@@ -1,7 +1,7 @@
 // recover-scoped-map.mjs — record the semantic rename map for every slice, by
 // aligning its readable range against the committed slice token by token
-// (PLAN §5; the campaign gate's record). AELORIA — adapted from the fleet
-// precedent (zombie-game-made-by-claude / taipei-rush-tokyo / kettuvellam).
+// (PLAN §5; the campaign gate's record). TAILGRAB — adapted from the fleet
+// precedent (aeloria / zombie-game-made-by-claude / taipei-rush-tokyo / kettuvellam).
 //
 // Two sections are written into rename-map.json:
 //

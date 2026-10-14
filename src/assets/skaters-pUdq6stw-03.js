@@ -1,12 +1,12 @@
 // assets/skaters-pUdq6stw 03 — math
 // Lines 777-916 of readable/assets/skaters-pUdq6stw.pretty.js (statement-aligned).
 function z(e) {
-  let t = R[e];
+  let t = proRoster[e];
   if (!t) throw Error(`skaterDef: no pro with id ${e}`);
   return t;
 }
-var B = (e) => Number.isInteger(e) && e >= 0 && e < R.length,
-  V = [
+var B = (e) => Number.isInteger(e) && e >= 0 && e < proRoster.length,
+  skillStyles = [
     {
       id: 200,
       key: `vert`,
@@ -60,13 +60,13 @@ var B = (e) => Number.isInteger(e) && e >= 0 && e < R.length,
       },
     },
   ],
-  H = (e) => Number.isInteger(e) && e >= 200 && e < 200 + V.length;
+  H = (e) => Number.isInteger(e) && e >= 200 && e < 200 + skillStyles.length;
 function U(e) {
-  return B(e) ? R[e].stats : H(e) ? V[e - 200].stats : oe;
+  return B(e) ? proRoster[e].stats : H(e) ? skillStyles[e - 200].stats : oe;
 }
 var oe = { air: 1, speed: 1, spin: 1, balance: 1, specials: [] };
 function W(e, t) {
-  return (t ? p(t) : null) || (B(e) ? R[e].look : ne);
+  return (t ? p(t) : null) || (B(e) ? proRoster[e].look : ne);
 }
 var G = 0.025,
   K = { full: 10, floor: 0.88 };
@@ -109,7 +109,7 @@ var ce = [
     `Gnarly.Rad.Sketchy.Tubular.Stoked.Radical.Mellow.Sick.Epic.Wobbly.Fakie.Chill.Comet.Turbo.Goofy.Salty.Spicy.Zippy.Bonkers.Groovy.Crispy.Fuzzy.Sneaky.Cosmic.Lucky.Bouncy.Breezy.Funky.Jazzy.Rowdy.Wavy.Mighty.Hyper`.split(
       `.`,
     ),
-  Q = [
+  defaultNames = [
     `Newt`,
     `Gecko`,
     `Pigeon`,
@@ -131,12 +131,12 @@ var ce = [
   $ = new Map(C.map((e) => [e.id, e.name])),
   le = new Set($.values());
 function ue(e = Math.random(), t) {
-  return `${Z[Math.floor(e * Z.length) % Z.length]} ${(t && $.get(t)) || Q[Math.floor(e * 7919) % Q.length]}`;
+  return `${Z[Math.floor(e * Z.length) % Z.length]} ${(t && $.get(t)) || defaultNames[Math.floor(e * 7919) % defaultNames.length]}`;
 }
 function de(e, t = Math.random) {
-  return `${Z[Math.floor(t() * Z.length)]} ${(t() < 2 / 3 ? $.get(e) : Q[Math.floor(t() * Q.length)]) ?? Q[0]}`;
+  return `${Z[Math.floor(t() * Z.length)]} ${(t() < 2 / 3 ? $.get(e) : defaultNames[Math.floor(t() * defaultNames.length)]) ?? defaultNames[0]}`;
 }
 function fe(e) {
   let [t, n, r] = e.split(` `);
-  return !r && Z.includes(t) && (Q.includes(n) || le.has(n));
+  return !r && Z.includes(t) && (defaultNames.includes(n) || le.has(n));
 }

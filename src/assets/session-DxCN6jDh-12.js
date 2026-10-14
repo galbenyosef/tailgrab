@@ -28,7 +28,7 @@ function wa(e) {
 }
 var Ta = new p(),
   Ea = { x: 0, y: 0, z: 0 },
-  Da = class {
+  GameSession = class {
     stage;
     net;
     park = null;
@@ -37,7 +37,7 @@ var Ta = new p(),
     local;
     localView;
     remotes = new Map();
-    cam = new In();
+    cam = new SkaterMotion();
     hud;
     localFrame = qt();
     selfSid;
@@ -60,7 +60,7 @@ var Ta = new p(),
       let i = t.room;
       this.selfSid = i.sessionId;
       let a = i.state.skaters.get(i.sessionId);
-      ((this.local = new $i(i, t.predict, a, t.world, r.canSkate)),
+      ((this.local = new PredictReconciler(i, t.predict, a, t.world, r.canSkate)),
         (this.local.onWarp = () => this.cut()),
         (this.localView = Yt(An(a.skater, a.look))),
         (this.localView.col = t.world.col),
@@ -83,7 +83,7 @@ var Ta = new p(),
             n && (wa(n), this.remotes.delete(t), this.onRemoteRemove(t));
           }),
         ),
-        (this.hud = new na(n, t.world.layout)),
+        (this.hud = new ComboHud(n, t.world.layout)),
         (this.cam.col = t.world.col),
         vt &&
           ((this.cam.tune = { ...gt.cam.tune }),
@@ -95,7 +95,7 @@ var Ta = new p(),
         this.stage.setLook(yt(this.net.world.layout.id)),
         (this.fence = fa(this.net.world)),
         this.fence && this.stage.scene.add(this.fence),
-        (this.riddles = new ua(
+        (this.riddles = new SeatTags(
           this.net.world.layout.id,
           this.stage.tier.liteScenery,
         )),

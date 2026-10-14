@@ -48,7 +48,7 @@ var M = [_.PELVIS, _.BUTT, _.HIP_L, _.HIP_R],
   Ce = new Float64Array(9),
   q = new Float64Array(3),
   we = r(),
-  Te = class {
+  RagdollBody = class {
     body = new i(v.length);
     target = new n();
     targetV = new n();
@@ -62,7 +62,7 @@ var M = [_.PELVIS, _.BUTT, _.HIP_L, _.HIP_R],
     limpAt = -1;
     clock = 0;
     downAt = -1;
-    blocks = [new Oe(M), new Oe(N)];
+    blocks = [new BoneMapper(M), new BoneMapper(N)];
     reachT = new Float64Array(v.length * 3);
     splatT = new Float64Array(v.length * 3);
     constructor() {

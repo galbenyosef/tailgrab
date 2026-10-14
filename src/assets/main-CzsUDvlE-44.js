@@ -12,7 +12,7 @@ var Ym = [
   Qm = 3,
   $m = 0.03,
   eh = 15,
-  th = class {
+  GameApp = class {
     stage;
     ui;
     announcer;
@@ -58,21 +58,21 @@ var Ym = [
       ((this.stage = e),
         (this.ui = t),
         (this.announcer = new Oa(t)),
-        (this.transition = new id(document.body)),
-        (this.bubbles = new ld(t)),
+        (this.transition = new ScreenWipe(document.body)),
+        (this.bubbles = new SkaterTags(t)),
         (this.bubbles.enabled = J.bubbles),
         (this.zones = qo(t)),
         (this.dock = this.zones.me),
         new Ea(this.dock, () => this.openStats()),
-        (this.coinChip = new mf(this.dock)),
-        (this.unlockCard = new ss(() => this.unlockWait())),
+        (this.coinChip = new CoinChip(this.dock)),
+        (this.unlockCard = new UnlockQueue(() => this.unlockWait())),
         this.dock.append(this.unlockCard.el),
-        new gf(this.dock),
-        (this.nav = new Fo(t)),
+        new NowPlaying(this.dock),
+        (this.nav = new AppRouter(t)),
         (this.padNav = new _i(this.nav, t)),
         (this.padNav.onMenu = () => this.openMenu()),
         Lr(() => this.ping?.refresh()),
-        (this.perf = new Hf(
+        (this.perf = new PerfMeter(
           () => Object.keys(O).find((e) => O[e] === this.stage.tier) ?? ``,
         )),
         Lr(() => this.perf.refresh()),
@@ -278,7 +278,7 @@ var Ym = [
         await this.lobby(n, r, !0);
         return;
       }
-      ((this.showroom = new Oo(this.stage)),
+      ((this.showroom = new ParkStage(this.stage)),
         await this.showroom.load(),
         (this.screen = `title`),
         ah(),
@@ -334,7 +334,7 @@ var Ym = [
       }
     }
     async lobby(e, t, n) {
-      let r = new Oo(this.stage);
+      let r = new ParkStage(this.stage);
       ((this.showroom = r), await r.load());
       let i = t.then(() => this.openLobby());
       ((this.screen = `title`), Kr(``), r.show(oi()), r.setParty(Gm(X.view)));
@@ -691,7 +691,7 @@ var Ym = [
     chatSend = () => {};
     installChat(e) {
       ((this.chatSend = e),
-        (this.chat ??= new gd(
+        (this.chat ??= new ChatPanel(
           this.dock,
           this.ui,
           (e) => this.chatSend(`chat`, { text: e }),
@@ -740,7 +740,7 @@ var Ym = [
             enter: () => void this.pickCareer(),
           },
         };
-      ((this.portalFx = new nf(
+      ((this.portalFx = new GatePopup(
         o,
         (e) => s[e] ?? (wr(e) ? q[e] : null),
         a.park?.group,
@@ -751,12 +751,12 @@ var Ym = [
           ((c = this.coach?.active ? [] : o),
             this.portalFx?.show((e) => c.some((t) => t.mode === e)));
         };
-      this.finds = new df(n.world.layout.id, null, (e) =>
+      this.finds = new Collectibles(n.world.layout.id, null, (e) =>
         this.stage.scene.add(e.group),
       );
       let u = () => void this.invite(),
         d = r.sessionId,
-        f = new Ku(
+        f = new PortalPrompts(
           this.zones,
           (e, t) => r.send(e, t),
           u,
@@ -806,7 +806,7 @@ var Ym = [
             }
           }
         };
-      this.markers = new Lf(this.ui);
+      this.markers = new EdgeMarkers(this.ui);
       let h = o.filter((e) => wr(e.mode)),
         g = [
           {
@@ -867,14 +867,14 @@ var Ym = [
             this.recover());
         }));
       let y = Jo() && this.corner ? this.corner : this.dock,
-        b = new wf(y, J.tutorial < 0);
+        b = new GoalsPanel(y, J.tutorial < 0);
       ((this.goals = b),
-        (this.missionsChip = new Tf(
+        (this.missionsChip = new MissionsDock(
           y,
           () => void this.nav.open($l()),
           J.tutorial < 0,
         )));
-      let x = new Cf(
+      let x = new Coach(
         Jo() ? this.zones.lane : this.ui,
         `hub`,
         () => Z.ui(`letter`),
@@ -1082,7 +1082,7 @@ var Ym = [
         s = () =>
           this.share(Xc(n.code), `Skate my park "${n.name}" in Tailgrab!`),
         c = () => void this.invite(),
-        l = new Vm({
+        l = new ParkEditor({
           stage: this.stage,
           session: i,
           room: t,
@@ -1098,7 +1098,7 @@ var Ym = [
           },
         });
       ((this.builder = l),
-        (this.parkHud = new Hm(this.ui, this.dock, n.ownerName, c, () =>
+        (this.parkHud = new ParkPill(this.ui, this.dock, n.ownerName, c, () =>
           l.enter(),
         )),
         (this.roomMenu = () => {
@@ -1344,7 +1344,7 @@ var Ym = [
       (this.wireCommon(i, t, () => n.skaters, `match`),
         await i.loadPark(),
         (this.session = i),
-        (this.matchHud = new Bd(
+        (this.matchHud = new MatchHud(
           this.zones,
           r,
           (e, n) => t.send(e, n),
@@ -1365,7 +1365,7 @@ var Ym = [
       let o = r === `career` ? `career` : `mode`,
         s = r === `career` ? n.career.level : r;
       if ((a.push(() => qn(o, s, `start`)), r === `skate`)) {
-        this.markers = new Lf(this.ui);
+        this.markers = new EdgeMarkers(this.ui);
         let e = () => [...n.letters].map((e) => ({ x: e.x, y: e.y, z: e.z })),
           r = ``;
         i.onFrame = (i) => {
@@ -1375,7 +1375,7 @@ var Ym = [
             a.length &&
             ((r = o),
             this.letters?.dispose(),
-            (this.letters = new sf(a)),
+            (this.letters = new SkateLetters(a)),
             this.stage.scene.add(this.letters.group));
           let s = n.roster.get(t.sessionId)?.letters ?? 0;
           this.letters?.update(i, s);
@@ -1408,14 +1408,14 @@ var Ym = [
             this.matchHud?.update(n, t.sessionId, t.clock.serverNow()));
         };
       } else if (r === `career`) {
-        this.markers = new Lf(this.ui);
+        this.markers = new EdgeMarkers(this.ui);
         let r = R(n.career.level);
         this.finds = r
-          ? new df(r.parkId, r.id, (e) => this.stage.scene.add(e.group))
+          ? new Collectibles(r.parkId, r.id, (e) => this.stage.scene.add(e.group))
           : null;
         let a =
           J.tips >= 0
-            ? new Cf(
+            ? new Coach(
                 Jo() ? this.zones.lane : this.ui,
                 `run`,
                 () => Z.ui(`letter`),
@@ -1428,7 +1428,7 @@ var Ym = [
               (Z.simEvents(e, t, i), a.events(e, t));
             }));
         let o = ++this.ghostGen;
-        Xa.open(
+        GhostNet.open(
           n.career.level,
           this.stage.scene,
           e.world.col,
@@ -1458,7 +1458,7 @@ var Ym = [
             ((s = l),
             this.letters?.dispose(),
             (this.letters = c.spots.length
-              ? new sf(
+              ? new SkateLetters(
                   [...c.spots].map((e) => ({
                     x: e.x,
                     y: e.y,
@@ -1544,7 +1544,7 @@ var Ym = [
           (this.matchHud.onNext = (e) => void this.startCareer(e)),
           (this.matchHud.onStats = () => this.openStats()));
       } else if (r === `tag`) {
-        this.markers = new Lf(this.ui);
+        this.markers = new EdgeMarkers(this.ui);
         let e = ``,
           r = ``,
           o = 0,
@@ -1941,7 +1941,7 @@ var Ym = [
     corner = null;
     ping = null;
     addCorner(e) {
-      (this.corner?.remove(), this.ping?.dispose(), (this.ping = new zf(e)));
+      (this.corner?.remove(), this.ping?.dispose(), (this.ping = new PingPill(e)));
       let t = j(`div`, `corner-btns interactive`);
       this.chat?.mountButton(t);
       let n = j(`button`, `ico-btn menu-btn`);

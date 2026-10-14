@@ -145,7 +145,7 @@ var ts = 4500,
   is = 8e3,
   as = () => (Jo() ? { thumbs: 2, dots: 2 } : { thumbs: 3, dots: 4 }),
   os = 96,
-  ss = class {
+  UnlockQueue = class {
     wait;
     el;
     card;

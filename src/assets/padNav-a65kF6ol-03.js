@@ -6,7 +6,7 @@ var Q = (e) =>
       ![`range`, `checkbox`, `radio`, `button`, `submit`].includes(e.type)),
   pt = `navpress`,
   mt = (e, t) => e.main.dispatchEvent(new CustomEvent(pt, { detail: t })),
-  ht = class {
+  PadNav = class {
     nav;
     ui;
     hints;
@@ -163,7 +163,7 @@ var Q = (e) =>
         return;
       }
       let n = it[t] ?? null,
-        r = at.has(t),
+        r = confirmKeys.has(t),
         i = t === `KeyQ`,
         a = t === `KeyE`;
       if (!n && !r && !i && !a) {
@@ -188,7 +188,7 @@ var Q = (e) =>
     };
     onKeyUp = (e) => {
       (this.keysDown.delete(e.code) && e.code === `Space` && e.preventDefault(),
-        at.has(e.code) && this.holding?.src === `kb` && this.endHold());
+        confirmKeys.has(e.code) && this.holding?.src === `kb` && this.endHold());
     };
     endHold() {
       this.holding &&= (Ze(this.holding.el), null);
@@ -528,7 +528,7 @@ var Q = (e) =>
         return;
       }
       let r = this.src === `kb`,
-        a = dt[r ? `kb` : (_ ?? `xbox`)],
+        a = padLabels[r ? `kb` : (_ ?? `xbox`)],
         o = document.activeElement,
         s =
           o instanceof HTMLInputElement && o.type === `range`

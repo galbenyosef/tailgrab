@@ -9,7 +9,7 @@ var e = (e) => ({ kind: `shop`, price: e }),
     ],
   }),
   n = e(400),
-  r = [
+  headTable = [
     { id: `hawk`, name: `Hawk` },
     { id: `duck`, name: `Duck`, unlock: n },
     { id: `axolotl`, name: `Axolotl` },
@@ -42,7 +42,7 @@ var e = (e) => ({ kind: `shop`, price: e }),
     { id: `chupa`, name: `Chupa`, unlock: n, secret: `chupacabra` },
     { id: `ranger`, name: `Ranger`, unlock: n, secret: `sentai` },
   ],
-  i = [
+  topsTable = [
     { id: `tee`, name: `Tee` },
     { id: `hoodie`, name: `Hoodie`, unlock: e(160) },
     { id: `tank`, name: `Tank Top`, unlock: e(100) },
@@ -51,13 +51,13 @@ var e = (e) => ({ kind: `shop`, price: e }),
     { id: `bare`, name: `No Shirt`, unlock: e(150), secret: `varginha` },
     { id: `suit`, name: `Ranger Suit`, unlock: e(600), secret: `sentai` },
   ],
-  a = [
+  bottomsTable = [
     { id: `shorts`, name: `Shorts` },
     { id: `pants`, name: `Pants`, unlock: e(100) },
     { id: `baggies`, name: `Baggies`, unlock: e(140) },
     { id: `boots`, name: `Ranger Boots`, unlock: e(400), secret: `sentai` },
   ],
-  o = [
+  hatsTable = [
     { id: `none`, name: `No Hat` },
     { id: `cap`, name: `Cap`, unlock: e(120) },
     { id: `cap-back`, name: `Backwards Cap`, unlock: e(120) },
@@ -78,7 +78,7 @@ var e = (e) => ({ kind: `shop`, price: e }),
     { id: `carapuca`, name: `Carapuça`, unlock: e(700), secret: `saci` },
     { id: `jester-cap`, name: `Jester Cap`, unlock: e(700), secret: `jester` },
   ],
-  s = [
+  accessoriesTable = [
     { id: `none`, name: `Nothing` },
     { id: `boombox`, name: `Boombox`, unlock: e(240) },
     { id: `backpack`, name: `Backpack`, unlock: e(180) },
@@ -90,13 +90,13 @@ var e = (e) => ({ kind: `shop`, price: e }),
     { id: `mini-ufo`, name: `Mini UFO`, unlock: e(800), secret: `varginha` },
     { id: `spider-legs`, name: `Spider Legs`, unlock: e(800), secret: `itsy` },
   ],
-  c = { head: r, top: i, bottom: a, hat: o, acc: s },
+  c = { head: headTable, top: topsTable, bottom: bottomsTable, hat: hatsTable, acc: accessoriesTable },
   l = new Set([`hoodie`, `longsleeve`, `suit`]),
   u = new Set([`boots`]);
 function d(e, t) {
   return c[e].find((e) => e.id === t);
 }
-var f = [
+var colorNames = [
     { id: `FF3D7F`, name: `Bubblegum` },
     { id: `FF5A36`, name: `Tomato` },
     { id: `FF8A1F`, name: `Tangerine` },
@@ -134,7 +134,7 @@ var f = [
     { id: `1D1A3A`, name: `Midnight` },
     { id: `3B2C4F`, name: `Aubergine` },
   ],
-  p = {
+  styleKeys = {
     head: [`fur`, `accent`, `hair`],
     top: [`top`],
     bottom: [`bottom`, `shoes`, `sole`],
@@ -142,12 +142,12 @@ var f = [
     acc: [`acc`],
     riding: [`deck0`, `deck1`],
   },
-  m = Object.keys(p);
+  m = Object.keys(styleKeys);
 function h(e) {
-  return m.find((t) => p[t].includes(e));
+  return m.find((t) => styleKeys[t].includes(e));
 }
-var g = [`FFFFFF`, `A3A9B8`, `6B6F80`, `1D1A3A`, `23304A`, `D9B48F`, `8A5A3C`],
-  _ = {
+var furColors = [`FFFFFF`, `A3A9B8`, `6B6F80`, `1D1A3A`, `23304A`, `D9B48F`, `8A5A3C`],
+  skinColors = {
     head: new Set([
       `F7E1C8`,
       `FFB38A`,
@@ -158,21 +158,21 @@ var g = [`FFFFFF`, `A3A9B8`, `6B6F80`, `1D1A3A`, `23304A`, `D9B48F`, `8A5A3C`],
       `7A5236`,
       `5C4033`,
     ]),
-    top: new Set(g),
-    bottom: new Set(g),
-    hat: new Set(g),
-    acc: new Set(g),
-    riding: new Set(g),
+    top: new Set(furColors),
+    bottom: new Set(furColors),
+    hat: new Set(furColors),
+    acc: new Set(furColors),
+    riding: new Set(furColors),
   },
   v = (e, t) => `color:${e}:${t}`;
 function ee(e) {
   let [t, n, r] = e.split(`:`);
-  return t === `color` && n in p && y(r ?? ``) ? { tab: n, id: r } : null;
+  return t === `color` && n in styleKeys && y(r ?? ``) ? { tab: n, id: r } : null;
 }
-f.map((e) => `#${e.id}`);
+colorNames.map((e) => `#${e.id}`);
 function y(e) {
   let t = e.replace(`#`, ``).toUpperCase();
-  return f.find((e) => e.id === t);
+  return colorNames.find((e) => e.id === t);
 }
 var b = [
     `fur`,
@@ -187,7 +187,7 @@ var b = [
     `deck1`,
     `sole`,
   ],
-  x = {
+  defaultStyle = {
     head: `hawk`,
     top: `tee`,
     bottom: `shorts`,
@@ -246,7 +246,7 @@ function E(e) {
     h.length !== n * 6
   )
     return null;
-  let g = x,
+  let g = defaultStyle,
     _ = {};
   return (
     b.forEach((e, t) => {
@@ -254,11 +254,11 @@ function E(e) {
     }),
     n < b.length && (_.sole = S(_.shoes)),
     {
-      head: T(r, l, g.head),
-      top: T(i, u, g.top),
-      bottom: T(a, d, g.bottom),
-      hat: T(o, f, g.hat),
-      acc: T(s, p, g.acc),
+      head: T(headTable, l, g.head),
+      top: T(topsTable, u, g.top),
+      bottom: T(bottomsTable, d, g.bottom),
+      hat: T(hatsTable, f, g.hat),
+      acc: T(accessoriesTable, p, g.acc),
       stance: m === `g` ? `goofy` : `regular`,
       c: _,
     }

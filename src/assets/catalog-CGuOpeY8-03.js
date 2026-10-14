@@ -89,7 +89,7 @@ function U(e, t, n) {
   )
     return null;
   let { pre: i, shape: a, kn: s, r8: c } = r,
-    l = o.includes(e.skin) ? e.skin : i.skin,
+    l = materialTable.includes(e.skin) ? e.skin : i.skin,
     u = a.groundOnly ? 0 : P(e.y),
     [d, f] = n ? V(a, s, c, e.x, e.z) : [e.x, e.z],
     p = {

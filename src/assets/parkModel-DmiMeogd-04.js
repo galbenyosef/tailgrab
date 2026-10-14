@@ -273,7 +273,7 @@ function Ye(e, t, n, r) {
     a = Math.sin(r);
   return (r, o, s) => [e + r * i + s * a, t + o, n - r * a + s * i];
 }
-var H = () => new z(-1e4);
+var H = () => new ParkBuilder(-1e4);
 function Xe(e, t) {
   let n = new p(e.build(), V().near);
   return ((n.name = t), (n.userData.noOutline = !0), n);

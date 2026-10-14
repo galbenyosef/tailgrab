@@ -1,7 +1,7 @@
 // assets/tag-BoiZZ9xV 02 — math
 // Lines 83-397 of readable/assets/tag-BoiZZ9xV.pretty.js (statement-aligned).
 var F = Math.PI * 2,
-  _e = class {
+  TagEditor = class {
     el;
     canvas;
     ctx;

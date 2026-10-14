@@ -473,7 +473,7 @@ var _ = (e) => Math.min(e, 2.6),
       knobs: [u(`R`, `Size`, 3.6, 6, 0.2), u(`h`, `Depth`, 1.8, 3.4)],
       axes: d(`R`, `h`),
       grips: { y: { dir: `down` } },
-      build: (e) => f({ type: `round`, R: e.R }, e.h, `sky`),
+      build: (e) => buildPiece({ type: `round`, R: e.R }, e.h, `sky`),
       quarterOnly: !0,
       groundOnly: !0,
     },
@@ -482,7 +482,7 @@ var _ = (e) => Math.min(e, 2.6),
       axes: d(`s`, `h`),
       grips: { y: { dir: `down` } },
       build: (e) =>
-        f(
+        buildPiece(
           {
             type: `kidney`,
             R1: 4 * e.s,
@@ -504,14 +504,14 @@ var _ = (e) => Math.min(e, 2.6),
       ],
       axes: d(`L`, `h`, `R`),
       grips: { y: { dir: `down` } },
-      build: (e) => f({ type: `oval`, L: e.L, R: e.R }, e.h, `sky`),
+      build: (e) => buildPiece({ type: `oval`, L: e.L, R: e.R }, e.h, `sky`),
       quarterOnly: !0,
       groundOnly: !0,
     },
     raisedBowl: {
       knobs: [u(`R`, `Size`, 3.6, 6, 0.2), u(`h`, `Height`, 1.6, 3.2)],
       axes: d(`R`, `h`),
-      build: (e) => f({ type: `round`, R: e.R }, e.h, `lilac`, !1),
+      build: (e) => buildPiece({ type: `round`, R: e.R }, e.h, `lilac`, !1),
       quarterOnly: !0,
       groundOnly: !0,
     },
@@ -520,7 +520,7 @@ var _ = (e) => Math.min(e, 2.6),
       axes: d(`s`, `h`),
       grips: { y: { dir: `down` } },
       build: (e) =>
-        f(
+        buildPiece(
           {
             type: `clover`,
             n: 4,
@@ -536,7 +536,7 @@ var _ = (e) => Math.min(e, 2.6),
       groundOnly: !0,
     },
   },
-  x = [
+  miniRampDef = [
     {
       id: `mini`,
       label: `Mini Ramp`,
@@ -954,4 +954,4 @@ var _ = (e) => Math.min(e, 2.6),
       skin: `lilac`,
     },
   ],
-  S = new Map(x.map((e) => [e.id, e]));
+  S = new Map(miniRampDef.map((e) => [e.id, e]));

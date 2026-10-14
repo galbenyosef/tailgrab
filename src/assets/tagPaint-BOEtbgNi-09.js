@@ -202,19 +202,19 @@ function Hr(e, t) {
 }
 function Ur(e, t) {
   let n = Xn(t);
-  return n === 0 || (n > 0 && Hr(e, z[n - 1].id));
+  return n === 0 || (n > 0 && Hr(e, skoolDaze[n - 1].id));
 }
 function Wr(e, t) {
   let n = 0,
     r = 0;
-  for (let i of z)
+  for (let i of skoolDaze)
     (t === void 0 || (i.tour ?? 1) === t) &&
       ((n += Vr(e, i.id).length), (r += i.goals.length));
   return r ? n / r : 0;
 }
 function Gr(e) {
   let t = 0;
-  for (let n of z) t += Vr(e, n.id).length;
+  for (let n of skoolDaze) t += Vr(e, n.id).length;
   let n = K.reduce((t, n) => t + e.stats[n], 0);
   return {
     earned: t,

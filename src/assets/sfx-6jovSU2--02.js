@@ -5,7 +5,7 @@ var u = {
     [e.COPING]: { f: 640, decay: 0.55 },
   },
   d = [1, 2.756, 5.404],
-  f = class {
+  AudioEngine = class {
     ctx = null;
     master;
     sfx;
@@ -100,7 +100,7 @@ var u = {
           .createMediaElementSource(t)
           .connect(this.trackGain)
           .connect(this.music),
-        (t.src = h()),
+        (t.src = wavBlob()),
         t.play().catch(() => {}),
         (this.track = t));
     }

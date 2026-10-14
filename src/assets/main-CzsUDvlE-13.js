@@ -81,7 +81,7 @@ function _c(e, t, n) {
     );
   return ((i.dataset.autofocus = ``), [i]);
 }
-var vc = {
+var statDefs = {
     air: { label: `Air`, icon: `air`, what: `Higher ollies, bigger vert air` },
     speed: {
       label: `Speed`,
@@ -102,7 +102,7 @@ var vc = {
 function Cc(e, t) {
   (e.classList.toggle(`off`, !t), e.setAttribute(`aria-disabled`, String(!t)));
 }
-var wc = class {
+var StatPointsBank = class {
   el = j(`div`, `sp`);
   bank = j(`div`, `sp-bank`);
   bankStar = j(`span`, `sp-bank-star`);
@@ -123,7 +123,7 @@ var wc = class {
       this.bank.append(this.bankStar, this.bankN, e));
     let t = j(`div`, `sp-rows`);
     (Tn.forEach((e, n) => {
-      let r = vc[e],
+      let r = statDefs[e],
         i = j(`div`, `sp-row`);
       i.style.setProperty(`--i`, String(n));
       let a = j(`span`, `sp-ico`);
@@ -262,7 +262,7 @@ var wc = class {
       if (
         (L(r.bonus, `pop`),
         o.confetti(t.x, t.y, 10, 0.3),
-        o.float(t.x, t.y - 30, `${Sc(1)} ${vc[e].label.toUpperCase()}`, `gain`),
+        o.float(t.x, t.y - 30, `${Sc(1)} ${statDefs[e].label.toUpperCase()}`, `gain`),
         i < Qt)
       )
         return;
@@ -318,7 +318,7 @@ function Tc() {
     },
   };
 }
-var Ec = [
+var profileStats = [
   [`career`, (e) => `${Math.round(gn(e) * 100)}%`],
   [`best combo`, (e) => e.life.bestCombo.toLocaleString()],
   [`points banked`, (e) => e.life.banked.toLocaleString()],

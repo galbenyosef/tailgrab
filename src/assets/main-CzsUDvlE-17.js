@@ -285,7 +285,7 @@ function Ml(e = {}) {
     },
   };
 }
-var Nl = [
+var controlHelp = [
   [`up`, `Forward / trick ↑`],
   [`down`, `Brake / trick ↓`],
   [`left`, `Turn left`],

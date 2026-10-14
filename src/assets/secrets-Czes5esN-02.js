@@ -2,14 +2,14 @@
 // Lines 254-529 of readable/assets/secrets-Czes5esN.pretty.js (statement-aligned).
 var Q = (e) => ({
     ...e,
-    id: ne[e.key],
+    id: secretSkaters[e.key],
     look: {
       ...e.look,
       stance: e.stance,
       c: { sole: u(e.look.c.shoes), ...e.look.c },
     },
   }),
-  $ = [
+  alienSecret = [
     Q({
       key: `varginha`,
       name: `ET de Varginha`,
@@ -263,12 +263,12 @@ var Q = (e) => ({
       },
     }),
   ],
-  re = new Map($.map((e) => [e.key, e])),
+  re = new Map(alienSecret.map((e) => [e.key, e])),
   ie = (e) => re.get(e),
-  ae = (e) => $.find((t) => 220 + t.id === e),
+  ae = (e) => alienSecret.find((t) => 220 + t.id === e),
   oe = (e) => 220 + e.id,
   se = null,
-  ce = (e) => (se ??= new Map($.map((e) => [s(e.look), e]))).get(e),
+  ce = (e) => (se ??= new Map(alienSecret.map((e) => [s(e.look), e]))).get(e),
   le = new Uint8Array(256).map((e, t) => t);
 for (let [e, t] of Object.entries(ee)) le[t] = Number(e);
 new Set(

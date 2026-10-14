@@ -45,7 +45,7 @@ import {
 } from "./palette-DQTkVEn_.js";
 import "./outline-BufNikL2.js";
 var x = [`hills`, `peaks`, `mesa`, `pines`, `skyline`, `coast`],
-  S = [
+  sceneryMarks = [
     `ferris`,
     `turbines`,
     `mast`,
@@ -95,7 +95,7 @@ function k(e) {
   let n = { theme: t[1], seed: Number(t[2]) };
   if (t[3] !== void 0) {
     let e = t[3] ? t[3].split(`,`) : [];
-    if (!e.every((e) => S.includes(e))) return null;
+    if (!e.every((e) => sceneryMarks.includes(e))) return null;
     n.marks = e;
   }
   return n;

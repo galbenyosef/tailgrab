@@ -28,7 +28,7 @@ function m(e) {
       (i[e] = s));
   return r;
 }
-function h() {
+function wavBlob() {
   let e = 2205,
     t = new DataView(new ArrayBuffer(2249)),
     n = (e, n) => {
@@ -50,8 +50,8 @@ function h() {
   for (let n = 0; n < e; n++) t.setUint8(44 + n, 128);
   return URL.createObjectURL(new Blob([t.buffer], { type: `audio/wav` }));
 }
-var g = new f();
-function _() {
+var g = new AudioEngine();
+function audioUnlock() {
   let e = () => {
     g.unlock();
   };

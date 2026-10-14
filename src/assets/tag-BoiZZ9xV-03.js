@@ -1,6 +1,6 @@
 // assets/tag-BoiZZ9xV 03 — append
 // Lines 398-665 of readable/assets/tag-BoiZZ9xV.pretty.js (statement-aligned).
-function z(o) {
+function tagPage(o) {
   return {
     id: `tag`,
     backdrop: `solid`,
@@ -19,7 +19,7 @@ function z(o) {
         C = !!o.rename && e(),
         w = () => C && !!h.trim() && v(h) !== r.profile?.name,
         T = n(`div`, `tg-art`),
-        j = new _e(T, { font: _, sfx: I });
+        j = new TagEditor(T, { font: _, sfx: I });
       s.own(() => j.dispose());
       let P = n(`div`, `tg-status`);
       P.setAttribute(`aria-live`, `polite`);

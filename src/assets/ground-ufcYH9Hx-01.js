@@ -7,7 +7,7 @@ import {
   V as r,
   xt as i,
 } from "./three.core-DVWDmH0S.js";
-import { a, i as o } from "./toon-CycGToy9.js";
+import { a, i as patchToon } from "./toon-CycGToy9.js";
 import { i as s, k as c } from "./preload-helper-DR1MrGPZ.js";
 import "./scene-DiAs2bfK.js";
 import { a as l, r as u } from "./palette-DQTkVEn_.js";
@@ -34,7 +34,7 @@ function p(e) {
   }
   return t;
 }
-var m = (e, t) => o(a({ color: e }), { rim: 0, kind: t });
+var m = (e, t) => patchToon(a({ color: e }), { rim: 0, kind: t });
 function h(e, t, n, r, i) {
   return (
     i.moveTo(e, -n),

@@ -79,7 +79,7 @@ import { n as Pa } from "./verlet-BVVzuOqv.js";
 import { n as Fa } from "./kit-C-OErpbU.js";
 import { n as Ia, r as La } from "./songs-B3nWAdc6.js";
 import { r as Ra, t as za } from "./stickers-9pAHXWwr.js";
-import { r as Ba } from "./decor-Tyb8Za1u.js";
+import { r as loadProps } from "./decor-Tyb8Za1u.js";
 import { t as Va } from "./OrbitControls-CQWqkYLs.js";
 import { r as Ha } from "./ground-ufcYH9Hx.js";
 async function Ua(e, t) {
@@ -204,7 +204,7 @@ function Ja(e) {
   return Ka.map((t) => e[t]);
 }
 var Ya = (e) => `g:${e}`,
-  Xa = class e {
+  GhostNet = class e {
     net;
     tags;
     ghosts = new Map();

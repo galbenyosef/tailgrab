@@ -1,6 +1,6 @@
 // assets/preload-helper-DR1MrGPZ 05 — skin
 // Lines 1271-1510 of readable/assets/preload-helper-DR1MrGPZ.pretty.js (statement-aligned).
-function ut(e, t, n, r, i) {
+function checkBankSurface(e, t, n, r, i) {
   let { w: o } = t,
     s = o / 2,
     c = t.t ?? 0.5,
@@ -13,7 +13,7 @@ function ut(e, t, n, r, i) {
     f = t.sideSkin ?? e.skin ?? `concrete`,
     p = t.topSkin ?? `asphalt`,
     m = `concrete`,
-    [h, g] = [ct(t.edges?.[0]), ct(t.edges?.[1])],
+    [h, g] = [checkLipProfile(t.edges?.[0]), checkLipProfile(t.edges?.[1])],
     _ = (e) => Math.min(C(e, { u: s, v: -c })[1], C(e, { u: -s, v: -c })[1]),
     v = t.base ?? `auto`;
   if (v === `slab`) {
@@ -156,7 +156,7 @@ function ut(e, t, n, r, i) {
   }
   return { prims: F, rails: I };
 }
-function dt(t, r, a, o) {
+function checkBerm(t, r, a, o) {
   let { r: s, h: c, deck: l } = r,
     u = r.side === `left` ? -1 : 1,
     d = !!t.path.closed,

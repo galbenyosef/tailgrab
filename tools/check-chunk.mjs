@@ -1,6 +1,6 @@
 // check-chunk.mjs — chunk-level gate: did renaming any slice break a SIBLING
-// slice (the cross-slice resolve proof, PLAN §5)? AELORIA — adapted from the
-// fleet precedent (zombie-game-made-by-claude / taipei-rush-tokyo).
+// slice (the cross-slice resolve proof, PLAN §5)? TAILGRAB — adapted from the
+// fleet precedent (aeloria / zombie-game-made-by-claude / taipei-rush-tokyo).
 //
 //   node tools/check-chunk.mjs --all
 //   node tools/check-chunk.mjs <sourceFile> [<sourceFile> …]   (readable/… path)

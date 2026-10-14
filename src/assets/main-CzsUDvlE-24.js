@@ -72,7 +72,7 @@ function Tu(e, t = {}) {
           (I.linksOut &&
             s.append(
               ku(`discord`, `Discord`, () =>
-                window.open(bu, `_blank`, `noopener`),
+                window.open(discordInvite, `_blank`, `noopener`),
               ),
             ),
             s.append(
@@ -84,7 +84,7 @@ function Tu(e, t = {}) {
             (c.alt = `Tailgrab`),
             (c.width = 1e3),
             (c.height = 381));
-          let d = new fu({
+          let d = new PartyDock({
               nav: e,
               slots: t.slots ?? (() => []),
               wave: t.wave ?? (() => {}),
@@ -172,13 +172,13 @@ function Tu(e, t = {}) {
                         o.room &&
                         (o.where === `plaza` || o.where === `park`)
                       ? ((t = `JOIN`),
-                        (n = `${o.name} is in ${wu[o.where]}`),
+                        (n = `${o.name} is in ${whereLabels[o.where]}`),
                         (r = `pulse`))
                       : ((t = e.me.ready ? `READY ✓` : `READY`),
                         (r = e.me.ready ? `ready` : ``),
                         (n =
                           o && !o.present
-                            ? `${o.name} is in ${wu[o.where] ?? `a game`}`
+                            ? `${o.name} is in ${whereLabels[o.where] ?? `a game`}`
                             : e.me.ready
                               ? `Waiting for the leader`
                               : `Ready up to go together`));

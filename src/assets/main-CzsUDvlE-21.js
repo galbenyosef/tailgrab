@@ -27,7 +27,7 @@ function $l() {
               t > 0 &&
               setTimeout(() => d(t - 1), 50));
         },
-        f = new Yl({
+        f = new StarRoadRewards({
           xp: s,
           stars: c,
           starCount: l,

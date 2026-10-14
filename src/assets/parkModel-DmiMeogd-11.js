@@ -1,22 +1,22 @@
 // assets/parkModel-DmiMeogd 11 — dispose
 // Lines 2863-2962 of readable/assets/parkModel-DmiMeogd.pretty.js (statement-aligned).
-async function ln(e, t = {}) {
+async function loadPark(e, t = {}) {
   if (e.tileSize && t.baked !== !1) {
-    let n = await sn(e.id);
+    let n = await loadParkManifest(e.id);
     if (n) return cn(e, n, t);
   }
   let n = t.decor !== !1,
     r = (e) => Ee(e).catch((e) => (console.warn(`[park] decor`, e), null)),
     [a, o] = await Promise.all([
-      t.baked === !1 ? Promise.resolve(null) : an(e.id),
+      t.baked === !1 ? Promise.resolve(null) : loadParkModel(e.id),
       n ? r(e) : Promise.resolve(null),
     ]),
     s = o,
     c = !!a,
     l = a ?? on(e),
-    u = new Ne(),
-    d = h({ vertexColors: !0 });
-  (g(d, { rim: 0.12, ao: !0, kind: !0 }),
+    u = new PaintTexture(),
+    d = toonMaterial({ vertexColors: !0 });
+  (patchToon(d, { rim: 0.12, ao: !0, kind: !0 }),
     u.patch(d),
     (l.material = d),
     (l.receiveShadow = !0),
@@ -40,7 +40,7 @@ async function ln(e, t = {}) {
     T = (e) => {
       e !== w &&
         ((w = e),
-        e ? (xe(l, C), s?.setOutlines(!0)) : (P(l), s?.setOutlines(!1)));
+        e ? (addOutlines(l, C), s?.setOutlines(!0)) : (P(l), s?.setOutlines(!1)));
     };
   return (
     T(t.outlines ?? !0),

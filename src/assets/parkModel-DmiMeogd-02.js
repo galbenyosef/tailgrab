@@ -49,7 +49,7 @@ float gNoise(vec2 p) {
   }
 }
 `,
-  Ne = class {
+  PaintTexture = class {
     texture;
     uniforms = { uZones: { value: null }, uGTime: { value: 0 } };
     data;
@@ -174,7 +174,7 @@ varying vec3 vGWorld;`,
   },
   L = Math.PI / 180,
   R = new l(),
-  z = class {
+  ParkBuilder = class {
     p = [];
     n = [];
     c = [];

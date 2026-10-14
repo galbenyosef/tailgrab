@@ -1,6 +1,6 @@
 // assets/main-CzsUDvlE 20 — gain
 // Lines 5841-6102 of readable/assets/main-CzsUDvlE.pretty.js (statement-aligned).
-var Yl = class {
+var StarRoadRewards = class {
   t;
   show = null;
   live = 0;

@@ -88,7 +88,7 @@ function Oe(e, t, n, r) {
 }
 var ke = `/`.replace(/\/?$/, `/`),
   J = new Map();
-function Ae() {
+function loadProps() {
   return je(`${ke}props/props.glb`);
 }
 function je(e) {
@@ -120,7 +120,7 @@ function je(e) {
     t)
   );
 }
-var Y = [
+var decorAttrs = [
     [`position`, [`position`], 3, 1],
     [`normal`, [`normal`], 3, 1],
     [`color`, [`color`], 3, 1],
@@ -136,7 +136,7 @@ function Ne(e) {
   for (let { g: r } of e)
     ((t += r.getAttribute(`position`).count),
       (n += r.index ? r.index.count : r.getAttribute(`position`).count));
-  let i = Y.map(([, , e]) => new Float32Array(t * e)),
+  let i = decorAttrs.map(([, , e]) => new Float32Array(t * e)),
     o = new Uint32Array(n),
     s = 0,
     c = 0;
@@ -144,7 +144,7 @@ function Ne(e) {
     let e = t.getAttribute(`position`);
     if (
       (n && Me.getNormalMatrix(n),
-      Y.forEach(([, r, a, o], c) => {
+      decorAttrs.forEach(([, r, a, o], c) => {
         let l = r.map((e) => t.getAttribute(e)).find(Boolean),
           u = i[c];
         for (let t = 0; t < e.count; t++) {
@@ -177,24 +177,24 @@ function Ne(e) {
   }
   let l = new a();
   return (
-    Y.forEach(([e, , t], n) => l.setAttribute(e, new r(i[n], t))),
+    decorAttrs.forEach(([e, , t], n) => l.setAttribute(e, new r(i[n], t))),
     l.setIndex(new r(o, 1)),
     l.computeBoundingSphere(),
     l
   );
 }
 function Pe(e = 0.22, t = !1) {
-  let n = u({ vertexColors: !0 });
-  return (d(n, { rim: e, ao: !0, glow: t }), n);
+  let n = toonMaterial({ vertexColors: !0 });
+  return (patchToon(n, { rim: e, ao: !0, glow: t }), n);
 }
 var Q = new e(),
   Fe = new i(),
   $ = new c(),
   Ie = new n(),
   Le = 190;
-async function Re(e, r) {
-  let i = r ?? (await Ae()),
-    { items: a, clouds: c } = fe(e),
+async function buildDecorEntry(e, r) {
+  let i = r ?? (await loadProps()),
+    { items: a, clouds: c } = buildProp(e),
     l = new t();
   l.name = `decor`;
   let u = [],
@@ -232,7 +232,7 @@ async function Re(e, r) {
   for (let [e, t] of d) g(t, `gate:${e}`);
   let _ = T(a.filter((e) => e.prop === `lamp` && i.has(`lamp`)));
   l.add(_.group);
-  let v = new Ce(
+  let v = new LooseBodies(
     f,
     (e) => i.get(e),
     p,
@@ -278,7 +278,7 @@ async function Re(e, r) {
         S();
       },
       setOutlines(e) {
-        for (let t of [...m, v.group]) e ? D(t, 0.8) : E(t);
+        for (let t of [...m, v.group]) e ? addOutlines(t, 0.8) : E(t);
       },
       dispose() {
         l.removeFromParent();

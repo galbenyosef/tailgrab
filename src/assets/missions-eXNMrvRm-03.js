@@ -15,7 +15,7 @@ function m(e) {
   let t = f();
   if (!e || typeof e != `object`) return t;
   let i = e;
-  for (let e of n) {
+  for (let e of missionPeriods) {
     let n = i[e];
     if (!n || typeof n != `object`) continue;
     ((t[e].period = p(n.period)), (t[e].crate = n.crate === !0));
@@ -61,7 +61,7 @@ var h = (e) => Math.round(e * 10) / 10,
   C = (e) => !e.crate && e.slots.length > 0 && e.slots.every((e) => e.claimed);
 function w(e) {
   let t = 0;
-  for (let r of n) {
+  for (let r of missionPeriods) {
     for (let n of e[r].slots) !n.claimed && S(n) && t++;
     C(e[r]) && t++;
   }

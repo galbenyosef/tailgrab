@@ -1,7 +1,7 @@
-// assets/tagPaint-BOEtbgNi 06 — attachall
+// assets/tagPaint-BOEtbgNi 06 — parkstate
 // Lines 2624-2758 of readable/assets/tagPaint-BOEtbgNi.pretty.js (statement-aligned).
 async function Cn(t) {
-  let n = await P.joinOrCreate(`ghost`, { level: t, ...F() }, un);
+  let n = await P.joinOrCreate(`ghost`, { level: t, ...F() }, GhostState);
   await Promise.race([yn(n), new Promise((e) => setTimeout(e, 3e3))]);
   let r = e.get(n),
     i = Gt.get(n, { mode: `lerp`, delay: pn, name: `skaters` });
@@ -17,11 +17,11 @@ function wn(e) {
 }
 async function Tn(e, t = !1) {
   return Dn(
-    await P.joinOrCreate(t ? `daily` : `park`, { park: e, ...F() }, cn),
+    await P.joinOrCreate(t ? `daily` : `park`, { park: e, ...F() }, ParkState),
   );
 }
 async function En(e) {
-  return Dn(await P.joinById(e, F(), cn));
+  return Dn(await P.joinById(e, F(), ParkState));
 }
 async function Dn(t) {
   await yn(t);
@@ -35,10 +35,10 @@ async function Dn(t) {
 }
 async function On(e) {
   return e.kind === `hub`
-    ? _n(await P.consumeSeatReservation(e.reservation, Xt))
-    : Dn(await P.consumeSeatReservation(e.reservation, cn));
+    ? _n(await P.consumeSeatReservation(e.reservation, HubState))
+    : Dn(await P.consumeSeatReservation(e.reservation, ParkState));
 }
-var kn = [
+var quickChat = [
     `Sick!`,
     `Gnarly!`,
     `GG`,
@@ -48,7 +48,7 @@ var kn = [
     `Wait up!`,
     `Follow me!`,
   ],
-  An = [
+  emoteIds = [
     `flame`,
     `hand-horns`,
     `hand-shake`,
@@ -65,7 +65,7 @@ function Mn(e, t = 80) {
 function Nn(e) {
   return typeof e == `string` ? Mn(e, 16) : ``;
 }
-var Pn = [
+var bannedWords = [
     `fuck`,
     `shit`,
     `bitch`,
@@ -91,15 +91,15 @@ var Pn = [
     7: `t`,
     "!": `i`,
   },
-  In = `#@$%&!*`;
+  maskChars = `#@$%&!*`;
 function Ln(e) {
   let t = [...e.toLowerCase()].map((e) => Fn[e] ?? e),
     n = [...e],
     r = t.join(``);
-  for (let e of Pn) {
+  for (let e of bannedWords) {
     let t = r.indexOf(e);
     for (; t >= 0;) {
-      for (let r = t; r < t + e.length; r++) n[r] !== ` ` && (n[r] = In[r % 7]);
+      for (let r = t; r < t + e.length; r++) n[r] !== ` ` && (n[r] = maskChars[r % 7]);
       t = r.indexOf(e, t + 1);
     }
   }

@@ -10,7 +10,7 @@ var _t = (e, t, n, r, i = 0) => ({
     path: { plan: [{ line: r }] },
     section: { type: `ledge`, w: 0.6, h: 0.81, profile: `jersey` },
   }),
-  V = {
+  garagePark = {
     id: `garage`,
     name: `The Garage`,
     range: [4e3, 4999],
@@ -191,7 +191,7 @@ var _t = (e, t, n, r, i = 0) => ({
     },
   ],
   kt = T(10, w.underpass, 0, `concreteDark`),
-  U = {
+  overpassPark = {
     id: `overpass`,
     name: `The Overpass`,
     range: [5e3, 5999],
@@ -362,7 +362,7 @@ var _t = (e, t, n, r, i = 0) => ({
       ],
     ],
   },
-  W = [k, nt, ht, V, U],
+  W = [downtownPark, nt, culvertBank, garagePark, overpassPark],
   At = [{ name: `Freeway Gap`, points: 500, from: [4e3], to: [5001, 5002] }],
   jt = [
     D(100, { x0: -30, x1: 0, z0: 160, z1: 172 }, 14, `brick`),
@@ -376,16 +376,16 @@ var _t = (e, t, n, r, i = 0) => ({
     D(108, { x0: 30, x1: 75, z0: -172, z1: -160 }, 14, `lilac`),
   ],
   G = Math.PI,
-  Mt = [
+  cityModes = [
     {
       id: `downtown`,
       name: `Downtown`,
       rect: w.downtown,
       modes: [`trick`, `graffiti`, `horse`, `skate`, `tag`],
-      spawns: k.spawns,
-      letters: k.letters,
-      horse: k.horse,
-      botPaths: k.botPaths,
+      spawns: downtownPark.spawns,
+      letters: downtownPark.letters,
+      horse: downtownPark.horse,
+      botPaths: downtownPark.botPaths,
     },
     {
       id: `garage`,
@@ -393,13 +393,13 @@ var _t = (e, t, n, r, i = 0) => ({
       rect: w.garage,
       modes: [`skate`, `tag`, `trick`],
       spawns: [
-        V.spawns[0],
+        garagePark.spawns[0],
         { x: 110, y: 0, z: -160, yaw: 0 },
         { x: 160, y: 0, z: -120, yaw: -G / 2 },
       ],
-      letters: V.letters,
-      horse: V.horse,
-      botPaths: V.botPaths,
+      letters: garagePark.letters,
+      horse: garagePark.horse,
+      botPaths: garagePark.botPaths,
     },
     {
       id: `ditch`,
@@ -407,12 +407,12 @@ var _t = (e, t, n, r, i = 0) => ({
       rect: { x0: -172, x1: -60, z0: -172, z1: 45 },
       modes: [`skate`, `trick`],
       spawns: [
-        ...ht.spawns,
+        ...culvertBank.spawns,
         { x: -150, y: 0, z: -125, yaw: G / 2 },
         { x: -110, y: 0, z: -165, yaw: -G / 2 },
       ],
-      letters: ht.letters,
-      botPaths: ht.botPaths,
+      letters: culvertBank.letters,
+      botPaths: culvertBank.botPaths,
     },
     {
       id: `underpass`,
@@ -420,13 +420,13 @@ var _t = (e, t, n, r, i = 0) => ({
       rect: w.underpass,
       modes: [`graffiti`, `tag`, `trick`],
       spawns: [
-        U.spawns[0],
+        overpassPark.spawns[0],
         { x: 110, y: 0, z: -30, yaw: 0 },
         { x: 115, y: 0, z: 60, yaw: G },
       ],
-      letters: U.letters,
-      horse: U.horse,
-      botPaths: U.botPaths,
+      letters: overpassPark.letters,
+      horse: overpassPark.horse,
+      botPaths: overpassPark.botPaths,
     },
   ],
   Nt = (() => {

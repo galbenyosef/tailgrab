@@ -9,7 +9,7 @@ function Qt(e, t, n) {
     c = He(r, a),
     l = We(r, a);
   (o.add(s.mesh, l.mesh), c && o.add(c.mesh));
-  let u = new z(a.floorY);
+  let u = new ParkBuilder(a.floorY);
   for (let e of a.hills) Ke(u, e, a.floorY);
   a.skirt && $t(u, r, a);
   for (let e of a.blocks) qe(u, e, a.floorY);
@@ -166,7 +166,7 @@ function tn(e, t, n, r) {
 }
 var nn = `/`.replace(/\/?$/, `/`),
   rn = new Te();
-async function an(e, t = `${e}.glb`) {
+async function loadParkModel(e, t = `${e}.glb`) {
   try {
     let e = await rn.loadAsync(`${nn}parks/${t}`),
       n = null;
@@ -210,7 +210,7 @@ function on(e) {
     n
   );
 }
-async function sn(e) {
+async function loadParkManifest(e) {
   try {
     let t = await fetch(`${nn}parks/${e}/manifest.json`);
     return t.ok ? await t.json() : null;
@@ -227,9 +227,9 @@ async function cn(e, t, n) {
   let r = e.spawns[0] ?? { x: 0, z: 0 },
     a = new i();
   a.name = `park:${e.id}`;
-  let o = new Ne(),
-    s = h({ vertexColors: !0 });
-  (g(s, { rim: 0.12, ao: !0, kind: !0 }), o.patch(s));
+  let o = new PaintTexture(),
+    s = toonMaterial({ vertexColors: !0 });
+  (patchToon(s, { rim: 0.12, ao: !0, kind: !0 }), o.patch(s));
   let c = n.outlineScale ?? 0.55,
     l = n.outlines ?? !0,
     u = !1,
@@ -240,7 +240,7 @@ async function cn(e, t, n) {
         (n.castShadow ?? !0) && e.key !== `far` && he(t),
         (t.name = `tile:${e.key}`),
         o.measure(t.geometry),
-        l && e.key !== `far` && xe(t, c, void 0, !0),
+        l && e.key !== `far` && addOutlines(t, c, void 0, !0),
         a.add(t),
         d.push({ e, mesh: t }));
     },
@@ -257,7 +257,7 @@ async function cn(e, t, n) {
       for (; _ < p.length;) {
         let t = _++,
           n = p[t],
-          r = await an(e.id, `${e.id}/${n.file}`);
+          r = await loadParkModel(e.id, `${e.id}/${n.file}`);
         if (u) {
           r?.geometry.dispose();
           return;
@@ -296,7 +296,7 @@ async function cn(e, t, n) {
       if (e !== l) {
         l = e;
         for (let t of d)
-          t.e.key !== `far` && (e ? xe(t.mesh, c, void 0, !0) : P(t.mesh));
+          t.e.key !== `far` && (e ? addOutlines(t.mesh, c, void 0, !0) : P(t.mesh));
         C?.setOutlines(e);
       }
     },

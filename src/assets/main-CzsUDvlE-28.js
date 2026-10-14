@@ -2,7 +2,7 @@
 // Lines 8503-9384 of readable/assets/main-CzsUDvlE.pretty.js (statement-aligned).
 var sd = new T(),
   cd = new T(),
-  ld = class {
+  SkaterTags = class {
     root;
     edge;
     tags = new Map();
@@ -163,7 +163,7 @@ var sd = new T(),
   ud = 19,
   dd = 13,
   fd = 0.45,
-  pd = class {
+  EmoteWheel = class {
     el;
     hub;
     pills;
@@ -246,7 +246,7 @@ var sd = new T(),
   },
   md = 220,
   hd = 12,
-  gd = class {
+  ChatPanel = class {
     root;
     log;
     form;
@@ -280,7 +280,7 @@ var sd = new T(),
       let o = j(`span`, `ico-label`, `Emotes `);
       (o.append(j(`kbd`, ``, `G`)),
         this.chatBtn.append(U(`chat`), o),
-        (this.wheel = new pd(t, r, [this.chatBtn])),
+        (this.wheel = new EmoteWheel(t, r, [this.chatBtn])),
         this.wireButton(),
         this.root.append(this.log, ...(i ? [this.form] : [])),
         e.append(this.root),
@@ -445,7 +445,7 @@ var sd = new T(),
   bd = 800,
   xd = 450,
   Sd = new Set([`ollie`, `flip`, `grab`, `grind`]),
-  Cd = class {
+  LevelUnlock = class {
     root;
     news;
     hooks;

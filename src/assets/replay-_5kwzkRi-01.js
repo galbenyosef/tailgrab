@@ -17,7 +17,7 @@ import { b as m, c as h, l as g, p as _, s as v } from "./session-DxCN6jDh.js";
 import { d as y, r as b, t as x } from "./fxHooks-Cvx_8YWC.js";
 import { n as S, t as C } from "./tapeRider-C0l9JrgL.js";
 var w = new e(),
-  T = class {
+  ReplayViewer = class {
     stage;
     cam = new m();
     rider;
@@ -173,10 +173,10 @@ var w = new e(),
 function D(e) {
   return u.link({ replay: e });
 }
-async function O(e) {
+async function replayLinkPage(e) {
   try {
     let t = await l(e);
-    return k(
+    return replayPage(
       { replay: e, name: t.name || `Skater`, score: t.score, rank: t.rank },
       t.title,
       t,
@@ -197,7 +197,7 @@ async function O(e) {
     };
   }
 }
-function k(e, t, n) {
+function replayPage(e, t, n) {
   return {
     id: `replay`,
     title: `#${e.rank} ${e.name}`,
@@ -258,7 +258,7 @@ function k(e, t, n) {
           a.textContent = `This replay is from a different version — reload to watch.`;
           return;
         }
-        let l = new T(i.stage, t, i.zones, i.announcer);
+        let l = new ReplayViewer(i.stage, t, i.zones, i.announcer);
         if ((await l.load(), r.signal.aborted || !i.open(l))) {
           l.dispose();
           return;

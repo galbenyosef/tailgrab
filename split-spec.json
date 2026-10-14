@@ -21,8 +21,8 @@
   },
   "rename": {
     "map": "rename-map.json",
-    "chunks": 0,
-    "names": 0,
+    "chunks": 46,
+    "names": 334,
     "indexedOccurrences": 0,
     "note": "Semantic renames are recorded per slice in rename-map.json (word-boundary `files` records + `scoped` token-index records); this file re-applies them when it re-cuts src/. Vendor identifiers (wholeFile regions and the vendor chunks) are never renamed; each chunk's fired binding map is recorded per source as renameBindings for the reconstruction gates (tools/verify-rename.mjs, tools/check-chunk.mjs)."
   },
@@ -39,8 +39,57 @@
       "idempotent": true,
       "tag": "assets/main-CzsUDvlE",
       "slices": 45,
-      "renameBindings": {},
-      "derived": "readable + 45 statement-aligned slice(s)"
+      "renameBindings": {
+        "Ba": "loadProps",
+        "D": "patchToon",
+        "E": "toonMaterial",
+        "Ee": "addOutlines",
+        "Xa": "GhostNet",
+        "Oo": "ParkStage",
+        "Po": "TabNav",
+        "Fo": "AppRouter",
+        "ss": "UnlockQueue",
+        "wc": "StatPointsBank",
+        "fu": "PartyDock",
+        "Ku": "PortalPrompts",
+        "id": "ScreenWipe",
+        "ld": "SkaterTags",
+        "pd": "EmoteWheel",
+        "gd": "ChatPanel",
+        "Cd": "LevelUnlock",
+        "Bd": "MatchHud",
+        "nf": "GatePopup",
+        "sf": "SkateLetters",
+        "df": "Collectibles",
+        "mf": "CoinChip",
+        "gf": "NowPlaying",
+        "Cf": "Coach",
+        "wf": "GoalsPanel",
+        "Tf": "MissionsDock",
+        "Lf": "EdgeMarkers",
+        "zf": "PingPill",
+        "Hf": "PerfMeter",
+        "wm": "BuilderHud",
+        "Vm": "ParkEditor",
+        "Hm": "ParkPill",
+        "Yl": "StarRoadRewards",
+        "th": "GameApp",
+        "ap": "MapControls",
+        "zl": "credits",
+        "Nl": "controlHelp",
+        "Ad": "modeBlurbs",
+        "tc": "careerStats",
+        "Ec": "profileStats",
+        "vc": "statDefs",
+        "_s": "styleSlots",
+        "ys": "styleGroups",
+        "ms": "swatchColors",
+        "jc": "oauthProviders",
+        "bu": "discordInvite",
+        "wu": "whereLabels",
+        "Kf": "qualityTiers"
+      },
+      "derived": "readable + 45 statement-aligned slice(s) (31 through the recorded rename map)"
     },
     {
       "sourceFile": "readable/assets/bailPhysics-C1H0uy1H.pretty.js",
@@ -54,8 +103,12 @@
       "idempotent": true,
       "tag": "assets/bailPhysics-C1H0uy1H",
       "slices": 5,
-      "renameBindings": {},
-      "derived": "readable + 5 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "Te": "RagdollBody",
+        "Je": "Ragdoll",
+        "Oe": "BoneMapper"
+      },
+      "derived": "readable + 5 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/bestTv-zah2thYf.pretty.js",
@@ -69,8 +122,15 @@
       "idempotent": true,
       "tag": "assets/bestTv-zah2thYf",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "M": "BestTv",
+        "b": "loadProps",
+        "l": "toonMaterial",
+        "m": "addOutlines",
+        "u": "patchToon",
+        "x": "Lens"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/catalog-CGuOpeY8.pretty.js",
@@ -84,8 +144,14 @@
       "idempotent": true,
       "tag": "assets/catalog-CGuOpeY8",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "i": "rampTable",
+        "o": "materialTable",
+        "s": "zoneMaterials",
+        "f": "buildPiece",
+        "x": "miniRampDef"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/compose-C1tLg9l9.pretty.js",
@@ -99,8 +165,16 @@
       "idempotent": true,
       "tag": "assets/compose-C1tLg9l9",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "a": "buildStairs",
+        "o": "buildLedge",
+        "s": "buildPlanter",
+        "c": "buildEscalator",
+        "d": "deckSlab",
+        "f": "buildBeam",
+        "p": "flatTop"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/debug-BVnJLfS4.pretty.js",
@@ -129,8 +203,10 @@
       "idempotent": true,
       "tag": "assets/decor-EQ8VRNuO",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "loadProps"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/decor-Tyb8Za1u.pretty.js",
@@ -144,8 +220,25 @@
       "idempotent": true,
       "tag": "assets/decor-Tyb8Za1u",
       "slices": 4,
-      "renameBindings": {},
-      "derived": "readable + 4 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "Ae": "loadProps",
+        "D": "addOutlines",
+        "d": "patchToon",
+        "u": "toonMaterial",
+        "re": "portalDefs",
+        "oe": "groundPlane",
+        "A": "treeModels",
+        "se": "buildBush",
+        "ce": "buildLamp",
+        "le": "buildCloud",
+        "ue": "portalPad",
+        "de": "buildTerrainDecor",
+        "fe": "buildProp",
+        "Ce": "LooseBodies",
+        "Y": "decorAttrs",
+        "Re": "buildDecorEntry"
+      },
+      "derived": "readable + 4 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/dmath-_BI8hNwF.pretty.js",
@@ -174,8 +267,26 @@
       "idempotent": true,
       "tag": "assets/fxHooks-Cvx_8YWC",
       "slices": 9,
-      "renameBindings": {},
-      "derived": "readable + 9 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "ae": "toonMaterial",
+        "le": "addOutlines",
+        "Le": "Particles",
+        "ze": "Decals",
+        "He": "SpriteText",
+        "Ue": "makeTextSprite",
+        "qe": "TrailMesh",
+        "on": "FunnelRide",
+        "dn": "skillTiers",
+        "yn": "XpMeter",
+        "bn": "LevelChip",
+        "xn": "Announcer",
+        "Sn": "praiseFor",
+        "wn": "CineBars",
+        "jn": "BeamBurst",
+        "Ln": "TrailBeam",
+        "ir": "TrickCallout"
+      },
+      "derived": "readable + 9 statement-aligned slice(s) (8 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/ground-ufcYH9Hx.pretty.js",
@@ -189,8 +300,10 @@
       "idempotent": true,
       "tag": "assets/ground-ufcYH9Hx",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "o": "patchToon"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/juice-6UyTKeka.pretty.js",
@@ -204,8 +317,11 @@
       "idempotent": true,
       "tag": "assets/juice-6UyTKeka",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "U": "hairStyles",
+        "Ie": "portraitUrlFor"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/kit-C-OErpbU.pretty.js",
@@ -219,8 +335,10 @@
       "idempotent": true,
       "tag": "assets/kit-C-OErpbU",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "o": "kitSlots"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/lens-BwVvQcWW.pretty.js",
@@ -234,8 +352,10 @@
       "idempotent": true,
       "tag": "assets/lens-BwVvQcWW",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "Lens"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/lens-Csl3PMnC.pretty.js",
@@ -249,8 +369,11 @@
       "idempotent": true,
       "tag": "assets/lens-Csl3PMnC",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "p": "Lens",
+        "u": "LensMaterial"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/missions-eXNMrvRm.pretty.js",
@@ -264,8 +387,13 @@
       "idempotent": true,
       "tag": "assets/missions-eXNMrvRm",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "n": "missionPeriods",
+        "o": "dailyMissions",
+        "s": "weeklyMissions",
+        "c": "trickGoals"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/music-D6fpJLig.pretty.js",
@@ -279,8 +407,10 @@
       "idempotent": true,
       "tag": "assets/music-D6fpJLig",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "E": "startMusic"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/outline-BufNikL2.pretty.js",
@@ -294,8 +424,12 @@
       "idempotent": true,
       "tag": "assets/outline-BufNikL2",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "p": "addOutlines",
+        "l": "expandOutline",
+        "f": "makeOutlineMaterial"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/outline-DM9oZu0n.pretty.js",
@@ -309,8 +443,10 @@
       "idempotent": true,
       "tag": "assets/outline-DM9oZu0n",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "addOutlines"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/padNav-a65kF6ol.pretty.js",
@@ -324,8 +460,21 @@
       "idempotent": true,
       "tag": "assets/padNav-a65kF6ol",
       "slices": 4,
-      "renameBindings": {},
-      "derived": "readable + 4 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "ce": "PartyMember",
+        "le": "PartyState",
+        "de": "navTabs",
+        "D": "partyKey",
+        "Ce": "partyState",
+        "B": "partyToast",
+        "Oe": "watchAdButton",
+        "He": "seenUnlocks",
+        "Me": "fakeAdOverlay",
+        "ht": "PadNav",
+        "dt": "padLabels",
+        "at": "confirmKeys"
+      },
+      "derived": "readable + 4 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/palette-DQTkVEn_.pretty.js",
@@ -354,8 +503,13 @@
       "idempotent": true,
       "tag": "assets/parkMesh-CjoleZJz",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "o": "toonMaterial",
+        "s": "patchToon",
+        "b": "parkVertexAttrs",
+        "x": "extrudePiece"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/parkModel-D9KlCEyZ.pretty.js",
@@ -369,8 +523,10 @@
       "idempotent": true,
       "tag": "assets/parkModel-D9KlCEyZ",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "loadPark"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js",
@@ -384,8 +540,17 @@
       "idempotent": true,
       "tag": "assets/parkModel-DmiMeogd",
       "slices": 11,
-      "renameBindings": {},
-      "derived": "readable + 11 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "g": "patchToon",
+        "h": "toonMaterial",
+        "ln": "loadPark",
+        "xe": "addOutlines",
+        "z": "ParkBuilder",
+        "Ne": "PaintTexture",
+        "an": "loadParkModel",
+        "sn": "loadParkManifest"
+      },
+      "derived": "readable + 11 statement-aligned slice(s) (7 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js",
@@ -399,8 +564,25 @@
       "idempotent": true,
       "tag": "assets/parks-C2dnYY6C",
       "slices": 10,
-      "renameBindings": {},
-      "derived": "readable + 10 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "ae": "modeParks",
+        "he": "modeNames",
+        "de": "horseWord",
+        "ve": "plazaPark",
+        "ye": "testPark",
+        "be": "warehousePark",
+        "xe": "schoolyardPark",
+        "Se": "pierPark",
+        "De": "mallPark",
+        "Ae": "kitLabPark",
+        "k": "downtownPark",
+        "U": "overpassPark",
+        "V": "garagePark",
+        "at": "ditchPark",
+        "ht": "culvertBank",
+        "Mt": "cityModes"
+      },
+      "derived": "readable + 10 statement-aligned slice(s) (8 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/parks-vuvy8Lj9.pretty.js",
@@ -414,8 +596,13 @@
       "idempotent": true,
       "tag": "assets/parks-vuvy8Lj9",
       "slices": 2,
-      "renameBindings": {},
-      "derived": "readable + 2 statement-aligned slice(s)"
+      "renameBindings": {
+        "x": "loadPark",
+        "k": "viewerOptions",
+        "j": "fogDefaults",
+        "ne": "loadViewerModules"
+      },
+      "derived": "readable + 2 statement-aligned slice(s) (2 through the recorded rename map)"
     },
     {
       "sourceFile": "readable/assets/perfLab-Dt5WuMzb.pretty.js",
@@ -429,8 +616,11 @@
       "idempotent": true,
       "tag": "assets/perfLab-Dt5WuMzb",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "r": "runPerfLab",
+        "a": "rendererInfo"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/poses-DwKBijP_.pretty.js",
@@ -444,8 +634,12 @@
       "idempotent": true,
       "tag": "assets/poses-DwKBijP_",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "emotePoses",
+        "t": "victoryPoses",
+        "n": "standPoses"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js",
@@ -459,8 +653,36 @@
       "idempotent": false,
       "tag": "assets/preload-helper-DR1MrGPZ",
       "slices": 18,
-      "renameBindings": {},
-      "derived": "readable + 18 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "H": "checkStep",
+        "W": "checkRise",
+        "G": "checkBank",
+        "q": "checkPlan",
+        "ne": "checkSamples",
+        "xe": "checkTerrain",
+        "we": "checkSingleTerrain",
+        "nt": "checkPosts",
+        "ot": "checkLedgeFill",
+        "ct": "checkLipProfile",
+        "st": "checkRail",
+        "ut": "checkBankSurface",
+        "dt": "checkBerm",
+        "ft": "checkDitchLip",
+        "pt": "checkTransition",
+        "mt": "checkLevee",
+        "vt": "bowlProfiles",
+        "yt": "checkBowl",
+        "Ot": "checkBack",
+        "Pt": "pieceDefaults",
+        "rr": "checkMeshTris",
+        "fr": "checkFloorHole",
+        "hr": "checkFloorMesh",
+        "Ir": "SpatialIndex",
+        "je": "CopingGrid",
+        "ci": "modulepreloadPolyfill",
+        "di": "preload"
+      },
+      "derived": "readable + 18 statement-aligned slice(s) (12 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/prims-CECOBLSv.pretty.js",
@@ -474,8 +696,12 @@
       "idempotent": true,
       "tag": "assets/prims-CECOBLSv",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "N": "checkSweep",
+        "_": "checkRim",
+        "b": "TriBuilder"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (2 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/replay-_5kwzkRi.pretty.js",
@@ -489,8 +715,12 @@
       "idempotent": true,
       "tag": "assets/replay-_5kwzkRi",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "O": "replayLinkPage",
+        "k": "replayPage",
+        "T": "ReplayViewer"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/scene-DiAs2bfK.pretty.js",
@@ -504,8 +734,12 @@
       "idempotent": true,
       "tag": "assets/scene-DiAs2bfK",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "Xe": "SkyRig",
+        "S": "sceneryMarks",
+        "R": "timesOfDay"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/secrets-Czes5esN.pretty.js",
@@ -519,8 +753,11 @@
       "idempotent": true,
       "tag": "assets/secrets-Czes5esN",
       "slices": 2,
-      "renameBindings": {},
-      "derived": "readable + 2 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "ne": "secretSkaters",
+        "$": "alienSecret"
+      },
+      "derived": "readable + 2 statement-aligned slice(s) (2 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js",
@@ -534,8 +771,19 @@
       "idempotent": true,
       "tag": "assets/session-DxCN6jDh",
       "slices": 12,
-      "renameBindings": {},
-      "derived": "readable + 12 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "m": "toonMaterial",
+        "In": "SkaterMotion",
+        "Gi": "checkTape",
+        "$i": "PredictReconciler",
+        "ea": "simFields",
+        "ta": "SampleRing",
+        "na": "ComboHud",
+        "aa": "riddle",
+        "ua": "SeatTags",
+        "Da": "GameSession"
+      },
+      "derived": "readable + 12 statement-aligned slice(s) (6 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/sfx-6jovSU2-.pretty.js",
@@ -549,8 +797,13 @@
       "idempotent": true,
       "tag": "assets/sfx-6jovSU2-",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "f": "AudioEngine",
+        "h": "wavBlob",
+        "_": "audioUnlock",
+        "t": "settingsKey"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/skaterRig-CvzHL-r4.pretty.js",
@@ -564,8 +817,20 @@
       "idempotent": true,
       "tag": "assets/skaterRig-CvzHL-r4",
       "slices": 4,
-      "renameBindings": {},
-      "derived": "readable + 4 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "Zt": "SkaterRigView",
+        "ae": "addOutlines",
+        "dt": "parseClips",
+        "m": "patchToon",
+        "p": "toonMaterial",
+        "pt": "loadSkaterAssets",
+        "Ue": "SkaterKit",
+        "tt": "FrameSampler",
+        "ct": "PoseBlend",
+        "qt": "lipTricks",
+        "A": "makeTrick"
+      },
+      "derived": "readable + 4 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/skaterRig-CWjsS5UF.pretty.js",
@@ -579,8 +844,12 @@
       "idempotent": true,
       "tag": "assets/skaterRig-CWjsS5UF",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "loadSkaterAssets",
+        "n": "SkaterRigView",
+        "t": "parseClips"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/skaters-pUdq6stw.pretty.js",
@@ -594,8 +863,12 @@
       "idempotent": true,
       "tag": "assets/skaters-pUdq6stw",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "R": "proRoster",
+        "V": "skillStyles",
+        "Q": "defaultNames"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (2 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/skaterView-DCMhULBk.pretty.js",
@@ -609,8 +882,12 @@
       "idempotent": true,
       "tag": "assets/skaterView-DCMhULBk",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "l": "toonMaterial",
+        "A": "SkaterView",
+        "x": "GhostRig"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/songs-B3nWAdc6.pretty.js",
@@ -624,8 +901,10 @@
       "idempotent": true,
       "tag": "assets/songs-B3nWAdc6",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "songs"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/stickers-9pAHXWwr.pretty.js",
@@ -639,8 +918,10 @@
       "idempotent": true,
       "tag": "assets/stickers-9pAHXWwr",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "stickerIds"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/table-W1plLavt.pretty.js",
@@ -654,8 +935,63 @@
       "idempotent": true,
       "tag": "assets/table-W1plLavt",
       "slices": 2,
-      "renameBindings": {},
-      "derived": "readable + 2 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "r": "headTable",
+        "i": "topsTable",
+        "a": "bottomsTable",
+        "o": "hatsTable",
+        "s": "accessoriesTable",
+        "f": "colorNames",
+        "p": "styleKeys",
+        "g": "furColors",
+        "_": "skinColors",
+        "x": "defaultStyle",
+        "j": "kickflip",
+        "M": "heelflip",
+        "N": "popShoveIt",
+        "P": "impossible",
+        "F": "hardflip",
+        "L": "varialKickflip",
+        "z": "doubleKickflip",
+        "U": "nosegrab",
+        "W": "tailgrab",
+        "G": "indy",
+        "K": "melon",
+        "q": "method",
+        "J": "stalefish",
+        "oe": "benihana",
+        "se": "crail",
+        "le": "grind5050",
+        "ue": "nosegrind",
+        "de": "grind50",
+        "fe": "smith",
+        "pe": "feeble",
+        "me": "crooked",
+        "Y": "boardslide",
+        "ve": "lipslide",
+        "X": "noseslide",
+        "Z": "tailslide",
+        "Q": "bluntslide",
+        "ye": "manual",
+        "be": "noseManual",
+        "xe": "axleStall",
+        "Se": "rockToFakie",
+        "Ce": "handplant",
+        "we": "disaster",
+        "Te": "spin",
+        "Ee": "wallride",
+        "et": "invert",
+        "tt": "andrecht",
+        "nt": "oneFootInvert",
+        "rt": "noseStall",
+        "it": "bluntToFakie",
+        "at": "treFlip",
+        "ot": "revert",
+        "st": "oneFootManual",
+        "ct": "spacewalk",
+        "lt": "truckstand"
+      },
+      "derived": "readable + 2 statement-aligned slice(s) (2 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/tag-BoiZZ9xV.pretty.js",
@@ -669,8 +1005,12 @@
       "idempotent": true,
       "tag": "assets/tag-BoiZZ9xV",
       "slices": 3,
-      "renameBindings": {},
-      "derived": "readable + 3 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "z": "tagPage",
+        "_e": "TagEditor",
+        "P": "keyRows"
+      },
+      "derived": "readable + 3 statement-aligned slice(s) (3 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js",
@@ -684,8 +1024,33 @@
       "idempotent": true,
       "tag": "assets/tagPaint-BOEtbgNi",
       "slices": 12,
-      "renameBindings": {},
-      "derived": "readable + 12 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "Kt": "Skater",
+        "Yt": "Portal",
+        "Xt": "HubState",
+        "Zt": "Competitor",
+        "Qt": "Piece",
+        "en": "HorseState",
+        "tn": "LetterSpot",
+        "nn": "TagState",
+        "rn": "CareerGoal",
+        "an": "CareerSpot",
+        "on": "CareerState",
+        "sn": "MatchState",
+        "cn": "ParkState",
+        "ln": "Ghost",
+        "un": "GhostState",
+        "dn": "backendUrl",
+        "fn": "createClient",
+        "kn": "quickChat",
+        "An": "emoteIds",
+        "Pn": "bannedWords",
+        "In": "maskChars",
+        "z": "skoolDaze",
+        "Qn": "kickflipMission",
+        "tr": "pickupIds"
+      },
+      "derived": "readable + 12 statement-aligned slice(s) (6 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/tapeRider-C0l9JrgL.pretty.js",
@@ -699,8 +1064,13 @@
       "idempotent": true,
       "tag": "assets/tapeRider-C0l9JrgL",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "b": "TapeSim",
+        "E": "TapeRunner",
+        "w": "compressTape",
+        "x": "tapeChecksum"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/toon-CycGToy9.pretty.js",
@@ -714,8 +1084,11 @@
       "idempotent": true,
       "tag": "assets/toon-CycGToy9",
       "slices": 2,
-      "renameBindings": {},
-      "derived": "readable + 2 statement-aligned slice(s) + 1 wholeFile region(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "ci": "toonMaterial",
+        "ui": "patchToon"
+      },
+      "derived": "readable + 2 statement-aligned slice(s) (1 through the recorded rename map) + 1 wholeFile region(s) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/toon-L4_S6Akl.pretty.js",
@@ -729,8 +1102,11 @@
       "idempotent": true,
       "tag": "assets/toon-L4_S6Akl",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "e": "toonMaterial",
+        "t": "patchToon"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/tuning-D4mSK766.pretty.js",
@@ -744,8 +1120,10 @@
       "idempotent": true,
       "tag": "assets/tuning-D4mSK766",
       "slices": 11,
-      "renameBindings": {},
-      "derived": "readable + 11 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "pn": "SurfaceProbe"
+      },
+      "derived": "readable + 11 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/types-DM-HODfo.pretty.js",
@@ -759,8 +1137,10 @@
       "idempotent": true,
       "tag": "assets/types-DM-HODfo",
       "slices": 1,
-      "renameBindings": {},
-      "derived": "readable + 1 statement-aligned slice(s) + 1 skipped section(s)"
+      "renameBindings": {
+        "S": "RunState"
+      },
+      "derived": "readable + 1 statement-aligned slice(s) (1 through the recorded rename map) + 1 skipped section(s)"
     },
     {
       "sourceFile": "readable/assets/verlet-BVVzuOqv.pretty.js",
@@ -945,7 +1325,7 @@
     {
       "file": "assets/main-CzsUDvlE-01.js",
       "title": "assets/main-CzsUDvlE 01 — vite__mapdeps",
-      "desc": "Lines 1-343. Markers: vite__mapdeps(2), map(1).",
+      "desc": "Lines 1-343. Markers: vite__mapdeps(2), addoutlines(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 343,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -953,7 +1333,7 @@
     {
       "file": "assets/main-CzsUDvlE-02.js",
       "title": "assets/main-CzsUDvlE 02 — append",
-      "desc": "Lines 344-642. Markers: append(9), ghosts(8).",
+      "desc": "Lines 344-642. Markers: append(9), ghosts(8). Range re-cut through the recorded semantic rename map.",
       "startLine": 344,
       "endLine": 642,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -969,7 +1349,7 @@
     {
       "file": "assets/main-CzsUDvlE-04.js",
       "title": "assets/main-CzsUDvlE 04 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 819-1241. Markers: math(34), view(26).",
+      "desc": "Oversized single declaration (kept whole). Lines 819-1241. Markers: math(34), view(26). Range re-cut through the recorded semantic rename map.",
       "startLine": 819,
       "endLine": 1241,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -985,7 +1365,7 @@
     {
       "file": "assets/main-CzsUDvlE-06.js",
       "title": "assets/main-CzsUDvlE 06 — root",
-      "desc": "Oversized single declaration (kept whole). Lines 1245-1754. Markers: root(28), home(24).",
+      "desc": "Oversized single declaration (kept whole). Lines 1245-1754. Markers: root(28), home(24). Range re-cut through the recorded semantic rename map.",
       "startLine": 1245,
       "endLine": 1754,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -993,7 +1373,7 @@
     {
       "file": "assets/main-CzsUDvlE-07.js",
       "title": "assets/main-CzsUDvlE 07 — append",
-      "desc": "Lines 1755-2057. Markers: append(17), card(14).",
+      "desc": "Lines 1755-2057. Markers: append(17), card(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 1755,
       "endLine": 2057,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1001,7 +1381,7 @@
     {
       "file": "assets/main-CzsUDvlE-08.js",
       "title": "assets/main-CzsUDvlE 08 — append",
-      "desc": "Lines 2058-2401. Markers: append(22), textcontent(14).",
+      "desc": "Lines 2058-2401. Markers: append(22), textcontent(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 2058,
       "endLine": 2401,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1017,7 +1397,7 @@
     {
       "file": "assets/main-CzsUDvlE-10.js",
       "title": "assets/main-CzsUDvlE 10 — append",
-      "desc": "Oversized single declaration (kept whole). Lines 2423-3104. Markers: append(37), profile(19).",
+      "desc": "Oversized single declaration (kept whole). Lines 2423-3104. Markers: append(37), profile(19). Range re-cut through the recorded semantic rename map.",
       "startLine": 2423,
       "endLine": 3104,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1033,7 +1413,7 @@
     {
       "file": "assets/main-CzsUDvlE-12.js",
       "title": "assets/main-CzsUDvlE 12 — append",
-      "desc": "Lines 3438-3770. Markers: append(26), kind(18).",
+      "desc": "Lines 3438-3770. Markers: append(26), kind(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 3438,
       "endLine": 3770,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1041,7 +1421,7 @@
     {
       "file": "assets/main-CzsUDvlE-13.js",
       "title": "assets/main-CzsUDvlE 13 — append",
-      "desc": "Lines 3771-4098. Markers: append(13), classlist(11).",
+      "desc": "Lines 3771-4098. Markers: append(13), classlist(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 3771,
       "endLine": 4098,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1049,7 +1429,7 @@
     {
       "file": "assets/main-CzsUDvlE-14.js",
       "title": "assets/main-CzsUDvlE 14 — append",
-      "desc": "Lines 4099-4442. Markers: append(36), textcontent(11).",
+      "desc": "Lines 4099-4442. Markers: append(36), textcontent(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 4099,
       "endLine": 4442,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1073,7 +1453,7 @@
     {
       "file": "assets/main-CzsUDvlE-17.js",
       "title": "assets/main-CzsUDvlE 17 — append",
-      "desc": "Lines 5019-5318. Markers: append(25), code(12).",
+      "desc": "Lines 5019-5318. Markers: append(25), code(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 5019,
       "endLine": 5318,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1081,7 +1461,7 @@
     {
       "file": "assets/main-CzsUDvlE-18.js",
       "title": "assets/main-CzsUDvlE 18 — append",
-      "desc": "Lines 5319-5631. Markers: append(19), setattribute(6).",
+      "desc": "Lines 5319-5631. Markers: append(19), setattribute(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 5319,
       "endLine": 5631,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1097,7 +1477,7 @@
     {
       "file": "assets/main-CzsUDvlE-20.js",
       "title": "assets/main-CzsUDvlE 20 — gain",
-      "desc": "Lines 5841-6102. Markers: gain(9), show(8).",
+      "desc": "Lines 5841-6102. Markers: gain(9), show(8). Range re-cut through the recorded semantic rename map.",
       "startLine": 5841,
       "endLine": 6102,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1105,7 +1485,7 @@
     {
       "file": "assets/main-CzsUDvlE-21.js",
       "title": "assets/main-CzsUDvlE 21 — append",
-      "desc": "Lines 6103-6417. Markers: append(30), dataset(14).",
+      "desc": "Lines 6103-6417. Markers: append(30), dataset(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 6103,
       "endLine": 6417,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1113,7 +1493,7 @@
     {
       "file": "assets/main-CzsUDvlE-22.js",
       "title": "assets/main-CzsUDvlE 22 — append",
-      "desc": "Lines 6418-6761. Markers: append(34), add(20).",
+      "desc": "Lines 6418-6761. Markers: append(34), add(20). Range re-cut through the recorded semantic rename map.",
       "startLine": 6418,
       "endLine": 6761,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1121,7 +1501,7 @@
     {
       "file": "assets/main-CzsUDvlE-23.js",
       "title": "assets/main-CzsUDvlE 23 — pointerid",
-      "desc": "Lines 6762-7096. Markers: pointerid(19), style(16).",
+      "desc": "Lines 6762-7096. Markers: pointerid(19), style(16). Range re-cut through the recorded semantic rename map.",
       "startLine": 6762,
       "endLine": 7096,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1129,7 +1509,7 @@
     {
       "file": "assets/main-CzsUDvlE-24.js",
       "title": "assets/main-CzsUDvlE 24 — kind",
-      "desc": "Lines 7097-7433. Markers: kind(12), isleader(10).",
+      "desc": "Lines 7097-7433. Markers: kind(12), isleader(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 7097,
       "endLine": 7433,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1145,7 +1525,7 @@
     {
       "file": "assets/main-CzsUDvlE-26.js",
       "title": "assets/main-CzsUDvlE 26 — append",
-      "desc": "Oversized single declaration (kept whole). Lines 7738-8221. Markers: append(29), mode(17).",
+      "desc": "Oversized single declaration (kept whole). Lines 7738-8221. Markers: append(29), mode(17). Range re-cut through the recorded semantic rename map.",
       "startLine": 7738,
       "endLine": 8221,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1153,7 +1533,7 @@
     {
       "file": "assets/main-CzsUDvlE-27.js",
       "title": "assets/main-CzsUDvlE 27 — append",
-      "desc": "Lines 8222-8502. Markers: append(12), icon(10).",
+      "desc": "Lines 8222-8502. Markers: append(12), icon(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 8222,
       "endLine": 8502,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1161,7 +1541,7 @@
     {
       "file": "assets/main-CzsUDvlE-28.js",
       "title": "assets/main-CzsUDvlE 28 — append",
-      "desc": "Oversized single declaration (kept whole). Lines 8503-9384. Markers: append(56), math(19).",
+      "desc": "Oversized single declaration (kept whole). Lines 8503-9384. Markers: append(56), math(19). Range re-cut through the recorded semantic rename map.",
       "startLine": 8503,
       "endLine": 9384,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1177,7 +1557,7 @@
     {
       "file": "assets/main-CzsUDvlE-30.js",
       "title": "assets/main-CzsUDvlE 30 — append",
-      "desc": "Oversized single declaration (kept whole). Lines 9415-10400. Markers: append(49), phase(30).",
+      "desc": "Oversized single declaration (kept whole). Lines 9415-10400. Markers: append(49), phase(30). Range re-cut through the recorded semantic rename map.",
       "startLine": 9415,
       "endLine": 10400,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1185,7 +1565,7 @@
     {
       "file": "assets/main-CzsUDvlE-31.js",
       "title": "assets/main-CzsUDvlE 31 — math",
-      "desc": "Lines 10401-10735. Markers: math(16), append(12).",
+      "desc": "Lines 10401-10735. Markers: math(16), append(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 10401,
       "endLine": 10735,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1193,7 +1573,7 @@
     {
       "file": "assets/main-CzsUDvlE-32.js",
       "title": "assets/main-CzsUDvlE 32 — root",
-      "desc": "Lines 10736-11078. Markers: root(12), add(10).",
+      "desc": "Lines 10736-11078. Markers: root(12), add(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 10736,
       "endLine": 11078,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1201,7 +1581,7 @@
     {
       "file": "assets/main-CzsUDvlE-33.js",
       "title": "assets/main-CzsUDvlE 33 — append",
-      "desc": "Lines 11079-11405. Markers: append(23), classlist(14).",
+      "desc": "Lines 11079-11405. Markers: append(23), classlist(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 11079,
       "endLine": 11405,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1209,7 +1589,7 @@
     {
       "file": "assets/main-CzsUDvlE-34.js",
       "title": "assets/main-CzsUDvlE 34 — math",
-      "desc": "Lines 11406-11750. Markers: math(18), hidden(9).",
+      "desc": "Lines 11406-11750. Markers: math(18), hidden(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 11406,
       "endLine": 11750,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1217,7 +1597,7 @@
     {
       "file": "assets/main-CzsUDvlE-35.js",
       "title": "assets/main-CzsUDvlE 35 — math",
-      "desc": "Lines 11751-12092. Markers: math(22), piece(20).",
+      "desc": "Lines 11751-12092. Markers: math(22), piece(20). Range re-cut through the recorded semantic rename map.",
       "startLine": 11751,
       "endLine": 12092,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1241,7 +1621,7 @@
     {
       "file": "assets/main-CzsUDvlE-38.js",
       "title": "assets/main-CzsUDvlE 38 — group",
-      "desc": "Oversized single declaration (kept whole). Lines 12661-13056. Markers: group(23), visible(21).",
+      "desc": "Oversized single declaration (kept whole). Lines 12661-13056. Markers: group(23), visible(21). Range re-cut through the recorded semantic rename map.",
       "startLine": 12661,
       "endLine": 13056,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1257,7 +1637,7 @@
     {
       "file": "assets/main-CzsUDvlE-40.js",
       "title": "assets/main-CzsUDvlE 40 — append",
-      "desc": "Lines 13120-13452. Markers: append(33), hooks(19).",
+      "desc": "Lines 13120-13452. Markers: append(33), hooks(19). Range re-cut through the recorded semantic rename map.",
       "startLine": 13120,
       "endLine": 13452,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1273,7 +1653,7 @@
     {
       "file": "assets/main-CzsUDvlE-42.js",
       "title": "assets/main-CzsUDvlE 42 — gizmos",
-      "desc": "Oversized single declaration (kept whole). Lines 13517-15417. Markers: gizmos(54), armed(49).",
+      "desc": "Oversized single declaration (kept whole). Lines 13517-15417. Markers: gizmos(54), armed(49). Range re-cut through the recorded semantic rename map.",
       "startLine": 13517,
       "endLine": 15417,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1289,7 +1669,7 @@
     {
       "file": "assets/main-CzsUDvlE-44.js",
       "title": "assets/main-CzsUDvlE 44 — announcer",
-      "desc": "Oversized single declaration (kept whole). Lines 15457-17654. Markers: announcer(54), screen(49).",
+      "desc": "Oversized single declaration (kept whole). Lines 15457-17654. Markers: announcer(54), screen(49). Range re-cut through the recorded semantic rename map.",
       "startLine": 15457,
       "endLine": 17654,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1297,7 +1677,7 @@
     {
       "file": "assets/main-CzsUDvlE-45.js",
       "title": "assets/main-CzsUDvlE 45 — classlist",
-      "desc": "Lines 17655-17758. Markers: classlist(4), body(3).",
+      "desc": "Lines 17655-17758. Markers: classlist(4), body(3). Range re-cut through the recorded semantic rename map.",
       "startLine": 17655,
       "endLine": 17758,
       "sourceFile": "readable/assets/main-CzsUDvlE.pretty.js"
@@ -1321,7 +1701,7 @@
     {
       "file": "assets/bailPhysics-C1H0uy1H-03.js",
       "title": "assets/bailPhysics-C1H0uy1H 03 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 370-1012. Markers: math(55), body(23).",
+      "desc": "Oversized single declaration (kept whole). Lines 370-1012. Markers: math(55), body(23). Range re-cut through the recorded semantic rename map.",
       "startLine": 370,
       "endLine": 1012,
       "sourceFile": "readable/assets/bailPhysics-C1H0uy1H.pretty.js"
@@ -1329,7 +1709,7 @@
     {
       "file": "assets/bailPhysics-C1H0uy1H-04.js",
       "title": "assets/bailPhysics-C1H0uy1H 04 — math",
-      "desc": "Lines 1013-1284. Markers: math(9), normalize(9).",
+      "desc": "Lines 1013-1284. Markers: math(9), normalize(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 1013,
       "endLine": 1284,
       "sourceFile": "readable/assets/bailPhysics-C1H0uy1H.pretty.js"
@@ -1337,7 +1717,7 @@
     {
       "file": "assets/bailPhysics-C1H0uy1H-05.js",
       "title": "assets/bailPhysics-C1H0uy1H 05 — math",
-      "desc": "Lines 1285-1495. Markers: math(13), body(11).",
+      "desc": "Lines 1285-1495. Markers: math(13), body(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 1285,
       "endLine": 1495,
       "sourceFile": "readable/assets/bailPhysics-C1H0uy1H.pretty.js"
@@ -1356,7 +1736,7 @@
     {
       "file": "assets/bestTv-zah2thYf-01.js",
       "title": "assets/bestTv-zah2thYf 01 — stage",
-      "desc": "Lines 1-323. Markers: stage(16), root(12).",
+      "desc": "Lines 1-323. Markers: stage(16), root(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 323,
       "sourceFile": "readable/assets/bestTv-zah2thYf.pretty.js"
@@ -1375,7 +1755,7 @@
     {
       "file": "assets/catalog-CGuOpeY8-01.js",
       "title": "assets/catalog-CGuOpeY8 01 — label",
-      "desc": "Lines 1-123. Markers: label(7), math(7).",
+      "desc": "Lines 1-123. Markers: label(7), math(7). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 123,
       "sourceFile": "readable/assets/catalog-CGuOpeY8.pretty.js"
@@ -1383,7 +1763,7 @@
     {
       "file": "assets/catalog-CGuOpeY8-02.js",
       "title": "assets/catalog-CGuOpeY8 02 — label",
-      "desc": "Oversized single declaration (kept whole). Lines 124-1078. Markers: label(53), cat(52).",
+      "desc": "Oversized single declaration (kept whole). Lines 124-1078. Markers: label(53), cat(52). Range re-cut through the recorded semantic rename map.",
       "startLine": 124,
       "endLine": 1078,
       "sourceFile": "readable/assets/catalog-CGuOpeY8.pretty.js"
@@ -1391,7 +1771,7 @@
     {
       "file": "assets/catalog-CGuOpeY8-03.js",
       "title": "assets/catalog-CGuOpeY8 03 — math",
-      "desc": "Lines 1079-1206. Markers: math(11), shape(11).",
+      "desc": "Lines 1079-1206. Markers: math(11), shape(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 1079,
       "endLine": 1206,
       "sourceFile": "readable/assets/catalog-CGuOpeY8.pretty.js"
@@ -1410,7 +1790,7 @@
     {
       "file": "assets/compose-C1tLg9l9-01.js",
       "title": "assets/compose-C1tLg9l9 01 — skin",
-      "desc": "Lines 1-217. Markers: skin(17), rot(15).",
+      "desc": "Lines 1-217. Markers: skin(17), rot(15). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 217,
       "sourceFile": "readable/assets/compose-C1tLg9l9.pretty.js"
@@ -1516,8 +1896,8 @@
     },
     {
       "file": "assets/decor-EQ8VRNuO-01.js",
-      "title": "assets/decor-EQ8VRNuO 01 — imports",
-      "desc": "Lines 1-1. Markers: .",
+      "title": "assets/decor-EQ8VRNuO 01 — loadprops",
+      "desc": "Lines 1-1. Markers: loadprops(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 1,
       "sourceFile": "readable/assets/decor-EQ8VRNuO.pretty.js"
@@ -1536,7 +1916,7 @@
     {
       "file": "assets/decor-Tyb8Za1u-01.js",
       "title": "assets/decor-Tyb8Za1u 01 — math",
-      "desc": "Lines 1-290. Markers: math(28), minx(17).",
+      "desc": "Lines 1-290. Markers: math(28), minx(17). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 290,
       "sourceFile": "readable/assets/decor-Tyb8Za1u.pretty.js"
@@ -1552,7 +1932,7 @@
     {
       "file": "assets/decor-Tyb8Za1u-03.js",
       "title": "assets/decor-Tyb8Za1u 03 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 393-903. Markers: math(37), shape(18).",
+      "desc": "Oversized single declaration (kept whole). Lines 393-903. Markers: math(37), shape(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 393,
       "endLine": 903,
       "sourceFile": "readable/assets/decor-Tyb8Za1u.pretty.js"
@@ -1560,7 +1940,7 @@
     {
       "file": "assets/decor-Tyb8Za1u-04.js",
       "title": "assets/decor-Tyb8Za1u 04 — math",
-      "desc": "Lines 904-1193. Markers: math(10), count(9).",
+      "desc": "Lines 904-1193. Markers: math(10), count(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 904,
       "endLine": 1193,
       "sourceFile": "readable/assets/decor-Tyb8Za1u.pretty.js"
@@ -1598,7 +1978,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-01.js",
       "title": "assets/fxHooks-Cvx_8YWC 01 — math",
-      "desc": "Lines 1-102. Markers: math(3), map(2).",
+      "desc": "Lines 1-102. Markers: math(3), map(2). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 102,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1606,7 +1986,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-02.js",
       "title": "assets/fxHooks-Cvx_8YWC 02 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 103-783. Markers: math(36), life(33).",
+      "desc": "Oversized single declaration (kept whole). Lines 103-783. Markers: math(36), life(33). Range re-cut through the recorded semantic rename map.",
       "startLine": 103,
       "endLine": 783,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1614,7 +1994,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-03.js",
       "title": "assets/fxHooks-Cvx_8YWC 03 — math",
-      "desc": "Lines 784-1110. Markers: math(14), mesh(6).",
+      "desc": "Lines 784-1110. Markers: math(14), mesh(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 784,
       "endLine": 1110,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1622,7 +2002,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-04.js",
       "title": "assets/fxHooks-Cvx_8YWC 04 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 1111-2552. Markers: math(114), random(41).",
+      "desc": "Oversized single declaration (kept whole). Lines 1111-2552. Markers: math(114), random(41). Range re-cut through the recorded semantic rename map.",
       "startLine": 1111,
       "endLine": 2552,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1630,7 +2010,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-05.js",
       "title": "assets/fxHooks-Cvx_8YWC 05 — min",
-      "desc": "Lines 2553-2639. Markers: min(9), append(2).",
+      "desc": "Lines 2553-2639. Markers: min(9), skilltiers(5). Range re-cut through the recorded semantic rename map.",
       "startLine": 2553,
       "endLine": 2639,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1638,7 +2018,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-06.js",
       "title": "assets/fxHooks-Cvx_8YWC 06 — append",
-      "desc": "Oversized single declaration (kept whole). Lines 2640-3006. Markers: append(19), fill(13).",
+      "desc": "Oversized single declaration (kept whole). Lines 2640-3006. Markers: append(19), fill(13). Range re-cut through the recorded semantic rename map.",
       "startLine": 2640,
       "endLine": 3006,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1646,7 +2026,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-07.js",
       "title": "assets/fxHooks-Cvx_8YWC 07 — math",
-      "desc": "Lines 3007-3351. Markers: math(20), geo(11).",
+      "desc": "Lines 3007-3351. Markers: math(20), geo(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 3007,
       "endLine": 3351,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1662,7 +2042,7 @@
     {
       "file": "assets/fxHooks-Cvx_8YWC-09.js",
       "title": "assets/fxHooks-Cvx_8YWC 09 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 3365-4729. Markers: math(62), color(42).",
+      "desc": "Oversized single declaration (kept whole). Lines 3365-4729. Markers: math(62), color(42). Range re-cut through the recorded semantic rename map.",
       "startLine": 3365,
       "endLine": 4729,
       "sourceFile": "readable/assets/fxHooks-Cvx_8YWC.pretty.js"
@@ -1681,7 +2061,7 @@
     {
       "file": "assets/ground-ufcYH9Hx-01.js",
       "title": "assets/ground-ufcYH9Hx 01 — math",
-      "desc": "Lines 1-102. Markers: math(10), grass(4).",
+      "desc": "Lines 1-102. Markers: math(10), grass(4). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 102,
       "sourceFile": "readable/assets/ground-ufcYH9Hx.pretty.js"
@@ -1708,7 +2088,7 @@
     {
       "file": "assets/juice-6UyTKeka-02.js",
       "title": "assets/juice-6UyTKeka 02 — addeventlistener",
-      "desc": "Lines 337-681. Markers: addeventlistener(10), classlist(8).",
+      "desc": "Lines 337-681. Markers: addeventlistener(10), classlist(8). Range re-cut through the recorded semantic rename map.",
       "startLine": 337,
       "endLine": 681,
       "sourceFile": "readable/assets/juice-6UyTKeka.pretty.js"
@@ -1735,7 +2115,7 @@
     {
       "file": "assets/kit-C-OErpbU-01.js",
       "title": "assets/kit-C-OErpbU 01 — index",
-      "desc": "Lines 1-115. Markers: index(12), position(12).",
+      "desc": "Lines 1-115. Markers: index(12), position(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 115,
       "sourceFile": "readable/assets/kit-C-OErpbU.pretty.js"
@@ -1753,8 +2133,8 @@
     },
     {
       "file": "assets/lens-BwVvQcWW-01.js",
-      "title": "assets/lens-BwVvQcWW 01 — imports",
-      "desc": "Lines 1-1. Markers: .",
+      "title": "assets/lens-BwVvQcWW 01 — lens",
+      "desc": "Lines 1-1. Markers: lens(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 1,
       "sourceFile": "readable/assets/lens-BwVvQcWW.pretty.js"
@@ -1773,7 +2153,7 @@
     {
       "file": "assets/lens-Csl3PMnC-01.js",
       "title": "assets/lens-Csl3PMnC 01 — material",
-      "desc": "Lines 1-131. Markers: material(13), dispose(6).",
+      "desc": "Lines 1-131. Markers: material(13), dispose(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 131,
       "sourceFile": "readable/assets/lens-Csl3PMnC.pretty.js"
@@ -1792,7 +2172,7 @@
     {
       "file": "assets/missions-eXNMrvRm-01.js",
       "title": "assets/missions-eXNMrvRm 01 — kind",
-      "desc": "Lines 1-10. Markers: kind(5).",
+      "desc": "Lines 1-10. Markers: kind(5), missionperiods(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 10,
       "sourceFile": "readable/assets/missions-eXNMrvRm.pretty.js"
@@ -1800,7 +2180,7 @@
     {
       "file": "assets/missions-eXNMrvRm-02.js",
       "title": "assets/missions-eXNMrvRm 02 — kind",
-      "desc": "Oversized single declaration (kept whole). Lines 11-382. Markers: kind(37), kinds(10).",
+      "desc": "Oversized single declaration (kept whole). Lines 11-382. Markers: kind(37), dailymissions(25). Range re-cut through the recorded semantic rename map.",
       "startLine": 11,
       "endLine": 382,
       "sourceFile": "readable/assets/missions-eXNMrvRm.pretty.js"
@@ -1808,7 +2188,7 @@
     {
       "file": "assets/missions-eXNMrvRm-03.js",
       "title": "assets/missions-eXNMrvRm 03 — math",
-      "desc": "Lines 383-500. Markers: math(13), slots(10).",
+      "desc": "Lines 383-500. Markers: math(13), slots(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 383,
       "endLine": 500,
       "sourceFile": "readable/assets/missions-eXNMrvRm.pretty.js"
@@ -1827,7 +2207,7 @@
     {
       "file": "assets/music-D6fpJLig-01.js",
       "title": "assets/music-D6fpJLig 01 — connect",
-      "desc": "Lines 1-162. Markers: connect(13), gain(12).",
+      "desc": "Lines 1-162. Markers: connect(13), gain(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 162,
       "sourceFile": "readable/assets/music-D6fpJLig.pretty.js"
@@ -1846,7 +2226,7 @@
     {
       "file": "assets/outline-BufNikL2-01.js",
       "title": "assets/outline-BufNikL2 01 — frustumculled",
-      "desc": "Lines 1-146. Markers: frustumculled(6), userdata(5).",
+      "desc": "Lines 1-146. Markers: frustumculled(6), makeoutlinematerial(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 146,
       "sourceFile": "readable/assets/outline-BufNikL2.pretty.js"
@@ -1864,8 +2244,8 @@
     },
     {
       "file": "assets/outline-DM9oZu0n-01.js",
-      "title": "assets/outline-DM9oZu0n 01 — imports",
-      "desc": "Lines 1-1. Markers: .",
+      "title": "assets/outline-DM9oZu0n 01 — addoutlines",
+      "desc": "Lines 1-1. Markers: addoutlines(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 1,
       "sourceFile": "readable/assets/outline-DM9oZu0n.pretty.js"
@@ -1884,7 +2264,7 @@
     {
       "file": "assets/padNav-a65kF6ol-01.js",
       "title": "assets/padNav-a65kF6ol 01 — kind",
-      "desc": "Lines 1-350. Markers: kind(18), code(14).",
+      "desc": "Lines 1-350. Markers: kind(18), code(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 350,
       "sourceFile": "readable/assets/padNav-a65kF6ol.pretty.js"
@@ -1892,7 +2272,7 @@
     {
       "file": "assets/padNav-a65kF6ol-02.js",
       "title": "assets/padNav-a65kF6ol 02 — look",
-      "desc": "Lines 351-646. Markers: look(6), math(6).",
+      "desc": "Lines 351-646. Markers: look(6), math(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 351,
       "endLine": 646,
       "sourceFile": "readable/assets/padNav-a65kF6ol.pretty.js"
@@ -1900,7 +2280,7 @@
     {
       "file": "assets/padNav-a65kF6ol-03.js",
       "title": "assets/padNav-a65kF6ol 03 — main",
-      "desc": "Oversized single declaration (kept whole). Lines 647-1238. Markers: main(23), nav(16).",
+      "desc": "Oversized single declaration (kept whole). Lines 647-1238. Markers: main(23), nav(16). Range re-cut through the recorded semantic rename map.",
       "startLine": 647,
       "endLine": 1238,
       "sourceFile": "readable/assets/padNav-a65kF6ol.pretty.js"
@@ -1946,7 +2326,7 @@
     {
       "file": "assets/parkMesh-CjoleZJz-01.js",
       "title": "assets/parkMesh-CjoleZJz 01 — kind",
-      "desc": "Lines 1-278. Markers: kind(11), push(10).",
+      "desc": "Lines 1-278. Markers: kind(11), push(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 278,
       "sourceFile": "readable/assets/parkMesh-CjoleZJz.pretty.js"
@@ -1964,8 +2344,8 @@
     },
     {
       "file": "assets/parkModel-D9KlCEyZ-01.js",
-      "title": "assets/parkModel-D9KlCEyZ 01 — imports",
-      "desc": "Lines 1-1. Markers: .",
+      "title": "assets/parkModel-D9KlCEyZ 01 — loadpark",
+      "desc": "Lines 1-1. Markers: loadpark(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 1,
       "sourceFile": "readable/assets/parkModel-D9KlCEyZ.pretty.js"
@@ -1983,8 +2363,8 @@
     },
     {
       "file": "assets/parkModel-DmiMeogd-01.js",
-      "title": "assets/parkModel-DmiMeogd 01 — imports",
-      "desc": "Lines 1-62. Markers: .",
+      "title": "assets/parkModel-DmiMeogd 01 — addoutlines",
+      "desc": "Lines 1-62. Markers: addoutlines(1), patchtoon(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 62,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -1992,7 +2372,7 @@
     {
       "file": "assets/parkModel-DmiMeogd-02.js",
       "title": "assets/parkModel-DmiMeogd 02 — math",
-      "desc": "Lines 63-403. Markers: math(29), texture(10).",
+      "desc": "Lines 63-403. Markers: math(29), texture(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 63,
       "endLine": 403,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -2000,7 +2380,7 @@
     {
       "file": "assets/parkModel-DmiMeogd-03.js",
       "title": "assets/parkModel-DmiMeogd 03 — push",
-      "desc": "Lines 404-745. Markers: push(9), math(8).",
+      "desc": "Lines 404-745. Markers: push(9), math(8). Range re-cut through the recorded semantic rename map.",
       "startLine": 404,
       "endLine": 745,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -2008,7 +2388,7 @@
     {
       "file": "assets/parkModel-DmiMeogd-04.js",
       "title": "assets/parkModel-DmiMeogd 04 — math",
-      "desc": "Lines 746-1037. Markers: math(35), tri(18).",
+      "desc": "Lines 746-1037. Markers: math(35), tri(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 746,
       "endLine": 1037,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -2016,7 +2396,7 @@
     {
       "file": "assets/parkModel-DmiMeogd-05.js",
       "title": "assets/parkModel-DmiMeogd 05 — math",
-      "desc": "Lines 1038-1382. Markers: math(28), beam(11).",
+      "desc": "Lines 1038-1382. Markers: math(28), beam(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 1038,
       "endLine": 1382,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -2056,7 +2436,7 @@
     {
       "file": "assets/parkModel-DmiMeogd-10.js",
       "title": "assets/parkModel-DmiMeogd 10 — mesh",
-      "desc": "Lines 2555-2862. Markers: mesh(15), dispose(14).",
+      "desc": "Lines 2555-2862. Markers: mesh(15), dispose(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 2555,
       "endLine": 2862,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -2064,7 +2444,7 @@
     {
       "file": "assets/parkModel-DmiMeogd-11.js",
       "title": "assets/parkModel-DmiMeogd 11 — dispose",
-      "desc": "Lines 2863-2962. Markers: dispose(8), geometry(6).",
+      "desc": "Lines 2863-2962. Markers: dispose(8), geometry(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 2863,
       "endLine": 2962,
       "sourceFile": "readable/assets/parkModel-DmiMeogd.pretty.js"
@@ -2083,7 +2463,7 @@
     {
       "file": "assets/parks-C2dnYY6C-01.js",
       "title": "assets/parks-C2dnYY6C 01 — blurb",
-      "desc": "Lines 1-185. Markers: blurb(6), color(6).",
+      "desc": "Lines 1-185. Markers: blurb(6), color(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 185,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2091,7 +2471,7 @@
     {
       "file": "assets/parks-C2dnYY6C-02.js",
       "title": "assets/parks-C2dnYY6C 02 — kind",
-      "desc": "Oversized single declaration (kept whole). Lines 186-2958. Markers: kind(200), skin(165).",
+      "desc": "Oversized single declaration (kept whole). Lines 186-2958. Markers: kind(200), skin(165). Range re-cut through the recorded semantic rename map.",
       "startLine": 186,
       "endLine": 2958,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2115,7 +2495,7 @@
     {
       "file": "assets/parks-C2dnYY6C-05.js",
       "title": "assets/parks-C2dnYY6C 05 — kind",
-      "desc": "Oversized single declaration (kept whole). Lines 3354-3726. Markers: kind(20), skin(19).",
+      "desc": "Oversized single declaration (kept whole). Lines 3354-3726. Markers: kind(20), skin(19). Range re-cut through the recorded semantic rename map.",
       "startLine": 3354,
       "endLine": 3726,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2123,7 +2503,7 @@
     {
       "file": "assets/parks-C2dnYY6C-06.js",
       "title": "assets/parks-C2dnYY6C 06 — plan",
-      "desc": "Lines 3727-3916. Markers: plan(10), rises(9).",
+      "desc": "Lines 3727-3916. Markers: plan(10), rises(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 3727,
       "endLine": 3916,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2131,7 +2511,7 @@
     {
       "file": "assets/parks-C2dnYY6C-07.js",
       "title": "assets/parks-C2dnYY6C 07 — kind",
-      "desc": "Oversized single declaration (kept whole). Lines 3917-4371. Markers: kind(24), rot(15).",
+      "desc": "Oversized single declaration (kept whole). Lines 3917-4371. Markers: kind(24), rot(15). Range re-cut through the recorded semantic rename map.",
       "startLine": 3917,
       "endLine": 4371,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2139,7 +2519,7 @@
     {
       "file": "assets/parks-C2dnYY6C-08.js",
       "title": "assets/parks-C2dnYY6C 08 — flatmap",
-      "desc": "Lines 4372-4425. Markers: flatmap(7), error(4).",
+      "desc": "Lines 4372-4425. Markers: flatmap(7), error(4). Range re-cut through the recorded semantic rename map.",
       "startLine": 4372,
       "endLine": 4425,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2147,7 +2527,7 @@
     {
       "file": "assets/parks-C2dnYY6C-09.js",
       "title": "assets/parks-C2dnYY6C 09 — kind",
-      "desc": "Oversized single declaration (kept whole). Lines 4426-5643. Markers: kind(71), skin(71).",
+      "desc": "Oversized single declaration (kept whole). Lines 4426-5643. Markers: kind(71), skin(71). Range re-cut through the recorded semantic rename map.",
       "startLine": 4426,
       "endLine": 5643,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2155,7 +2535,7 @@
     {
       "file": "assets/parks-C2dnYY6C-10.js",
       "title": "assets/parks-C2dnYY6C 10 — arena",
-      "desc": "Lines 5644-5689. Markers: arena(5), box(5).",
+      "desc": "Lines 5644-5689. Markers: arena(5), box(5). Range re-cut through the recorded semantic rename map.",
       "startLine": 5644,
       "endLine": 5689,
       "sourceFile": "readable/assets/parks-C2dnYY6C.pretty.js"
@@ -2173,8 +2553,8 @@
     },
     {
       "file": "assets/parks-vuvy8Lj9-01.js",
-      "title": "assets/parks-vuvy8Lj9 01 — add",
-      "desc": "Lines 1-316. Markers: add(19), park(17).",
+      "title": "assets/parks-vuvy8Lj9 01 — vieweroptions",
+      "desc": "Lines 1-316. Markers: vieweroptions(30), add(19). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 316,
       "sourceFile": "readable/assets/parks-vuvy8Lj9.pretty.js"
@@ -2182,7 +2562,7 @@
     {
       "file": "assets/parks-vuvy8Lj9-02.js",
       "title": "assets/parks-vuvy8Lj9 02 — startswith",
-      "desc": "Lines 317-372. Markers: startswith(5), addoutlines(3).",
+      "desc": "Lines 317-372. Markers: startswith(5), addoutlines(3). Range re-cut through the recorded semantic rename map.",
       "startLine": 317,
       "endLine": 372,
       "sourceFile": "readable/assets/parks-vuvy8Lj9.pretty.js"
@@ -2190,7 +2570,7 @@
     {
       "file": "assets/perfLab-Dt5WuMzb-01.js",
       "title": "assets/perfLab-Dt5WuMzb 01 — tier",
-      "desc": "Lines 1-113. Markers: tier(11), off(4).",
+      "desc": "Lines 1-113. Markers: tier(11), off(4). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 113,
       "sourceFile": "readable/assets/perfLab-Dt5WuMzb.pretty.js"
@@ -2209,7 +2589,7 @@
     {
       "file": "assets/poses-DwKBijP_-01.js",
       "title": "assets/poses-DwKBijP_ 01 — clip",
-      "desc": "Lines 1-121. Markers: clip(39), only(7).",
+      "desc": "Lines 1-121. Markers: clip(39), only(7). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 121,
       "sourceFile": "readable/assets/poses-DwKBijP_.pretty.js"
@@ -2228,7 +2608,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-01.js",
       "title": "assets/preload-helper-DR1MrGPZ 01 — math",
-      "desc": "Lines 1-334. Markers: math(28), len(22).",
+      "desc": "Lines 1-334. Markers: math(28), len(22). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 334,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2236,7 +2616,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-02.js",
       "title": "assets/preload-helper-DR1MrGPZ 02 — math",
-      "desc": "Lines 335-683. Markers: math(23), error(9).",
+      "desc": "Lines 335-683. Markers: math(23), error(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 335,
       "endLine": 683,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2244,7 +2624,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-03.js",
       "title": "assets/preload-helper-DR1MrGPZ 03 — math",
-      "desc": "Lines 684-1033. Markers: math(34), floor(12).",
+      "desc": "Lines 684-1033. Markers: math(34), floor(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 684,
       "endLine": 1033,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2252,7 +2632,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-04.js",
       "title": "assets/preload-helper-DR1MrGPZ 04 — skin",
-      "desc": "Lines 1034-1270. Markers: skin(18), ledge(9).",
+      "desc": "Lines 1034-1270. Markers: skin(18), ledge(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 1034,
       "endLine": 1270,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2260,7 +2640,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-05.js",
       "title": "assets/preload-helper-DR1MrGPZ 05 — skin",
-      "desc": "Lines 1271-1510. Markers: skin(17), push(15).",
+      "desc": "Lines 1271-1510. Markers: skin(17), push(15). Range re-cut through the recorded semantic rename map.",
       "startLine": 1271,
       "endLine": 1510,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2268,7 +2648,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-06.js",
       "title": "assets/preload-helper-DR1MrGPZ 06 — abs",
-      "desc": "Lines 1511-1850. Markers: abs(25), push(23).",
+      "desc": "Lines 1511-1850. Markers: abs(25), push(23). Range re-cut through the recorded semantic rename map.",
       "startLine": 1511,
       "endLine": 1850,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2276,7 +2656,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-07.js",
       "title": "assets/preload-helper-DR1MrGPZ 07 — push",
-      "desc": "Lines 1851-2173. Markers: push(23), path(20).",
+      "desc": "Lines 1851-2173. Markers: push(23), path(20). Range re-cut through the recorded semantic rename map.",
       "startLine": 1851,
       "endLine": 2173,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2292,7 +2672,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-09.js",
       "title": "assets/preload-helper-DR1MrGPZ 09 — push",
-      "desc": "Lines 2327-2675. Markers: push(23), path(21).",
+      "desc": "Lines 2327-2675. Markers: push(23), path(21). Range re-cut through the recorded semantic rename map.",
       "startLine": 2327,
       "endLine": 2675,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2340,7 +2720,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-15.js",
       "title": "assets/preload-helper-DR1MrGPZ 15 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 4576-5002. Markers: math(40), push(18).",
+      "desc": "Oversized single declaration (kept whole). Lines 4576-5002. Markers: math(40), push(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 4576,
       "endLine": 5002,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2348,7 +2728,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-16.js",
       "title": "assets/preload-helper-DR1MrGPZ 16 — push",
-      "desc": "Lines 5003-5324. Markers: push(23), math(15).",
+      "desc": "Lines 5003-5324. Markers: push(23), math(15). Range re-cut through the recorded semantic rename map.",
       "startLine": 5003,
       "endLine": 5324,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2356,7 +2736,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-17.js",
       "title": "assets/preload-helper-DR1MrGPZ 17 — math",
-      "desc": "Lines 5325-5670. Markers: math(23), next(17).",
+      "desc": "Lines 5325-5670. Markers: math(23), next(17). Range re-cut through the recorded semantic rename map.",
       "startLine": 5325,
       "endLine": 5670,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2364,7 +2744,7 @@
     {
       "file": "assets/preload-helper-DR1MrGPZ-18.js",
       "title": "assets/preload-helper-DR1MrGPZ 18 — math",
-      "desc": "Lines 5671-5911. Markers: math(11), map(6).",
+      "desc": "Lines 5671-5911. Markers: math(11), map(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 5671,
       "endLine": 5911,
       "sourceFile": "readable/assets/preload-helper-DR1MrGPZ.pretty.js"
@@ -2383,7 +2763,7 @@
     {
       "file": "assets/prims-CECOBLSv-01.js",
       "title": "assets/prims-CECOBLSv 01 — math",
-      "desc": "Lines 1-316. Markers: math(28), push(12).",
+      "desc": "Lines 1-316. Markers: math(28), push(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 316,
       "sourceFile": "readable/assets/prims-CECOBLSv.pretty.js"
@@ -2399,7 +2779,7 @@
     {
       "file": "assets/prims-CECOBLSv-03.js",
       "title": "assets/prims-CECOBLSv 03 — map",
-      "desc": "Lines 634-834. Markers: map(9), math(8).",
+      "desc": "Lines 634-834. Markers: map(9), math(8). Range re-cut through the recorded semantic rename map.",
       "startLine": 634,
       "endLine": 834,
       "sourceFile": "readable/assets/prims-CECOBLSv.pretty.js"
@@ -2418,7 +2798,7 @@
     {
       "file": "assets/replay-_5kwzkRi-01.js",
       "title": "assets/replay-_5kwzkRi 01 — stage",
-      "desc": "Lines 1-330. Markers: stage(15), cam(13).",
+      "desc": "Lines 1-330. Markers: stage(15), cam(13). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 330,
       "sourceFile": "readable/assets/replay-_5kwzkRi.pretty.js"
@@ -2437,7 +2817,7 @@
     {
       "file": "assets/scene-DiAs2bfK-01.js",
       "title": "assets/scene-DiAs2bfK 01 — math",
-      "desc": "Lines 1-347. Markers: math(43), pool(11).",
+      "desc": "Lines 1-347. Markers: math(43), pool(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 347,
       "sourceFile": "readable/assets/scene-DiAs2bfK.pretty.js"
@@ -2445,7 +2825,7 @@
     {
       "file": "assets/scene-DiAs2bfK-02.js",
       "title": "assets/scene-DiAs2bfK 02 — math",
-      "desc": "Lines 348-629. Markers: math(9), lamps(6).",
+      "desc": "Lines 348-629. Markers: math(9), lamps(6). Range re-cut through the recorded semantic rename map.",
       "startLine": 348,
       "endLine": 629,
       "sourceFile": "readable/assets/scene-DiAs2bfK.pretty.js"
@@ -2453,7 +2833,7 @@
     {
       "file": "assets/scene-DiAs2bfK-03.js",
       "title": "assets/scene-DiAs2bfK 03 — renderer",
-      "desc": "Lines 630-914. Markers: renderer(16), sun(16).",
+      "desc": "Lines 630-914. Markers: renderer(16), sun(16). Range re-cut through the recorded semantic rename map.",
       "startLine": 630,
       "endLine": 914,
       "sourceFile": "readable/assets/scene-DiAs2bfK.pretty.js"
@@ -2472,7 +2852,7 @@
     {
       "file": "assets/secrets-Czes5esN-01.js",
       "title": "assets/secrets-Czes5esN 01 — math",
-      "desc": "Lines 1-253. Markers: math(11), bal(10).",
+      "desc": "Lines 1-253. Markers: math(11), bal(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 253,
       "sourceFile": "readable/assets/secrets-Czes5esN.pretty.js"
@@ -2480,7 +2860,7 @@
     {
       "file": "assets/secrets-Czes5esN-02.js",
       "title": "assets/secrets-Czes5esN 02 — acc",
-      "desc": "Lines 254-529. Markers: acc(18), bottom(18).",
+      "desc": "Lines 254-529. Markers: acc(18), bottom(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 254,
       "endLine": 529,
       "sourceFile": "readable/assets/secrets-Czes5esN.pretty.js"
@@ -2499,7 +2879,7 @@
     {
       "file": "assets/session-DxCN6jDh-01.js",
       "title": "assets/session-DxCN6jDh 01 — vite__mapdeps",
-      "desc": "Lines 1-219. Markers: vite__mapdeps(2), map(1).",
+      "desc": "Lines 1-219. Markers: vite__mapdeps(2), map(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 219,
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js"
@@ -2507,7 +2887,7 @@
     {
       "file": "assets/session-DxCN6jDh-02.js",
       "title": "assets/session-DxCN6jDh 02 — math",
-      "desc": "Lines 220-566. Markers: math(57), pos(24).",
+      "desc": "Lines 220-566. Markers: math(57), pos(24). Range re-cut through the recorded semantic rename map.",
       "startLine": 220,
       "endLine": 566,
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js"
@@ -2563,7 +2943,7 @@
     {
       "file": "assets/session-DxCN6jDh-09.js",
       "title": "assets/session-DxCN6jDh 09 — yaw",
-      "desc": "Lines 2508-2852. Markers: yaw(6), math(5).",
+      "desc": "Lines 2508-2852. Markers: yaw(6), math(5). Range re-cut through the recorded semantic rename map.",
       "startLine": 2508,
       "endLine": 2852,
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js"
@@ -2571,7 +2951,7 @@
     {
       "file": "assets/session-DxCN6jDh-10.js",
       "title": "assets/session-DxCN6jDh 10 — count",
-      "desc": "Oversized single declaration (kept whole). Lines 2853-3420. Markers: count(18), classlist(17).",
+      "desc": "Oversized single declaration (kept whole). Lines 2853-3420. Markers: count(18), classlist(17). Range re-cut through the recorded semantic rename map.",
       "startLine": 2853,
       "endLine": 3420,
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js"
@@ -2579,7 +2959,7 @@
     {
       "file": "assets/session-DxCN6jDh-11.js",
       "title": "assets/session-DxCN6jDh 11 — color",
-      "desc": "Lines 3421-3768. Markers: color(13), secret(11).",
+      "desc": "Lines 3421-3768. Markers: color(13), secret(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 3421,
       "endLine": 3768,
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js"
@@ -2587,7 +2967,7 @@
     {
       "file": "assets/session-DxCN6jDh-12.js",
       "title": "assets/session-DxCN6jDh 12 — stage",
-      "desc": "Lines 3769-4029. Markers: stage(20), local(16).",
+      "desc": "Lines 3769-4029. Markers: stage(20), local(16). Range re-cut through the recorded semantic rename map.",
       "startLine": 3769,
       "endLine": 4029,
       "sourceFile": "readable/assets/session-DxCN6jDh.pretty.js"
@@ -2606,7 +2986,7 @@
     {
       "file": "assets/sfx-6jovSU2--01.js",
       "title": "assets/sfx-6jovSU2- 01 — tutorial",
-      "desc": "Lines 1-72. Markers: tutorial(9), binds(3).",
+      "desc": "Lines 1-72. Markers: tutorial(9), settingskey(4). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 72,
       "sourceFile": "readable/assets/sfx-6jovSU2-.pretty.js"
@@ -2614,7 +2994,7 @@
     {
       "file": "assets/sfx-6jovSU2--02.js",
       "title": "assets/sfx-6jovSU2- 02 — tone",
-      "desc": "Oversized single declaration (kept whole). Lines 73-1327. Markers: tone(126), connect(102).",
+      "desc": "Oversized single declaration (kept whole). Lines 73-1327. Markers: tone(126), connect(102). Range re-cut through the recorded semantic rename map.",
       "startLine": 73,
       "endLine": 1327,
       "sourceFile": "readable/assets/sfx-6jovSU2-.pretty.js"
@@ -2622,7 +3002,7 @@
     {
       "file": "assets/sfx-6jovSU2--03.js",
       "title": "assets/sfx-6jovSU2- 03 — math",
-      "desc": "Lines 1328-1392. Markers: math(6), setuint32(5).",
+      "desc": "Lines 1328-1392. Markers: math(6), setuint32(5). Range re-cut through the recorded semantic rename map.",
       "startLine": 1328,
       "endLine": 1392,
       "sourceFile": "readable/assets/sfx-6jovSU2-.pretty.js"
@@ -2641,7 +3021,7 @@
     {
       "file": "assets/skaterRig-CvzHL-r4-01.js",
       "title": "assets/skaterRig-CvzHL-r4 01 — math",
-      "desc": "Lines 1-331. Markers: math(14), scene(13).",
+      "desc": "Lines 1-331. Markers: math(14), scene(13). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 331,
       "sourceFile": "readable/assets/skaterRig-CvzHL-r4.pretty.js"
@@ -2649,7 +3029,7 @@
     {
       "file": "assets/skaterRig-CvzHL-r4-02.js",
       "title": "assets/skaterRig-CvzHL-r4 02 — copy",
-      "desc": "Lines 332-680. Markers: copy(21), math(21).",
+      "desc": "Lines 332-680. Markers: copy(21), math(21). Range re-cut through the recorded semantic rename map.",
       "startLine": 332,
       "endLine": 680,
       "sourceFile": "readable/assets/skaterRig-CvzHL-r4.pretty.js"
@@ -2665,7 +3045,7 @@
     {
       "file": "assets/skaterRig-CvzHL-r4-04.js",
       "title": "assets/skaterRig-CvzHL-r4 04 — math",
-      "desc": "Oversized single declaration (kept whole). Lines 691-1787. Markers: math(54), copy(38).",
+      "desc": "Oversized single declaration (kept whole). Lines 691-1787. Markers: math(54), copy(38). Range re-cut through the recorded semantic rename map.",
       "startLine": 691,
       "endLine": 1787,
       "sourceFile": "readable/assets/skaterRig-CvzHL-r4.pretty.js"
@@ -2683,8 +3063,8 @@
     },
     {
       "file": "assets/skaterRig-CWjsS5UF-01.js",
-      "title": "assets/skaterRig-CWjsS5UF 01 — imports",
-      "desc": "Lines 1-1. Markers: .",
+      "title": "assets/skaterRig-CWjsS5UF 01 — loadskaterassets",
+      "desc": "Lines 1-1. Markers: loadskaterassets(1), parseclips(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 1,
       "sourceFile": "readable/assets/skaterRig-CWjsS5UF.pretty.js"
@@ -2711,7 +3091,7 @@
     {
       "file": "assets/skaters-pUdq6stw-02.js",
       "title": "assets/skaters-pUdq6stw 02 — bottom",
-      "desc": "Oversized single declaration (kept whole). Lines 47-776. Markers: bottom(44), hat(44).",
+      "desc": "Oversized single declaration (kept whole). Lines 47-776. Markers: bottom(44), hat(44). Range re-cut through the recorded semantic rename map.",
       "startLine": 47,
       "endLine": 776,
       "sourceFile": "readable/assets/skaters-pUdq6stw.pretty.js"
@@ -2719,7 +3099,7 @@
     {
       "file": "assets/skaters-pUdq6stw-03.js",
       "title": "assets/skaters-pUdq6stw 03 — math",
-      "desc": "Lines 777-916. Markers: math(8), air(7).",
+      "desc": "Lines 777-916. Markers: math(8), air(7). Range re-cut through the recorded semantic rename map.",
       "startLine": 777,
       "endLine": 916,
       "sourceFile": "readable/assets/skaters-pUdq6stw.pretty.js"
@@ -2738,7 +3118,7 @@
     {
       "file": "assets/skaterView-DCMhULBk-01.js",
       "title": "assets/skaterView-DCMhULBk 01 — math",
-      "desc": "Lines 1-294. Markers: math(24), position(23).",
+      "desc": "Lines 1-294. Markers: math(24), position(23). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 294,
       "sourceFile": "readable/assets/skaterView-DCMhULBk.pretty.js"
@@ -2757,7 +3137,7 @@
     {
       "file": "assets/songs-B3nWAdc6-01.js",
       "title": "assets/songs-B3nWAdc6 01 — artist",
-      "desc": "Lines 1-45. Markers: artist(3), file(3).",
+      "desc": "Lines 1-45. Markers: artist(3), file(3). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 45,
       "sourceFile": "readable/assets/songs-B3nWAdc6.pretty.js"
@@ -2775,8 +3155,8 @@
     },
     {
       "file": "assets/stickers-9pAHXWwr-01.js",
-      "title": "assets/stickers-9pAHXWwr 01 — includes",
-      "desc": "Lines 1-14. Markers: includes(1).",
+      "title": "assets/stickers-9pAHXWwr 01 — stickerids",
+      "desc": "Lines 1-14. Markers: stickerids(3), includes(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 14,
       "sourceFile": "readable/assets/stickers-9pAHXWwr.pretty.js"
@@ -2795,7 +3175,7 @@
     {
       "file": "assets/table-W1plLavt-01.js",
       "title": "assets/table-W1plLavt 01 — unlock",
-      "desc": "Lines 1-313. Markers: unlock(63), secret(16).",
+      "desc": "Lines 1-313. Markers: unlock(63), secret(16). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 313,
       "sourceFile": "readable/assets/table-W1plLavt.pretty.js"
@@ -2803,7 +3183,7 @@
     {
       "file": "assets/table-W1plLavt-02.js",
       "title": "assets/table-W1plLavt 02 — special_air",
-      "desc": "Lines 314-475. Markers: special_air(14), flip(13).",
+      "desc": "Lines 314-475. Markers: special_air(14), flip(13). Range re-cut through the recorded semantic rename map.",
       "startLine": 314,
       "endLine": 475,
       "sourceFile": "readable/assets/table-W1plLavt.pretty.js"
@@ -2822,7 +3202,7 @@
     {
       "file": "assets/tag-BoiZZ9xV-01.js",
       "title": "assets/tag-BoiZZ9xV 01 — append",
-      "desc": "Lines 1-82. Markers: append(5), assign(3).",
+      "desc": "Lines 1-82. Markers: append(5), assign(3). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 82,
       "sourceFile": "readable/assets/tag-BoiZZ9xV.pretty.js"
@@ -2830,7 +3210,7 @@
     {
       "file": "assets/tag-BoiZZ9xV-02.js",
       "title": "assets/tag-BoiZZ9xV 02 — math",
-      "desc": "Lines 83-397. Markers: math(24), letters(18).",
+      "desc": "Lines 83-397. Markers: math(24), letters(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 83,
       "endLine": 397,
       "sourceFile": "readable/assets/tag-BoiZZ9xV.pretty.js"
@@ -2838,7 +3218,7 @@
     {
       "file": "assets/tag-BoiZZ9xV-03.js",
       "title": "assets/tag-BoiZZ9xV 03 — append",
-      "desc": "Lines 398-665. Markers: append(11), rename(9).",
+      "desc": "Lines 398-665. Markers: append(11), rename(9). Range re-cut through the recorded semantic rename map.",
       "startLine": 398,
       "endLine": 665,
       "sourceFile": "readable/assets/tag-BoiZZ9xV.pretty.js"
@@ -2889,15 +3269,15 @@
     {
       "file": "assets/tagPaint-BOEtbgNi-05.js",
       "title": "assets/tagPaint-BOEtbgNi 05 — float32",
-      "desc": "Lines 2283-2623. Markers: float32(37), uint8(36).",
+      "desc": "Lines 2283-2623. Markers: float32(37), uint8(36). Range re-cut through the recorded semantic rename map.",
       "startLine": 2283,
       "endLine": 2623,
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js"
     },
     {
       "file": "assets/tagPaint-BOEtbgNi-06.js",
-      "title": "assets/tagPaint-BOEtbgNi 06 — attachall",
-      "desc": "Lines 2624-2758. Markers: attachall(2), callbacks(2).",
+      "title": "assets/tagPaint-BOEtbgNi 06 — parkstate",
+      "desc": "Lines 2624-2758. Markers: parkstate(3), attachall(2). Range re-cut through the recorded semantic rename map.",
       "startLine": 2624,
       "endLine": 2758,
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js"
@@ -2905,7 +3285,7 @@
     {
       "file": "assets/tagPaint-BOEtbgNi-07.js",
       "title": "assets/tagPaint-BOEtbgNi 07 — kind",
-      "desc": "Oversized single declaration (kept whole). Lines 2759-3415. Markers: kind(65), spots(16).",
+      "desc": "Oversized single declaration (kept whole). Lines 2759-3415. Markers: kind(65), spots(16). Range re-cut through the recorded semantic rename map.",
       "startLine": 2759,
       "endLine": 3415,
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js"
@@ -2913,7 +3293,7 @@
     {
       "file": "assets/tagPaint-BOEtbgNi-08.js",
       "title": "assets/tagPaint-BOEtbgNi 08 — kind",
-      "desc": "Lines 3416-3760. Markers: kind(26), map(11).",
+      "desc": "Lines 3416-3760. Markers: kind(26), map(11). Range re-cut through the recorded semantic rename map.",
       "startLine": 3416,
       "endLine": 3760,
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js"
@@ -2921,7 +3301,7 @@
     {
       "file": "assets/tagPaint-BOEtbgNi-09.js",
       "title": "assets/tagPaint-BOEtbgNi 09 — kind",
-      "desc": "Lines 3761-4099. Markers: kind(18), level(14).",
+      "desc": "Lines 3761-4099. Markers: kind(18), level(14). Range re-cut through the recorded semantic rename map.",
       "startLine": 3761,
       "endLine": 4099,
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js"
@@ -2929,7 +3309,7 @@
     {
       "file": "assets/tagPaint-BOEtbgNi-10.js",
       "title": "assets/tagPaint-BOEtbgNi 10 — math",
-      "desc": "Lines 4100-4444. Markers: math(21), kind(12).",
+      "desc": "Lines 4100-4444. Markers: math(21), kind(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 4100,
       "endLine": 4444,
       "sourceFile": "readable/assets/tagPaint-BOEtbgNi.pretty.js"
@@ -2964,7 +3344,7 @@
     {
       "file": "assets/tapeRider-C0l9JrgL-01.js",
       "title": "assets/tapeRider-C0l9JrgL 01 — run",
-      "desc": "Lines 1-245. Markers: run(15), tape(12).",
+      "desc": "Lines 1-245. Markers: run(15), tape(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 245,
       "sourceFile": "readable/assets/tapeRider-C0l9JrgL.pretty.js"
@@ -3001,7 +3381,7 @@
     {
       "file": "assets/toon-CycGToy9-02.js",
       "title": "assets/toon-CycGToy9 02 — float",
-      "desc": "Lines 14155-14417. Markers: float(21), kind(10).",
+      "desc": "Lines 14155-14417. Markers: float(21), kind(10). Range re-cut through the recorded semantic rename map.",
       "startLine": 14155,
       "endLine": 14417,
       "sourceFile": "readable/assets/toon-CycGToy9.pretty.js"
@@ -3019,8 +3399,8 @@
     },
     {
       "file": "assets/toon-L4_S6Akl-01.js",
-      "title": "assets/toon-L4_S6Akl 01 — imports",
-      "desc": "Lines 1-1. Markers: .",
+      "title": "assets/toon-L4_S6Akl 01 — patchtoon",
+      "desc": "Lines 1-1. Markers: patchtoon(1), toonmaterial(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 1,
       "sourceFile": "readable/assets/toon-L4_S6Akl.pretty.js"
@@ -3119,7 +3499,7 @@
     {
       "file": "assets/tuning-D4mSK766-11.js",
       "title": "assets/tuning-D4mSK766 11 — center",
-      "desc": "Lines 2887-3191. Markers: center(14), surf(12).",
+      "desc": "Lines 2887-3191. Markers: center(14), surf(12). Range re-cut through the recorded semantic rename map.",
       "startLine": 2887,
       "endLine": 3191,
       "sourceFile": "readable/assets/tuning-D4mSK766.pretty.js"
@@ -3138,7 +3518,7 @@
     {
       "file": "assets/types-DM-HODfo-01.js",
       "title": "assets/types-DM-HODfo 01 — none",
-      "desc": "Lines 1-196. Markers: none(5), math(4).",
+      "desc": "Lines 1-196. Markers: none(5), math(4). Range re-cut through the recorded semantic rename map.",
       "startLine": 1,
       "endLine": 196,
       "sourceFile": "readable/assets/types-DM-HODfo.pretty.js"

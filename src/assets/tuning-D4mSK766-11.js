@@ -2,7 +2,7 @@
 // Lines 2887-3191 of readable/assets/tuning-D4mSK766.pretty.js (statement-aligned).
 var dn = 0.5,
   fn = 2,
-  pn = class {
+  SurfaceProbe = class {
     geometry;
     bvh;
     normals;

@@ -1,7 +1,7 @@
 // assets/parks-C2dnYY6C 02 — kind
 // Lines 186-2958 of readable/assets/parks-C2dnYY6C.pretty.js (statement-aligned).
 var p = Math.PI,
-  ve = {
+  plazaPark = {
     id: `plaza`,
     name: `Skate Hub`,
     half: 44,
@@ -559,7 +559,7 @@ var p = Math.PI,
       { x: 20, y: 0, z: -30, yaw: 0 },
     ],
   },
-  ye = {
+  testPark = {
     id: `test`,
     name: `Test Park`,
     half: 60,
@@ -633,7 +633,7 @@ var p = Math.PI,
     gaps: [{ name: `Kicker Launch`, points: 100, from: [2], to: [100] }],
   },
   m = Math.PI,
-  be = {
+  warehousePark = {
     id: `warehouse`,
     name: `Crate Warehouse`,
     half: 32,
@@ -1045,7 +1045,7 @@ var p = Math.PI,
     ],
   },
   h = Math.PI,
-  xe = {
+  schoolyardPark = {
     id: `schoolyard`,
     name: `Skool Daze`,
     half: 36,
@@ -1487,7 +1487,7 @@ var p = Math.PI,
     ],
   },
   g = Math.PI,
-  Se = {
+  pierPark = {
     id: `pier`,
     name: `Pier Pressure`,
     half: 40,
@@ -2024,7 +2024,7 @@ var p = Math.PI,
     skin: `peach`,
     topSkin: `mint`,
   }),
-  De = {
+  mallPark = {
     id: `mall`,
     name: `Mall Rats`,
     half: 40,
@@ -2550,7 +2550,7 @@ var p = Math.PI,
       name: `Hanging Light`,
     },
   ],
-  Ae = {
+  kitLabPark = {
     id: `lab`,
     name: `Kit Lab`,
     half: 60,

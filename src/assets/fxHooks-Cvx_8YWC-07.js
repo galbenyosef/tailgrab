@@ -1,6 +1,6 @@
 // assets/fxHooks-Cvx_8YWC 07 — math
 // Lines 3007-3351 of readable/assets/fxHooks-Cvx_8YWC.pretty.js (statement-aligned).
-function Sn(e) {
+function praiseFor(e) {
   return e >= 5e4
     ? { text: `INSANE!!`, tone: `pink` }
     : e >= 2e4
@@ -14,7 +14,7 @@ function Sn(e) {
             : null;
 }
 var Cn = 1300,
-  wn = class {
+  CineBars = class {
     top;
     bot;
     timer = 0;
@@ -59,7 +59,7 @@ function kn() {
   );
 }
 var An = 1.7,
-  jn = class {
+  BeamBurst = class {
     group = new u();
     beams = [];
     beamGeo = new c(1, 1, 1, 24, 1, !0).translate(0, 0.5, 0);
@@ -160,7 +160,7 @@ var An = 1.7,
   Pn = new y(`#6A5F8C`),
   Fn = new y(`#FFF1A0`),
   In = new y(`#E09A12`),
-  Ln = class {
+  TrailBeam = class {
     mesh;
     scale = 1;
     geo;

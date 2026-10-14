@@ -45,7 +45,7 @@ import {
   y as fe,
 } from "./padNav-a65kF6ol.js";
 import { c as pe, i as me, p as he, r as N } from "./skaters-pUdq6stw.js";
-var P = [`1234567890`, `QWERTYUIOP`, `ASDFGHJKL-`, `ZXCVBNM.'`];
+var keyRows = [`1234567890`, `QWERTYUIOP`, `ASDFGHJKL-`, `ZXCVBNM.'`];
 function ge(e) {
   let t = n(`div`, `pg`),
     r = (e, t, r, i = e) => {
@@ -59,10 +59,10 @@ function ge(e) {
         a
       );
     };
-  P.forEach((i, a) => {
+  keyRows.forEach((i, a) => {
     let o = n(`div`, `pg-row`);
     for (let t of i) o.append(r(t, ``, () => e.onChar(t)));
-    if (a === P.length - 1) {
+    if (a === keyRows.length - 1) {
       let t = r(`DEL`, `del`, e.onDel, `Delete`);
       (Object.assign(t.dataset, { pad: `b`, padLabel: `Delete` }), o.append(t));
     }

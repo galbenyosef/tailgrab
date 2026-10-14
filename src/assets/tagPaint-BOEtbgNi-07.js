@@ -42,7 +42,7 @@ var Gn = we[0].y ?? 0,
       text: `Sick Score: ${n.toLocaleString(`en-US`)}`,
     },
   ],
-  z = [
+  skoolDaze = [
     {
       id: `skool`,
       name: `Skool Daze`,

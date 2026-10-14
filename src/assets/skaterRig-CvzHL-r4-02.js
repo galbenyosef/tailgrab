@@ -1,6 +1,6 @@
 // assets/skaterRig-CvzHL-r4 02 — copy
 // Lines 332-680 of readable/assets/skaterRig-CvzHL-r4.pretty.js (statement-aligned).
-var tt = class {
+var FrameSampler = class {
   q;
   v;
   shownQ;
@@ -92,7 +92,7 @@ var tt = class {
     ((this.lastDt = e), (this.frames = Math.min(this.frames + 1, 2)));
   }
 };
-function A(e, t, n) {
+function makeTrick(e, t, n) {
   n.set(0, 0, 0);
   let r = e.name.includes(`Double`) ? 2 : 1;
   switch (
@@ -164,16 +164,16 @@ var nt = class {
         t.mode === v.AIR &&
         r &&
         (r.kind === g.FLIP || r.kind === g.SPECIAL_AIR) &&
-        A(r, 0, k)
+        makeTrick(r, 0, k)
       ) {
         let e = Math.min(1, t.trickT / Math.max(r.ticks / 30, 0.001));
         (this.def && (this.rate > 0 || t.trickT + 1e-4 < this.lastT)
           ? this.fold()
           : this.def &&
             this.def !== r &&
-            (this.fix.setFromEuler((A(r, w(e), k), k)).invert(),
+            (this.fix.setFromEuler((makeTrick(r, w(e), k), k)).invert(),
             this.fix.premultiply(
-              T.setFromEuler((A(this.def, w(this.p), k), k)),
+              T.setFromEuler((makeTrick(this.def, w(this.p), k), k)),
             ),
             (this.fixT = 0)),
           (this.def = r),
@@ -190,7 +190,7 @@ var nt = class {
       }
       if (
         (e.identity(),
-        this.def && e.setFromEuler((A(this.def, w(this.p), k), k)),
+        this.def && e.setFromEuler((makeTrick(this.def, w(this.p), k), k)),
         this.fixT >= 0)
       ) {
         let t = Xe(this.fixT / Ye);
@@ -206,7 +206,7 @@ var nt = class {
         (this.fixT = -1));
     }
     fold() {
-      (A(this.def, 1, k),
+      (makeTrick(this.def, 1, k),
         Math.round(k.y / Math.PI) & 1 && (this.back = !this.back),
         (this.def = null),
         (this.p = this.rate = 0),
@@ -218,7 +218,7 @@ var nt = class {
   at = 13,
   ot = 0.06,
   st = 1.5,
-  ct = class {
+  PoseBlend = class {
     lastP = new f();
     lastQ = new n();
     lastUp = new f();
@@ -290,7 +290,7 @@ var nt = class {
   },
   lt = `/`.replace(/\/?$/, `/`),
   ut = new i(new f(0, 0.6, 0), 3);
-function dt(e) {
+function parseClips(e) {
   let t = new Map();
   for (let n of e) {
     let e = ne.parse(n);
@@ -299,15 +299,15 @@ function dt(e) {
   return t;
 }
 var ft = null;
-function pt() {
+function loadSkaterAssets() {
   return (
     (ft ??= Promise.all([
       fetch(`${lt}skaters/clips.json`).then((e) => {
         if (!e.ok) throw Error(`skaters/clips.json: ${e.status}`);
         return e.json();
       }),
-      Ue.load(),
-    ]).then(([e, t]) => ({ kit: t, clips: dt(e) }))),
+      SkaterKit.load(),
+    ]).then(([e, t]) => ({ kit: t, clips: parseClips(e) }))),
     ft
   );
 }

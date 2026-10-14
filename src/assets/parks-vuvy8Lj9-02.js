@@ -1,6 +1,6 @@
 // assets/parks-vuvy8Lj9 02 — startswith
 // Lines 317-372 of readable/assets/parks-vuvy8Lj9.pretty.js (statement-aligned).
-async function ne() {
+async function loadViewerModules() {
   let { loadProps: n } = await s(
       async () => {
         let { loadProps: e } = await import(`./decor-EQ8VRNuO.js`);
@@ -52,7 +52,7 @@ async function ne() {
     requestAnimationFrame($));
 }
 D.has(`props`)
-  ? ne()
-  : Promise.all([H(k.park), T.ready]).then(() => {
+  ? loadViewerModules()
+  : Promise.all([H(viewerOptions.park), T.ready]).then(() => {
       ((window.__parks.ready = !0), requestAnimationFrame($));
     });

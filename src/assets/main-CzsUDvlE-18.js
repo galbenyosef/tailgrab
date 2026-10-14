@@ -124,7 +124,7 @@ function Rl(e) {
       (a.setAttribute(`role`, `radio`), i.append(a));
     }
     (e.append(j(`span`, `set-label`, `Layout`), i), t.append(e));
-    for (let [e, i] of Nl) {
+    for (let [e, i] of controlHelp) {
       let a = J.binds[e] ?? $n()[e],
         o = j(`div`, `set-row`),
         s = V([...new Set(a.map(rr))].join(` · `), `tiny ghost keycap`, () => {
@@ -145,7 +145,7 @@ function Rl(e) {
             let i = t.code.startsWith(`Shift`)
               ? [`ShiftLeft`, `ShiftRight`]
               : [t.code];
-            for (let [t] of Nl) {
+            for (let [t] of controlHelp) {
               let n = J.binds[t] ?? $n()[t];
               t !== e &&
                 n.some((e) => i.includes(e)) &&
@@ -170,7 +170,7 @@ function Rl(e) {
   };
   return (r(), t);
 }
-var zl = [
+var credits = [
   [`Game`, [[`Endel Dreyer`, `Game Developer`, `https://x.com/endel`]]],
   [
     `Built with`,
@@ -196,7 +196,7 @@ function Bl() {
     hue: `#2FD67B`,
     build(e) {
       let t = 0;
-      for (let [n, r, i] of zl) {
+      for (let [n, r, i] of credits) {
         let a = j(`div`, `cred-list`);
         for (let [e, n, o] of r) {
           let r = j(`div`, `cred`);

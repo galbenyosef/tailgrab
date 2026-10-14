@@ -231,7 +231,7 @@ function Z(e, t) {
     a
   );
 }
-var ne = Object.fromEntries(
+var secretSkaters = Object.fromEntries(
   [
     `varginha`,
     `abominollie`,

@@ -1,6 +1,6 @@
 // assets/main-CzsUDvlE 30 — append
 // Lines 9415-10400 of readable/assets/main-CzsUDvlE.pretty.js (statement-aligned).
-var Ad = {
+var modeBlurbs = {
     trick: `Biggest score wins`,
     graffiti: `Paint the most pieces`,
     skate: `Grab all five letters first`,
@@ -16,7 +16,7 @@ var Ad = {
   Ld = () => (nr() === `pad` ? hi().a : `Enter`),
   Rd = (e) => e.text.split(`:`)[0].toUpperCase(),
   zd = (e) => e.split(` `)[0],
-  Bd = class {
+  MatchHud = class {
     root;
     clock;
     board;
@@ -79,7 +79,7 @@ var Ad = {
         e.style.setProperty(`--mc`, q[t].color);
       (e.root.append(this.root),
         t === `career` &&
-          (this.career = new Cd(this.results, this.news, {
+          (this.career = new LevelUnlock(this.results, this.news, {
             send: n,
             leave: r,
             menu: () => this.onMenu(),
@@ -474,7 +474,7 @@ var Ad = {
       }
       return this.mode === `career`
         ? `Every goal you land stays done`
-        : (Ad[this.mode] ?? ``);
+        : (modeBlurbs[this.mode] ?? ``);
     }
     clearCenter() {
       for (let e of [...this.center.children])

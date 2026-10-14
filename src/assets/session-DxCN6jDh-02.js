@@ -9,7 +9,7 @@ var R = Ie(),
     minDist: 2.2,
     fadeAt: 2.9,
   },
-  In = class {
+  SkaterMotion = class {
     yaw = 0;
     pos = new p(0, 4, -8);
     shown = new p();

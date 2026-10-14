@@ -5,7 +5,7 @@ function ni(e) {
   (t ? Zr.delete(e.id) : (t = { now: new Map(), last: new Map() }),
     Zr.set(e.id, t),
     Zr.size > Qr && Zr.delete(Zr.keys().next().value));
-  let n = fr(e),
+  let n = checkFloorHole(e),
     r = e.pieces.filter((e) => e.kind === `floor`),
     i = (e, t) =>
       (
@@ -175,12 +175,12 @@ function si(e) {
     );
   };
 }
-var ci = `modulepreload`,
+var modulepreloadPolyfill = `modulepreload`,
   li = function (e) {
     return `/` + e;
   },
   ui = {},
-  di = function (e, t, n) {
+  preload = function (e, t, n) {
     let r = Promise.resolve();
     if (t && t.length > 0) {
       let e = document.getElementsByTagName(`link`),
@@ -213,7 +213,7 @@ var ci = `modulepreload`,
             }
             let i = document.createElement(`link`);
             if (
-              ((i.rel = r ? `stylesheet` : ci),
+              ((i.rel = r ? `stylesheet` : modulepreloadPolyfill),
               r || (i.as = `script`),
               (i.crossOrigin = ``),
               (i.href = t),

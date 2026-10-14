@@ -19,10 +19,10 @@ import {
   xt as re,
   yr as f,
 } from "./three.core-DVWDmH0S.js";
-import { a as p, i as m, n as h } from "./toon-CycGToy9.js";
+import { a as toonMaterial, i as patchToon, n as h } from "./toon-CycGToy9.js";
 import "./tuning-D4mSK766.js";
 import "./palette-DQTkVEn_.js";
-import { r as ie, t as ae } from "./outline-BufNikL2.js";
+import { r as ie, t as addOutlines } from "./outline-BufNikL2.js";
 import {
   J as oe,
   K as se,
@@ -149,7 +149,7 @@ var He = (e) => ({
       }),
     scene: (t) => e.loadAsync(`${ze}${t}`).then((e) => e.scene),
   }),
-  Ue = class n {
+  SkaterKit = class n {
     manifest;
     body;
     board;

@@ -2,7 +2,7 @@
 // Lines 11-382 of readable/assets/missions-eXNMrvRm.pretty.js (statement-aligned).
 var i = [e.FLIP],
   a = [e.SPECIAL_AIR, e.SPECIAL_GRIND, e.SPECIAL_MANUAL],
-  o = (e, t, n, r, i, a, o, s = {}) => ({
+  dailyMissions = (e, t, n, r, i, a, o, s = {}) => ({
     id: `d.${e}`,
     cadence: `daily`,
     family: t,
@@ -13,7 +13,7 @@ var i = [e.FLIP],
     xp: o,
     ...s,
   }),
-  s = (e, t, n, r, i, a, o, s = {}) => ({
+  weeklyMissions = (e, t, n, r, i, a, o, s = {}) => ({
     id: `w.${e}`,
     cadence: `weekly`,
     family: t,
@@ -24,8 +24,8 @@ var i = [e.FLIP],
     xp: o,
     ...s,
   }),
-  c = [
-    o(
+  trickGoals = [
+    dailyMissions(
       `kickflip`,
       `trick`,
       `Land {n} Kickflips`,
@@ -34,7 +34,7 @@ var i = [e.FLIP],
       [5, 10, 15],
       225,
     ),
-    o(
+    dailyMissions(
       `heelflip`,
       `trick`,
       `Land {n} Heelflips`,
@@ -43,7 +43,7 @@ var i = [e.FLIP],
       [5, 10, 15],
       225,
     ),
-    o(
+    dailyMissions(
       `flips`,
       `trick`,
       `Land {n} flip tricks`,
@@ -52,7 +52,7 @@ var i = [e.FLIP],
       [10, 20, 30],
       225,
     ),
-    o(
+    dailyMissions(
       `grabs`,
       `trick`,
       `Land {n} grabs`,
@@ -61,7 +61,7 @@ var i = [e.FLIP],
       [8, 15, 25],
       225,
     ),
-    o(
+    dailyMissions(
       `grinds`,
       `trick`,
       `Land {n} grinds`,
@@ -70,7 +70,7 @@ var i = [e.FLIP],
       [5, 10, 15],
       225,
     ),
-    o(
+    dailyMissions(
       `spin360`,
       `trick`,
       `Spin {n} 360s or bigger`,
@@ -80,7 +80,7 @@ var i = [e.FLIP],
       300,
       { one: `Spin a 360` },
     ),
-    o(
+    dailyMissions(
       `slides`,
       `trick`,
       `Land {n} slides`,
@@ -89,7 +89,7 @@ var i = [e.FLIP],
       [4, 8, 12],
       250,
     ),
-    o(
+    dailyMissions(
       `lips`,
       `trick`,
       `Stall {n} lip tricks`,
@@ -98,7 +98,7 @@ var i = [e.FLIP],
       [2, 4, 6],
       300,
     ),
-    o(
+    dailyMissions(
       `wallride`,
       `trick`,
       `Land {n} wallrides`,
@@ -107,7 +107,7 @@ var i = [e.FLIP],
       [2, 4, 6],
       300,
     ),
-    o(
+    dailyMissions(
       `special`,
       `trick`,
       `Pull off {n} Specials`,
@@ -117,7 +117,7 @@ var i = [e.FLIP],
       375,
       { one: `Pull off a Special` },
     ),
-    o(
+    dailyMissions(
       `gaps`,
       `skill`,
       `Clear {n} gaps`,
@@ -126,7 +126,7 @@ var i = [e.FLIP],
       [3, 6, 10],
       300,
     ),
-    o(
+    dailyMissions(
       `grind`,
       `skill`,
       `Grind {n} m`,
@@ -136,7 +136,7 @@ var i = [e.FLIP],
       300,
       { unit: `m` },
     ),
-    o(
+    dailyMissions(
       `manual`,
       `skill`,
       `Manual for {n} seconds`,
@@ -146,7 +146,7 @@ var i = [e.FLIP],
       300,
       { unit: `s` },
     ),
-    o(
+    dailyMissions(
       `combo`,
       `skill`,
       `Land a {n}-point combo`,
@@ -155,7 +155,7 @@ var i = [e.FLIP],
       [1500, 5e3, 12e3],
       350,
     ),
-    o(
+    dailyMissions(
       `chain`,
       `skill`,
       `Chain {n} tricks in one combo`,
@@ -164,7 +164,7 @@ var i = [e.FLIP],
       [5, 8, 12],
       350,
     ),
-    o(
+    dailyMissions(
       `bank`,
       `skill`,
       `Bank {n} combo points`,
@@ -173,7 +173,7 @@ var i = [e.FLIP],
       [15e3, 5e4, 15e4],
       300,
     ),
-    o(
+    dailyMissions(
       `combos`,
       `skill`,
       `Land {n} combos worth 1,000+`,
@@ -182,7 +182,7 @@ var i = [e.FLIP],
       [5, 10, 20],
       300,
     ),
-    o(
+    dailyMissions(
       `matches`,
       `play`,
       `Finish {n} portal matches`,
@@ -192,7 +192,7 @@ var i = [e.FLIP],
       250,
       { one: `Finish a portal match` },
     ),
-    o(
+    dailyMissions(
       `win`,
       `play`,
       `Win {n} matches`,
@@ -202,7 +202,7 @@ var i = [e.FLIP],
       375,
       { one: `Win a match` },
     ),
-    o(
+    dailyMissions(
       `run`,
       `play`,
       `Skate {n} career runs`,
@@ -212,7 +212,7 @@ var i = [e.FLIP],
       250,
       { one: `Skate a career run` },
     ),
-    o(
+    dailyMissions(
       `parks`,
       `play`,
       `Land combos in {n} different parks`,
@@ -221,7 +221,7 @@ var i = [e.FLIP],
       [2, 2, 3],
       300,
     ),
-    o(
+    dailyMissions(
       `trick`,
       `play`,
       `Finish {n} Trick Attack matches`,
@@ -231,7 +231,7 @@ var i = [e.FLIP],
       300,
       { one: `Finish a Trick Attack match` },
     ),
-    o(
+    dailyMissions(
       `skate`,
       `play`,
       `Finish {n} S-K-A-T-E matches`,
@@ -241,7 +241,7 @@ var i = [e.FLIP],
       300,
       { one: `Finish a S-K-A-T-E match` },
     ),
-    s(
+    weeklyMissions(
       `flips`,
       `trick`,
       `Land {n} flip tricks`,
@@ -250,7 +250,7 @@ var i = [e.FLIP],
       [60, 120, 200],
       800,
     ),
-    s(
+    weeklyMissions(
       `grabs`,
       `trick`,
       `Land {n} grabs`,
@@ -259,7 +259,7 @@ var i = [e.FLIP],
       [50, 100, 160],
       800,
     ),
-    s(
+    weeklyMissions(
       `specials`,
       `trick`,
       `Pull off {n} Specials`,
@@ -268,7 +268,7 @@ var i = [e.FLIP],
       [5, 10, 20],
       1050,
     ),
-    s(
+    weeklyMissions(
       `bank`,
       `skill`,
       `Bank {n} combo points`,
@@ -277,7 +277,7 @@ var i = [e.FLIP],
       [15e4, 5e5, 15e5],
       1050,
     ),
-    s(
+    weeklyMissions(
       `combo`,
       `skill`,
       `Land a {n}-point combo`,
@@ -286,7 +286,7 @@ var i = [e.FLIP],
       [8e3, 25e3, 6e4],
       1050,
     ),
-    s(
+    weeklyMissions(
       `gaps`,
       `skill`,
       `Clear {n} gaps`,
@@ -295,7 +295,7 @@ var i = [e.FLIP],
       [20, 40, 70],
       950,
     ),
-    s(
+    weeklyMissions(
       `grind`,
       `skill`,
       `Grind {n} m`,
@@ -305,7 +305,7 @@ var i = [e.FLIP],
       950,
       { unit: `m` },
     ),
-    s(
+    weeklyMissions(
       `wins`,
       `play`,
       `Win {n} matches`,
@@ -314,7 +314,7 @@ var i = [e.FLIP],
       [3, 5, 10],
       1300,
     ),
-    s(
+    weeklyMissions(
       `matches`,
       `play`,
       `Finish {n} portal matches`,
@@ -323,7 +323,7 @@ var i = [e.FLIP],
       [8, 15, 25],
       1050,
     ),
-    s(
+    weeklyMissions(
       `modes`,
       `play`,
       `Play {n} different modes`,
@@ -332,7 +332,7 @@ var i = [e.FLIP],
       [3, 4, 5],
       1050,
     ),
-    s(
+    weeklyMissions(
       `runs`,
       `play`,
       `Skate {n} career runs`,
@@ -341,7 +341,7 @@ var i = [e.FLIP],
       [5, 10, 15],
       950,
     ),
-    s(
+    weeklyMissions(
       `runScore`,
       `play`,
       `Score {n} in one career run`,
@@ -350,7 +350,7 @@ var i = [e.FLIP],
       [15e3, 4e4, 1e5],
       1050,
     ),
-    s(
+    weeklyMissions(
       `parks`,
       `play`,
       `Land combos in {n} different parks`,
@@ -359,7 +359,7 @@ var i = [e.FLIP],
       [3, 4, 5],
       950,
     ),
-    o(
+    dailyMissions(
       `coins`,
       `play`,
       `Grab {n} coins in the Skate Hub`,
@@ -369,6 +369,6 @@ var i = [e.FLIP],
       250,
     ),
   ],
-  l = new Map(c.map((e) => [e.id, e])),
+  l = new Map(trickGoals.map((e) => [e.id, e])),
   u = (e) => l.get(e),
   d = 16;

@@ -1,5 +1,5 @@
-// Reference-level drift check for one slice (or a whole chunk). AELORIA —
-// adapted from the fleet precedent (zombie-game-made-by-claude /
+// Reference-level drift check for one slice (or a whole chunk). TAILGRAB —
+// adapted from the fleet precedent (aeloria / zombie-game-made-by-claude /
 // taipei-rush-tokyo / kettuvellam tools/refcheck.mjs).
 //
 // The token-level round trip in tools/audit.js proves the slice is its source

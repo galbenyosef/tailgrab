@@ -36,7 +36,7 @@ var R = 0.1047,
   z = 0.0524,
   B = 1200,
   V = (e) => (`line` in e ? e.line : Math.abs(e.turn) * e.arc);
-function H(e) {
+function checkStep(e) {
   let t = [],
     r = 0,
     a = 0,
@@ -93,7 +93,7 @@ function U(e, t) {
     a = e.turn > 0 ? 1 : -1;
   return { x: e.cx - a * e.R * n(r), z: e.cz + a * e.R * i(r), h: r };
 }
-function W(e, t, n) {
+function checkRise(e, t, n) {
   let r = e.length,
     i = e.reduce((e, t) => e + t.len, 0),
     a = t.y0 ?? 0,
@@ -135,7 +135,7 @@ function W(e, t, n) {
       g.push({ s: h[e].s, g: h[e].g, y: _ }));
   return ((g[g.length - 1].y = a + s), g);
 }
-function G(e, t) {
+function checkBank(e, t) {
   if (!t) return [];
   let n = e.length,
     r = t.ease ?? 6,
@@ -186,22 +186,22 @@ function ee(e, t) {
   }
   return n[n.length - 1].b;
 }
-function q(e) {
+function checkPlan(e) {
   if (!e.plan.length) throw Error(`path: empty plan`);
   if (e.step !== void 0 && !(e.step >= 0.1))
     throw Error(`path: step must be ≥ 0.1 m`);
   for (let t of e.plan)
     if (!Number.isFinite(`line` in t ? t.line : t.arc * t.turn))
       throw Error(`path: plan steps must be finite`);
-  let t = H(e.plan),
+  let t = checkStep(e.plan),
     n = t.reduce((e, t) => e + t.len, 0),
-    r = W(t, e.grade ?? {}, !!e.closed),
+    r = checkRise(t, e.grade ?? {}, !!e.closed),
     i = {
       spec: e,
       segs: t,
       length: n,
       knots: r,
-      bankKnots: G(t, e.bank),
+      bankKnots: checkBank(t, e.bank),
       ox: 0,
       oz: 0,
       y0: r[0].y,
@@ -224,7 +224,7 @@ function q(e) {
       t = -1 / 0,
       n = 1 / 0,
       r = -1 / 0;
-    for (let a of ne(i)) {
+    for (let a of checkSamples(i)) {
       let o = J(i, a);
       ((e = Math.min(e, o.x)),
         (t = Math.max(t, o.x)),
@@ -270,7 +270,7 @@ function te(e, t) {
     h: r.h,
   };
 }
-function ne(t) {
+function checkSamples(t) {
   let n = t.spec.step ?? 1.25,
     r = [];
   for (let e of t.segs) {
@@ -302,7 +302,7 @@ function ne(t) {
   return a;
 }
 function re(e) {
-  return ne(e).map((t) => te(e, t));
+  return checkSamples(e).map((t) => te(e, t));
 }
 function ie(e) {
   let t = te(e, e.length);
@@ -319,7 +319,7 @@ function ae(e) {
       };
 }
 function oe(e) {
-  let t = ie(q(e.path)),
+  let t = ie(checkPlan(e.path)),
     r = e.rot ?? 0,
     a = n(r),
     o = i(r);

@@ -12,7 +12,7 @@ import {
   yr as c,
   yt as l,
 } from "./three.core-DVWDmH0S.js";
-import { a as u, i as d, t as f } from "./toon-CycGToy9.js";
+import { a as toonMaterial, i as patchToon, t as f } from "./toon-CycGToy9.js";
 import {
   I as p,
   P as m,
@@ -23,12 +23,12 @@ import {
 } from "./preload-helper-DR1MrGPZ.js";
 import { d as y, f as b, p as x, u as S, zt as C } from "./tuning-D4mSK766.js";
 import { r as w, u as T } from "./scene-DiAs2bfK.js";
-import { a as E, t as D } from "./outline-BufNikL2.js";
+import { a as E, t as addOutlines } from "./outline-BufNikL2.js";
 import { c as O, g as k } from "./types-DM-HODfo.js";
 import { t as ee } from "./sfx-6jovSU2-.js";
 import { t as te } from "./verlet-BVVzuOqv.js";
 import { t as ne } from "./GLTFLoader-BAb7LzOS.js";
-var re = {
+var portalDefs = {
   trick: `portal_trick`,
   graffiti: `portal_graffiti`,
   horse: `portal_horse`,
@@ -54,7 +54,7 @@ function ae(e) {
     t = Math.imul(t ^ e.charCodeAt(n), 16777619);
   return t >>> 0;
 }
-function oe(e) {
+function groundPlane(e) {
   let t = { minX: 1 / 0, maxX: -1 / 0, minZ: 1 / 0, maxZ: -1 / 0 };
   for (let n of e.pieces)
     n.kind === `floor` &&
@@ -64,8 +64,8 @@ function oe(e) {
       (t.maxZ = Math.max(t.maxZ, n.z + n.d / 2)));
   return t;
 }
-var A = [`tree_round`, `tree_tall`, `tree_blossom`];
-function se(e, t, n, r) {
+var treeModels = [`tree_round`, `tree_tall`, `tree_blossom`];
+function buildBush(e, t, n, r) {
   let i = [],
     a = r.count * 30,
     o = 0;
@@ -88,7 +88,7 @@ function se(e, t, n, r) {
     if (i.some((e) => (e.x - l) ** 2 + (e.z - u) ** 2 < (e.rad + f) ** 2))
       continue;
     i.push({ x: l, z: u, rad: f });
-    let p = d ? `bush` : A[Math.floor(n() * A.length)];
+    let p = d ? `bush` : treeModels[Math.floor(n() * treeModels.length)];
     (e.push({
       prop: p,
       x: l,
@@ -100,7 +100,7 @@ function se(e, t, n, r) {
       o++);
   }
 }
-function ce(e, t, n, r, i = 6, a = 5) {
+function buildLamp(e, t, n, r, i = 6, a = 5) {
   let o = [
     [t.minX, t.maxZ + n, 1, 0, Math.PI],
     [t.minX, t.minZ - n, 1, 0, 0],
@@ -117,7 +117,7 @@ function ce(e, t, n, r, i = 6, a = 5) {
     }
   }
 }
-function le(e, t, n) {
+function buildCloud(e, t, n) {
   let r = [];
   for (let i = 0; i < t; i++) {
     let a = (i / t) * Math.PI * 2 + e() * 0.5,
@@ -134,10 +134,10 @@ function le(e, t, n) {
   }
   return r;
 }
-var ue = {
+var portalPad = {
   plaza(e, t) {
     for (let n of e.portals ?? []) {
-      let e = re[n.mode];
+      let e = portalDefs[n.mode];
       e &&
         (t.push({
           prop: e,
@@ -160,7 +160,7 @@ var ue = {
     }
   },
 };
-function de(e, t, n, r) {
+function buildTerrainDecor(e, t, n, r) {
   let { positions: i, pieces: a } = _(e),
     o = new Map();
   for (let t = 0; t < a.length; t++) {
@@ -211,7 +211,7 @@ function de(e, t, n, r) {
         continue;
       let d = r() < 0.3;
       (n.push({
-        prop: d ? `bush` : A[Math.floor(r() * A.length)],
+        prop: d ? `bush` : treeModels[Math.floor(r() * treeModels.length)],
         x: a,
         y: t.y(a, o) - 0.05,
         z: o,
@@ -258,16 +258,16 @@ function de(e, t, n, r) {
     }
   }
 }
-function fe(e) {
+function buildProp(e) {
   let t = ie(ae(e.id)),
     n = [],
     r = g(e),
-    i = oe(e);
+    i = groundPlane(e);
   e.decorAuto === !1 ||
     (r
-      ? de(e, r, n, t)
+      ? buildTerrainDecor(e, r, n, t)
       : Number.isFinite(i.minX) &&
-        (se(n, i, t, { count: 26, inner: 5, outer: 28 }), ce(n, i, 0.6, 14)));
+        (buildBush(n, i, t, { count: 26, inner: 5, outer: 28 }), buildLamp(n, i, 0.6, 14)));
   let a = (e, t) => (r ? r.y(e, t) : 0);
   for (let t of e.props ?? [])
     n.push({
@@ -288,5 +288,5 @@ function fe(e) {
         rot: t.rot ?? 0,
         s: t.s ?? 1,
       });
-  return (ue[e.id]?.(e, n, t), { items: n, clouds: le(t, 12, 150) });
+  return (portalPad[e.id]?.(e, n, t), { items: n, clouds: buildCloud(t, 12, 150) });
 }

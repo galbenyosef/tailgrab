@@ -1,0 +1,996 @@
+{
+  "assets/bestTv-zah2thYf.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "M": "BestTv",
+      "b": "loadProps",
+      "l": "toonMaterial",
+      "m": "addOutlines",
+      "u": "patchToon",
+      "x": "Lens"
+    },
+    "evidence": {
+      "M": "own export table: local `M` is exported as `BestTv`",
+      "b": "import { r as b } from \"assets/decor-Tyb8Za1u.js\" — public name is semantic",
+      "l": "import { a as l } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "m": "import { t as m } from \"assets/outline-BufNikL2.js\" — public name is semantic",
+      "u": "import { i as u } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "x": "import { t as x } from \"assets/lens-Csl3PMnC.js\" — public name is semantic"
+    }
+  },
+  "assets/decor-EQ8VRNuO.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "e": "loadProps"
+    },
+    "evidence": {
+      "e": "own export table: local `e` is exported as `loadProps`"
+    }
+  },
+  "assets/decor-Tyb8Za1u.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "Ae": "loadProps",
+      "D": "addOutlines",
+      "d": "patchToon",
+      "u": "toonMaterial",
+      "re": "portalDefs",
+      "oe": "groundPlane",
+      "A": "treeModels",
+      "se": "buildBush",
+      "ce": "buildLamp",
+      "le": "buildCloud",
+      "ue": "portalPad",
+      "de": "buildTerrainDecor",
+      "fe": "buildProp",
+      "Ce": "LooseBodies",
+      "Y": "decorAttrs",
+      "Re": "buildDecorEntry"
+    },
+    "evidence": {
+      "Ae": "own export table: local `Ae` is exported as `loadProps`",
+      "D": "import { t as D } from \"assets/outline-BufNikL2.js\" — public name is semantic",
+      "d": "import { i as d } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "u": "import { a as u } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "re": "strings `portal_trick | portal_graffiti | portal_horse | portal_skate | portal_tag | portal_career` — the mode-portal definitions",
+      "oe": "string `floor` — the ground plane builder",
+      "A": "strings `tree_round | tree_tall | tree_blossom` — the tree model keys",
+      "se": "string `bush` — the bush builder",
+      "ce": "string `lamp` — the lamp builder",
+      "le": "strings `cloud_ | abc` — the cloud builder",
+      "ue": "string `portal_pad` — the portal pad",
+      "de": "strings `terrain | grass | bush | path | lamp` — the terrain decor builder",
+      "fe": "string `prop` — the prop builder",
+      "Ce": "class with bodies/riders/eye/sound + `loose | pop | land | knock` — the loose-body background skaters",
+      "Y": "strings `position | normal | color | _ao | glow | _zone` — the decor vertex attributes",
+      "Re": "strings `decor | decor:static | gate: | lamp` — the decor-entry builder"
+    }
+  },
+  "assets/fxHooks-Cvx_8YWC.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "ae": "toonMaterial",
+      "le": "addOutlines",
+      "Le": "Particles",
+      "ze": "Decals",
+      "He": "SpriteText",
+      "Ue": "makeTextSprite",
+      "qe": "TrailMesh",
+      "on": "FunnelRide",
+      "dn": "skillTiers",
+      "yn": "XpMeter",
+      "bn": "LevelChip",
+      "xn": "Announcer",
+      "Sn": "praiseFor",
+      "wn": "CineBars",
+      "jn": "BeamBurst",
+      "Ln": "TrailBeam",
+      "ir": "TrickCallout"
+    },
+    "evidence": {
+      "ae": "import { a as ae } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "le": "import { t as le } from \"assets/outline-BufNikL2.js\" — public name is semantic",
+      "Le": "class with aPos/aCol/aMisc/life/grav/drag — the particle system",
+      "ze": "class with aPos/aU/aV/aCol/aInk/peak/pop/mirror — the spray decal system",
+      "He": "class with group/tex/words/say — the canvas word sprites",
+      "Ue": "fn drawing `99.84px \"…\", system-ui` text to canvas — the text-sprite maker",
+      "qe": "class with mesh/pos/attr/mat — an instanced mesh wrapper",
+      "on": "class with riders/drains/devils/beamMat/funnelMat/ride — the funnel ride effect",
+      "dn": "strings `Grom | Local | Ripper | Flow | Pro` — the skill tiers",
+      "yn": "class with badge/xp-meter-badge/xp-txt — the XP meter",
+      "bn": "class with lv-chip/lv-chip-badge — the level chip",
+      "xn": "class with announcer/toasts and `BAILED!` — the announcer toasts",
+      "Sn": "fn returning `INSANE!! | GNARLY! | SICK!` — the praise words",
+      "wn": "class with cine-bar top/bot/cine-tag — the cinematic letterbox bars",
+      "jn": "class with beams/beamGeo/ringGeo/spawn/drop — the beam burst",
+      "Ln": "class with iTail/iSpan/iAlpha — the trail beam ribbons",
+      "ir": "class with onCall/target/spin/ring/ghost/word + `fade | clean | bail` — the trick callout"
+    }
+  },
+  "assets/ground-ufcYH9Hx.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "a": "toonMaterial",
+      "o": "patchToon"
+    },
+    "evidence": {
+      "a": "import { a as a } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "o": "import { i as o } from \"assets/toon-CycGToy9.js\" — public name is semantic"
+    }
+  },
+  "assets/lens-BwVvQcWW.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "e": "Lens"
+    },
+    "evidence": {
+      "e": "own export table: local `e` is exported as `Lens`"
+    }
+  },
+  "assets/lens-Csl3PMnC.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "p": "Lens",
+      "u": "LensMaterial"
+    },
+    "evidence": {
+      "p": "own export table: local `p` is exported as `Lens`",
+      "u": "class wrapping the lens material"
+    }
+  },
+  "assets/main-CzsUDvlE.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "Ba": "loadProps",
+      "D": "patchToon",
+      "E": "toonMaterial",
+      "Ee": "addOutlines",
+      "Xa": "GhostNet",
+      "Oo": "ParkStage",
+      "Po": "TabNav",
+      "Fo": "AppRouter",
+      "ss": "UnlockQueue",
+      "wc": "StatPointsBank",
+      "fu": "PartyDock",
+      "Ku": "PortalPrompts",
+      "id": "ScreenWipe",
+      "ld": "SkaterTags",
+      "pd": "EmoteWheel",
+      "gd": "ChatPanel",
+      "Cd": "LevelUnlock",
+      "Bd": "MatchHud",
+      "nf": "GatePopup",
+      "sf": "SkateLetters",
+      "df": "Collectibles",
+      "mf": "CoinChip",
+      "gf": "NowPlaying",
+      "Cf": "Coach",
+      "wf": "GoalsPanel",
+      "Tf": "MissionsDock",
+      "Lf": "EdgeMarkers",
+      "zf": "PingPill",
+      "Hf": "PerfMeter",
+      "wm": "BuilderHud",
+      "Vm": "ParkEditor",
+      "Hm": "ParkPill",
+      "Yl": "StarRoadRewards",
+      "th": "GameApp",
+      "ap": "MapControls",
+      "zl": "credits",
+      "Nl": "controlHelp",
+      "Ad": "modeBlurbs",
+      "tc": "careerStats",
+      "Ec": "profileStats",
+      "vc": "statDefs",
+      "_s": "styleSlots",
+      "ys": "styleGroups",
+      "ms": "swatchColors",
+      "jc": "oauthProviders",
+      "bu": "discordInvite",
+      "wu": "whereLabels",
+      "Kf": "qualityTiers"
+    },
+    "evidence": {
+      "Ba": "import { r as Ba } from \"assets/decor-Tyb8Za1u.js\" — public name is semantic",
+      "D": "import { i as D } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "E": "import { a as E } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "Ee": "import { t as Ee } from \"assets/outline-BufNikL2.js\" — public name is semantic",
+      "Xa": "class with a static async open(), a `ghosts` Map and send/remove/clear — the multiplayer ghost-pose channel",
+      "Oo": "class holding stage/park/parkId/cast/crowdGroup/tv — the skate-hub world stage",
+      "Po": "class with page-tabs/htab DOM strings — the tab navigation",
+      "Fo": "class with nav-scrim/nav-stage/popstate — the SPA page router",
+      "ss": "class with unlock-slot/unlock-card/role=status — the unlock card queue",
+      "wc": "class with sp-bank/sp-bank-star — the stat-points bank UI",
+      "fu": "class with lb-party/lb-party-dock — the party dock",
+      "Ku": "class with portal-card/queue-chip/gate-prompt — the mode-gate prompts",
+      "id": "class with wipe/wipe-card/--wipe — the screen-wipe transition",
+      "ld": "class with bubbles/edge-pills/tag/bubble-stack — skater name tags and bubbles",
+      "pd": "class with emote-wheel/ew-ring/ew-hub — the emote wheel",
+      "gd": "class with chat/chat-log/chat-form — the chat panel",
+      "Cd": "class with `LEVEL UNLOCKED!`/cr-slam-park — the level-unlock takeover",
+      "Bd": "class with match-hud/match-clock — the match HUD",
+      "nf": "canvas class drawing `gate:` labels — the mode-gate popup",
+      "sf": "canvas class drawing `SKATE` letters — the S-K-A-T-E letters",
+      "df": "class with day/drops/finds/coins — the collectible pickups",
+      "mf": "class with coin-chip/coin-ico — the coin chip",
+      "gf": "class with now-playing/np-text — the now-playing card",
+      "Cf": "class with coach/coach-dots/coach-title — the tutorial coach",
+      "wf": "class with goals/goals-btn — the goals panel",
+      "Tf": "class with ms-dock/ms-btn — the missions dock",
+      "Lf": "class with edge-markers and off-screen translate() logic — the edge markers",
+      "zf": "class with ping-pill/aria-label Ping — the ping pill",
+      "Hf": "class with perf-meter/cpu/calls/tris — the perf meter",
+      "wm": "class with bh-joints/bh-budget/ramps/Del — the park-builder HUD",
+      "Vm": "class with gizmos/buildOk/buildError — the park build editor",
+      "Hm": "class with park-pill — the park pill",
+      "Yl": "class with .ms-pay/ms-stamp/claiming — the star-road claim UI",
+      "th": "class wiring stage/ui/announcer/session/hub/match/park — the game application",
+      "ap": "class extending the OrbitControls vendor base with PAN-first mouse buttons — the park-viewer pan controls",
+      "zl": "strings `Game | Endel Dreyer | Game Developer | Built with | Colyseus` — the credits record",
+      "Nl": "strings `Forward / trick ↑ | Brake / trick ↓ | Turn left/right` — the control help rows",
+      "Ad": "strings `Biggest score wins | Paint the most pieces | Grab all five letters first` — the mode descriptions",
+      "tc": "strings `wins | matches | runs | pt combo | points | missions` — the career stat labels",
+      "Ec": "strings `career | best combo | points banked | career runs` — the profile stat labels",
+      "vc": "strings `Air | Higher ollies… | Speed | Faster pushes…` — the stat-point upgrade definitions",
+      "_s": "strings `head | Critter | face | top | Top | tee` — the Your-Style slot definitions",
+      "ys": "strings `Fur | Markings | Hair & spots | Color | Shoes | Soles` — the Your-Style group labels",
+      "ms": "the `#ffd21f | #ff8a1f | #1fc7e8 | #4f6bff | #a55bff | #3a1d7a` swatch list — the paint swatches",
+      "jc": "strings `Apple | Google` — the OAuth provider list",
+      "bu": "the discord.gg invite URL constant",
+      "wu": "strings `the Skate Hub | a park | a match | career` — the where-to labels",
+      "Kf": "strings `low | med | high` — the quality tiers"
+    }
+  },
+  "assets/music-D6fpJLig.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "E": "startMusic"
+    },
+    "evidence": {
+      "E": "own export table: local `E` is exported as `startMusic`"
+    }
+  },
+  "assets/outline-BufNikL2.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "p": "addOutlines",
+      "l": "expandOutline",
+      "f": "makeOutlineMaterial"
+    },
+    "evidence": {
+      "p": "own export table: local `p` is exported as `addOutlines`",
+      "l": "strings `outlineNormal | position | normal` — the outline geometry expansion",
+      "f": "shader strings `void main() { | #include <project_vertex> | #include <skinning_vertex>` — the outline material"
+    }
+  },
+  "assets/outline-DM9oZu0n.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "e": "addOutlines"
+    },
+    "evidence": {
+      "e": "own export table: local `e` is exported as `addOutlines`"
+    }
+  },
+  "assets/parkMesh-CjoleZJz.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "o": "toonMaterial",
+      "s": "patchToon",
+      "b": "parkVertexAttrs",
+      "x": "extrudePiece"
+    },
+    "evidence": {
+      "o": "import { a as o } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "s": "import { i as s } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "b": "strings `position | normal | color | zone | kind | park` — the park vertex attributes",
+      "x": "strings `extrude | mesh` — the extrude helper"
+    }
+  },
+  "assets/parkModel-D9KlCEyZ.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "e": "loadPark"
+    },
+    "evidence": {
+      "e": "own export table: local `e` is exported as `loadPark`"
+    }
+  },
+  "assets/parkModel-DmiMeogd.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "g": "patchToon",
+      "h": "toonMaterial",
+      "ln": "loadPark",
+      "xe": "addOutlines",
+      "z": "ParkBuilder",
+      "Ne": "PaintTexture",
+      "an": "loadParkModel",
+      "sn": "loadParkManifest"
+    },
+    "evidence": {
+      "g": "import { i as g } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "h": "import { a as h } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "ln": "own export table: local `ln` is exported as `loadPark`",
+      "xe": "import { t as xe } from \"assets/outline-BufNikL2.js\" — public name is semantic",
+      "z": "class with tris/tri/quad/box/beam/prism/cone/build — the park geometry builder",
+      "Ne": "class patching materials with `#include <color_fragment>` — the park paint texture",
+      "an": "strings `.glb | parks/ | _ao | _zone | kind` — the park GLB loader",
+      "sn": "strings `parks/…/manifest.json` — the park manifest loader"
+    }
+  },
+  "assets/parks-vuvy8Lj9.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "x": "loadPark",
+      "k": "viewerOptions",
+      "j": "fogDefaults",
+      "ne": "loadViewerModules"
+    },
+    "evidence": {
+      "x": "import { t as x } from \"assets/parkModel-DmiMeogd.js\" — public name is semantic",
+      "k": "strings `park | plaza | outlines | collision | decor | wide` — the viewer options",
+      "j": "strings `fog | park` — the fog defaults",
+      "ne": "dynamic imports `./decor-EQ8VRNuO.js | ./toon-L4_S6Akl.js | ./outline-DM9oZu0n.js` — the viewer module loader"
+    }
+  },
+  "assets/perfLab-Dt5WuMzb.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "r": "runPerfLab",
+      "a": "rendererInfo"
+    },
+    "evidence": {
+      "r": "own export table: local `r` is exported as `runPerfLab`",
+      "a": "strings `WEBGL_debug_renderer_info | MSAA | dpr | buffer` — the renderer info readout"
+    }
+  },
+  "assets/replay-_5kwzkRi.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "O": "replayLinkPage",
+      "k": "replayPage",
+      "T": "ReplayViewer"
+    },
+    "evidence": {
+      "O": "own export table: local `O` is exported as `replayLinkPage`",
+      "k": "own export table: local `k` is exported as `replayPage`",
+      "T": "class with stage/cam/rider/speed/paused/announcer + `Checking the tape…` — the replay viewer"
+    }
+  },
+  "assets/session-DxCN6jDh.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "m": "toonMaterial",
+      "In": "SkaterMotion",
+      "Gi": "checkTape",
+      "$i": "PredictReconciler",
+      "ea": "simFields",
+      "ta": "SampleRing",
+      "na": "ComboHud",
+      "aa": "riddle",
+      "ua": "SeatTags",
+      "Da": "GameSession"
+    },
+    "evidence": {
+      "m": "import { a as m } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "In": "class with yaw/pos/pipeYaw/held/look/shake/fovKick/floorY — the local skater motion",
+      "Gi": "error strings `truncated tape | tape too long (…)` — the replay-tape checker",
+      "$i": "class with recon/input/combos/forecast + string `reliable | combo` — the prediction reconciler",
+      "ea": "strings `simTick | mode | modeTick | trickId | trickTick | trickEnd` — the sim tick fields",
+      "ta": "class with ring/head/count/tick/sample — the sample ring buffer",
+      "na": "class with combo/combo-tricks/combo-score/balance — the combo HUD",
+      "aa": "strings `saci | REDEMOINHO | SPIN THREE TIMES ROUND` — the riddle definition",
+      "ua": "class with group/tags/pxPerM/seat/paint — the seat tags",
+      "Da": "class with stage/net/park/fence/riddles/remotes/cam/hud/selfSid — the game session"
+    }
+  },
+  "assets/skaterRig-CWjsS5UF.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "e": "loadSkaterAssets",
+      "n": "SkaterRigView",
+      "t": "parseClips"
+    },
+    "evidence": {
+      "e": "own export table: local `e` is exported as `loadSkaterAssets`",
+      "n": "own export table: local `n` is exported as `SkaterRigView`",
+      "t": "own export table: local `t` is exported as `parseClips`"
+    }
+  },
+  "assets/skaterRig-CvzHL-r4.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "Zt": "SkaterRigView",
+      "ae": "addOutlines",
+      "dt": "parseClips",
+      "m": "patchToon",
+      "p": "toonMaterial",
+      "pt": "loadSkaterAssets",
+      "Ue": "SkaterKit",
+      "tt": "FrameSampler",
+      "ct": "PoseBlend",
+      "qt": "lipTricks",
+      "A": "makeTrick"
+    },
+    "evidence": {
+      "Zt": "own export table: local `Zt` is exported as `SkaterRigView`",
+      "ae": "import { t as ae } from \"assets/outline-BufNikL2.js\" — public name is semantic",
+      "dt": "own export table: local `dt` is exported as `parseClips`",
+      "m": "import { i as m } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "p": "import { a as p } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "pt": "own export table: local `pt` is exported as `loadSkaterAssets`",
+      "Ue": "class with manifest/body/board/heads + `skaters/kit/kit.json` — the skater kit asset manager",
+      "tt": "class with q/v/shownQ/srcQ/next/dur/frames/request/cut — the animation frame sampler",
+      "ct": "class with shownP/shownQ/turnQ/pace/mode/init/apply — the pose blender",
+      "qt": "strings `lip-handplant | lip-invert | lip-andrecht | lip-onefoot` — the lip trick clips",
+      "A": "fn producing `Kickflip | special-flip | Hardflip | flip-kick` entries — the trick builder"
+    }
+  },
+  "assets/skaterView-DCMhULBk.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "l": "toonMaterial",
+      "A": "SkaterView",
+      "x": "GhostRig"
+    },
+    "evidence": {
+      "l": "import { a as l } from \"assets/toon-CycGToy9.js\" — public name is semantic",
+      "A": "class with squash/board/boardFlip/goofy/landPulse/setPose/animate/setGhost — the skater view model",
+      "x": "class with off/size/t/yaw/mode/progress — the ghost rig"
+    }
+  },
+  "assets/tag-BoiZZ9xV.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "z": "tagPage",
+      "_e": "TagEditor",
+      "P": "keyRows"
+    },
+    "evidence": {
+      "z": "own export table: local `z` is exported as `tagPage`",
+      "_e": "class with canvas/letters/painted/queued/outlined + `tg-canvas` — the tag editor",
+      "P": "strings `1234567890 | QWERTYUIOP | ASDFGHJKL- | ZXCVBNM.'` — the tag keyboard rows"
+    }
+  },
+  "assets/toon-CycGToy9.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "ci": "toonMaterial",
+      "ui": "patchToon"
+    },
+    "evidence": {
+      "ci": "own export table: local `ci` is exported as `toonMaterial`",
+      "ui": "own export table: local `ui` is exported as `patchToon`"
+    }
+  },
+  "assets/toon-L4_S6Akl.js": {
+    "note": "evidence-driven proposals (tools/propose-names.mjs): own export table + facade flow + semantic imports",
+    "renames": {
+      "e": "toonMaterial",
+      "t": "patchToon"
+    },
+    "evidence": {
+      "e": "own export table: local `e` is exported as `toonMaterial`",
+      "t": "own export table: local `t` is exported as `patchToon`"
+    }
+  },
+  "assets/bailPhysics-C1H0uy1H.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "Te": "RagdollBody",
+      "Je": "Ragdoll",
+      "Oe": "BoneMapper"
+    },
+    "evidence": {
+      "Te": "class driving body/target/tune/mirror/braces/spine/neck/limp — the ragdoll body",
+      "Je": "class with body/mirror/rider/shove/step/center/matrix/axes — the ragdoll rig",
+      "Oe": "class with q/m/rot/ids/start/match/fit — the bone-name matcher"
+    }
+  },
+  "assets/catalog-CGuOpeY8.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "i": "rampTable",
+      "o": "materialTable",
+      "s": "zoneMaterials",
+      "f": "buildPiece",
+      "x": "miniRampDef"
+    },
+    "evidence": {
+      "i": "strings `ramps | Ramps | quarter | street | stairs` — the ramp/piece kind table",
+      "o": "strings `concrete | concreteDark | wood | woodSide | metal | brick` — the material table",
+      "s": "strings `concrete | concreteDark | wood | brick | grass | sky` — the zone material table",
+      "f": "builder fn with `arc | bowl | mint | sky | concrete` — the piece mesh builder",
+      "x": "strings `mini | Mini Ramp | quarter | woodSide | Quarter Pipe` — the mini-ramp definition"
+    }
+  },
+  "assets/compose-C1tLg9l9.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "a": "buildStairs",
+      "o": "buildLedge",
+      "s": "buildPlanter",
+      "c": "buildEscalator",
+      "d": "deckSlab",
+      "f": "buildBeam",
+      "p": "flatTop"
+    },
+    "evidence": {
+      "a": "strings `stairs | concreteDark | rail | Rail | hubba | Hubba` — the stairs builder",
+      "o": "strings `ledge | concrete` — the ledge builder",
+      "s": "strings `path | Planter | lilac | ledge | grass` — the planter builder",
+      "c": "strings `Escalator | wedge | metal | hubba` — the escalator builder",
+      "d": "strings `path | concrete | center | deck | slab | lip` — the deck-slab helper",
+      "f": "strings `cap | Beam | metal` — the beam builder",
+      "p": "error string `only a level deck has a top to stack on` — the flat-top height of a piece"
+    }
+  },
+  "assets/juice-6UyTKeka.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "U": "hairStyles",
+      "Ie": "portraitUrlFor"
+    },
+    "evidence": {
+      "U": "strings `tawny-hawk | teal | bob-burnquack | bubblegum | rodney-mullet` — the hairstyle keys",
+      "Ie": "string `skaters/portraits/…png` — the portrait URL builder"
+    }
+  },
+  "assets/kit-C-OErpbU.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "o": "kitSlots"
+    },
+    "evidence": {
+      "o": "strings `top: | bottom: | shoes | acc: | head | hair | hat:` — the skater kit slots"
+    }
+  },
+  "assets/missions-eXNMrvRm.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "n": "missionPeriods",
+      "o": "dailyMissions",
+      "s": "weeklyMissions",
+      "c": "trickGoals"
+    },
+    "evidence": {
+      "n": "strings `daily | weekly` — the mission periods",
+      "o": "fn with string `daily` — the daily mission generator",
+      "s": "fn with string `weekly` — the weekly mission generator",
+      "c": "strings `kickflip | Land {n} Kickflips` — the trick-goal definitions"
+    }
+  },
+  "assets/padNav-a65kF6ol.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "ce": "PartyMember",
+      "le": "PartyState",
+      "de": "navTabs",
+      "D": "partyKey",
+      "Ce": "partyState",
+      "B": "partyToast",
+      "Oe": "watchAdButton",
+      "He": "seenUnlocks",
+      "Me": "fakeAdOverlay",
+      "ht": "PadNav",
+      "dt": "padLabels",
+      "at": "confirmKeys"
+    },
+    "evidence": {
+      "ce": "schema registration with string `PartyMember`",
+      "le": "schema registration with string `PartyState`",
+      "de": "strings `maker | daily | invite | community` — the nav tabs",
+      "D": "string `tailgrab-party` — the party storage key",
+      "Ce": "fn with string `party` — the party store",
+      "B": "strings `joined your party! | left the party` — the party toasts",
+      "Oe": "strings `UNLOCK | WATCH AD | play` — the ad-unlock button",
+      "He": "string `freeskater-seen-unlocks-3` — the seen-unlocks store",
+      "Me": "strings `fake-ad | fake-ad-count | Skip the ad (no reward)` — the fake-ad overlay",
+      "ht": "class with nav/ui/hints/ring/pad-hints — the gamepad/keyboard navigation layer",
+      "dt": "strings `CREATE | OPTIONS | Enter | Esc` — the pad button labels",
+      "at": "strings `Enter | NumpadEnter | Space` — the confirm keys"
+    }
+  },
+  "assets/parks-C2dnYY6C.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "ae": "modeParks",
+      "he": "modeNames",
+      "de": "horseWord",
+      "ve": "plazaPark",
+      "ye": "testPark",
+      "be": "warehousePark",
+      "xe": "schoolyardPark",
+      "Se": "pierPark",
+      "De": "mallPark",
+      "Ae": "kitLabPark",
+      "k": "downtownPark",
+      "U": "overpassPark",
+      "V": "garagePark",
+      "at": "ditchPark",
+      "ht": "culvertBank",
+      "Mt": "cityModes"
+    },
+    "evidence": {
+      "ae": "strings `trick | Trick Attack | warehouse | schoolyard | city` — the mode->park table",
+      "he": "strings `trick | career | graffiti | horse | skate | tag` — the mode names",
+      "de": "string `HORSE` — the H-O-R-S-E word",
+      "ve": "string `plaza | Skate Hub` — the built-in Skate Hub park definition",
+      "ye": "string `test | Test Park` — the test park definition",
+      "be": "string `warehouse | Crate Warehouse` — the built-in warehouse park",
+      "xe": "string `schoolyard | Skool Daze` — the built-in schoolyard park",
+      "Se": "string `pier | Pier Pressure` — the built-in pier park",
+      "De": "string `mall | Mall Rats` — the built-in mall park",
+      "Ae": "string `lab | Kit Lab` — the built-in kit lab park",
+      "k": "string `downtown | Downtown | volcano | Fountain Volcano` — the built-in downtown park",
+      "U": "string `overpass | The Overpass` — the built-in overpass park",
+      "V": "string `garage | The Garage` — the built-in garage park",
+      "at": "string `path | The Ditch` — the built-in ditch park",
+      "ht": "string `ditch | The Ditch | wedge | Culvert Bank` — the culvert bank piece",
+      "Mt": "strings `downtown | trick | graffiti | horse | skate` — the city mode table"
+    }
+  },
+  "assets/poses-DwKBijP_.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "e": "emotePoses",
+      "t": "victoryPoses",
+      "n": "standPoses"
+    },
+    "evidence": {
+      "e": "strings `emote-wave | greet-salute | greet-point | greet-nod` — the emote pose clips",
+      "t": "strings `victory-360 | fidget-tap | fidget-shake` — the victory/fidget pose clips",
+      "n": "strings `stand-kick | stand-wave | stand-sit | stand-lean | idle-stand` — the standing pose clips"
+    }
+  },
+  "assets/preload-helper-DR1MrGPZ.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "H": "checkStep",
+      "W": "checkRise",
+      "G": "checkBank",
+      "q": "checkPlan",
+      "ne": "checkSamples",
+      "xe": "checkTerrain",
+      "we": "checkSingleTerrain",
+      "nt": "checkPosts",
+      "ot": "checkLedgeFill",
+      "ct": "checkLipProfile",
+      "st": "checkRail",
+      "ut": "checkBankSurface",
+      "dt": "checkBerm",
+      "ft": "checkDitchLip",
+      "pt": "checkTransition",
+      "mt": "checkLevee",
+      "vt": "bowlProfiles",
+      "yt": "checkBowl",
+      "Ot": "checkBack",
+      "Pt": "pieceDefaults",
+      "rr": "checkMeshTris",
+      "fr": "checkFloorHole",
+      "hr": "checkFloorMesh",
+      "Ir": "SpatialIndex",
+      "je": "CopingGrid",
+      "ci": "modulepreloadPolyfill",
+      "di": "preload"
+    },
+    "evidence": {
+      "H": "error strings `path: a plan step needs a positive length` — the plan-step checker",
+      "W": "error strings `path: … rises for … plan steps` — the rise checker",
+      "G": "error strings `path: … bank angles for … plan steps` — the bank checker",
+      "q": "error strings `path: empty plan | plan steps must be finite` — the plan checker",
+      "ne": "error strings `path: … samples (max …)` — the sample-count checker",
+      "xe": "error strings `terrain: coarse must be ≥ 1 m` — the terrain checker",
+      "we": "error strings `terrain: one terrain per park` — the single-terrain checker",
+      "nt": "error strings `: posts must be > 0.5 m apart | : pillars must be > 1 m apart` — the post checker",
+      "ot": "error strings `: only a closed ledge can be filled` — the ledge-fill checker",
+      "ct": "strings `lip | railing | curb | parapet | jersey` — the lip-profile checker",
+      "st": "strings `metal | tube | none` — the rail checker",
+      "ut": "error strings `: a slab needs … m under it` — the bank-surface checker",
+      "dt": "error strings `: a berm lip at … ° launches` — the berm checker",
+      "ft": "error strings `: lip grade … is over | : the bottom dips under the ground` — the ditch-lip checker",
+      "pt": "strings `concrete | cap | soft` — the transition checker",
+      "mt": "error strings `: only a sunk ditch has a levee` — the levee checker",
+      "vt": "strings `round | oval | kidney | clover` — the bowl profile shapes",
+      "yt": "error strings `: h … < r (the lip must go vert) | rim needs 0.6 m of deck` — the bowl checker",
+      "Ot": "error strings `: a square back needs a pocket of sweep π/2` — the back/hip checker",
+      "Pt": "strings `path | terrain | metal | prop | bowl | curve | pyramid` — the piece defaults",
+      "rr": "error strings `: a degenerate triangle at (…) | : the mesh covers … m²` — the triangle-mesh checker",
+      "fr": "error strings `: a floor hole needs a quarter-turn rot` — the floor-hole checker",
+      "hr": "error strings `: holes need an unrotated floor` — the floor-mesh checker",
+      "Ir": "class with cells/near — the cell spatial index",
+      "je": "class with segs/grid/stamp/sweep/nearestCoping — the coping grid",
+      "ci": "string `modulepreload` — the Vite modulepreload polyfill",
+      "di": "strings `link | meta[property=csp-nonce] | fulfilled | rejected | .css` — the Vite preload helper"
+    }
+  },
+  "assets/prims-CECOBLSv.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "N": "checkSweep",
+      "_": "checkRim",
+      "b": "TriBuilder"
+    },
+    "evidence": {
+      "N": "error strings `path: every sample needs … section rows | the section folds at s` — the sweep checker",
+      "_": "error strings `rim parameters don't meet (NaN) | rim gap at junction | rim kink` — the rim checker",
+      "b": "class with pos/nrm/tris/skins/tri/quad/prim — the triangle mesh builder"
+    }
+  },
+  "assets/scene-DiAs2bfK.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "Xe": "SkyRig",
+      "x": "sceneryKinds",
+      "S": "sceneryMarks",
+      "R": "timesOfDay"
+    },
+    "evidence": {
+      "Xe": "class with renderer/scene/camera/sun/hemi/sky/stars/tod — the sky and lighting rig",
+      "x": "strings `hills | peaks | mesa | pines | skyline | coast` — the scenery kinds",
+      "S": "strings `ferris | turbines | mast | balloons | blimp | sign` — the scenery marks",
+      "R": "strings `morning | day | evening | night` — the times of day"
+    }
+  },
+  "assets/secrets-Czes5esN.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "ne": "secretSkaters",
+      "$": "alienSecret"
+    },
+    "evidence": {
+      "ne": "strings `varginha | abominollie | chupacabra | saci | curupira | itsy` — the secret skater ids",
+      "$": "strings `varginha | ET de Varginha | One air lasting 1.8 seconds` — the alien secret definition"
+    }
+  },
+  "assets/sfx-6jovSU2-.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "f": "AudioEngine",
+      "h": "wavBlob",
+      "_": "audioUnlock",
+      "t": "settingsKey"
+    },
+    "evidence": {
+      "f": "class with ctx/master/sfx/music/noise/brown/grind/rail/wind/skid — the audio engine",
+      "h": "strings `RIFF | WAVE | fmt | data | audio/wav` — the WAV encoder",
+      "_": "listeners `pointerdown | keydown | touchstart | visibilitychange` — the audio unlock hook",
+      "t": "string `freeskater-settings-v1` — the settings storage key"
+    }
+  },
+  "assets/skaters-pUdq6stw.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "R": "proRoster",
+      "V": "skillStyles",
+      "Q": "defaultNames"
+    },
+    "evidence": {
+      "R": "strings `tawny-hawk | Tawny Hawk | hawk | Tony Hawk | goofy` — the pro roster",
+      "V": "strings `vert | Vert | Big air… | street | Street | Speed for the long lines` — the skill styles",
+      "Q": "strings `Newt | Gecko | Pigeon | Llama | Walrus | Beaver` — the default skater names"
+    }
+  },
+  "assets/songs-B3nWAdc6.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "e": "songs"
+    },
+    "evidence": {
+      "e": "strings `recomecar | Recomeçar | Sobre Você | music/recomecar.mp3` — the song table"
+    }
+  },
+  "assets/stickers-9pAHXWwr.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "e": "stickerIds"
+    },
+    "evidence": {
+      "e": "strings `homework | bubblewrap | fish | bag | tape | ticket` — the pack sticker ids"
+    }
+  },
+  "assets/table-W1plLavt.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "r": "headTable",
+      "i": "topsTable",
+      "a": "bottomsTable",
+      "o": "hatsTable",
+      "s": "accessoriesTable",
+      "f": "colorNames",
+      "p": "styleKeys",
+      "g": "furColors",
+      "_": "skinColors",
+      "x": "defaultStyle",
+      "j": "kickflip",
+      "M": "heelflip",
+      "N": "popShoveIt",
+      "P": "impossible",
+      "F": "hardflip",
+      "L": "varialKickflip",
+      "z": "doubleKickflip",
+      "U": "nosegrab",
+      "W": "tailgrab",
+      "G": "indy",
+      "K": "melon",
+      "q": "method",
+      "J": "stalefish",
+      "oe": "benihana",
+      "se": "crail",
+      "le": "grind5050",
+      "ue": "nosegrind",
+      "de": "grind50",
+      "fe": "smith",
+      "pe": "feeble",
+      "me": "crooked",
+      "Y": "boardslide",
+      "ve": "lipslide",
+      "X": "noseslide",
+      "Z": "tailslide",
+      "Q": "bluntslide",
+      "ye": "manual",
+      "be": "noseManual",
+      "xe": "axleStall",
+      "Se": "rockToFakie",
+      "Ce": "handplant",
+      "we": "disaster",
+      "Te": "spin",
+      "Ee": "wallride",
+      "et": "invert",
+      "tt": "andrecht",
+      "nt": "oneFootInvert",
+      "rt": "noseStall",
+      "it": "bluntToFakie",
+      "at": "treFlip",
+      "ot": "revert",
+      "st": "oneFootManual",
+      "ct": "spacewalk",
+      "lt": "truckstand"
+    },
+    "evidence": {
+      "r": "strings `hawk | Hawk | duck | Duck | axolotl | Axolotl` — the head model table",
+      "i": "strings `tee | Tee | hoodie | Hoodie | tank | Tank Top` — the tops table",
+      "a": "strings `shorts | Shorts | pants | Pants | baggies | Baggies` — the bottoms table",
+      "o": "strings `none | No Hat | cap | Cap | cap-back` — the hats table",
+      "s": "strings `none | Nothing | boombox | Boombox | backpack` — the accessories table",
+      "f": "strings `FF3D7F | Bubblegum | FF5A36 | Tomato | FF8A1F | Tangerine` — the color names",
+      "p": "strings `fur | accent | hair | top | bottom | shoes` — the style keys",
+      "g": "the `FFFFFF | A3A9B8 | 6B6F80 | 1D1A3A` fur color list",
+      "_": "the `F7E1C8 | FFB38A | E6BD7B | D9B48F | B9804F | 8A5A3C` skin color list",
+      "x": "strings `hawk | tee | shorts | none | regular` — the default style",
+      "j": "trick entry `Kickflip | flip-kick`",
+      "M": "trick entry `Heelflip | flip-heel`",
+      "N": "trick entry `Pop Shove-It | flip-shove`",
+      "P": "trick entry `Impossible | flip-impossible`",
+      "F": "trick entry `Hardflip | flip-hard`",
+      "L": "trick entry `Varial Kickflip | flip-varial-kick`",
+      "z": "trick entry `Double Kickflip | flip-kick`",
+      "U": "trick entry `Nosegrab | grab-nose`",
+      "W": "trick entry `Tailgrab | grab-tail` (the game's namesake trick)",
+      "G": "trick entry `Indy | grab-indy`",
+      "K": "trick entry `Melon | grab-melon`",
+      "q": "trick entry `Method | grab-method`",
+      "J": "trick entry `Stalefish | grab-stalefish`",
+      "oe": "trick entry `Benihana | grab-benihana`",
+      "se": "trick entry `Crail Grab | grab-crail`",
+      "le": "trick entry `50-50 | grind-5050`",
+      "ue": "trick entry `Nosegrind | grind-nose`",
+      "de": "trick entry `5-0 | grind-50`",
+      "fe": "trick entry `Smith | grind-smith`",
+      "pe": "trick entry `Feeble | grind-feeble`",
+      "me": "trick entry `Crooked | grind-crooked`",
+      "Y": "trick entry `Boardslide | slide-board`",
+      "ve": "trick entry `Lipslide | slide-lip`",
+      "X": "trick entry `Noseslide | slide-nose`",
+      "Z": "trick entry `Tailslide | slide-tail`",
+      "Q": "trick entry `Bluntslide | slide-blunt`",
+      "ye": "trick entry `Manual | manual`",
+      "be": "trick entry `Nose Manual | manual-nose`",
+      "xe": "trick entry `Axle Stall | lip-axle`",
+      "Se": "trick entry `Rock to Fakie | lip-rock`",
+      "Ce": "trick entry `Handplant | lip-handplant`",
+      "we": "trick entry `Disaster | lip-disaster`",
+      "Te": "trick entry `Spin`",
+      "Ee": "trick entry `Wallride | wallride`",
+      "et": "trick entry `Invert | lip-invert`",
+      "tt": "trick entry `Andrecht Invert | lip-andrecht`",
+      "nt": "trick entry `One Foot Invert | lip-onefoot`",
+      "rt": "trick entry `Nose Stall | lip-nose`",
+      "it": "trick entry `Blunt to Fakie | lip-blunt`",
+      "at": "trick entry `360 Flip | flip-tre`",
+      "ot": "trick entry `Revert`",
+      "st": "trick entry `One Foot Manual | manual-onefoot`",
+      "ct": "trick entry `Spacewalk | manual-spacewalk`",
+      "lt": "trick entry `Truckstand | manual-truckstand`"
+    }
+  },
+  "assets/tagPaint-BOEtbgNi.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "Kt": "Skater",
+      "Yt": "Portal",
+      "Xt": "HubState",
+      "Zt": "Competitor",
+      "Qt": "Piece",
+      "en": "HorseState",
+      "tn": "LetterSpot",
+      "nn": "TagState",
+      "rn": "CareerGoal",
+      "an": "CareerSpot",
+      "on": "CareerState",
+      "sn": "MatchState",
+      "cn": "ParkState",
+      "ln": "Ghost",
+      "un": "GhostState",
+      "dn": "backendUrl",
+      "fn": "createClient",
+      "kn": "quickChat",
+      "An": "emoteIds",
+      "Pn": "bannedWords",
+      "In": "maskChars",
+      "z": "skoolDaze",
+      "Qn": "kickflipMission",
+      "tr": "pickupIds"
+    },
+    "evidence": {
+      "Kt": "schema registration with string `Skater`",
+      "Yt": "schema registration with string `Portal`",
+      "Xt": "schema registration with string `HubState`",
+      "Zt": "schema registration with string `Competitor`",
+      "Qt": "schema registration with string `Piece`",
+      "en": "schema registration with string `HorseState`",
+      "tn": "schema registration with string `LetterSpot`",
+      "nn": "schema registration with string `TagState`",
+      "rn": "schema registration with string `CareerGoal`",
+      "an": "schema registration with string `CareerSpot`",
+      "on": "schema registration with string `CareerState`",
+      "sn": "schema registration with string `MatchState`",
+      "cn": "schema registration with string `ParkState`",
+      "ln": "schema registration with string `Ghost`",
+      "un": "schema registration with string `GhostState`",
+      "dn": "string `wss://backend.tailgrab.io` — the live backend URL",
+      "fn": "string `http` — the Colyseus client factory",
+      "kn": "strings `Sick! | Gnarly! | Nice line! | Let's go! | Oops!` — the quick-chat lines",
+      "An": "strings `flame | hand-horns | hand-shake | hand-clap | board | oops` — the emote sticker ids",
+      "Pn": "the profanity list — the name filter",
+      "In": "string `#@$%&!*` — the profanity mask",
+      "z": "strings `skool | Skool Daze | schoolyard | high | bigset | longrail` — the skool-daze mode",
+      "Qn": "strings `kickflip | Land a Kickflip | combo` — the kickflip mission",
+      "tr": "strings `pickup_coin | pickup_stash | pickup_deck` — the pickup ids"
+    }
+  },
+  "assets/tapeRider-C0l9JrgL.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "b": "TapeSim",
+      "E": "TapeRunner",
+      "w": "compressTape",
+      "x": "tapeChecksum"
+    },
+    "evidence": {
+      "b": "class with tape/world/sim/ev/inp/rewind/seek/step — the tape simulation",
+      "E": "class with run/frame/onStep/onCut/onEnd/seek — the tape runner",
+      "w": "string `deflate-raw` — the tape compressor",
+      "x": "strings `version | bank | hash` — the tape checksum"
+    }
+  },
+  "assets/tuning-D4mSK766.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "pn": "SurfaceProbe"
+    },
+    "evidence": {
+      "pn": "class with geometry/bvh/surf/raySurface/probeNearest/sphereWalls — the surface probe (three-mesh-bvh consumer)"
+    }
+  },
+  "assets/types-DM-HODfo.js": {
+    "note": "curated semantic names (read out of the code's own strings/identifiers) + tools/propose-names.mjs evidence",
+    "renames": {
+      "S": "RunState"
+    },
+    "evidence": {
+      "S": "class with flags/tricks/pieces/rail/comboScore/impact/landSpin/grade/bailWhy/respawnWhy — the run-state type"
+    }
+  }
+}

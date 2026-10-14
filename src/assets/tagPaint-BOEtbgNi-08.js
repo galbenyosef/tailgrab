@@ -1,10 +1,10 @@
 // assets/tagPaint-BOEtbgNi 08 — kind
 // Lines 3416-3760 of readable/assets/tagPaint-BOEtbgNi.pretty.js (statement-aligned).
 function Yn(e) {
-  return z.find((t) => t.id === e);
+  return skoolDaze.find((t) => t.id === e);
 }
 function Xn(e) {
-  return z.findIndex((t) => t.id === e);
+  return skoolDaze.findIndex((t) => t.id === e);
 }
 function Zn(e, t) {
   if (!e.starter) return !1;
@@ -17,7 +17,7 @@ function Zn(e, t) {
     r && n < e.need
   );
 }
-var Qn = [
+var kickflipMission = [
     {
       id: `kickflip`,
       kind: `trick`,
@@ -70,7 +70,7 @@ var Qn = [
   ],
   $n = `plaza`,
   er = [6, 4, 2],
-  tr = { coin: `pickup_coin`, stash: `pickup_stash`, deck: `pickup_deck` },
+  pickupIds = { coin: `pickup_coin`, stash: `pickup_stash`, deck: `pickup_deck` },
   B = (e, t, n, r) => ({ id: e, tier: 0, x: t, y: n, z: r }),
   V = (e, t, n, r) => ({ id: e, tier: 1, x: t, y: n, z: r }),
   H = (e, t, n, r) => ({ id: e, tier: 2, x: t, y: n, z: r }),
@@ -286,7 +286,7 @@ var mr = (e, t) => !!e && e.paid.includes(t),
     tutorial: 500,
   };
 function q(e) {
-  let t = z.find((t) => t.unlocks === e);
+  let t = skoolDaze.find((t) => t.unlocks === e);
   return t ? { kind: `career`, level: t.id } : (C[e]?.unlock ?? null);
 }
 var vr = (e, t) =>

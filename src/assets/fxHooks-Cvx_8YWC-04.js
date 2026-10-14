@@ -1,9 +1,9 @@
 // assets/fxHooks-Cvx_8YWC 04 — math
 // Lines 1111-2552 of readable/assets/fxHooks-Cvx_8YWC.pretty.js (statement-aligned).
-var on = class {
+var FunnelRide = class {
     root = new u();
-    decals = new ze();
-    words = new He();
+    decals = new Decals();
+    words = new SpriteText();
     p;
     riders = new Map();
     drains = [];
@@ -361,7 +361,7 @@ var on = class {
             (t.sy = s),
             (t.sz = c),
             (t.webAt = this.time.value),
-            (t.silk ??= new qe()),
+            (t.silk ??= new TrailMesh()),
             this.root.add(t.silk.mesh),
             (t.snap = -1),
             (t.rain = -1),
@@ -997,7 +997,7 @@ var on = class {
           this.corner(e, 0.6, 3),
           (e.stride = 0),
           (e.prints = 1)),
-          (e.silk ??= new qe()),
+          (e.silk ??= new TrailMesh()),
           this.root.add(e.silk.mesh),
           (e.snap = -1),
           (e.rain = -1));

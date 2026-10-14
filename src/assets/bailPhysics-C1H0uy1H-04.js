@@ -75,7 +75,7 @@ function De(e, t) {
       (n[e + 2] += r * s - i * o));
   }
 }
-var Oe = class {
+var BoneMapper = class {
   q;
   m;
   rot = new e();

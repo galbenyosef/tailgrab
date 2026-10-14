@@ -6,7 +6,7 @@ function i(e, r, i) {
     o = n(e.rot ?? 0);
   return { x: e.x + r * a + i * o, z: e.z - r * o + i * a };
 }
-function a(e, t, n) {
+function buildStairs(e, t, n) {
   let a = n.rise ?? 0.25,
     o = n.run ?? 0.45,
     s = n.steps * a,
@@ -72,7 +72,7 @@ function a(e, t, n) {
     }
   return d;
 }
-function o(e, t, n) {
+function buildLedge(e, t, n) {
   let a = [];
   for (let o = 0; o < n.n; o++) {
     let s = i(t, 0, o * (n.w + n.gap) + n.w / 2);
@@ -92,7 +92,7 @@ function o(e, t, n) {
   }
   return a;
 }
-function s(e, t, n, r, i = {}) {
+function buildPlanter(e, t, n, r, i = {}) {
   return {
     id: e,
     kind: `path`,
@@ -105,7 +105,7 @@ function s(e, t, n, r, i = {}) {
     section: { type: `ledge`, w: 0.5, h: i.h ?? 0.55, fill: `grass` },
   };
 }
-function c(e, t, n) {
+function buildEscalator(e, t, n) {
   let r = n.w ?? 3,
     a = t.rot ?? 0,
     o = t.y ?? 0,
@@ -151,7 +151,7 @@ function c(e, t, n) {
 }
 var l = { type: `lip` },
   u = (e) => (e === `plain` ? void 0 : (e ?? l));
-function d(e, t) {
+function deckSlab(e, t) {
   return {
     id: e,
     kind: `path`,
@@ -177,10 +177,10 @@ function d(e, t) {
     ends: [t.nz ?? `lip`, t.pz ?? `lip`],
   };
 }
-function f(t, n, r, i, a, o, s = {}) {
+function buildBeam(t, n, r, i, a, o, s = {}) {
   let c = i - n,
     l = a - r;
-  return d(t, {
+  return deckSlab(t, {
     x: (n + i) / 2,
     z: (r + a) / 2,
     y: o,
@@ -195,7 +195,7 @@ function f(t, n, r, i, a, o, s = {}) {
     skin: s.skin ?? `metal`,
   });
 }
-function p(e) {
+function flatTop(e) {
   let t = e.y ?? 0;
   switch (e.kind) {
     case `path`:
@@ -215,5 +215,5 @@ function p(e) {
   }
 }
 function m(e, t) {
-  return { ...t, y: p(e) + (t.y ?? 0) };
+  return { ...t, y: flatTop(e) + (t.y ?? 0) };
 }

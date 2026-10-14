@@ -13,7 +13,7 @@ function it() {
   return { y0: e, rises: t, ease: 10 };
 }
 var I = it(),
-  at = {
+  ditchPark = {
     id: 3e3,
     kind: `path`,
     ...P,
@@ -101,18 +101,18 @@ var I = it(),
   },
   pt = T(8, w.basin, 0, `concrete`);
 function mt(e) {
-  let t = i(s(at.path), e),
+  let t = i(s(ditchPark.path), e),
     n = a(s({ plan: F, grade: I }), e).y,
     r = E(P, t.x, t.z);
   return { x: r.x, y: n + 1, z: r.z };
 }
-var ht = {
+var culvertBank = {
     id: `ditch`,
     name: `The Ditch`,
     range: [3e3, 3999],
     rect: w.ditch,
     pieces: [
-      at,
+      ditchPark,
       ct,
       ut,
       dt,
@@ -141,7 +141,7 @@ var ht = {
         skin: `peach`,
       },
     ],
-    terrain: [ee(at, 10), { f: `pad`, floor: 8, blend: 10 }],
+    terrain: [ee(ditchPark, 10), { f: `pad`, floor: 8, blend: 10 }],
     gaps: [
       { name: `Ditch Bridge Hop`, points: 250, from: [3001], to: [1, 3e3] },
       { name: `Culvert Gap`, points: 400, from: [3010], to: [3012] },

@@ -95,7 +95,7 @@ function be(e, t, n) {
   }
   return r;
 }
-function xe(e, r) {
+function checkTerrain(e, r) {
   let a = `terrain ${e.id}`;
   if (e.coarse !== void 0 && !(e.coarse >= 1))
     throw Error(`${a}: coarse must be ≥ 1 m`);
@@ -148,7 +148,7 @@ function xe(e, r) {
             throw Error(
               `${a}: a street arc of radius ${n.arc} is too tight for its width and blend (needs ≥ ${(t / 0.8).toFixed(1)})`,
             );
-        let r = q(e.path),
+        let r = checkPlan(e.path),
           o = { x0: 1 / 0, x1: -1 / 0, z0: 1 / 0, z1: -1 / 0 };
         for (let e = 0; e <= r.length; e += 0.5) {
           let t = te(r, Math.min(e, r.length));

@@ -1,6 +1,6 @@
 // assets/scene-DiAs2bfK 02 — math
 // Lines 348-629 of readable/assets/scene-DiAs2bfK.pretty.js (statement-aligned).
-var R = [`morning`, `day`, `evening`, `night`],
+var timesOfDay = [`morning`, `day`, `evening`, `night`],
   Fe = {
     morning: {
       sunDir: [0.75, 0.55, -0.35],

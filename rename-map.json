@@ -1,0 +1,1593 @@
+{
+  "note": "Semantic rename map for src/, recovered mechanically by anchor alignment from the committed slices (tools/recover-scoped-map.mjs): the token streams of a slice and its readable range must be identical in every non-identifier position, so every differing identifier pair is a proven rename, not a guess. `files` is a word-boundary map, used only where a name means the same thing everywhere in the slice and is never a property or object key; `scoped` addresses the rest by exact token index as { name: [[i, target], …] }. tools/derive.mjs re-applies this map when it re-cuts src/ (index-validated), tools/verify-rename.mjs and tools/audit.js re-prove every slice from it, and tools/check-chunk.mjs proves cross-slice references still resolve. Regenerate with `node tools/recover-scoped-map.mjs` after any rename batch.",
+  "files": {
+    "assets/bailPhysics-C1H0uy1H-03.js": {
+      "Oe": "BoneMapper",
+      "Te": "RagdollBody"
+    },
+    "assets/bailPhysics-C1H0uy1H-04.js": {
+      "Oe": "BoneMapper"
+    },
+    "assets/bailPhysics-C1H0uy1H-05.js": {
+      "Je": "Ragdoll"
+    },
+    "assets/bestTv-zah2thYf-01.js": {
+      "M": "BestTv",
+      "m": "addOutlines"
+    },
+    "assets/catalog-CGuOpeY8-02.js": {
+      "f": "buildPiece"
+    },
+    "assets/decor-EQ8VRNuO-01.js": {
+      "e": "loadProps"
+    },
+    "assets/decor-Tyb8Za1u-01.js": {
+      "A": "treeModels",
+      "D": "addOutlines",
+      "ce": "buildLamp",
+      "de": "buildTerrainDecor",
+      "fe": "buildProp",
+      "le": "buildCloud",
+      "oe": "groundPlane",
+      "re": "portalDefs",
+      "se": "buildBush",
+      "ue": "portalPad"
+    },
+    "assets/decor-Tyb8Za1u-03.js": {
+      "Ce": "LooseBodies"
+    },
+    "assets/decor-Tyb8Za1u-04.js": {
+      "Ae": "loadProps",
+      "Ce": "LooseBodies",
+      "D": "addOutlines",
+      "Re": "buildDecorEntry",
+      "Y": "decorAttrs",
+      "fe": "buildProp"
+    },
+    "assets/fxHooks-Cvx_8YWC-01.js": {
+      "ae": "toonMaterial",
+      "le": "addOutlines"
+    },
+    "assets/fxHooks-Cvx_8YWC-02.js": {
+      "He": "SpriteText",
+      "Le": "Particles",
+      "Ue": "makeTextSprite",
+      "ze": "Decals"
+    },
+    "assets/fxHooks-Cvx_8YWC-03.js": {
+      "Ue": "makeTextSprite",
+      "ae": "toonMaterial",
+      "le": "addOutlines",
+      "qe": "TrailMesh"
+    },
+    "assets/fxHooks-Cvx_8YWC-04.js": {
+      "He": "SpriteText",
+      "on": "FunnelRide",
+      "qe": "TrailMesh",
+      "ze": "Decals"
+    },
+    "assets/fxHooks-Cvx_8YWC-05.js": {
+      "dn": "skillTiers"
+    },
+    "assets/fxHooks-Cvx_8YWC-06.js": {
+      "bn": "LevelChip",
+      "xn": "Announcer",
+      "yn": "XpMeter"
+    },
+    "assets/fxHooks-Cvx_8YWC-07.js": {
+      "Ln": "TrailBeam",
+      "Sn": "praiseFor",
+      "jn": "BeamBurst",
+      "wn": "CineBars"
+    },
+    "assets/fxHooks-Cvx_8YWC-09.js": {
+      "Le": "Particles",
+      "Ln": "TrailBeam",
+      "ir": "TrickCallout",
+      "jn": "BeamBurst",
+      "on": "FunnelRide",
+      "wn": "CineBars"
+    },
+    "assets/juice-6UyTKeka-02.js": {
+      "Ie": "portraitUrlFor",
+      "U": "hairStyles"
+    },
+    "assets/lens-BwVvQcWW-01.js": {
+      "e": "Lens"
+    },
+    "assets/lens-Csl3PMnC-01.js": {
+      "p": "Lens",
+      "u": "LensMaterial"
+    },
+    "assets/main-CzsUDvlE-01.js": {
+      "Ee": "addOutlines"
+    },
+    "assets/main-CzsUDvlE-02.js": {
+      "Ba": "loadProps",
+      "Xa": "GhostNet"
+    },
+    "assets/main-CzsUDvlE-04.js": {
+      "Oo": "ParkStage"
+    },
+    "assets/main-CzsUDvlE-06.js": {
+      "Fo": "AppRouter",
+      "Po": "TabNav"
+    },
+    "assets/main-CzsUDvlE-07.js": {
+      "ss": "UnlockQueue"
+    },
+    "assets/main-CzsUDvlE-08.js": {
+      "_s": "styleSlots",
+      "ms": "swatchColors",
+      "ys": "styleGroups"
+    },
+    "assets/main-CzsUDvlE-10.js": {
+      "ys": "styleGroups"
+    },
+    "assets/main-CzsUDvlE-12.js": {
+      "tc": "careerStats"
+    },
+    "assets/main-CzsUDvlE-13.js": {
+      "Ec": "profileStats",
+      "vc": "statDefs",
+      "wc": "StatPointsBank"
+    },
+    "assets/main-CzsUDvlE-14.js": {
+      "Ec": "profileStats",
+      "jc": "oauthProviders",
+      "wc": "StatPointsBank"
+    },
+    "assets/main-CzsUDvlE-17.js": {
+      "Nl": "controlHelp"
+    },
+    "assets/main-CzsUDvlE-18.js": {
+      "Nl": "controlHelp",
+      "zl": "credits"
+    },
+    "assets/main-CzsUDvlE-20.js": {
+      "Yl": "StarRoadRewards"
+    },
+    "assets/main-CzsUDvlE-21.js": {
+      "Yl": "StarRoadRewards"
+    },
+    "assets/main-CzsUDvlE-22.js": {
+      "fu": "PartyDock"
+    },
+    "assets/main-CzsUDvlE-23.js": {
+      "bu": "discordInvite",
+      "wu": "whereLabels"
+    },
+    "assets/main-CzsUDvlE-24.js": {
+      "bu": "discordInvite",
+      "fu": "PartyDock",
+      "wu": "whereLabels"
+    },
+    "assets/main-CzsUDvlE-26.js": {
+      "Ku": "PortalPrompts"
+    },
+    "assets/main-CzsUDvlE-28.js": {
+      "Cd": "LevelUnlock",
+      "gd": "ChatPanel",
+      "ld": "SkaterTags",
+      "pd": "EmoteWheel"
+    },
+    "assets/main-CzsUDvlE-30.js": {
+      "Ad": "modeBlurbs",
+      "Bd": "MatchHud",
+      "Cd": "LevelUnlock"
+    },
+    "assets/main-CzsUDvlE-31.js": {
+      "nf": "GatePopup"
+    },
+    "assets/main-CzsUDvlE-32.js": {
+      "Ba": "loadProps",
+      "D": "patchToon",
+      "E": "toonMaterial",
+      "Ee": "addOutlines",
+      "df": "Collectibles",
+      "gf": "NowPlaying",
+      "mf": "CoinChip",
+      "sf": "SkateLetters"
+    },
+    "assets/main-CzsUDvlE-33.js": {
+      "Cf": "Coach",
+      "Tf": "MissionsDock",
+      "wf": "GoalsPanel"
+    },
+    "assets/main-CzsUDvlE-34.js": {
+      "Hf": "PerfMeter",
+      "Kf": "qualityTiers",
+      "Lf": "EdgeMarkers",
+      "zf": "PingPill"
+    },
+    "assets/main-CzsUDvlE-35.js": {
+      "Kf": "qualityTiers",
+      "ap": "MapControls"
+    },
+    "assets/main-CzsUDvlE-38.js": {
+      "E": "toonMaterial"
+    },
+    "assets/main-CzsUDvlE-40.js": {
+      "wm": "BuilderHud"
+    },
+    "assets/main-CzsUDvlE-42.js": {
+      "Ba": "loadProps",
+      "Hm": "ParkPill",
+      "Vm": "ParkEditor",
+      "ap": "MapControls",
+      "wm": "BuilderHud"
+    },
+    "assets/main-CzsUDvlE-44.js": {
+      "Bd": "MatchHud",
+      "Cf": "Coach",
+      "Fo": "AppRouter",
+      "Hf": "PerfMeter",
+      "Hm": "ParkPill",
+      "Ku": "PortalPrompts",
+      "Lf": "EdgeMarkers",
+      "Oo": "ParkStage",
+      "Tf": "MissionsDock",
+      "Vm": "ParkEditor",
+      "Xa": "GhostNet",
+      "df": "Collectibles",
+      "gd": "ChatPanel",
+      "gf": "NowPlaying",
+      "ld": "SkaterTags",
+      "mf": "CoinChip",
+      "nf": "GatePopup",
+      "sf": "SkateLetters",
+      "ss": "UnlockQueue",
+      "th": "GameApp",
+      "wf": "GoalsPanel",
+      "zf": "PingPill"
+    },
+    "assets/main-CzsUDvlE-45.js": {
+      "th": "GameApp"
+    },
+    "assets/missions-eXNMrvRm-01.js": {
+      "n": "missionPeriods"
+    },
+    "assets/missions-eXNMrvRm-02.js": {
+      "c": "trickGoals"
+    },
+    "assets/music-D6fpJLig-01.js": {
+      "E": "startMusic"
+    },
+    "assets/outline-BufNikL2-01.js": {
+      "f": "makeOutlineMaterial",
+      "p": "addOutlines"
+    },
+    "assets/outline-DM9oZu0n-01.js": {
+      "e": "addOutlines"
+    },
+    "assets/padNav-a65kF6ol-01.js": {
+      "B": "partyToast",
+      "Ce": "partyState",
+      "D": "partyKey",
+      "Me": "fakeAdOverlay",
+      "Oe": "watchAdButton",
+      "ce": "PartyMember",
+      "de": "navTabs",
+      "le": "PartyState"
+    },
+    "assets/padNav-a65kF6ol-02.js": {
+      "He": "seenUnlocks",
+      "Me": "fakeAdOverlay",
+      "at": "confirmKeys",
+      "dt": "padLabels"
+    },
+    "assets/padNav-a65kF6ol-03.js": {
+      "dt": "padLabels",
+      "ht": "PadNav"
+    },
+    "assets/parkModel-D9KlCEyZ-01.js": {
+      "e": "loadPark"
+    },
+    "assets/parkModel-DmiMeogd-01.js": {
+      "xe": "addOutlines"
+    },
+    "assets/parkModel-DmiMeogd-02.js": {
+      "Ne": "PaintTexture"
+    },
+    "assets/parkModel-DmiMeogd-10.js": {
+      "Ne": "PaintTexture",
+      "an": "loadParkModel",
+      "sn": "loadParkManifest",
+      "xe": "addOutlines"
+    },
+    "assets/parkModel-DmiMeogd-11.js": {
+      "Ne": "PaintTexture",
+      "an": "loadParkModel",
+      "g": "patchToon",
+      "h": "toonMaterial",
+      "ln": "loadPark",
+      "sn": "loadParkManifest",
+      "xe": "addOutlines"
+    },
+    "assets/parks-C2dnYY6C-01.js": {
+      "ae": "modeParks",
+      "de": "horseWord",
+      "he": "modeNames"
+    },
+    "assets/parks-C2dnYY6C-02.js": {
+      "Ae": "kitLabPark",
+      "De": "mallPark",
+      "Se": "pierPark",
+      "be": "warehousePark",
+      "ve": "plazaPark",
+      "xe": "schoolyardPark",
+      "ye": "testPark"
+    },
+    "assets/parks-C2dnYY6C-05.js": {
+      "k": "downtownPark"
+    },
+    "assets/parks-C2dnYY6C-06.js": {
+      "at": "ditchPark",
+      "ht": "culvertBank"
+    },
+    "assets/parks-C2dnYY6C-07.js": {
+      "Mt": "cityModes",
+      "U": "overpassPark",
+      "V": "garagePark",
+      "k": "downtownPark"
+    },
+    "assets/parks-C2dnYY6C-08.js": {
+      "Mt": "cityModes"
+    },
+    "assets/parks-C2dnYY6C-09.js": {
+      "Ae": "kitLabPark",
+      "De": "mallPark",
+      "Se": "pierPark",
+      "be": "warehousePark",
+      "ve": "plazaPark",
+      "xe": "schoolyardPark",
+      "ye": "testPark"
+    },
+    "assets/parks-C2dnYY6C-10.js": {
+      "ve": "plazaPark"
+    },
+    "assets/parks-vuvy8Lj9-01.js": {
+      "j": "fogDefaults",
+      "k": "viewerOptions"
+    },
+    "assets/parks-vuvy8Lj9-02.js": {
+      "k": "viewerOptions",
+      "ne": "loadViewerModules"
+    },
+    "assets/preload-helper-DR1MrGPZ-01.js": {
+      "G": "checkBank",
+      "H": "checkStep",
+      "W": "checkRise",
+      "ne": "checkSamples",
+      "q": "checkPlan"
+    },
+    "assets/preload-helper-DR1MrGPZ-02.js": {
+      "q": "checkPlan",
+      "xe": "checkTerrain"
+    },
+    "assets/preload-helper-DR1MrGPZ-03.js": {
+      "je": "CopingGrid",
+      "nt": "checkPosts",
+      "we": "checkSingleTerrain",
+      "xe": "checkTerrain"
+    },
+    "assets/preload-helper-DR1MrGPZ-04.js": {
+      "ct": "checkLipProfile",
+      "dt": "checkBerm",
+      "ft": "checkDitchLip",
+      "nt": "checkPosts",
+      "ot": "checkLedgeFill",
+      "q": "checkPlan",
+      "st": "checkRail",
+      "ut": "checkBankSurface"
+    },
+    "assets/preload-helper-DR1MrGPZ-05.js": {
+      "ct": "checkLipProfile",
+      "dt": "checkBerm",
+      "ut": "checkBankSurface"
+    },
+    "assets/preload-helper-DR1MrGPZ-06.js": {
+      "ft": "checkDitchLip",
+      "mt": "checkLevee",
+      "pt": "checkTransition",
+      "q": "checkPlan"
+    },
+    "assets/preload-helper-DR1MrGPZ-07.js": {
+      "Ot": "checkBack",
+      "vt": "bowlProfiles",
+      "yt": "checkBowl"
+    },
+    "assets/preload-helper-DR1MrGPZ-09.js": {
+      "Ot": "checkBack",
+      "Pt": "pieceDefaults",
+      "yt": "checkBowl"
+    },
+    "assets/preload-helper-DR1MrGPZ-15.js": {
+      "q": "checkPlan",
+      "rr": "checkMeshTris"
+    },
+    "assets/preload-helper-DR1MrGPZ-16.js": {
+      "Pt": "pieceDefaults",
+      "fr": "checkFloorHole",
+      "hr": "checkFloorMesh",
+      "rr": "checkMeshTris",
+      "we": "checkSingleTerrain"
+    },
+    "assets/preload-helper-DR1MrGPZ-17.js": {
+      "Ir": "SpatialIndex",
+      "Pt": "pieceDefaults",
+      "fr": "checkFloorHole",
+      "je": "CopingGrid",
+      "we": "checkSingleTerrain"
+    },
+    "assets/preload-helper-DR1MrGPZ-18.js": {
+      "ci": "modulepreloadPolyfill",
+      "di": "preload",
+      "fr": "checkFloorHole"
+    },
+    "assets/prims-CECOBLSv-03.js": {
+      "N": "checkSweep"
+    },
+    "assets/replay-_5kwzkRi-01.js": {
+      "T": "ReplayViewer"
+    },
+    "assets/scene-DiAs2bfK-01.js": {
+      "S": "sceneryMarks"
+    },
+    "assets/scene-DiAs2bfK-02.js": {
+      "R": "timesOfDay"
+    },
+    "assets/scene-DiAs2bfK-03.js": {
+      "Xe": "SkyRig"
+    },
+    "assets/secrets-Czes5esN-01.js": {
+      "ne": "secretSkaters"
+    },
+    "assets/secrets-Czes5esN-02.js": {
+      "$": "alienSecret",
+      "ne": "secretSkaters"
+    },
+    "assets/session-DxCN6jDh-02.js": {
+      "In": "SkaterMotion"
+    },
+    "assets/session-DxCN6jDh-09.js": {
+      "Gi": "checkTape"
+    },
+    "assets/session-DxCN6jDh-10.js": {
+      "$i": "PredictReconciler",
+      "ea": "simFields",
+      "na": "ComboHud",
+      "ta": "SampleRing"
+    },
+    "assets/session-DxCN6jDh-11.js": {
+      "aa": "riddle",
+      "m": "toonMaterial",
+      "ta": "SampleRing",
+      "ua": "SeatTags"
+    },
+    "assets/session-DxCN6jDh-12.js": {
+      "$i": "PredictReconciler",
+      "Da": "GameSession",
+      "In": "SkaterMotion",
+      "na": "ComboHud",
+      "ua": "SeatTags"
+    },
+    "assets/sfx-6jovSU2--01.js": {
+      "t": "settingsKey"
+    },
+    "assets/sfx-6jovSU2--03.js": {
+      "_": "audioUnlock",
+      "f": "AudioEngine",
+      "h": "wavBlob"
+    },
+    "assets/skaterRig-CWjsS5UF-01.js": {
+      "e": "loadSkaterAssets"
+    },
+    "assets/skaterRig-CvzHL-r4-01.js": {
+      "Ue": "SkaterKit",
+      "ae": "addOutlines"
+    },
+    "assets/skaterRig-CvzHL-r4-02.js": {
+      "A": "makeTrick",
+      "Ue": "SkaterKit",
+      "ct": "PoseBlend",
+      "dt": "parseClips",
+      "pt": "loadSkaterAssets",
+      "tt": "FrameSampler"
+    },
+    "assets/skaterRig-CvzHL-r4-04.js": {
+      "Zt": "SkaterRigView",
+      "ae": "addOutlines",
+      "ct": "PoseBlend",
+      "m": "patchToon",
+      "qt": "lipTricks",
+      "tt": "FrameSampler"
+    },
+    "assets/skaterView-DCMhULBk-01.js": {
+      "A": "SkaterView",
+      "l": "toonMaterial"
+    },
+    "assets/skaters-pUdq6stw-02.js": {
+      "R": "proRoster"
+    },
+    "assets/skaters-pUdq6stw-03.js": {
+      "Q": "defaultNames",
+      "R": "proRoster",
+      "V": "skillStyles"
+    },
+    "assets/table-W1plLavt-01.js": {
+      "x": "defaultStyle"
+    },
+    "assets/table-W1plLavt-02.js": {
+      "Ce": "handplant",
+      "Ee": "wallride",
+      "F": "hardflip",
+      "G": "indy",
+      "J": "stalefish",
+      "K": "melon",
+      "L": "varialKickflip",
+      "M": "heelflip",
+      "N": "popShoveIt",
+      "P": "impossible",
+      "Q": "bluntslide",
+      "Se": "rockToFakie",
+      "Te": "spin",
+      "U": "nosegrab",
+      "W": "tailgrab",
+      "X": "noseslide",
+      "Y": "boardslide",
+      "Z": "tailslide",
+      "at": "treFlip",
+      "be": "noseManual",
+      "ct": "spacewalk",
+      "de": "grind50",
+      "et": "invert",
+      "fe": "smith",
+      "it": "bluntToFakie",
+      "j": "kickflip",
+      "le": "grind5050",
+      "lt": "truckstand",
+      "me": "crooked",
+      "nt": "oneFootInvert",
+      "oe": "benihana",
+      "ot": "revert",
+      "pe": "feeble",
+      "q": "method",
+      "rt": "noseStall",
+      "se": "crail",
+      "st": "oneFootManual",
+      "tt": "andrecht",
+      "ue": "nosegrind",
+      "ve": "lipslide",
+      "we": "disaster",
+      "xe": "axleStall",
+      "ye": "manual",
+      "z": "doubleKickflip"
+    },
+    "assets/tag-BoiZZ9xV-02.js": {
+      "_e": "TagEditor"
+    },
+    "assets/tag-BoiZZ9xV-03.js": {
+      "_e": "TagEditor"
+    },
+    "assets/tagPaint-BOEtbgNi-05.js": {
+      "Kt": "Skater",
+      "Qt": "Piece",
+      "Xt": "HubState",
+      "Yt": "Portal",
+      "Zt": "Competitor",
+      "an": "CareerSpot",
+      "cn": "ParkState",
+      "dn": "backendUrl",
+      "en": "HorseState",
+      "fn": "createClient",
+      "ln": "Ghost",
+      "nn": "TagState",
+      "on": "CareerState",
+      "rn": "CareerGoal",
+      "sn": "MatchState",
+      "tn": "LetterSpot",
+      "un": "GhostState"
+    },
+    "assets/tagPaint-BOEtbgNi-06.js": {
+      "An": "emoteIds",
+      "In": "maskChars",
+      "Pn": "bannedWords",
+      "Xt": "HubState",
+      "cn": "ParkState",
+      "kn": "quickChat",
+      "un": "GhostState"
+    },
+    "assets/tagPaint-BOEtbgNi-08.js": {
+      "Qn": "kickflipMission",
+      "tr": "pickupIds"
+    },
+    "assets/tagPaint-BOEtbgNi-09.js": {
+      "z": "skoolDaze"
+    },
+    "assets/tagPaint-BOEtbgNi-10.js": {
+      "z": "skoolDaze"
+    },
+    "assets/tapeRider-C0l9JrgL-01.js": {
+      "E": "TapeRunner",
+      "b": "TapeSim",
+      "w": "compressTape"
+    },
+    "assets/toon-CycGToy9-02.js": {
+      "ci": "toonMaterial",
+      "ui": "patchToon"
+    },
+    "assets/toon-L4_S6Akl-01.js": {
+      "e": "toonMaterial",
+      "t": "patchToon"
+    },
+    "assets/tuning-D4mSK766-11.js": {
+      "pn": "SurfaceProbe"
+    },
+    "assets/types-DM-HODfo-01.js": {
+      "S": "RunState"
+    }
+  },
+  "scoped": {
+    "assets/bestTv-zah2thYf-01.js": {
+      "b": [
+        [
+          123,
+          "loadProps"
+        ],
+        [
+          1088,
+          "loadProps"
+        ]
+      ],
+      "l": [
+        [
+          46,
+          "toonMaterial"
+        ],
+        [
+          1144,
+          "toonMaterial"
+        ]
+      ],
+      "u": [
+        [
+          50,
+          "patchToon"
+        ],
+        [
+          1157,
+          "patchToon"
+        ]
+      ],
+      "x": [
+        [
+          132,
+          "Lens"
+        ],
+        [
+          288,
+          "Lens"
+        ]
+      ]
+    },
+    "assets/catalog-CGuOpeY8-01.js": {
+      "f": [
+        [
+          403,
+          "buildPiece"
+        ]
+      ],
+      "i": [
+        [
+          35,
+          "rampTable"
+        ]
+      ],
+      "o": [
+        [
+          194,
+          "materialTable"
+        ]
+      ],
+      "s": [
+        [
+          255,
+          "zoneMaterials"
+        ]
+      ]
+    },
+    "assets/catalog-CGuOpeY8-02.js": {
+      "x": [
+        [
+          5625,
+          "miniRampDef"
+        ],
+        [
+          8091,
+          "miniRampDef"
+        ]
+      ]
+    },
+    "assets/catalog-CGuOpeY8-03.js": {
+      "o": [
+        [
+          941,
+          "materialTable"
+        ]
+      ]
+    },
+    "assets/compose-C1tLg9l9-01.js": {
+      "a": [
+        [
+          89,
+          "buildStairs"
+        ]
+      ],
+      "c": [
+        [
+          788,
+          "buildEscalator"
+        ]
+      ],
+      "d": [
+        [
+          1117,
+          "deckSlab"
+        ],
+        [
+          1393,
+          "deckSlab"
+        ]
+      ],
+      "f": [
+        [
+          1359,
+          "buildBeam"
+        ]
+      ],
+      "o": [
+        [
+          503,
+          "buildLedge"
+        ]
+      ],
+      "p": [
+        [
+          1509,
+          "flatTop"
+        ],
+        [
+          1657,
+          "flatTop"
+        ]
+      ],
+      "s": [
+        [
+          659,
+          "buildPlanter"
+        ]
+      ]
+    },
+    "assets/decor-Tyb8Za1u-01.js": {
+      "d": [
+        [
+          54,
+          "patchToon"
+        ]
+      ],
+      "u": [
+        [
+          50,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/decor-Tyb8Za1u-04.js": {
+      "d": [
+        [
+          2169,
+          "patchToon"
+        ]
+      ],
+      "u": [
+        [
+          2157,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/ground-ufcYH9Hx-01.js": {
+      "o": [
+        [
+          32,
+          "patchToon"
+        ],
+        [
+          248,
+          "patchToon"
+        ]
+      ]
+    },
+    "assets/kit-C-OErpbU-01.js": {
+      "o": [
+        [
+          116,
+          "kitSlots"
+        ]
+      ]
+    },
+    "assets/main-CzsUDvlE-01.js": {
+      "D": [
+        [
+          249,
+          "patchToon"
+        ]
+      ],
+      "E": [
+        [
+          245,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/main-CzsUDvlE-10.js": {
+      "_s": [
+        [
+          2386,
+          "styleSlots"
+        ]
+      ]
+    },
+    "assets/main-CzsUDvlE-27.js": {
+      "id": [
+        [
+          2297,
+          "ScreenWipe"
+        ]
+      ]
+    },
+    "assets/main-CzsUDvlE-44.js": {
+      "id": [
+        [
+          264,
+          "ScreenWipe"
+        ]
+      ]
+    },
+    "assets/missions-eXNMrvRm-02.js": {
+      "o": [
+        [
+          25,
+          "dailyMissions"
+        ],
+        [
+          174,
+          "dailyMissions"
+        ],
+        [
+          222,
+          "dailyMissions"
+        ],
+        [
+          270,
+          "dailyMissions"
+        ],
+        [
+          316,
+          "dailyMissions"
+        ],
+        [
+          366,
+          "dailyMissions"
+        ],
+        [
+          416,
+          "dailyMissions"
+        ],
+        [
+          470,
+          "dailyMissions"
+        ],
+        [
+          520,
+          "dailyMissions"
+        ],
+        [
+          570,
+          "dailyMissions"
+        ],
+        [
+          620,
+          "dailyMissions"
+        ],
+        [
+          674,
+          "dailyMissions"
+        ],
+        [
+          712,
+          "dailyMissions"
+        ],
+        [
+          758,
+          "dailyMissions"
+        ],
+        [
+          804,
+          "dailyMissions"
+        ],
+        [
+          842,
+          "dailyMissions"
+        ],
+        [
+          880,
+          "dailyMissions"
+        ],
+        [
+          918,
+          "dailyMissions"
+        ],
+        [
+          960,
+          "dailyMissions"
+        ],
+        [
+          1006,
+          "dailyMissions"
+        ],
+        [
+          1052,
+          "dailyMissions"
+        ],
+        [
+          1098,
+          "dailyMissions"
+        ],
+        [
+          1136,
+          "dailyMissions"
+        ],
+        [
+          1188,
+          "dailyMissions"
+        ],
+        [
+          1770,
+          "dailyMissions"
+        ]
+      ],
+      "s": [
+        [
+          98,
+          "weeklyMissions"
+        ],
+        [
+          1240,
+          "weeklyMissions"
+        ],
+        [
+          1286,
+          "weeklyMissions"
+        ],
+        [
+          1336,
+          "weeklyMissions"
+        ],
+        [
+          1382,
+          "weeklyMissions"
+        ],
+        [
+          1420,
+          "weeklyMissions"
+        ],
+        [
+          1458,
+          "weeklyMissions"
+        ],
+        [
+          1496,
+          "weeklyMissions"
+        ],
+        [
+          1542,
+          "weeklyMissions"
+        ],
+        [
+          1580,
+          "weeklyMissions"
+        ],
+        [
+          1618,
+          "weeklyMissions"
+        ],
+        [
+          1656,
+          "weeklyMissions"
+        ],
+        [
+          1694,
+          "weeklyMissions"
+        ],
+        [
+          1732,
+          "weeklyMissions"
+        ]
+      ]
+    },
+    "assets/missions-eXNMrvRm-03.js": {
+      "n": [
+        [
+          146,
+          "missionPeriods"
+        ],
+        [
+          832,
+          "missionPeriods"
+        ]
+      ]
+    },
+    "assets/outline-BufNikL2-01.js": {
+      "l": [
+        [
+          57,
+          "expandOutline"
+        ],
+        [
+          769,
+          "expandOutline"
+        ]
+      ]
+    },
+    "assets/padNav-a65kF6ol-03.js": {
+      "at": [
+        [
+          1753,
+          "confirmKeys"
+        ],
+        [
+          2032,
+          "confirmKeys"
+        ]
+      ]
+    },
+    "assets/parkMesh-CjoleZJz-01.js": {
+      "b": [
+        [
+          224,
+          "parkVertexAttrs"
+        ]
+      ],
+      "o": [
+        [
+          34,
+          "toonMaterial"
+        ],
+        [
+          959,
+          "toonMaterial"
+        ]
+      ],
+      "s": [
+        [
+          38,
+          "patchToon"
+        ],
+        [
+          957,
+          "patchToon"
+        ]
+      ],
+      "x": [
+        [
+          562,
+          "extrudePiece"
+        ],
+        [
+          1046,
+          "extrudePiece"
+        ]
+      ]
+    },
+    "assets/parkModel-DmiMeogd-01.js": {
+      "g": [
+        [
+          72,
+          "patchToon"
+        ]
+      ],
+      "h": [
+        [
+          68,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/parkModel-DmiMeogd-02.js": {
+      "z": [
+        [
+          1157,
+          "ParkBuilder"
+        ]
+      ]
+    },
+    "assets/parkModel-DmiMeogd-03.js": {
+      "g": [
+        [
+          288,
+          "patchToon"
+        ],
+        [
+          340,
+          "patchToon"
+        ]
+      ],
+      "h": [
+        [
+          290,
+          "toonMaterial"
+        ],
+        [
+          342,
+          "toonMaterial"
+        ]
+      ],
+      "z": [
+        [
+          707,
+          "ParkBuilder"
+        ]
+      ]
+    },
+    "assets/parkModel-DmiMeogd-04.js": {
+      "z": [
+        [
+          3640,
+          "ParkBuilder"
+        ]
+      ]
+    },
+    "assets/parkModel-DmiMeogd-05.js": {
+      "z": [
+        [
+          1663,
+          "ParkBuilder"
+        ]
+      ]
+    },
+    "assets/parkModel-DmiMeogd-10.js": {
+      "g": [
+        [
+          2190,
+          "patchToon"
+        ]
+      ],
+      "h": [
+        [
+          2179,
+          "toonMaterial"
+        ]
+      ],
+      "z": [
+        [
+          103,
+          "ParkBuilder"
+        ]
+      ]
+    },
+    "assets/parks-C2dnYY6C-07.js": {
+      "ht": [
+        [
+          2149,
+          "culvertBank"
+        ],
+        [
+          2706,
+          "culvertBank"
+        ],
+        [
+          2759,
+          "culvertBank"
+        ],
+        [
+          2765,
+          "culvertBank"
+        ]
+      ]
+    },
+    "assets/parks-vuvy8Lj9-01.js": {
+      "x": [
+        [
+          224,
+          "loadPark"
+        ],
+        [
+          1510,
+          "loadPark"
+        ]
+      ]
+    },
+    "assets/perfLab-Dt5WuMzb-01.js": {
+      "a": [
+        [
+          434,
+          "rendererInfo"
+        ],
+        [
+          1060,
+          "rendererInfo"
+        ]
+      ],
+      "r": [
+        [
+          20,
+          "runPerfLab"
+        ]
+      ]
+    },
+    "assets/poses-DwKBijP_-01.js": {
+      "e": [
+        [
+          1,
+          "emotePoses"
+        ],
+        [
+          909,
+          "emotePoses"
+        ]
+      ],
+      "n": [
+        [
+          693,
+          "standPoses"
+        ]
+      ],
+      "t": [
+        [
+          316,
+          "victoryPoses"
+        ],
+        [
+          899,
+          "victoryPoses"
+        ]
+      ]
+    },
+    "assets/prims-CECOBLSv-01.js": {
+      "_": [
+        [
+          1801,
+          "checkRim"
+        ]
+      ],
+      "b": [
+        [
+          2929,
+          "TriBuilder"
+        ]
+      ]
+    },
+    "assets/prims-CECOBLSv-03.js": {
+      "b": [
+        [
+          2158,
+          "TriBuilder"
+        ]
+      ]
+    },
+    "assets/replay-_5kwzkRi-01.js": {
+      "O": [
+        [
+          1467,
+          "replayLinkPage"
+        ]
+      ],
+      "k": [
+        [
+          1484,
+          "replayPage"
+        ],
+        [
+          1604,
+          "replayPage"
+        ]
+      ]
+    },
+    "assets/session-DxCN6jDh-01.js": {
+      "m": [
+        [
+          150,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/sfx-6jovSU2--02.js": {
+      "f": [
+        [
+          48,
+          "AudioEngine"
+        ]
+      ],
+      "h": [
+        [
+          854,
+          "wavBlob"
+        ]
+      ]
+    },
+    "assets/skaterRig-CWjsS5UF-01.js": {
+      "n": [
+        [
+          12,
+          "SkaterRigView"
+        ]
+      ],
+      "t": [
+        [
+          8,
+          "parseClips"
+        ]
+      ]
+    },
+    "assets/skaterRig-CvzHL-r4-01.js": {
+      "m": [
+        [
+          80,
+          "patchToon"
+        ]
+      ],
+      "p": [
+        [
+          76,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/skaterRig-CvzHL-r4-04.js": {
+      "p": [
+        [
+          848,
+          "toonMaterial"
+        ],
+        [
+          875,
+          "toonMaterial"
+        ]
+      ]
+    },
+    "assets/skaterView-DCMhULBk-01.js": {
+      "x": [
+        [
+          234,
+          "GhostRig"
+        ],
+        [
+          976,
+          "GhostRig"
+        ]
+      ]
+    },
+    "assets/songs-B3nWAdc6-01.js": {
+      "e": [
+        [
+          1,
+          "songs"
+        ]
+      ]
+    },
+    "assets/stickers-9pAHXWwr-01.js": {
+      "e": [
+        [
+          1,
+          "stickerIds"
+        ],
+        [
+          49,
+          "stickerIds"
+        ],
+        [
+          60,
+          "stickerIds"
+        ]
+      ]
+    },
+    "assets/table-W1plLavt-01.js": {
+      "_": [
+        [
+          2305,
+          "skinColors"
+        ]
+      ],
+      "a": [
+        [
+          836,
+          "bottomsTable"
+        ],
+        [
+          1578,
+          "bottomsTable"
+        ],
+        [
+          3264,
+          "bottomsTable"
+        ]
+      ],
+      "f": [
+        [
+          1653,
+          "colorNames"
+        ],
+        [
+          2472,
+          "colorNames"
+        ],
+        [
+          2517,
+          "colorNames"
+        ]
+      ],
+      "g": [
+        [
+          2273,
+          "furColors"
+        ],
+        [
+          2354,
+          "furColors"
+        ],
+        [
+          2362,
+          "furColors"
+        ],
+        [
+          2370,
+          "furColors"
+        ],
+        [
+          2378,
+          "furColors"
+        ],
+        [
+          2386,
+          "furColors"
+        ]
+      ],
+      "i": [
+        [
+          679,
+          "topsTable"
+        ],
+        [
+          1574,
+          "topsTable"
+        ],
+        [
+          3251,
+          "topsTable"
+        ]
+      ],
+      "o": [
+        [
+          924,
+          "hatsTable"
+        ],
+        [
+          1582,
+          "hatsTable"
+        ],
+        [
+          3277,
+          "hatsTable"
+        ]
+      ],
+      "p": [
+        [
+          2162,
+          "styleKeys"
+        ],
+        [
+          2241,
+          "styleKeys"
+        ],
+        [
+          2260,
+          "styleKeys"
+        ],
+        [
+          2447,
+          "styleKeys"
+        ]
+      ],
+      "r": [
+        [
+          78,
+          "headTable"
+        ],
+        [
+          1570,
+          "headTable"
+        ],
+        [
+          3238,
+          "headTable"
+        ]
+      ],
+      "s": [
+        [
+          1341,
+          "accessoriesTable"
+        ],
+        [
+          1586,
+          "accessoriesTable"
+        ],
+        [
+          3290,
+          "accessoriesTable"
+        ]
+      ]
+    },
+    "assets/tag-BoiZZ9xV-01.js": {
+      "P": [
+        [
+          228,
+          "keyRows"
+        ],
+        [
+          362,
+          "keyRows"
+        ],
+        [
+          425,
+          "keyRows"
+        ]
+      ]
+    },
+    "assets/tag-BoiZZ9xV-03.js": {
+      "z": [
+        [
+          1,
+          "tagPage"
+        ]
+      ]
+    },
+    "assets/tagPaint-BOEtbgNi-07.js": {
+      "z": [
+        [
+          440,
+          "skoolDaze"
+        ]
+      ]
+    },
+    "assets/tagPaint-BOEtbgNi-08.js": {
+      "z": [
+        [
+          7,
+          "skoolDaze"
+        ],
+        [
+          33,
+          "skoolDaze"
+        ],
+        [
+          2337,
+          "skoolDaze"
+        ]
+      ]
+    },
+    "assets/tapeRider-C0l9JrgL-01.js": {
+      "x": [
+        [
+          506,
+          "tapeChecksum"
+        ],
+        [
+          814,
+          "tapeChecksum"
+        ]
+      ]
+    }
+  }
+}

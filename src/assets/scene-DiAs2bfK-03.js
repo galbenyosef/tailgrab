@@ -1,6 +1,6 @@
 // assets/scene-DiAs2bfK 03 — renderer
 // Lines 630-914 of readable/assets/scene-DiAs2bfK.pretty.js (statement-aligned).
-var Xe = class {
+var SkyRig = class {
     renderer;
     scene = new o();
     camera = new t(62, 1, 0.1, 1e3);

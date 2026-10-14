@@ -22,7 +22,7 @@ import {
   s as ie,
   t as f,
 } from "./compose-C1tLg9l9.js";
-var ae = {
+var modeParks = {
   trick: {
     id: `trick`,
     name: `Trick Attack`,
@@ -123,9 +123,9 @@ var ae = {
     resultsMs: 18e4,
   },
 };
-Object.keys(ae);
+Object.keys(modeParks);
 function oe(e) {
-  return typeof e == `string` && e in ae;
+  return typeof e == `string` && e in modeParks;
 }
 var se = [`trick`, `graffiti`, `horse`, `skate`, `tag`];
 function ce(e) {
@@ -141,7 +141,7 @@ var le = {
     ABORTED: 6,
   },
   ue = 3500,
-  de = `HORSE`,
+  horseWord = `HORSE`,
   fe = 1e4,
   pe = `SKATE`;
 function me(e) {
@@ -149,7 +149,7 @@ function me(e) {
   for (; e;) ((t += e & 1), (e >>>= 1));
   return t;
 }
-function he(e, t, n) {
+function modeNames(e, t, n) {
   switch (e) {
     case `trick`:
     case `career`:

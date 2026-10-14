@@ -27,7 +27,7 @@ function $r(e, t) {
       break;
     case `complete`:
       i = 0;
-      for (let e of z)
+      for (let e of skoolDaze)
         (e.tour ?? 1) === 1 &&
           ((i += e.goals.length), t && (r += Vr(t, e.id).length));
       a = i ? r / i : 1;

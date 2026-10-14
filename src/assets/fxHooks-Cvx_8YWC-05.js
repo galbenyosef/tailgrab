@@ -18,7 +18,7 @@ function un(e) {
     ? null
     : `Riding at ${ln(e)}% speed & pop · full at LV ${De.full}`;
 }
-var dn = [
+var skillTiers = [
   { min: 1, name: `Grom` },
   { min: 5, name: `Local` },
   { min: 10, name: `Ripper` },
@@ -29,7 +29,7 @@ var dn = [
 function fn(e) {
   let t = 0;
   return (
-    dn.forEach((n, r) => {
+    skillTiers.forEach((n, r) => {
       e >= n.min && (t = r);
     }),
     t
@@ -37,8 +37,8 @@ function fn(e) {
 }
 function pn(e) {
   let t = fn(e),
-    n = dn[t + 1],
-    { min: r, name: i } = dn[t];
+    n = skillTiers[t + 1],
+    { min: r, name: i } = skillTiers[t];
   return {
     name: i,
     range: n
@@ -52,7 +52,7 @@ var mn = `cx="66" cy="52" rx="58" ry="19"`,
 function _n(e) {
   let t = fn(e),
     n = ++gn,
-    r = t === dn.length - 1,
+    r = t === skillTiers.length - 1,
     i = `<ellipse ${mn} class="orbit-ink"/><ellipse ${mn} class="orbit"${r ? ` style="stroke:url(#lvh${n})"` : ``}/><ellipse ${mn} class="comet" pathLength="100"/>`,
     a = [72, 58, 46][Math.min(2, String(e).length - 1)],
     o = (e) => (e + a * 0.35).toFixed(1),

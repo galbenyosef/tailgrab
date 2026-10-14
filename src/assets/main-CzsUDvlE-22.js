@@ -171,7 +171,7 @@ function du(e) {
   }
   return e.ready ? `READY` : ``;
 }
-var fu = class {
+var PartyDock = class {
   layer;
   dock;
   nav;

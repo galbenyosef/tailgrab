@@ -37,7 +37,7 @@ var Z = new Float64Array(me.length * 3),
     flail: 0.08,
     plant: 0.2,
   },
-  qt = new Set([`lip-handplant`, `lip-invert`, `lip-andrecht`, `lip-onefoot`]),
+  lipTricks = new Set([`lip-handplant`, `lip-invert`, `lip-andrecht`, `lip-onefoot`]),
   Jt = Object.fromEntries(
     [
       `lip-handplant`,
@@ -51,7 +51,7 @@ var Z = new Float64Array(me.length * 3),
   ),
   Yt = 1.05,
   Xt = new t({ color: 0 }),
-  Zt = class {
+  SkaterRigView = class {
     root = new r();
     squash = new r();
     lean = new r();
@@ -76,7 +76,7 @@ var Z = new Float64Array(me.length * 3),
     animBoardQ = new n();
     poseBlend = null;
     spin = new nt();
-    glide = new ct();
+    glide = new PoseBlend();
     simQ = new n();
     drawnQ = new n();
     lipCut = !1;
@@ -123,8 +123,8 @@ var Z = new Float64Array(me.length * 3),
         n = t.getObjectByName(`body`),
         r = t.getObjectByName(`board`),
         i = t.getObjectByName(`Hips`),
-        a = m(p({ vertexColors: !0 }), { ao: !0, rider: !0 }),
-        o = m(p({ vertexColors: !0 }), { ao: !0, rider: !0 });
+        a = patchToon(toonMaterial({ vertexColors: !0 }), { ao: !0, rider: !0 }),
+        o = patchToon(toonMaterial({ vertexColors: !0 }), { ao: !0, rider: !0 });
       ((this.materials = [a, o]),
         (n.material = a),
         (r.material = o),
@@ -164,7 +164,7 @@ var Z = new Float64Array(me.length * 3),
         this.animHips.copy(i.position),
         this.animBoardP.copy(this.boardAnchor.position),
         this.animBoardQ.copy(this.boardAnchor.quaternion),
-        (this.poseBlend = new tt(
+        (this.poseBlend = new FrameSampler(
           [
             ...this.animQ.map((e) => e.bone.quaternion),
             this.boardAnchor.quaternion,
@@ -193,7 +193,7 @@ var Z = new Float64Array(me.length * 3),
         c(s.Tail1, [0, -0.3, -1], 0.14, 90, 8, 0.6),
         c(s.Tail2, [0, -0.2, -1], 0.14, 110, 8, 0.7),
       ]),
-        (this.shells = ae(this.root, vt)),
+        (this.shells = addOutlines(this.root, vt)),
         (this.mixer = new d(this.rig)),
         this.onAttached(),
         this.ghost < 1 && this.setGhost(this.ghost));
@@ -235,7 +235,7 @@ var Z = new Float64Array(me.length * 3),
         (this.lipCut =
           n &&
           (e.mode === v.LIP && this.lastMode !== v.LIP
-            ? qt.has(se[e.trickId]?.clip ?? ``)
+            ? lipTricks.has(se[e.trickId]?.clip ?? ``)
             : e.mode === v.GROUND &&
               this.lastMode === v.LIP &&
               Jt[this.curName] !== void 0)),

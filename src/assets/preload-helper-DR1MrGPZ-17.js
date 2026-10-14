@@ -181,7 +181,7 @@ function Pr(e) {
     }
 }
 var Fr = Math.fround,
-  Ir = class {
+  SpatialIndex = class {
     cells = new Map();
     constructor(e, t) {
       for (let n of e) {
@@ -208,8 +208,8 @@ var Fr = Math.fround,
 function Br(e) {
   let t = Rr * Rr,
     n = zr,
-    r = new Ir(e, !1),
-    i = new Ir(e, !0);
+    r = new SpatialIndex(e, !1),
+    i = new SpatialIndex(e, !0);
   for (let i of e)
     if (!(i.next >= 0))
       for (let a of r.near(i.bx, i.bz)) {
@@ -275,7 +275,7 @@ function Vr(e) {
   return {
     layout: e,
     col: c,
-    rails: new je(n ? n.rails(c) : yr(e, c)),
+    rails: new CopingGrid(n ? n.rails(c) : yr(e, c)),
     pieces: t,
     bounds: o,
     box: { x0: o.x0 - ar, x1: o.x1 + ar, z0: o.z0 - ar, z1: o.z1 + ar },
@@ -285,7 +285,7 @@ function Vr(e) {
   };
 }
 function Hr(e) {
-  let t = we(e);
+  let t = checkSingleTerrain(e);
   if (t) return { rect: t.rect, y: ir, ground: t };
   let n = 1 / 0,
     r = -1 / 0,
@@ -317,7 +317,7 @@ function Gr(e, t, n, r = e.yTop) {
 }
 var Kr = (e) => e.id.startsWith(`u-`);
 function qr(e) {
-  let t = JSON.stringify(fr(e)),
+  let t = JSON.stringify(checkFloorHole(e)),
     n = e.pieces.filter((e) => e.kind === `floor`),
     r = (e, t) =>
       (
@@ -335,7 +335,7 @@ function Xr(e) {
   let t = JSON.stringify(e),
     n = Jr.get(t);
   return (
-    n ? Jr.delete(t) : (n = Pt(e)),
+    n ? Jr.delete(t) : (n = pieceDefaults(e)),
     Jr.set(t, n),
     Jr.size > Yr && Jr.delete(Jr.keys().next().value),
     n

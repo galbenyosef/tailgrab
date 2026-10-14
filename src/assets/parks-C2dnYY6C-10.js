@@ -17,7 +17,7 @@ function pn(e) {
   let t = $.get(e);
   if (t) return t;
   let { parkId: n, arena: r } = dn(e),
-    i = un[n] ?? ve,
+    i = un[n] ?? plazaPark,
     a = r ? i.arenas?.find((e) => e.id === r) : void 0;
   if (!a) return ((t = $.get(i.id) ?? te(i)), $.set(i.id, t), $.set(e, t), t);
   let o = pn(i.id),

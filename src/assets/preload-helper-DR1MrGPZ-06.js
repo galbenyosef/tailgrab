@@ -1,6 +1,6 @@
 // assets/preload-helper-DR1MrGPZ 06 — abs
 // Lines 1511-1850 of readable/assets/preload-helper-DR1MrGPZ.pretty.js (statement-aligned).
-function ft(e, t, r, o) {
+function checkDitchLip(e, t, r, o) {
   let { w: s, r: c } = t,
     l = s / 2,
     u = t.apron ?? 1,
@@ -13,7 +13,7 @@ function ft(e, t, r, o) {
     _ = !!t.sunk;
   if (_ && (f || t.roof))
     throw Error(`${o}: a sunk ditch is one open run (no ring, no roof)`);
-  let v = q({ ...e.path, grade: t.lip, bank: void 0 }),
+  let v = checkPlan({ ...e.path, grade: t.lip, bank: void 0 }),
     b = r.map((e) => K(v, e.s));
   for (let [e, t] of r.entries())
     if (Math.abs(b[e].g) > ze.grade.lip + 1e-9)
@@ -45,7 +45,7 @@ function ft(e, t, r, o) {
     L = x(r, !0);
   if (t.roof) {
     if (!g) throw Error(`${o}: a culvert needs vertical walls`);
-    return pt(
+    return checkTransition(
       e,
       t,
       t.roof,
@@ -184,7 +184,7 @@ function ft(e, t, r, o) {
     ...((e.y ?? 0) === 0 && d === 0 ? { outline: Ze(L, ee, -ee, f) } : {}),
   };
 }
-function pt(e, t, r, o, s, c, l, u) {
+function checkTransition(e, t, r, o, s, c, l, u) {
   let {
       hw: d,
       r: f,
@@ -291,7 +291,7 @@ function pt(e, t, r, o, s, c, l, u) {
   }
   return { prims: [k.prim(`soft`)], rails: [] };
 }
-function mt(e, t) {
+function checkLevee(e, t) {
   let n = e.section;
   if (n.type !== `channel` || !n.sunk)
     throw Error(`path ${e.id}: only a sunk ditch has a levee`);

@@ -151,7 +151,7 @@ var Q = { NONE: 0, CLEAN: 1, LET_GO: 2, BAIL: 3 },
       ((i.fx = m / _), (i.fy = h / _), (i.fz = g / _));
     }
   },
-  $i = class {
+  PredictReconciler = class {
     recon;
     input;
     combos;
@@ -268,7 +268,7 @@ var Q = { NONE: 0, CLEAN: 1, LET_GO: 2, BAIL: 3 },
       this.recon.dispose();
     }
   },
-  ea = [
+  simFields = [
     `simTick`,
     `mode`,
     `modeTick`,
@@ -292,7 +292,7 @@ var Q = { NONE: 0, CLEAN: 1, LET_GO: 2, BAIL: 3 },
     `xfer`,
     `rolling`,
   ],
-  ta = class {
+  SampleRing = class {
     ring = [];
     head = 0;
     count = 0;
@@ -309,7 +309,7 @@ var Q = { NONE: 0, CLEAN: 1, LET_GO: 2, BAIL: 3 },
       this.lastTick = e;
       let t = this.ring[this.head],
         n = this.sk;
-      for (let e of ea) n[e] !== void 0 && (t[e] = n[e]);
+      for (let e of simFields) n[e] !== void 0 && (t[e] = n[e]);
       ((this.head = (this.head + 1) % this.ring.length),
         (this.count = Math.min(this.count + 1, this.ring.length)));
     }
@@ -337,7 +337,7 @@ var Q = { NONE: 0, CLEAN: 1, LET_GO: 2, BAIL: 3 },
       this.ring.length = 0;
     }
   },
-  na = class {
+  ComboHud = class {
     el;
     combo;
     tricks;

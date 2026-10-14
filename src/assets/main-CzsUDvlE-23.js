@@ -317,7 +317,7 @@ function yu() {
   let e = Math.max(0.58, Math.min(1, window.innerHeight / 560));
   return J.touchScale * e;
 }
-var bu = `https://discord.gg/8fYyEs3zSF`,
+var discordInvite = `https://discord.gg/8fYyEs3zSF`,
   xu = (e) =>
     e.kind === `career`
       ? null
@@ -329,7 +329,7 @@ var bu = `https://discord.gg/8fYyEs3zSF`,
       ? e
       : { kind: `park`, code: e.code, via: e.via, name: e.name },
   Cu = (e) => !!e && e.members.length > 1,
-  wu = {
+  whereLabels = {
     plaza: `the Skate Hub`,
     park: `a park`,
     match: `a match`,

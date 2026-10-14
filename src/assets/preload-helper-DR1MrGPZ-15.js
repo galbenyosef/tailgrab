@@ -58,7 +58,7 @@ function tr(e, r) {
     E = new er(f.slice(), p.slice()),
     D = T.map((e) => ({
       f: e,
-      c: q(e.path),
+      c: checkPlan(e.path),
       cs: n(e.rot ?? 0),
       sn: i(e.rot ?? 0),
     }));
@@ -328,7 +328,7 @@ function tr(e, r) {
       l = 1 + 0.03 * t(Math.round(o * 4), Math.round(s * 4));
     ne.tri(oe(r), oe(i), oe(a), c, l);
   }
-  rr(
+  checkMeshTris(
     s,
     f,
     J,

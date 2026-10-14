@@ -1,6 +1,6 @@
 // assets/preload-helper-DR1MrGPZ 09 — push
 // Lines 2327-2675 of readable/assets/preload-helper-DR1MrGPZ.pretty.js (statement-aligned).
-function Pt(e) {
+function pieceDefaults(e) {
   switch (e.kind) {
     case `path`:
       return We(e);
@@ -14,9 +14,9 @@ function Pt(e) {
       );
     }
     case `bowl`:
-      return yt(e);
+      return checkBowl(e);
     case `curve`:
-      return Ot(e);
+      return checkBack(e);
     case `pyramid`:
       return kt(e);
     case `volcano`:

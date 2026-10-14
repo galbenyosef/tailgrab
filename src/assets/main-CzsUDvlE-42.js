@@ -37,7 +37,7 @@ var Em = (e) => (e.min.x + e.max.x) / 2,
   Rm = (e) => ((Math.round(e / (Math.PI / 2)) % 4) + 4) % 4,
   zm = new T(0, 1, 0),
   Bm = { x: `↔`, y: `↕`, z: `⤢` },
-  Vm = class {
+  ParkEditor = class {
     active = !1;
     d;
     gizmos;
@@ -115,7 +115,7 @@ var Em = (e) => (e.min.x + e.max.x) / 2,
         this._v.normalize());
       let a = new T(i.x + this._v.x * 8, 0, i.z + this._v.z * 8);
       r.position.set(a.x - this._v.x * 16, 18, a.z - this._v.z * 16);
-      let o = new ap(r, e.renderer.domElement);
+      let o = new MapControls(r, e.renderer.domElement);
       (o.target.copy(a),
         (o.enableDamping = !0),
         (o.dampingFactor = 0.12),
@@ -133,7 +133,7 @@ var Em = (e) => (e.min.x + e.max.x) / 2,
         s.addEventListener(`pointerleave`, this.onLeave),
         s.addEventListener(`wheel`, this.onWheel, { capture: !0, passive: !1 }),
         s.addEventListener(`contextmenu`, this.onContext),
-        (this.hud = new wm(
+        (this.hud = new BuilderHud(
           this.d.ui,
           {
             arm: (e) => this.arm(e),
@@ -159,7 +159,7 @@ var Em = (e) => (e.min.x + e.max.x) / 2,
         this.hud.setUndo(this.undos.length),
         (this.camY = 0),
         this.showLevel(),
-        Ba()
+        loadProps()
           .then((e) => {
             (lm(e),
               this.active &&
@@ -1866,7 +1866,7 @@ var Em = (e) => (e.min.x + e.max.x) / 2,
       e.hint(t);
     }
   },
-  Hm = class {
+  ParkPill = class {
     pill;
     name;
     build;

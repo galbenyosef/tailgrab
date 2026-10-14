@@ -76,7 +76,7 @@ import {
   xt as w,
   yr as T,
 } from "./three.core-DVWDmH0S.js";
-import { a as E, i as D } from "./toon-CycGToy9.js";
+import { a as toonMaterial, i as patchToon } from "./toon-CycGToy9.js";
 import {
   C as ne,
   I as re,
@@ -98,7 +98,7 @@ import { Mt as _e, Zt as ve, d as ye, u as be } from "./tuning-D4mSK766.js";
 import { i as xe } from "./prims-CECOBLSv.js";
 import { d as Se, n as O, p as Ce, t as we } from "./scene-DiAs2bfK.js";
 import { a as Te } from "./palette-DQTkVEn_.js";
-import { t as Ee } from "./outline-BufNikL2.js";
+import { t as addOutlines } from "./outline-BufNikL2.js";
 import {
   $ as De,
   K as Oe,

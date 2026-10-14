@@ -171,7 +171,7 @@ function g(e) {
     o = e.da > 0 ? 1 : -1;
   return [e.cx + e.R * r, e.cz + e.R * a, -a * o, r * o];
 }
-function _(e, t, n = 1, i = 1) {
+function checkRim(e, t, n = 1, i = 1) {
   let a = e.segs;
   for (let e of a)
     for (let t of Object.values(e))
@@ -261,7 +261,7 @@ function y(e) {
       a.z > i && (i = a.z));
   return { x0: t, x1: n, z0: r, z1: i };
 }
-var b = class {
+var TriBuilder = class {
     pos = [];
     nrm = [];
     tris = [];

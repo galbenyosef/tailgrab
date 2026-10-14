@@ -31,7 +31,7 @@ import { o as C, t as w } from "./sfx-6jovSU2-.js";
 import { n as ae } from "./catalog-CGuOpeY8.js";
 import { c as T, d as oe, i as E } from "./skaters-pUdq6stw.js";
 var se = { IDLE: 0, LAUNCHING: 1 },
-  ce = e(
+  PartyMember = e(
     {
       name: t.string().default(``),
       skater: t.uint16().default(0),
@@ -46,18 +46,18 @@ var se = { IDLE: 0, LAUNCHING: 1 },
     },
     `PartyMember`,
   ),
-  le = e(
+  PartyState = e(
     {
       code: t.string().default(``),
       leader: t.string().default(``),
       dest: t.string().default(``),
       phase: t.uint8().default(0),
-      members: t.map(ce),
+      members: t.map(PartyMember),
     },
     `PartyState`,
   ),
   ue = { KICKED: 4410, REPLACED: 4411 },
-  de = [`maker`, `daily`, `invite`, `community`];
+  navTabs = [`maker`, `daily`, `invite`, `community`];
 function fe(e) {
   let t = e;
   if (typeof t == `string`) {
@@ -76,7 +76,7 @@ function fe(e) {
     typeof n.code != `string` ||
     !ae.test(n.code) ||
     typeof n.via != `string` ||
-    !de.includes(n.via)
+    !navTabs.includes(n.via)
   )
     return null;
   let r = { kind: `park`, code: n.code, via: n.via };
@@ -88,7 +88,7 @@ function fe(e) {
 function pe(e) {
   return e.connected && e.where === ``;
 }
-var D = `tailgrab-party`,
+var partyKey = `tailgrab-party`,
   me = 18e5,
   O = null,
   k = null,
@@ -144,17 +144,17 @@ function L(e) {
   if (((j = t), !n)) for (let e of N) e(!0);
   return t;
 }
-function Ce() {
+function partyState() {
   return L(async () => {
-    O || (await y(), await B(await p.create(`party`, v(), le)));
+    O || (await y(), await partyToast(await p.create(`party`, v(), PartyState)));
   });
 }
 function R(e) {
   return L(async () => {
     if (k?.code === e) return;
     await y();
-    let t = await p.joinById(e, v(), le);
-    (z(!0), await B(t));
+    let t = await p.joinById(e, v(), PartyState);
+    (z(!0), await partyToast(t));
   });
 }
 async function we() {
@@ -170,7 +170,7 @@ function z(e = !1) {
   let t = O;
   t && (V(), U(null), t.leave(!0).catch(() => {}), e || H());
 }
-function B(e) {
+function partyToast(e) {
   ((O = e),
     U({ code: e.roomId, at: Date.now() }),
     (A = setInterval(() => {
@@ -294,7 +294,7 @@ function Te(e) {
 }
 function Ee() {
   try {
-    let e = JSON.parse(localStorage.getItem(D) ?? `null`);
+    let e = JSON.parse(localStorage.getItem(partyKey) ?? `null`);
     return e && typeof e.code == `string` && typeof e.at == `number`
       ? { code: e.code, at: e.at }
       : null;
@@ -304,13 +304,13 @@ function Ee() {
 }
 function U(e) {
   try {
-    e ? localStorage.setItem(D, JSON.stringify(e)) : localStorage.removeItem(D);
+    e ? localStorage.setItem(partyKey, JSON.stringify(e)) : localStorage.removeItem(partyKey);
   } catch {}
 }
 var W = d.ads.kind === `off` ? `off` : d.ads.kind,
   G = () => W !== `poki` && ne(s.profile),
   De = () => G() || W !== `off`;
-function Oe(e, t, n = `UNLOCK`, r = `WATCH AD`) {
+function watchAdButton(e, t, n = `UNLOCK`, r = `WATCH AD`) {
   if (G()) return g(n, e, t);
   let i = g(r, e, t);
   return (i.prepend(b(`play`)), i);
@@ -335,7 +335,7 @@ async function K() {
   let e = Ae(),
     t = performance.now();
   try {
-    return W === `fake` ? await Me() : await d.ads.rewarded();
+    return W === `fake` ? await fakeAdOverlay() : await d.ads.rewarded();
   } finally {
     (e(), x(`reward`), x(`rewardS`, Math.round((performance.now() - t) / 1e3)));
   }

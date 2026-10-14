@@ -11,7 +11,7 @@ import {
   xt as s,
   yr as c,
 } from "./three.core-DVWDmH0S.js";
-import { a as l } from "./toon-CycGToy9.js";
+import { a as toonMaterial } from "./toon-CycGToy9.js";
 import "./tuning-D4mSK766.js";
 import { u } from "./palette-DQTkVEn_.js";
 import { J as d, K as f, c as p } from "./table-W1plLavt.js";
@@ -46,7 +46,7 @@ var _ = 0.3,
   v = 0.3,
   y = (e) => e === m.GROUND || e === m.MANUAL,
   b = Math.PI / 2,
-  x = class {
+  GhostRig = class {
     off = 0;
     size = 0;
     off0 = 0;
@@ -112,7 +112,7 @@ function k(e, t, n) {
   let r = Math.hypot(n.x, n.z);
   return r > 0.5 ? n.set(n.x / r, 0, n.z / r) : n.set(0, 0, 1);
 }
-var A = class {
+var SkaterView = class {
   root = new n();
   squash = new n();
   body = new n();
@@ -122,11 +122,11 @@ var A = class {
   goofy;
   landPulse = 0;
   lastMode = -1;
-  turn = new x();
+  turn = new GhostRig();
   constructor(t) {
     this.goofy = t.stance === `goofy`;
     let i = t.c,
-      c = (e) => l({ color: u(e) }),
+      c = (e) => toonMaterial({ color: u(e) }),
       d = c(i.fur),
       f = c(i.accent),
       p = c(i.top),

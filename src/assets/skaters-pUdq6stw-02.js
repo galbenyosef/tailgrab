@@ -1,6 +1,6 @@
 // assets/skaters-pUdq6stw 02 — bottom
 // Lines 47-776 of readable/assets/skaters-pUdq6stw.pretty.js (statement-aligned).
-var R = [
+var proRoster = [
   L({
     id: 0,
     key: `tawny-hawk`,

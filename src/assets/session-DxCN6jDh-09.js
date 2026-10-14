@@ -279,7 +279,7 @@ function Ui(e, t, n, r) {
 }
 new TextEncoder();
 var Wi = new TextDecoder();
-function Gi(e) {
+function checkTape(e) {
   let t = new DataView(e.buffer, e.byteOffset, e.byteLength),
     n = 0,
     r = (t) => {

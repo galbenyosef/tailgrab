@@ -17,7 +17,7 @@ function of() {
     af
   );
 }
-var sf = class {
+var SkateLetters = class {
     group = new c();
     items = [];
     owned = [];
@@ -73,16 +73,16 @@ var sf = class {
         }
         (a.add(_), this.group.add(a), this.items.push({ root: a, base: e.y }));
       }),
-        Ba()
+        loadProps()
           .then((t) => {
             if (this.dead) return;
             let n = new Map(),
               r = (e = ``) => {
                 let t = n.get(e);
                 if (!t) {
-                  let r = E({ vertexColors: !0 });
+                  let r = toonMaterial({ vertexColors: !0 });
                   (e && r.color.set(e),
-                    D(r, { rim: 0.35, ao: !0 }),
+                    patchToon(r, { rim: 0.35, ao: !0 }),
                     n.set(e, r),
                     this.owned.push(r),
                     (t = r));
@@ -107,7 +107,7 @@ var sf = class {
                   n = (a.size ?? 1.1) / (Math.max(e.x, e.y, e.z) || 1);
                 (u.scale.setScalar(n), u.position.copy(t).multiplyScalar(-n));
               }
-              Ee(u, 1);
+              addOutlines(u, 1);
               let f = new c();
               (f.add(u),
                 n.root.remove(n.root.children[n.root.children.length - 1]),
@@ -148,7 +148,7 @@ var sf = class {
     e.kind === `stash`
       ? { x: e.x, y: e.y, z: e.z, prop: Xe.stash, size: 1.1 }
       : { x: e.x, y: e.y, z: e.z, prop: Xe.deck, size: 1.3 },
-  df = class {
+  Collectibles = class {
     layer = null;
     day = -1;
     drops = [];
@@ -167,7 +167,7 @@ var sf = class {
           (this.drops = this.coins ? En(t) : []),
           this.layer?.dispose());
         let e = [...this.drops.map(lf), ...this.finds.map(uf)];
-        ((this.layer = e.length ? new sf(e) : null),
+        ((this.layer = e.length ? new SkateLetters(e) : null),
           this.layer && this.add(this.layer));
       }
       if (!this.layer) return;
@@ -195,7 +195,7 @@ function pf(e, t, n, r) {
     o = i ? (-ff.y * 0.5 + 0.5) * innerHeight : innerHeight / 2;
   return new DOMRect(a - 20, o - 20, 40, 40);
 }
-var mf = class {
+var CoinChip = class {
     el = j(`div`, `coin-chip off`);
     ico = B(`coin`, `coin-ico`);
     n = j(`span`, `coin-n`);
@@ -234,7 +234,7 @@ var mf = class {
     }
   },
   hf = 4500,
-  gf = class {
+  NowPlaying = class {
     el = j(`div`, `now-playing`);
     text = j(`span`, `np-text`);
     timer = 0;

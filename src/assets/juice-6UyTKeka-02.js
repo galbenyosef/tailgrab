@@ -69,7 +69,7 @@ function Ae(e) {
   }
   return t;
 }
-var U = {
+var hairStyles = {
     "tawny-hawk": `teal`,
     "bob-burnquack": `bubblegum`,
     "rodney-mullet": `sky`,
@@ -105,9 +105,9 @@ var U = {
   je = null;
 function Me(e) {
   return `key` in e
-    ? V[U[e.key] ?? Ae(e.look)]
+    ? V[hairStyles[e.key] ?? Ae(e.look)]
     : ((je ??= new Map(
-        [...T, ...ie].flatMap((e) => (U[e.key] ? [[u(e.look), U[e.key]]] : [])),
+        [...T, ...ie].flatMap((e) => (hairStyles[e.key] ? [[u(e.look), hairStyles[e.key]]] : [])),
       )),
       V[je.get(u(e)) ?? Ae(e)]);
 }
@@ -117,12 +117,12 @@ function Ne(e, t) {
 }
 var Pe = `/`.replace(/\/?$/, `/`),
   Fe = (e) => C.test(e),
-  Ie = (e) => `${Pe}skaters/portraits/${e}.png`;
+  portraitUrlFor = (e) => `${Pe}skaters/portraits/${e}.png`;
 function Le(e, t = ``) {
   let n = new Image();
   ((n.className = `species-shadow ${t}`), (n.alt = ``), (n.decoding = `async`));
   let r = T.find((t) => t.species === e);
-  return (r && (n.src = Ie(r.key)), n);
+  return (r && (n.src = portraitUrlFor(r.key)), n);
 }
 function Re(e, t = ``, n = !1) {
   let r = `key` in e ? e.look : e,
@@ -134,7 +134,7 @@ function Re(e, t = ``, n = !1) {
     (a.decoding = `async`),
     (a.onload = () => i.classList.add(`has-img`)),
     `key` in e
-      ? (a.src = Ie(e.key))
+      ? (a.src = portraitUrlFor(e.key))
       : ue(e).then((e) => {
           e && (a.src = e);
         }),

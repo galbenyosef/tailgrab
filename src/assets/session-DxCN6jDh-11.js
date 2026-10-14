@@ -36,7 +36,7 @@ async function ia(e, t) {
     dispose: () => r.removeFromParent(),
   };
 }
-var aa = [
+var riddle = [
     {
       secret: `saci`,
       park: `schoolyard`,
@@ -155,11 +155,11 @@ var aa = [
       color: `#EE2A2A`,
     },
   ],
-  oa = (e) => aa.filter((t) => t.park === e && xn(t.secret)),
+  oa = (e) => riddle.filter((t) => t.park === e && xn(t.secret)),
   sa = null,
   ca = 0.01,
   la = 0.04,
-  ua = class {
+  SeatTags = class {
     group = new i();
     tags = [];
     pxPerM;
@@ -173,7 +173,7 @@ var aa = [
           (e.height = Math.round(t.h * this.pxPerM)));
         let r = new l(e);
         r.colorSpace = a;
-        let i = m({
+        let i = toonMaterial({
             map: r,
             transparent: !0,
             depthWrite: !1,
@@ -329,7 +329,7 @@ function ga(e, t, n = null) {
       view: r,
       sk: t,
       frame: qt(),
-      anim: new ta(t),
+      anim: new SampleRing(t),
       sid: e,
       lastMode: -1,
       ring: ma(t.color, !1),

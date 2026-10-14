@@ -3,7 +3,7 @@
 var xm = 6,
   Sm = new T(),
   Cm = (e, t) => (t >= 1 ? String(e) : e.toFixed(t >= 0.1 ? 1 : 2)),
-  wm = class {
+  BuilderHud = class {
     root;
     palette;
     inspector;

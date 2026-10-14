@@ -172,7 +172,7 @@ function ut(e, n) {
     `#FFFFFF`,
   ),
     (lt ??= new t({ color: `#FF3B4E`, fog: !1 })));
-  let i = new z(0),
+  let i = new ParkBuilder(0),
     a = 1.6 * e.s,
     o = [
       [a, 0, 0],

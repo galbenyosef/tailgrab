@@ -1,7 +1,7 @@
 // verify-rename.mjs — apply rename-map.json to a slice's readable range and
 // require an exact reproduction of the committed slice, then prove the rename
-// layer kept every reference and binding intact across the chunk. AELORIA —
-// adapted from the fleet precedent (zombie-game-made-by-claude / taipei-rush-tokyo).
+// layer kept every reference and binding intact across the chunk. TAILGRAB —
+// adapted from the fleet precedent (aeloria / zombie-game-made-by-claude / taipei-rush-tokyo).
 //
 //   node tools/verify-rename.mjs <slice-file> [<slice-file> …]
 //   node tools/verify-rename.mjs --all

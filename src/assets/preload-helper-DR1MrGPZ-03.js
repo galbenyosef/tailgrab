@@ -1,11 +1,11 @@
 // assets/preload-helper-DR1MrGPZ 03 — math
 // Lines 684-1033 of readable/assets/preload-helper-DR1MrGPZ.pretty.js (statement-aligned).
-function we(e) {
+function checkSingleTerrain(e) {
   if (Ce.has(e.pieces)) return Ce.get(e.pieces);
   let t = e.pieces.filter((e) => e.kind === `terrain`);
   if (t.length > 1) throw Error(`${e.id}: one terrain per park`);
   let n = t.length
-    ? xe(
+    ? checkTerrain(
         t[0],
         e.pieces.filter((e) => e.kind === `floor`),
       )
@@ -28,7 +28,7 @@ function Oe() {
 }
 var ke = Oe(),
   Ae = 2,
-  je = class {
+  CopingGrid = class {
     segs;
     grid = new Map();
     stamp;
@@ -230,7 +230,7 @@ var ze = {
   Ue = new WeakMap();
 function We(e) {
   let t = Ue.get(e);
-  return (t || Ue.set(e, (t = nt(e))), t);
+  return (t || Ue.set(e, (t = checkPosts(e))), t);
 }
 var Ge = new WeakMap();
 function Ke(e) {
