@@ -1,0 +1,147 @@
+html {
+  font-size: clamp(8.5px, min(0.78125vw, 1.38889dvh), 20px);
+}
+@media (orientation: portrait) {
+  html {
+    font-size: clamp(8.4px, min(2.5vw, 1.16279dvh), 16px);
+  }
+}
+html,
+body {
+  background: #ffe3ec;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+.boot {
+  z-index: 50;
+  color: #fff;
+  grid-template-columns: min(50rem, 42vw);
+  place-content: center start;
+  justify-items: center;
+  gap: 2.2rem;
+  padding-left: 7vw;
+  font:
+    700 1.8rem "Baloo 2",
+    system-ui,
+    sans-serif;
+  display: grid;
+  position: fixed;
+  inset: 0;
+}
+.boot:before {
+  content: "";
+  z-index: -1;
+  background: linear-gradient(#9d86da, #e9a3bd);
+  transition: opacity 0.45s;
+  position: absolute;
+  inset: 0;
+}
+.boot-art {
+  z-index: -1;
+  transition: opacity 0.45s;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.boot-art img {
+  object-fit: cover;
+  object-position: 70% 35%;
+  width: 100%;
+  height: 100%;
+  animation: 14s cubic-bezier(0.2, 0.6, 0.3, 1) both boot-push;
+  display: block;
+}
+.boot-art:after {
+  content: "";
+  background: linear-gradient(100deg, #22181c59, #22181c14 38%, #22181c00 55%);
+  position: absolute;
+  inset: 0;
+}
+@keyframes boot-push {
+  0% {
+    transform: scale(1.1);
+  }
+}
+.boot-title {
+  display: contents;
+}
+.boot:has(.boot-noscript) .boot-bar {
+  display: none;
+}
+.boot:has(.boot-noscript) .boot-msg:not(.boot-noscript) {
+  display: none;
+}
+.boot-logo {
+  filter: drop-shadow(0.3rem 0 #fff) drop-shadow(-0.3rem 0 #fff)
+    drop-shadow(0 0.3rem #fff) drop-shadow(0 -0.3rem #fff)
+    drop-shadow(0 0.8rem #22181c40);
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.6rem;
+  display: block;
+  transform: rotate(-4deg);
+}
+.boot-bar {
+  background: #fff;
+  border-radius: 99rem;
+  width: min(36rem, 70vw);
+  height: 2.2rem;
+  transition: opacity 0.2s;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 0.4rem #22181c,
+    0 0.5rem 0 0.4rem #22181c;
+}
+.boot-fill {
+  background: repeating-linear-gradient(
+    -45deg,
+    #feb82a 0 1.4rem,
+    #ffd35e 1.4rem 2.8rem
+  );
+  width: 0;
+  height: 100%;
+  transition: width 0.25s;
+}
+.boot-msg {
+  text-align: center;
+  -webkit-text-stroke: 0.5rem #22181c;
+  paint-order: stroke fill;
+  padding: 0 2.4rem;
+  font-size: 2rem;
+  transition: opacity 0.2s;
+}
+.boot.gone {
+  pointer-events: none;
+}
+.boot.gone:before,
+.boot.gone .boot-art,
+.boot.gone .boot-bar,
+.boot.gone .boot-msg {
+  opacity: 0;
+}
+.boot.fade {
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+@media (orientation: portrait) {
+  .boot {
+    grid-template-columns: min(46rem, 84vw);
+    place-content: end center;
+    padding: 0 0 9vh;
+  }
+  .boot-art img {
+    object-position: 70% 50%;
+  }
+  .boot-art:after {
+    background: linear-gradient(#22181c00 58%, #22181c80);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .boot-art img {
+    animation: none;
+  }
+}
+.reduce-motion .boot-art img {
+  animation: none;
+}

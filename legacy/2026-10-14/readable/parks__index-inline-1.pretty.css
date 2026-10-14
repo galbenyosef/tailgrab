@@ -1,0 +1,22 @@
+html,
+body {
+  background: #ffe3ec;
+  height: 100%;
+  margin: 0;
+  font-family: "Baloo 2", system-ui, sans-serif;
+  overflow: hidden;
+}
+canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+#hud {
+  color: #3b2c4f;
+  pointer-events: none;
+  text-shadow: 0 1px #fff8;
+  font-size: 13px;
+  position: fixed;
+  bottom: 10px;
+  left: 12px;
+}

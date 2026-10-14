@@ -1,0 +1,959 @@
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = [
+      "assets/lens-BwVvQcWW.js",
+      "assets/lens-Csl3PMnC.js",
+      "assets/three.core-DVWDmH0S.js",
+    ]),
+) => i.map((i) => d[i]);
+import {
+  Bt as e,
+  It as t,
+  L as n,
+  Rt as r,
+  St as i,
+  U as a,
+  Un as o,
+  V as s,
+  Vn as c,
+  Vt as l,
+  Wn as u,
+  Zn as d,
+  bt as ee,
+  c as f,
+  d as p,
+  h as m,
+  k as te,
+  l as h,
+  q as ne,
+  vr as re,
+  xt as ie,
+  yr as g,
+} from "./three.core-DVWDmH0S.js";
+import { c as ae, r as _, s as v } from "./toon-CycGToy9.js";
+import { i as y, k as oe, n as b, t as se } from "./preload-helper-DR1MrGPZ.js";
+import {
+  c as ce,
+  i as le,
+  l as ue,
+  s as de,
+  t as fe,
+} from "./palette-DQTkVEn_.js";
+import "./outline-BufNikL2.js";
+var x = [`hills`, `peaks`, `mesa`, `pines`, `skyline`, `coast`],
+  S = [
+    `ferris`,
+    `turbines`,
+    `mast`,
+    `balloons`,
+    `blimp`,
+    `sign`,
+    `lighthouse`,
+    `boats`,
+  ],
+  C = [`#B6E6A6`, `#A3DB9A`],
+  w = 4e3,
+  pe = 1e3,
+  T = { sky: 0.1, stars: 0.2, apron: 0.3, water: 0.4, far: 0.5 },
+  E = 1600,
+  D = 1800,
+  me = {
+    plaza: { pool: x, face: -20 },
+    warehouse: { pool: [`skyline`, `peaks`, `mesa`, `hills`], face: -40 },
+    schoolyard: { pool: [`hills`, `pines`, `peaks`, `skyline`], face: -38 },
+    pier: { pool: [`coast`], face: -41, sea: 90 },
+    mall: { pool: [`skyline`, `peaks`, `coast`], face: -41 },
+    city: { pool: [`peaks`, `hills`, `coast`, `pines`], face: -150 },
+    hangar: { pool: [`mesa`, `hills`, `pines`, `peaks`], face: 133 },
+    beach: { pool: [`coast`], face: -139, sea: 90 },
+    bridge: { pool: [`skyline`, `coast`, `peaks`], face: -142 },
+  };
+function O(e) {
+  return me[e] ?? { pool: x };
+}
+function he(e) {
+  let t = O(e).pool;
+  return {
+    theme: t[b(`scenery`, e) % t.length],
+    seed: b(`scenery-seed`, e) % 1e3,
+  };
+}
+function ge(e, t, n) {
+  if (!t.length) return null;
+  let r = t.length;
+  return t[(((n + b(`scenery-day`, e)) % r) + r) % r];
+}
+function k(e) {
+  if (!e) return null;
+  if (e === `off`) return `off`;
+  let t = /^([a-z]+):(\d+)(?:\+([a-z,]*))?$/.exec(e);
+  if (!t || !x.includes(t[1])) return null;
+  let n = { theme: t[1], seed: Number(t[2]) };
+  if (t[3] !== void 0) {
+    let e = t[3] ? t[3].split(`,`) : [];
+    if (!e.every((e) => S.includes(e))) return null;
+    n.marks = e;
+  }
+  return n;
+}
+function _e(e) {
+  return `${e.theme}:${e.seed}${e.marks ? `+${e.marks.join(`,`)}` : ``}`;
+}
+function ve(e, t) {
+  let n = oe(e),
+    r;
+  if (n) r = { ...n.rect };
+  else {
+    r = { x0: 1 / 0, x1: -1 / 0, z0: 1 / 0, z1: -1 / 0 };
+    for (let t of e.pieces)
+      t.kind === `floor` &&
+        ((r.x0 = Math.min(r.x0, t.x - t.w / 2)),
+        (r.x1 = Math.max(r.x1, t.x + t.w / 2)),
+        (r.z0 = Math.min(r.z0, t.z - t.d / 2)),
+        (r.z1 = Math.max(r.z1, t.z + t.d / 2)));
+    if (!(r.x0 < r.x1)) {
+      let t = e.half;
+      r = { x0: -t, x1: t, z0: -t, z1: t };
+    }
+  }
+  let i = 0;
+  for (let t of e.pieces)
+    t.kind === `wall` && (i = Math.max(i, (t.y ?? 0) + t.h));
+  let a = n
+      ? (e, t) =>
+          n.y(
+            Math.min(Math.max(e, r.x0), r.x1),
+            Math.min(Math.max(t, r.z0), r.z1),
+          ) - 0.03
+      : () => y,
+    o = y;
+  if (n) {
+    for (let e = r.x0; e <= r.x1; e += 4)
+      o = Math.min(o, a(e, r.z0), a(e, r.z1));
+    for (let e = r.z0; e <= r.z1; e += 4)
+      o = Math.min(o, a(r.x0, e), a(r.x1, e));
+  }
+  let s = (r.x0 + r.x1) / 2,
+    c = (r.z0 + r.z1) / 2;
+  return {
+    id: e.id,
+    rect: r,
+    cx: s,
+    cz: c,
+    diag: Math.hypot(r.x1 - s, r.z1 - c),
+    wallH: i,
+    edgeY: a,
+    floorY: o - 0.05,
+    terrain: !!n,
+    baked: t.baked,
+    tiled: t.tiled,
+  };
+}
+function ye(e, t, n) {
+  return Math.max(e.x0 - t, t - e.x1, e.z0 - n, n - e.z1);
+}
+var A = Math.PI / 180,
+  j = (e) => Math.sin(e * A),
+  M = (e) => -Math.cos(e * A);
+function N(e, t) {
+  let n = ((((e - t) % 360) + 540) % 360) - 180;
+  return n === -180 ? 180 : n;
+}
+function P(e, t, n) {
+  let r = j(t),
+    i = M(t),
+    a = (e.rect.x1 - e.rect.x0) / 2,
+    o = (e.rect.z1 - e.rect.z0) / 2,
+    s = Math.min(
+      Math.abs(r) > 1e-6 ? (n + a) / Math.abs(r) : 1 / 0,
+      Math.abs(i) > 1e-6 ? (n + o) / Math.abs(i) : 1 / 0,
+    );
+  return { x: e.cx + r * s, z: e.cz + i * s, t: s };
+}
+function be(e, t) {
+  let n =
+    0.5 +
+    0.25 * Math.sin(e * 0.061 + 1.7) * Math.cos(t * 0.047 - 0.3) +
+    0.25 * Math.sin((e + t) * 0.023);
+  return F(C[0], C[1], Math.max(0, Math.min(1, n)));
+}
+function F(e, t, n) {
+  let r = parseInt(e.slice(1), 16),
+    i = parseInt(t.slice(1), 16),
+    a = 0;
+  for (let e of [16, 8, 0]) {
+    let t = (r >> e) & 255,
+      o = (i >> e) & 255;
+    a |= Math.round(t + (o - t) * n) << e;
+  }
+  return `#${a.toString(16).padStart(6, `0`).toUpperCase()}`;
+}
+function xe(e, t) {
+  let n = parseInt(e.slice(1), 16),
+    r = 0;
+  for (let e of [16, 8, 0])
+    r |= Math.min(255, Math.round(((n >> e) & 255) * t)) << e;
+  return `#${r.toString(16).padStart(6, `0`).toUpperCase()}`;
+}
+function Se(e, t) {
+  if (e === `mesa`) return { rho: [1, 0.93, 0.86, 0.8], y: [0, 0.42, 0.84, 1] };
+  let n = [],
+    r = [];
+  for (let i = 0; i < t; i++) {
+    let a = i / t;
+    e === `peak`
+      ? (n.push(1 - a), r.push(a ** 0.85))
+      : (n.push(Math.cos((a * Math.PI) / 2)),
+        r.push(Math.sin((a * Math.PI) / 2)));
+  }
+  return { rho: n, y: r };
+}
+function Ce(e, t, n) {
+  let r = Math.cos(e.yaw),
+    i = Math.sin(e.yaw);
+  return { x: e.x + t * r + n * i, z: e.z - t * i + n * r };
+}
+function we(e, t, n) {
+  let r = t - e.x,
+    i = n - e.z,
+    a = Math.cos(e.yaw),
+    o = Math.sin(e.yaw),
+    s = r * a - i * o,
+    c = r * o + i * a,
+    l = Math.hypot(s / e.rx, c / e.rz);
+  return l >= 1
+    ? -1
+    : e.shape === `peak`
+      ? e.h * (1 - l) ** 0.85
+      : e.shape === `mesa`
+        ? l < 0.8
+          ? e.h
+          : e.h * (1 - (l - 0.8) / 0.2)
+        : e.h * Math.sqrt(1 - l * l);
+}
+function Te(e, t) {
+  let n = j(t.bearing),
+    r = M(t.bearing),
+    i = P(e, t.bearing, t.d).t,
+    a = (e) => t.bend * (e / 100) ** 2 + t.wave * Math.sin(e * t.k + t.phase);
+  return {
+    s(t, o) {
+      let s = t - e.cx,
+        c = o - e.cz,
+        l = -s * r + c * n;
+      return s * n + c * r - (i + a(l));
+    },
+    at(t, o) {
+      let s = i + a(t) + o;
+      return { x: e.cx + n * s - r * t, z: e.cz + r * s + n * t };
+    },
+    latMax: t.bend > 0 ? Math.min(w, 100 * Math.sqrt((w - i) / t.bend)) : w,
+  };
+}
+var Ee = [36, 44, 54, 70, 95, 135, 200, 300, 480, 800, 1400, 2400, w];
+function De(e, t) {
+  return Math.max(8, (t - e) * 0.9);
+}
+function Oe(e) {
+  return e.seg * (2 * e.rings - 1) + (e.sand ? e.seg * 2 : 0);
+}
+function ke(e) {
+  return (e.elev.length - 1) * 4;
+}
+function Ae(e) {
+  return e.tiers * 10 + (e.antenna ? 4 : 0);
+}
+function je(e) {
+  return e.puffs.length * 12;
+}
+var Me = [0, 3, 8, 18, 40, 90, 200, 450, 1e3, 2200, w],
+  I = { fog: [85, 210], tod: `day`, slab: 4 };
+function L(...e) {
+  return e.map((e) => {
+    let t = k(e);
+    if (!t || t === `off`) throw Error(`parkLook: not a scenery pin: ${e}`);
+    return t;
+  });
+}
+var Ne = {
+  plaza: { slab: 5, scenery: L(`hills:1`, `peaks:1`, `skyline:1`) },
+  warehouse: {
+    slab: 5,
+    scenery: L(
+      `skyline:1`,
+      `peaks:1`,
+      `mesa:1`,
+      `hills:1`,
+      `skyline:2`,
+      `peaks:2`,
+    ),
+  },
+  schoolyard: {
+    tod: `morning`,
+    scenery: L(
+      `pines:2`,
+      `hills:2`,
+      `hills:1`,
+      `pines:1`,
+      `peaks:1`,
+      `skyline:1`,
+    ),
+  },
+  pier: {
+    tod: `evening`,
+    scenery: L(
+      `coast:2`,
+      `coast:1`,
+      `coast:3`,
+      `coast:4`,
+      `coast:5`,
+      `coast:6`,
+    ),
+  },
+  mall: { tod: `night`, scenery: L(`skyline:2`, `skyline:1`) },
+  city: { fog: [110, 300], tod: `evening`, scenery: L(`peaks:2`, `peaks:1`) },
+  hangar: {
+    tod: `morning`,
+    slab: 5,
+    scenery: L(`peaks:1`, `mesa:2`, `hills:1`, `pines:1`, `hills:2`),
+  },
+  beach: {
+    tod: `evening`,
+    scenery: L(
+      `coast:3`,
+      `coast:2`,
+      `coast:4`,
+      `coast:5`,
+      `coast:1`,
+      `coast:6`,
+    ),
+  },
+  bridge: {
+    tod: `night`,
+    scenery: L(
+      `coast:2`,
+      `skyline:2`,
+      `skyline:1`,
+      `peaks:1`,
+      `peaks:2`,
+      `coast:1`,
+    ),
+  },
+};
+function Pe(e) {
+  return { ...I, scenery: [he(e)], ...Ne[e] };
+}
+var R = [`morning`, `day`, `evening`, `night`],
+  Fe = {
+    morning: {
+      sunDir: [0.75, 0.55, -0.35],
+      sun: `#FFE3A6`,
+      sunI: 2,
+      hemiSky: `#EEF3FF`,
+      hemiGround: `#A9A2EA`,
+      hemiI: 1.05,
+      skyTop: `#86C4F2`,
+      skyHorizon: `#FFE9D6`,
+      skyBottom: `#FBEDE4`,
+      disc: `#FFE9C4`,
+      fog: `#F6E6DE`,
+      haze: 0.8,
+      rimShade: [0.62, 0.6, 0.95],
+      rimSun: [1, 0.88, 0.7],
+      lamps: 0,
+      stars: 0,
+    },
+    day: {
+      sunDir: [-0.45, 0.8, -0.35],
+      sun: ue,
+      sunI: 2.1,
+      hemiSky: `#FFFFFF`,
+      hemiGround: le,
+      hemiI: 1.18,
+      skyTop: ce,
+      skyHorizon: de,
+      skyBottom: `#FBEFF5`,
+      disc: `#FFF6D6`,
+      fog: fe,
+      haze: 1,
+      rimShade: [0.62, 0.55, 0.95],
+      rimSun: [1, 0.86, 0.72],
+      lamps: 0,
+      stars: 0,
+    },
+    evening: {
+      sunDir: [-0.7, 0.52, 0.45],
+      sun: `#FFC48F`,
+      sunI: 2.2,
+      hemiSky: `#D9C4F0`,
+      hemiGround: `#6A55B8`,
+      hemiI: 0.8,
+      skyTop: `#6F6FC9`,
+      skyHorizon: `#FFB38A`,
+      skyBottom: `#F6C7B8`,
+      disc: `#FFD08A`,
+      fog: `#F4C1B0`,
+      haze: 1,
+      rimShade: [0.55, 0.42, 0.9],
+      rimSun: [1, 0.68, 0.48],
+      lamps: 0.5,
+      stars: 0,
+    },
+    night: {
+      sunDir: [0.3, 0.85, 0.4],
+      sun: `#A9BCFF`,
+      sunI: 0.9,
+      hemiSky: `#7D83E0`,
+      hemiGround: `#2B2250`,
+      hemiI: 0.55,
+      skyTop: `#1B1E4A`,
+      skyHorizon: `#4A3A7A`,
+      skyBottom: `#2A2350`,
+      disc: `#DCE6FF`,
+      fog: `#3A3266`,
+      haze: 0.8,
+      rimShade: [0.25, 0.28, 0.55],
+      rimSun: [0.35, 0.4, 0.65],
+      lamps: 1,
+      stars: 1,
+    },
+  },
+  Ie = `#FFD9A0`,
+  Le = `#FFA850`,
+  Re = 0.5,
+  ze = 3.55,
+  z = 8,
+  B = 0,
+  V = null;
+function H(e) {
+  e.onBeforeCompile = (e) => {
+    e.fragmentShader = e.fragmentShader.replace(
+      `#include <fog_fragment>`,
+      `#ifdef USE_FOG
+  gl_FragColor.rgb *= 1.0 - smoothstep(fogNear, fogFar, vFogDepth);
+#endif`,
+    );
+  };
+}
+function Be() {
+  if (V) return V;
+  let e = document.createElement(`canvas`);
+  e.width = e.height = 64;
+  let t = e.getContext(`2d`),
+    n = t.createRadialGradient(32, 32, 0, 32, 32, 32);
+  (n.addColorStop(0, `rgba(255,255,255,1)`),
+    n.addColorStop(0.3, `rgba(255,255,255,0.5)`),
+    n.addColorStop(1, `rgba(255,255,255,0)`),
+    (t.fillStyle = n),
+    t.fillRect(0, 0, 64, 64));
+  let r = { map: new p(e), transparent: !0, depthWrite: !1, blending: 2 };
+  return (
+    (V = {
+      halo: new l({ ...r, color: Ie, size: 2.6, sizeAttenuation: !0 }),
+      pool: new i({
+        ...r,
+        color: Le,
+        polygonOffset: !0,
+        polygonOffsetFactor: -2,
+        polygonOffsetUnits: -2,
+      }),
+    }),
+    H(V.halo),
+    H(V.pool),
+    U(),
+    V
+  );
+}
+function U() {
+  ((_.uLampGlow.value = B),
+    V &&
+      ((V.halo.opacity = B),
+      (V.pool.opacity = B * Re),
+      (V.halo.visible = V.pool.visible = B > 0)));
+}
+function Ve(e) {
+  ((B = e), U());
+}
+function He(t) {
+  let n = new s();
+  if (((n.name = `lamp-glow`), !t.length)) return { group: n, dispose() {} };
+  let { halo: i, pool: a } = Be(),
+    o = new Float32Array(t.length * 3);
+  t.forEach((e, t) => o.set([e.x, e.y + ze * e.s, e.z], t * 3));
+  let c = new h();
+  c.setAttribute(`position`, new f(o, 3));
+  let l = new e(c, i);
+  l.name = `lamp-glow:halo`;
+  let u = new r(z, z).rotateX(-Math.PI / 2),
+    d = new ne(u, a, t.length);
+  d.name = `lamp-glow:pool`;
+  let p = new ee();
+  return (
+    t.forEach((e, t) =>
+      d.setMatrixAt(
+        t,
+        p.makeScale(e.s, 1, e.s).setPosition(e.x, e.y + 0.03, e.z),
+      ),
+    ),
+    d.computeBoundingSphere(),
+    n.add(l, d),
+    {
+      group: n,
+      dispose() {
+        (n.removeFromParent(), c.dispose(), u.dispose(), d.dispose());
+      },
+    }
+  );
+}
+var W = {
+    lens: { barrel: 0.55, chroma: 1.4, tape: 1, vignette: 0.55 },
+    cam: {
+      tune: {
+        dist: 0.6,
+        height: 0.42,
+        lookY: 0.62,
+        floor: 0.35,
+        minDist: 1.3,
+        fadeAt: 1.4,
+      },
+      fov: 86,
+    },
+  },
+  G = typeof location < `u` && new URLSearchParams(location.search).has(`vx`),
+  K = {
+    uFog: { value: new m() },
+    uHorizon: { value: new m() },
+    uSkyTop: { value: new m() },
+    uSunDir: { value: new g(0, 1, 0) },
+    uSunTint: { value: new m(1, 1, 1) },
+    uShadeTint: { value: new m(0.8, 0.8, 0.8) },
+    uDisc: { value: new m() },
+    uLamps: { value: 0 },
+    uHaze: { value: 1 },
+    uTime: { value: 0 },
+    uFogNear: { value: 85 },
+    uFogFar: { value: 210 },
+    uFogStretch: { value: 3 },
+    uHazeMax: { value: 0.6 },
+    uMoon: { value: 0 },
+    uMoonDir: { value: new g(0, 0.4, -1).normalize() },
+    uMoonPhase: { value: 0.5 },
+  },
+  q = !1,
+  J = 0,
+  Y = !1,
+  Ue = new m(),
+  X = new m();
+function We(e, t, n) {
+  let r = K;
+  (r.uFog.value.set(e.fog),
+    r.uHorizon.value.set(e.skyHorizon),
+    r.uSkyTop.value.set(e.skyTop),
+    r.uSunDir.value.fromArray(e.sunDir).normalize(),
+    r.uDisc.value.set(e.disc),
+    X.set(e.hemiSky).multiplyScalar(e.hemiI * 0.68),
+    r.uShadeTint.value.copy(X),
+    r.uSunTint.value.copy(X).add(Ue.set(e.sun).multiplyScalar(e.sunI * 0.16)),
+    (r.uLamps.value = e.lamps),
+    (r.uHaze.value = 1 / e.haze),
+    (r.uFogNear.value = t),
+    (r.uFogFar.value = n),
+    (J = Math.max(e.stars, 0.6 * e.lamps)),
+    (r.uMoon.value = q ? J : 0));
+}
+function Ge(e) {
+  if (((q = !!e), e)) {
+    let t = (e.bearing * Math.PI) / 180,
+      n = (e.elev * Math.PI) / 180;
+    (K.uMoonDir.value.set(
+      Math.sin(t) * Math.cos(n),
+      Math.sin(n),
+      -Math.cos(t) * Math.cos(n),
+    ),
+      (K.uMoonPhase.value = e.phase));
+  }
+  K.uMoon.value = q ? J : 0;
+}
+function Ke(e) {
+  K.uFogStretch.value = e ? 1.4 : 3;
+}
+function qe(e) {
+  Y = e;
+}
+function Je() {
+  return Y;
+}
+var Z = {
+    low: {
+      pixelRatio: 1,
+      shadowSize: 512,
+      outlines: !1,
+      particles: 0.4,
+      drawDist: 240,
+      textures: !1,
+      liteScenery: !0,
+      skinFx: !1,
+      drain: !1,
+      worldShadows: !1,
+    },
+    med: {
+      pixelRatio: 1.5,
+      shadowSize: 1024,
+      outlines: !0,
+      particles: 0.7,
+      drawDist: 290,
+      textures: !0,
+      liteScenery: !1,
+      skinFx: !0,
+      drain: !0,
+      worldShadows: !0,
+    },
+    high: {
+      pixelRatio: 2,
+      shadowSize: 2048,
+      outlines: !0,
+      particles: 1,
+      drawDist: 340,
+      textures: !0,
+      liteScenery: !1,
+      skinFx: !0,
+      drain: !0,
+      worldShadows: !0,
+    },
+  },
+  Q = !0;
+function Ye(e) {
+  ((e.userData.worldCaster = !0), (e.castShadow = Q));
+}
+var Xe = class {
+    renderer;
+    scene = new o();
+    camera = new t(62, 1, 0.1, 1e3);
+    sun;
+    hemi;
+    sky;
+    stars;
+    sunDir = new g();
+    sunRight = new g();
+    sunUp = new g();
+    look = I;
+    todOverride = null;
+    tier = Z.high;
+    scale = 1;
+    box = new DOMRect();
+    lens = null;
+    lensLoad = Promise.resolve();
+    drainWarm = 0;
+    constructor(e, t = {}) {
+      let r = new URLSearchParams(location.search).get(`aa`) !== `0`;
+      ((this.renderer = new ae({
+        canvas: e,
+        antialias: r,
+        powerPreference: `high-performance`,
+        preserveDrawingBuffer: !!t.preserveDrawingBuffer,
+      })),
+        (this.renderer.outputColorSpace = c),
+        (this.renderer.toneMapping = 0),
+        (this.renderer.shadowMap.enabled = !0),
+        (this.renderer.shadowMap.type = 1),
+        (this.scene.fog = new n(16777215)),
+        (this.scene.background = new m()),
+        (this.hemi = new a()),
+        this.scene.add(this.hemi),
+        (this.sun = new te()),
+        (this.sun.castShadow = !0));
+      let i = this.sun.shadow.camera;
+      ((i.left = -14),
+        (i.right = 14),
+        (i.top = 14),
+        (i.bottom = -14),
+        (i.near = 1),
+        (i.far = 80),
+        (this.sun.shadow.bias = -6e-4),
+        (this.sun.shadow.normalBias = 0.03),
+        this.scene.add(this.sun, this.sun.target),
+        (this.sky = et(this.sunDir)),
+        (this.stars = tt()),
+        this.sky.add(this.stars),
+        this.scene.add(this.sky),
+        this.applyTier(this.tier),
+        this.resize(),
+        window.addEventListener(`resize`, () => this.resize()),
+        G && this.setLens(!0));
+    }
+    setLens(e) {
+      return e
+        ? this.lens
+          ? Promise.resolve()
+          : (this.lensLoad = se(
+              () =>
+                import(`./lens-BwVvQcWW.js`).then((e) => {
+                  ((this.lens = new e.Lens(W.lens)), this.resize());
+                }),
+              __vite__mapDeps([0, 1, 2]),
+            ))
+        : (this.lens?.dispose(), (this.lens = null), Promise.resolve());
+    }
+    drain(e) {
+      this.renderer.domElement.classList.toggle(
+        `drained`,
+        e && this.tier.drain,
+      );
+    }
+    precompile() {
+      this.renderer.compileAsync(this.scene, this.camera).catch(() => {});
+    }
+    warmDrain() {
+      this.drainWarm === 0 &&
+        this.tier.drain &&
+        (this.renderer.domElement.classList.add(`drain-warm`),
+        (this.drainWarm = 20));
+    }
+    get ready() {
+      return this.lensLoad;
+    }
+    applyTier(e) {
+      ((this.tier = e),
+        this.applyRatio(),
+        this.sun.shadow.mapSize.set(e.shadowSize, e.shadowSize),
+        this.sun.shadow.map?.dispose(),
+        (this.sun.shadow.map = null),
+        e.outlines
+          ? this.camera.layers.enable(1)
+          : this.camera.layers.disable(1),
+        (Q = e.worldShadows),
+        this.scene.traverse((e) => {
+          e.userData.worldCaster && (e.castShadow = Q);
+        }),
+        (v.uTex.value = +!!e.textures),
+        qe(e.liteScenery),
+        this.warmDrain(),
+        this.applyMood());
+    }
+    setScale(e) {
+      e !== this.scale && ((this.scale = e), this.applyRatio());
+    }
+    applyRatio() {
+      (this.renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio || 1, this.tier.pixelRatio) *
+          this.scale,
+      ),
+        this.lens && this.resize());
+    }
+    resize() {
+      let e = window.innerWidth,
+        t = window.innerHeight;
+      if (
+        (this.renderer.setSize(e, t, !1),
+        (this.box = this.renderer.domElement.getBoundingClientRect()),
+        (this.camera.aspect = e / t),
+        (this.camera.fov = e < t ? 72 : 62),
+        this.camera.updateProjectionMatrix(),
+        this.lens)
+      ) {
+        let e = this.renderer.getDrawingBufferSize(Qe);
+        this.lens.setSize(e.x, e.y);
+      }
+    }
+    setLook(e) {
+      ((this.look = e), (v.uSlab.value = e.slab ?? 4), this.applyMood());
+    }
+    setTodOverride(e) {
+      ((this.todOverride = e), this.applyMood());
+    }
+    applyMood() {
+      let e = Fe[this.todOverride ?? this.look.tod];
+      (this.hemi.color.set(e.hemiSky),
+        this.hemi.groundColor.set(e.hemiGround),
+        (this.hemi.intensity = e.hemiI),
+        this.sun.color.set(e.sun),
+        (this.sun.intensity = e.sunI));
+      let t = this.scene.fog;
+      (t.color.set(e.fog),
+        (t.near = this.look.fog[0] * e.haze),
+        (t.far = Math.min(this.look.fog[1] * e.haze, this.tier.drawDist - 10)),
+        this.scene.background.set(e.skyHorizon));
+      let n = this.sky.material.uniforms;
+      (n.top.value.set(e.skyTop),
+        n.horizon.value.set(e.skyHorizon),
+        n.bottom.value.set(e.skyBottom),
+        n.sunCol.value.set(e.disc),
+        this.sunDir.fromArray(e.sunDir).normalize(),
+        this.sunRight.crossVectors(Ze, this.sunDir).normalize(),
+        this.sunUp.crossVectors(this.sunDir, this.sunRight),
+        _.uRimShade.value.fromArray(e.rimShade),
+        _.uRimSun.value.fromArray(e.rimSun),
+        Ve(e.lamps),
+        We(e, t.near, t.far),
+        (this.stars.material.opacity = e.stars),
+        (this.stars.visible = e.stars > 0));
+    }
+    followShadow(e, t = 0, n = this.camera) {
+      let r = $e.copy(e);
+      if (t) {
+        (n.getWorldDirection($), ($.y = 0));
+        let e = $.length();
+        e > 0.1 && r.addScaledVector($, t / e);
+      }
+      let i = 28 / this.tier.shadowSize,
+        a = this.sunRight,
+        o = this.sunUp,
+        s = this.sunDir,
+        c = Math.round(r.dot(a) / i) * i,
+        l = Math.round(r.dot(o) / i) * i,
+        u = r.dot(s),
+        d = this.sun.target.position
+          .set(0, 0, 0)
+          .addScaledVector(a, c)
+          .addScaledVector(o, l)
+          .addScaledVector(s, u);
+      (this.sun.position.copy(d).addScaledVector(s, 40),
+        this.sky.position.copy(n.position));
+    }
+    render() {
+      (this.drainWarm > 0 &&
+        --this.drainWarm === 0 &&
+        ((this.drainWarm = -1),
+        this.renderer.domElement.classList.remove(`drain-warm`)),
+        this.lens
+          ? this.lens.render(this.renderer, this.scene, this.camera)
+          : this.renderer.render(this.scene, this.camera));
+    }
+  },
+  Ze = new g(0, 1, 0),
+  Qe = new re(),
+  $e = new g(),
+  $ = new g();
+function et(e) {
+  let t = new u({
+      side: 1,
+      depthWrite: !1,
+      fog: !1,
+      uniforms: {
+        top: { value: new m() },
+        horizon: { value: new m() },
+        bottom: { value: new m() },
+        sunDir: { value: e },
+        sunCol: { value: new m() },
+        uMoon: K.uMoon,
+        uMoonDir: K.uMoonDir,
+        uMoonPhase: K.uMoonPhase,
+      },
+      vertexShader: `
+      varying vec3 vDir;
+      void main() {
+        vDir = normalize(position);
+        vec4 p = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        gl_Position = p.xyww;
+      }`,
+      fragmentShader: `
+      uniform vec3 top, horizon, bottom, sunDir, sunCol, uMoonDir;
+      uniform float uMoon, uMoonPhase;
+      varying vec3 vDir;
+      void main() {
+        vec3 d = normalize(vDir);
+        float h = d.y;
+        vec3 c = h > 0.0 ? mix(horizon, top, pow(clamp(h, 0.0, 1.0), 0.55)) : mix(horizon, bottom, clamp(-h * 4.0, 0.0, 1.0));
+        float s = max(dot(d, normalize(sunDir)), 0.0);
+        // the scenery's moon takes over from the night's overhead glow
+        c += sunCol * (pow(s, 64.0) * 0.9 + pow(s, 6.0) * 0.18) * (1.0 - uMoon);
+        if (uMoon > 0.0) {
+          // a crescent: the disc less one pushed sideways by how new it is
+          const float R = 0.99926; // cos 2.2°
+          float m = dot(d, uMoonDir);
+          vec3 side = normalize(cross(uMoonDir, vec3(0.0, 1.0, 0.0)));
+          float cut = dot(d, normalize(uMoonDir + side * 0.045 * (1.0 - uMoonPhase)));
+          float aa = fwidth(m);
+          float disc = smoothstep(R - aa, R + aa, m) * (1.0 - smoothstep(R - aa, R + aa, cut));
+          c = mix(c, sunCol * 1.05, disc * uMoon);
+          c += sunCol * pow(max(m, 0.0), 900.0) * 0.18 * uMoon;
+        }
+        gl_FragColor = vec4(c, 1.0);
+        #include <colorspace_fragment>
+      }`,
+    }),
+    n = new ie(new d(300, 32, 16), t);
+  return ((n.renderOrder = T.sky), (n.frustumCulled = !1), n);
+}
+function tt() {
+  let t = new Float32Array(1260),
+    n = new Float32Array(1260),
+    r = 7,
+    i = () => ((r = (r * 16807) % 2147483647) - 1) / 2147483646;
+  for (let e = 0; e < 420; e++) {
+    let r = 0.06 + 0.94 * Math.sqrt(i()),
+      a = i() * Math.PI * 2,
+      o = Math.sqrt(1 - r * r);
+    (t.set([Math.cos(a) * o * 280, r * 280, Math.sin(a) * o * 280], e * 3),
+      n.fill(0.35 + 0.65 * i() ** 2, e * 3, e * 3 + 3));
+  }
+  let a = new h();
+  (a.setAttribute(`position`, new f(t, 3)),
+    a.setAttribute(`color`, new f(n, 3)));
+  let o = new l({
+    size: 2,
+    sizeAttenuation: !1,
+    vertexColors: !0,
+    fog: !1,
+    transparent: !1,
+    depthWrite: !1,
+    blending: 2,
+  });
+  ((o.onBeforeCompile = (e) => {
+    e.vertexShader = e.vertexShader.replace(
+      `#include <project_vertex>`,
+      `#include <project_vertex>
+  gl_Position.z = gl_Position.w;`,
+    );
+  }),
+    (o.customProgramCacheKey = () => `stars-far`));
+  let s = new e(a, o);
+  return ((s.frustumCulled = !1), (s.renderOrder = T.stars), s);
+}
+export {
+  we as A,
+  ve as B,
+  De as C,
+  ye as D,
+  M as E,
+  F,
+  xe as H,
+  P as I,
+  k as L,
+  Oe as M,
+  O as N,
+  _e as O,
+  be as P,
+  ge as R,
+  N as S,
+  j as T,
+  Ae as U,
+  Te as V,
+  pe as _,
+  K as a,
+  Me as b,
+  W as c,
+  R as d,
+  I as f,
+  E as g,
+  D as h,
+  Je as i,
+  Ce as j,
+  Se as k,
+  G as l,
+  Ee as m,
+  Z as n,
+  Ke as o,
+  Pe as p,
+  Ye as r,
+  Ge as s,
+  Xe as t,
+  He as u,
+  T as v,
+  je as w,
+  x,
+  S as y,
+  ke as z,
+};

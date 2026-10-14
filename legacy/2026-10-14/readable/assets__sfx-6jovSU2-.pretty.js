@@ -1,0 +1,1393 @@
+import { i as e } from "./prims-CECOBLSv.js";
+var t = `freeskater-settings-v1`,
+  n = {
+    name: ``,
+    skater: 0,
+    color: 0,
+    binds: {},
+    layout: `auto`,
+    layoutPicked: !1,
+    master: 0.8,
+    music: 0.5,
+    sfx: 0.8,
+    quality: `auto`,
+    timeOfDay: `auto`,
+    shake: !0,
+    bubbles: !0,
+    ping: !0,
+    showFps: !1,
+    reducedMotion: !1,
+    landingMarker: !0,
+    landingGlow: !1,
+    touchScale: 1,
+    touchOpacity: 0.85,
+    touchStick: `stay`,
+    leftHanded: !1,
+    haptics: !0,
+    tutorial: 0,
+    tips: 0,
+    airOut: !1,
+  };
+function r() {
+  try {
+    let e = localStorage.getItem(t);
+    if (!e) return { ...n };
+    let r = JSON.parse(e);
+    return (
+      r.seenHints && r.tutorial === void 0 && (r.tutorial = -1),
+      r.tips === void 0 &&
+        r.tutorial !== void 0 &&
+        ((r.tips =
+          r.tutorial === 4 ? 1 : r.tutorial >= 0 && r.tutorial <= 3 ? 0 : -1),
+        r.tutorial >= 3 && (r.tutorial = -1)),
+      (r.layout ??= `wasd`),
+      delete r.seenHints,
+      delete r.lastPlaza,
+      { ...n, ...r, binds: { ...(r.binds ?? {}) } }
+    );
+  } catch {
+    return { ...n };
+  }
+}
+var i = r(),
+  a = (() => {
+    try {
+      return !localStorage.getItem(t);
+    } catch {
+      return !0;
+    }
+  })();
+function o() {
+  try {
+    localStorage.setItem(t, JSON.stringify(i));
+  } catch {}
+}
+var s = [];
+function c(e) {
+  s.push(e);
+}
+function l() {
+  o();
+  for (let e of s) e();
+}
+var u = {
+    [e.RAIL]: { f: 1180, decay: 1.1 },
+    [e.COPING]: { f: 640, decay: 0.55 },
+  },
+  d = [1, 2.756, 5.404],
+  f = class {
+    ctx = null;
+    master;
+    sfx;
+    music;
+    dip;
+    noise;
+    brown;
+    roll = null;
+    grind = null;
+    rail = { on: !1, kind: -1, p: 1, sliding: !1 };
+    wind = null;
+    skid = null;
+    wallRoll = null;
+    lastPlay = new Map();
+    fall = 1;
+    slap = null;
+    track = null;
+    trackGain;
+    trackOn = !1;
+    unlocked = [];
+    sixSevenBuf = null;
+    paused = !1;
+    hidden = !1;
+    unlock() {
+      if (this.ctx) {
+        if (this.held()) return;
+        (this.ctx.state === `suspended` && this.ctx.resume(),
+          this.trackOn &&
+            this.track?.paused &&
+            this.track.play().catch(() => {}));
+        return;
+      }
+      let e = window.AudioContext ?? window.webkitAudioContext;
+      if (!e) return;
+      let t = new e();
+      this.ctx = t;
+      let n = t.createDynamicsCompressor();
+      ((n.threshold.value = -10),
+        (n.ratio.value = 8),
+        (n.attack.value = 0.003),
+        (n.release.value = 0.15),
+        (this.master = t.createGain()),
+        (this.sfx = t.createGain()),
+        (this.music = t.createGain()),
+        (this.dip = t.createGain()),
+        this.sfx.connect(this.master),
+        this.music.connect(this.dip).connect(this.master),
+        this.master.connect(n).connect(t.destination),
+        (this.noise = p(t, !1)),
+        (this.brown = p(t, !0)),
+        this.applyVolumes(),
+        this.startLoops(),
+        this.startTrack(t),
+        this.held() && t.suspend());
+      for (let e of this.unlocked.splice(0)) e();
+    }
+    onUnlock(e) {
+      this.ctx ? e() : this.unlocked.push(e);
+    }
+    pause(e) {
+      ((this.paused = e), this.hold());
+    }
+    hide(e) {
+      ((this.hidden = e), this.hold());
+    }
+    held() {
+      return this.paused || this.hidden;
+    }
+    hold() {
+      let e = this.held();
+      (this.track &&
+        this.trackOn &&
+        (e ? this.track.pause() : this.track.play().catch(() => {})),
+        this.ctx && (e ? this.ctx.suspend() : this.ctx.resume()));
+    }
+    playTrack(e, t) {
+      let n = this.track;
+      if (!n) return;
+      ((this.trackOn = !0), (this.trackGain.gain.value = t));
+      let r = new URL(e, document.baseURI).href;
+      (n.src === r ? (n.currentTime = 0) : (n.src = r),
+        this.held() || n.play().catch(() => {}));
+    }
+    stopTrack() {
+      ((this.trackOn = !1), this.track?.pause());
+    }
+    startTrack(e) {
+      let t = document.createElement(`audio`);
+      ((t.preload = `auto`),
+        (this.trackGain = e.createGain()),
+        e
+          .createMediaElementSource(t)
+          .connect(this.trackGain)
+          .connect(this.music),
+        (t.src = h()),
+        t.play().catch(() => {}),
+        (this.track = t));
+    }
+    applyVolumes() {
+      this.ctx &&
+        ((this.master.gain.value = i.master),
+        (this.sfx.gain.value = i.sfx),
+        (this.music.gain.value = i.music * 0.55));
+    }
+    startLoops() {
+      let e = this.ctx,
+        t = (t) => {
+          let n = e.createBufferSource();
+          return (
+            (n.buffer = t),
+            (n.loop = !0),
+            n.start(0, Math.random() * 1.5),
+            n
+          );
+        },
+        n = (t, n, r) => {
+          let i = e.createBiquadFilter();
+          return ((i.type = t), (i.frequency.value = n), (i.Q.value = r), i);
+        },
+        r = (t) => {
+          let n = e.createGain();
+          return ((n.gain.value = t), n);
+        };
+      {
+        let t = e.createBufferSource();
+        ((t.buffer = this.brown), (t.loop = !0));
+        let n = e.createBiquadFilter();
+        ((n.type = `lowpass`), (n.frequency.value = 500), (n.Q.value = 0.7));
+        let r = e.createGain();
+        ((r.gain.value = 0),
+          t.connect(n).connect(r).connect(this.sfx),
+          t.start(),
+          (this.roll = { src: t, filt: n, gain: r }));
+      }
+      {
+        let i = r(0.84);
+        i.connect(this.sfx);
+        let a = { filt: n(`bandpass`, 3800, 0.8), gain: r(0) };
+        t(this.noise).connect(a.filt).connect(a.gain).connect(i);
+        let o = {
+          lp: n(`lowpass`, 420, 0.9),
+          body: n(`peaking`, 260, 2),
+          gain: r(0),
+        };
+        ((o.body.gain.value = 0),
+          t(this.brown)
+            .connect(o.lp)
+            .connect(o.body)
+            .connect(o.gain)
+            .connect(i));
+        let s = r(0);
+        t(this.noise)
+          .connect(n(`highpass`, 400, 0.7))
+          .connect(s);
+        let c = d.map(() => {
+            let e = { filt: n(`bandpass`, 1e3, 38), gain: r(0) };
+            return (s.connect(e.filt).connect(e.gain).connect(i), e);
+          }),
+          l = [0, 1].map(() => {
+            let t = e.createOscillator();
+            ((t.type = `sine`), (t.frequency.value = 1e3), t.start());
+            let n = { osc: t, gain: r(0) };
+            return (t.connect(n.gain).connect(i), n);
+          });
+        this.grind = { bus: i, hiss: a, rumble: o, exc: s, modes: c, tones: l };
+      }
+      {
+        let i = n(`lowpass`, 400, 0.8),
+          a = n(`bandpass`, 1400, 0.8),
+          o = r(0.05),
+          s = r(1),
+          c = r(0);
+        (t(this.brown).connect(i).connect(s),
+          t(this.noise).connect(a).connect(o).connect(s),
+          s.connect(c).connect(this.slapBus()));
+        let l = t(m(e));
+        (l.connect(r(0.52)).connect(s.gain),
+          l.connect(r(180)).connect(i.frequency),
+          (this.wallRoll = {
+            gain: c,
+            lp: i,
+            bp: a,
+            grit: o,
+            rough: l,
+            on: !1,
+            pebble: 0,
+            stone: 0,
+          }));
+      }
+      {
+        let e = n(`bandpass`, 700, 0.8),
+          i = r(0);
+        (t(this.noise)
+          .connect(e)
+          .connect(n(`lowpass`, 2600, 0.6))
+          .connect(i)
+          .connect(this.sfx),
+          (this.wind = { filt: e, gain: i, rush: 0, last: -1, at: 0 }));
+      }
+      {
+        let i = r(0.6);
+        i.connect(this.sfx);
+        let a = m(e),
+          o = r(1),
+          s = { filt: n(`bandpass`, 1600, 0.6), gain: r(0), rough: t(a) };
+        (t(this.noise)
+          .connect(n(`highpass`, 400, 0.7))
+          .connect(s.filt)
+          .connect(n(`lowpass`, 3600, 0.6))
+          .connect(o)
+          .connect(s.gain)
+          .connect(i),
+          s.rough.connect(r(0.5)).connect(o.gain));
+        let c = e.createOscillator();
+        ((c.type = `sawtooth`), (c.frequency.value = 40), c.start());
+        let l = e.createWaveShaper(),
+          u = new Float32Array(1024);
+        for (let e = 0; e < 1024; e++) u[e] = (1 - e / 1023) ** 3;
+        l.curve = u;
+        let d = r(1);
+        c.connect(l)
+          .connect(n(`lowpass`, 110, 0.6))
+          .connect(d);
+        let f = t(a);
+        ((f.playbackRate.value = 1.3), f.connect(r(0.45)).connect(d.gain));
+        let p = r(5);
+        t(a).connect(p).connect(c.frequency);
+        let h = r(0.3),
+          g = { filt: n(`bandpass`, 1100, 0.7), gain: r(0) };
+        (t(this.noise)
+          .connect(g.filt)
+          .connect(n(`lowpass`, 3e3, 0.6))
+          .connect(h)
+          .connect(g.gain)
+          .connect(i),
+          d.connect(r(0.7)).connect(h.gain));
+        let _ = r(0),
+          v = r(0);
+        (t(this.brown)
+          .connect(n(`lowpass`, 300, 0.9))
+          .connect(_)
+          .connect(v)
+          .connect(i),
+          d.connect(_.gain),
+          (this.skid = {
+            out: i,
+            rasp: s,
+            lfo: c,
+            jitter: p,
+            tk: g,
+            tok: v,
+            grit: 0,
+            on: !1,
+          }));
+      }
+    }
+    drive(e, t, n, r, i, a = 0) {
+      let o = this.ctx;
+      if (!o || !this.roll || !this.grind) return;
+      let s = o.currentTime,
+        c = Math.min(1, e / 14);
+      (this.roll.gain.gain.setTargetAtTime(
+        t ? (0.05 + c * 0.32) * (a ? 0.5 : 1) : 0,
+        s,
+        0.06,
+      ),
+        this.skid && this.slide(s, a, e, t),
+        this.roll.filt.frequency.setTargetAtTime(260 + c * 900, s, 0.1));
+      let l = this.grind,
+        f = this.rail;
+      (n ? ((f.kind = i), (f.sliding = r)) : f.on && this.ringOut(),
+        (f.on = n),
+        l.hiss.gain.gain.setTargetAtTime(
+          n ? (r ? 0.072 : 0.056 + 0.024 * c) : 0,
+          s,
+          0.03,
+        ),
+        l.hiss.filt.frequency.setTargetAtTime(
+          r ? 1600 : 3400 + 1200 * c,
+          s,
+          0.05,
+        ),
+        l.rumble.gain.gain.setTargetAtTime(n ? 0.14 + 0.07 * c : 0, s, 0.03),
+        l.rumble.lp.frequency.setTargetAtTime(r ? 340 : 420 + 200 * c, s, 0.05),
+        l.rumble.body.gain.setTargetAtTime(r ? 9 : 0, s, 0.05));
+      let p = n ? u[i] : void 0,
+        m = p ? (r ? 0.45 : 1) * (0.55 + 0.45 * c) : 0,
+        h = 1 + 0.35 * Math.sin(s * 7.3) * Math.sin(s * 2.9 + 1);
+      if (
+        (l.exc.gain.setTargetAtTime(m, s, 0.03),
+        l.modes.forEach((e, t) => {
+          (p && e.filt.frequency.setTargetAtTime(p.f * d[t] * f.p, s, 0.005),
+            e.gain.gain.setTargetAtTime([0.9, 0.6, 0.35][t] * h, s, 0.03));
+        }),
+        l.tones.forEach((e, t) => {
+          (p &&
+            e.osc.frequency.setTargetAtTime(
+              p.f * d[t] * f.p * (1 + 0.0015 * Math.sin(s * 5 + t)),
+              s,
+              0.01,
+            ),
+            e.gain.gain.setTargetAtTime(m * [0.022, 0.012][t] * h, s, 0.03));
+        }),
+        this.wind)
+      ) {
+        let t = this.wind,
+          n = s - t.at;
+        (t.last >= 0 &&
+          n > 0 &&
+          (t.rush = Math.max(
+            t.rush * Math.exp(-n / 0.5),
+            Math.min(1, Math.max(0, (e - t.last) / n) / 8),
+          )),
+          (t.last = e),
+          (t.at = s));
+        let r = Math.min(1, Math.max(0, (e - 10) / 7)),
+          i = Math.min(1, Math.max(0, (e - 10.5) / 3.5));
+        (t.gain.gain.setTargetAtTime(
+          r * r * 0.018 + t.rush * i * 0.06,
+          s,
+          0.08,
+        ),
+          t.filt.frequency.setTargetAtTime(
+            600 + 1e3 * r + 500 * t.rush,
+            s,
+            0.1,
+          ));
+      }
+    }
+    slide(e, t, n, r) {
+      let i = this.skid;
+      (i.on &&
+        !t &&
+        r &&
+        (this.tone(`sine`, 130, 60, 0.07, 0.14, 0, i.out),
+        this.burst(`lowpass`, 900, 0.7, 0.06, 0.08, 0, 0, i.out)),
+        (i.on = t > 0));
+      let a = 5 + 3.4 * n;
+      (i.lfo.frequency.setTargetAtTime(a, e, 0.03),
+        i.jitter.gain.setTargetAtTime(a * 0.14, e, 0.1));
+      let o = Math.min(1, Math.max(0, (0.95 - t) / 0.55)),
+        s = (e) => (t ? e : 0),
+        c = t ? 0.012 : 0.03;
+      if (
+        (i.tk.filt.frequency.setTargetAtTime(750 + 650 * t, e, 0.04),
+        i.tk.gain.gain.setTargetAtTime(s(0.08 + 0.3 * o), e, c),
+        i.tok.gain.setTargetAtTime(s(0.2 + 0.6 * o), e, c),
+        i.rasp.gain.gain.setTargetAtTime(
+          s((0.1 + 0.2 * t) * (1 - 0.45 * o)),
+          e,
+          t ? 0.015 : 0.04,
+        ),
+        i.rasp.filt.frequency.setTargetAtTime(950 + 1500 * t, e, 0.04),
+        i.rasp.rough.playbackRate.setTargetAtTime(0.5 + n / 8, e, 0.05),
+        !t)
+      ) {
+        i.grit = 0;
+        return;
+      }
+      let l = (1 - 0.4 * o) * (0.5 + 0.5 * t);
+      for (i.grit = Math.max(i.grit, e); i.grit < e + 0.05;) {
+        let t = Math.random() < 0.06;
+        (this.burst(
+          `bandpass`,
+          900 + Math.random() * 1700,
+          1.2,
+          0.007 + Math.random() * 0.008,
+          (t ? 0.05 : 0.014 + 0.022 * Math.random()) * l,
+          i.grit - e,
+          0,
+          i.out,
+        ),
+          (i.grit += -Math.log(1 - Math.random()) / (18 + 5 * n)));
+      }
+    }
+    wallride(e, t = 0, n = 0, r = 0) {
+      let i = this.ctx,
+        a = this.wallRoll;
+      if (!i || !a) return;
+      let o = i.currentTime;
+      if (!e) {
+        (a.on && this.burst(`bandpass`, 1400, 1.2, 0.09, 0.12, 0, 600),
+          (a.on = !1),
+          a.gain.gain.setTargetAtTime(0, o, 0.03));
+        return;
+      }
+      a.on || ((a.on = !0), (a.pebble = a.stone = o + 0.03));
+      let s = Math.min(1, t / 14),
+        c = Math.max(-1, Math.min(1, n / 3)),
+        l = 1 - 0.35 * r;
+      (a.gain.gain.setTargetAtTime((0.1 + 0.28 * s) * l, o, 0.03),
+        a.lp.frequency.setTargetAtTime(
+          (320 + 900 * s) * (1 + 0.15 * c),
+          o,
+          0.06,
+        ),
+        a.bp.frequency.setTargetAtTime(1300 + 600 * s + 250 * c, o, 0.06),
+        a.grit.gain.setTargetAtTime(0.058 + 0.065 * s, o, 0.05),
+        a.rough.playbackRate.setTargetAtTime(0.4 + t / 10, o, 0.1));
+      let u = (0.6 + 0.4 * s) * l;
+      for (a.pebble = Math.max(a.pebble, o); a.pebble < o + 0.06;) {
+        let e = Math.random() < 0.12;
+        (this.burst(
+          `bandpass`,
+          2500 + Math.random() * 3e3,
+          1.5,
+          0.004 + Math.random() * 0.006,
+          (e ? 0.135 : 0.032 + 0.042 * Math.random()) * u,
+          a.pebble - o,
+        ),
+          (a.pebble += -Math.log(1 - Math.random()) / (15 + 4.2 * t)));
+      }
+      for (a.stone = Math.max(a.stone, o); a.stone < o + 0.06;)
+        (this.burst(
+          `lowpass`,
+          500 + Math.random() * 500,
+          0.8,
+          0.02 + Math.random() * 0.015,
+          (0.055 + 0.06 * Math.random()) * u,
+          a.stone - o,
+        ),
+          (a.stone += -Math.log(1 - Math.random()) / (2.4 + 0.45 * t)));
+    }
+    silence() {
+      ((this.rail.on = !1),
+        this.wallRoll && (this.wallRoll.on = !1),
+        this.drive(0, !1, !1, !1, -1),
+        this.wallride(!1));
+    }
+    gate(e, t) {
+      let n = performance.now();
+      return n - (this.lastPlay.get(e) ?? 0) < t
+        ? !1
+        : (this.lastPlay.set(e, n), !0);
+    }
+    tone(e, t, n, r, i, a = 0, o = this.sfx) {
+      let s = this.ctx,
+        c = s.currentTime + a,
+        l = s.createOscillator();
+      ((l.type = e),
+        l.frequency.setValueAtTime(t, c),
+        l.frequency.exponentialRampToValueAtTime(Math.max(20, n), c + r));
+      let u = s.createGain();
+      (u.gain.setValueAtTime(1e-4, c),
+        u.gain.exponentialRampToValueAtTime(i, c + 0.006),
+        u.gain.exponentialRampToValueAtTime(1e-4, c + r),
+        l.connect(u).connect(o),
+        l.start(c),
+        l.stop(c + r + 0.02));
+    }
+    burst(e, t, n, r, i, a = 0, o = 0, s = this.sfx) {
+      let c = this.ctx,
+        l = c.currentTime + a,
+        u = c.createBufferSource();
+      ((u.buffer = this.noise),
+        (u.playbackRate.value = 0.8 + Math.random() * 0.4));
+      let d = c.createBiquadFilter();
+      ((d.type = e),
+        d.frequency.setValueAtTime(t, l),
+        (d.Q.value = n),
+        o && d.frequency.exponentialRampToValueAtTime(o, l + r));
+      let f = c.createGain();
+      (f.gain.setValueAtTime(i, l),
+        f.gain.exponentialRampToValueAtTime(1e-4, l + r),
+        u.connect(d).connect(f).connect(s),
+        u.start(l, Math.random() * 1.5),
+        u.stop(l + r + 0.02));
+    }
+    ring(e, t, n, r = this.sfx, i = 0) {
+      let a = this.ctx,
+        o = a.currentTime + i;
+      for (let [i, s] of [
+        [1, n],
+        [1.004, n * 0.6],
+      ]) {
+        let n = a.createOscillator();
+        ((n.type = `sine`), (n.frequency.value = e * i));
+        let c = a.createGain();
+        (c.gain.setValueAtTime(1e-4, o),
+          c.gain.exponentialRampToValueAtTime(s, o + 0.002),
+          c.gain.exponentialRampToValueAtTime(1e-4, o + t),
+          n.connect(c).connect(r),
+          n.start(o),
+          n.stop(o + t + 0.02));
+      }
+    }
+    slapBus() {
+      if (this.slap) return this.slap;
+      let e = this.ctx,
+        t = e.createDelay(0.5);
+      t.delayTime.value = 0.068;
+      let n = e.createBiquadFilter();
+      ((n.type = `lowpass`), (n.frequency.value = 1820));
+      let r = e.createGain();
+      r.gain.value = 0.3;
+      let i = e.createGain();
+      ((i.gain.value = 0.53),
+        t.connect(n).connect(r).connect(t),
+        n.connect(i).connect(this.sfx));
+      let a = (this.slap = e.createGain());
+      return (a.connect(this.sfx), a.connect(t), a);
+    }
+    swell(e, t, n, r, i, a = 0, o = 0) {
+      let s = this.ctx,
+        c = s.currentTime + a,
+        l = s.createBufferSource();
+      ((l.buffer = this.noise), (l.loop = !0));
+      let u = s.createBiquadFilter();
+      ((u.type = `bandpass`),
+        (u.frequency.value = e),
+        (u.Q.value = t),
+        o &&
+          (u.frequency.setValueAtTime(e, c),
+          u.frequency.exponentialRampToValueAtTime(o, c + r)));
+      let d = s.createGain();
+      (d.gain.setValueAtTime(1e-4, c),
+        d.gain.exponentialRampToValueAtTime(i, c + n),
+        d.gain.exponentialRampToValueAtTime(1e-4, c + r),
+        l.connect(u).connect(d).connect(this.sfx),
+        l.start(c, Math.random() * 1.5),
+        l.stop(c + r + 0.02));
+    }
+    whistle(e, t, n, r = 0, i = 1) {
+      let a = this.ctx,
+        o = a.currentTime + r,
+        s = a.createOscillator();
+      ((s.type = `sine`),
+        s.frequency.setValueAtTime(e, o),
+        s.frequency.setValueAtTime(e, o + t * 0.6),
+        s.frequency.exponentialRampToValueAtTime(e * i, o + t));
+      let c = a.createOscillator();
+      c.frequency.value = 28 + Math.random() * 6;
+      let l = a.createGain();
+      ((l.gain.value = e * 0.025), c.connect(l).connect(s.frequency));
+      let u = a.createGain();
+      u.gain.value = 0.6;
+      let d = a.createGain();
+      ((d.gain.value = 0.4), c.connect(d).connect(u.gain));
+      let f = a.createGain();
+      (f.gain.setValueAtTime(1e-4, o),
+        f.gain.exponentialRampToValueAtTime(n, o + 0.012),
+        f.gain.setValueAtTime(n, o + t - 0.04),
+        f.gain.exponentialRampToValueAtTime(1e-4, o + t),
+        s.connect(u).connect(f).connect(this.sfx),
+        s.start(o),
+        s.stop(o + t + 0.02),
+        c.start(o),
+        c.stop(o + t + 0.02),
+        this.burst(`bandpass`, e, 5, t, n * 0.5, r));
+    }
+    pad(e, t, n, r = 0, i = 0.15) {
+      let a = this.ctx,
+        o = a.currentTime + r,
+        s = a.createBiquadFilter();
+      ((s.type = `lowpass`), (s.frequency.value = 2600));
+      let c = a.createGain();
+      (c.gain.setValueAtTime(1e-4, o),
+        c.gain.linearRampToValueAtTime(n, o + i),
+        c.gain.exponentialRampToValueAtTime(1e-4, o + t),
+        s.connect(c).connect(this.sfx));
+      for (let n of [1, 1.007]) {
+        let r = a.createOscillator();
+        ((r.type = `triangle`),
+          (r.frequency.value = e * n),
+          r.connect(s),
+          r.start(o),
+          r.stop(o + t + 0.02));
+      }
+    }
+    duck(e, t) {
+      let n = this.ctx.currentTime,
+        r = this.music.gain,
+        a = i.music * 0.55;
+      (r.cancelScheduledValues(n),
+        r.setValueAtTime(r.value, n),
+        r.linearRampToValueAtTime(a * e, n + 0.12),
+        r.setValueAtTime(a * e, n + t / 1e3),
+        r.linearRampToValueAtTime(a, n + t / 1e3 + 0.7));
+    }
+    scratch(e, t = 0) {
+      let n = this.ctx;
+      for (let [r, i, a, o, s] of [
+        [0, 0.075, 600, 2600, 1],
+        [0.08, 0.155, 2400, 380, 0.9],
+      ]) {
+        let c = n.currentTime + t + r,
+          l = n.currentTime + t + i,
+          u = (e) => {
+            let t = n.createGain();
+            return (
+              t.gain.setValueAtTime(1e-4, c),
+              t.gain.exponentialRampToValueAtTime(e, c + 0.012),
+              t.gain.exponentialRampToValueAtTime(e * 0.6, l - 0.012),
+              t.gain.exponentialRampToValueAtTime(1e-4, l),
+              t
+            );
+          },
+          d = n.createBufferSource();
+        d.buffer = this.noise;
+        let f = n.createBiquadFilter();
+        ((f.type = `bandpass`),
+          (f.Q.value = 2.2),
+          f.frequency.setValueAtTime(a, c),
+          f.frequency.exponentialRampToValueAtTime(o, l),
+          d
+            .connect(f)
+            .connect(u(e * s))
+            .connect(this.sfx),
+          d.start(c, Math.random() * 1.5),
+          d.stop(l + 0.01));
+        let p = n.createOscillator();
+        ((p.type = `sawtooth`),
+          p.frequency.setValueAtTime(a / 6, c),
+          p.frequency.exponentialRampToValueAtTime(o / 6, l));
+        let m = n.createBiquadFilter();
+        ((m.type = `lowpass`),
+          (m.frequency.value = 2200),
+          p
+            .connect(m)
+            .connect(u(e * s * 0.3))
+            .connect(this.sfx),
+          p.start(c),
+          p.stop(l + 0.01));
+      }
+    }
+    pop(e = 0.5, t = 0, n = 1) {
+      if (!this.ctx || !this.gate(`pop`, 60)) return;
+      let r = 0.75 + 0.35 * e,
+        i = Math.min(1, t / 14),
+        a = 0.95 + Math.random() * 0.1,
+        o = this.slapBus();
+      (this.burst(`bandpass`, 2310 * a, 0.73, 0.021, 0.72 * r, 0, 0, o),
+        this.burst(`highpass`, 5e3, 0.7, 0.004, 0.043 * r),
+        this.tone(`triangle`, 287 * a, 183, 0.058, 0.26 * r, 0, o),
+        this.tone(`sine`, 152 * a, 65, 0.087, 0.43 * r * (0.4 + 0.6 * n)),
+        this.swell(900, 1, 0.06, 0.22, 0.029 + 0.058 * i, 0.03, 2600));
+    }
+    land(e) {
+      if (!this.ctx || !this.gate(`land`, 80)) return;
+      let t = Math.min(1, e / 10);
+      (this.tone(`sine`, 95, 45, 0.16, 0.35 + t * 0.4),
+        this.burst(`lowpass`, 1400, 0.7, 0.07, 0.35 + t * 0.3),
+        this.burst(`lowpass`, 1100, 0.7, 0.06, 0.25 + t * 0.2, 0.028));
+    }
+    whoosh(e = !1) {
+      this.ctx &&
+        this.gate(`whoosh`, 70) &&
+        this.burst(
+          `bandpass`,
+          900,
+          1.2,
+          e ? 0.35 : 0.2,
+          e ? 0.3 : 0.18,
+          0,
+          e ? 4200 : 3e3,
+        );
+    }
+    clank() {
+      this.ctx &&
+        this.gate(`clank`, 90) &&
+        (this.tone(`triangle`, 1850, 1600, 0.12, 0.12),
+        this.tone(`sine`, 2750, 2500, 0.18, 0.08),
+        this.burst(`highpass`, 3e3, 0.8, 0.05, 0.3),
+        this.tone(`sine`, 120, 70, 0.08, 0.3));
+    }
+    wallOn(e) {
+      if (!this.ctx || !this.gate(`wallOn`, 90)) return;
+      let t = 0.65 + 0.35 * Math.min(1, e / 14),
+        n = this.slapBus();
+      (this.burst(`lowpass`, 1100, 0.7, 0.06, 0.38 * t, 0, 0, n),
+        this.burst(`lowpass`, 1300, 0.7, 0.05, 0.26 * t, 0.024, 0, n),
+        this.tone(`sine`, 120, 55, 0.11, 0.3 * t),
+        this.burst(`bandpass`, 1900, 2, 0.035, 0.14 * t, 0.004),
+        this.burst(`highpass`, 3200, 0.7, 0.015, 0.07 * t, 0, 0, n));
+    }
+    grindOn(e, t, n) {
+      if (!this.ctx || !this.grind || !this.gate(`grindOn`, 90)) return;
+      let r = this.grind.bus,
+        i = 0.65 + 0.35 * Math.min(1, n / 14),
+        a = (this.rail.p = 0.97 + Math.random() * 0.06);
+      (this.tone(`sine`, 140, 60, 0.1, 0.38 * i, 0, r),
+        this.burst(`highpass`, 2600, 0.8, 0.025, 0.22 * i, 0, 0, r),
+        t &&
+          (this.burst(`bandpass`, 1e3, 2.5, 0.05, 0.3 * i, 0, 0, r),
+          this.tone(`triangle`, 420, 300, 0.06, 0.1 * i, 0, r)));
+      let o = u[e];
+      o
+        ? d.forEach((e, n) =>
+            this.ring(
+              o.f * e * a,
+              o.decay / (1 + n),
+              [0.13, 0.08, 0.045][n] * i * (t ? 0.6 : 1),
+              r,
+            ),
+          )
+        : (this.burst(`bandpass`, 700, 1.4, 0.07, 0.3 * i, 0, 0, r),
+          this.tone(`triangle`, 260, 160, 0.06, 0.12 * i, 0, r));
+    }
+    ringOut() {
+      let e = u[this.rail.kind];
+      if (!e || !this.grind) return;
+      let t = this.rail.sliding ? 0.6 : 1;
+      d.forEach((n, r) =>
+        this.ring(
+          e.f * n * this.rail.p,
+          (e.decay * 0.8) / (1 + r),
+          [0.07, 0.045, 0.025][r] * t,
+          this.grind.bus,
+        ),
+      );
+    }
+    bail(e, t) {
+      if (!this.ctx || !this.gate(`bail`, 300)) return;
+      let n = t > 200 ? Math.min(1, Math.log(t / 200) / Math.log(100)) : 0,
+        r = (this.fall = 0.4 + 0.6 * n),
+        i = 0.93 + Math.random() * 0.14,
+        a = t > 0 ? 0.16 : 0;
+      (this.duckMusic(0.5 - 0.15 * n, 0.45 + a),
+        t > 0 && this.scratch(0.2 + 0.6 * n),
+        this.tone(`sine`, 80 * i, 32, 0.3, (0.5 + 0.3 * e) * r, a),
+        this.burst(`lowpass`, 900, 0.8, 0.1, (0.28 + 0.25 * e) * r, a),
+        this.burst(`highpass`, 2600, 0.7, 0.035, (0.16 + 0.16 * e) * r, a),
+        this.swell(
+          2400,
+          1.2,
+          0.02,
+          0.22 + 0.3 * e,
+          (0.22 + 0.2 * e) * r,
+          a + 0.03,
+          700,
+        ));
+    }
+    duckMusic(e, t) {
+      let n = this.dip.gain,
+        r = this.ctx.currentTime;
+      (n.cancelScheduledValues(r),
+        n.setTargetAtTime(e, r, 0.02),
+        n.setTargetAtTime(1, r + t, 0.12));
+    }
+    slam(e) {
+      this.ctx &&
+        this.gate(`slam`, 100) &&
+        (this.tone(
+          `sine`,
+          90 * (0.93 + Math.random() * 0.14),
+          38,
+          0.16,
+          (0.22 + 0.4 * e) * this.fall,
+        ),
+        this.burst(`lowpass`, 800, 0.7, 0.07, (0.14 + 0.25 * e) * this.fall));
+    }
+    clatter(e) {
+      this.ctx &&
+        this.gate(`clatter`, 70) &&
+        (this.tone(`triangle`, 380 + e * 140, 220, 0.07, 0.08 + e * 0.18),
+        this.burst(`bandpass`, 1800, 1.4, 0.05, 0.12 + e * 0.22));
+    }
+    knock(e, t, n) {
+      if (
+        !this.ctx ||
+        n < 0.03 ||
+        !this.gate(`${t}:${e}`, t === `land` ? 70 : 50)
+      )
+        return;
+      let r = 0.92 + Math.random() * 0.16;
+      if (t === `pop`) {
+        (this.tone(`sine`, 420 * r, 980 * r, 0.09, 0.12 * n),
+          this.burst(`bandpass`, 2400, 3, 0.03, 0.06 * n));
+        return;
+      }
+      let i = t === `land` ? 0.45 * n : 0.4 + 0.6 * n;
+      e === `trash_can`
+        ? (this.ring(610 * r, 0.22, 0.07 * i),
+          this.ring(1490 * r, 0.12, 0.04 * i),
+          this.burst(`bandpass`, 2600, 1.6, 0.05, 0.16 * i),
+          this.tone(`sine`, 150 * r, 70, 0.1, 0.22 * i))
+        : (this.tone(`triangle`, 330 * r, 210 * r, 0.07, 0.2 * i),
+          this.burst(`bandpass`, 950 * r, 2.2, 0.06, 0.28 * i),
+          this.burst(`highpass`, 3200, 0.7, 0.012, 0.06 * i));
+    }
+    wall(e) {
+      this.ctx &&
+        this.gate(`wall`, 150) &&
+        (this.tone(`sine`, 140, 60, 0.12, Math.min(0.5, 0.1 + e * 0.05)),
+        this.burst(`lowpass`, 900, 0.8, 0.08, 0.2));
+    }
+    push() {
+      this.ctx &&
+        this.gate(`push`, 280) &&
+        this.burst(`lowpass`, 600, 0.6, 0.12, 0.1);
+    }
+    skidStart(e) {
+      if (!this.ctx || !this.skid || !this.gate(`skid`, 250)) return;
+      let t = Math.min(1, e / 14),
+        n = this.skid.out;
+      (this.burst(`lowpass`, 700, 0.7, 0.08, 0.14 + 0.05 * t, 0, 0, n),
+        this.burst(`bandpass`, 1600, 0.7, 0.16, 0.07 + 0.03 * t, 0, 700, n));
+      for (let e = 0; e < 4; e++)
+        this.burst(
+          `bandpass`,
+          1e3 + Math.random() * 1500,
+          1.2,
+          0.01,
+          0.025 + 0.025 * Math.random(),
+          Math.random() * 0.06,
+          0,
+          n,
+        );
+    }
+    step() {
+      this.ctx &&
+        this.gate(`step`, 90) &&
+        this.burst(
+          `lowpass`,
+          420 + Math.random() * 180,
+          0.7,
+          0.05,
+          0.05 + Math.random() * 0.02,
+        );
+    }
+    secret() {
+      if (!this.ctx) return;
+      let e = (e) => 440 * 2 ** ((e - 69) / 12);
+      (this.duck(0.35, 2300), this.swell(380, 0.9, 0.42, 0.55, 0.13, 0, 5200));
+      let t = 0.55;
+      (this.tone(`sine`, 150, 38, 0.45, 0.55, t),
+        this.burst(`highpass`, 3e3, 0.7, 0.06, 0.35, t),
+        this.burst(`lowpass`, 800, 0.7, 0.16, 0.3, t));
+      for (let n of [72, 76, 79, 83, 88])
+        (this.tone(`sine`, e(n), e(n), 2.2, 0.045, t),
+          this.tone(`sine`, e(n) * 1.006, e(n) * 1.006, 2.4, 0.03, t));
+      [91, 95, 98, 103, 107, 110].forEach((t, n) =>
+        this.tone(
+          `triangle`,
+          e(t),
+          e(t),
+          0.25,
+          0.04,
+          0.6100000000000001 + n * 0.05,
+        ),
+      );
+      for (let n of [60, 64, 67, 71]) this.pad(e(n), 2.4, 0.03, t, 0.35);
+      this.swell(2600, 1.2, 0.25, 1.6, 0.04, 0.6000000000000001);
+    }
+    sixSeven() {
+      let e = this.ctx;
+      e &&
+        ((this.sixSevenBuf ??= fetch(
+          new URL(`sfx/six-seven.mp3`, document.baseURI).href,
+        )
+          .then((e) => e.arrayBuffer())
+          .then((t) => e.decodeAudioData(t))
+          .catch(() => (this.sixSevenBuf = null))),
+        this.sixSevenBuf.then((t) => {
+          if (!t) return;
+          this.duck(0.3, t.duration * 1e3);
+          let n = e.createBufferSource();
+          ((n.buffer = t), n.connect(this.sfx), n.start());
+        }));
+    }
+    ui(e, t = 0) {
+      if (!this.ctx) return;
+      let n = (e) => 440 * 2 ** ((e - 69) / 12);
+      switch (e) {
+        case `click`:
+          this.tone(`sine`, 900, 700, 0.05, 0.12);
+          break;
+        case `chat`:
+          this.gate(`chat`, 200) &&
+            (this.tone(`sine`, 1300, 1500, 0.06, 0.08),
+            this.tone(`sine`, 1700, 1900, 0.06, 0.06, 0.05));
+          break;
+        case `count3`:
+        case `count2`:
+        case `count1`: {
+          let t = e === `count3` ? 69 : e === `count2` ? 72 : 76;
+          (this.tone(`square`, n(t), n(t), 0.16, 0.1),
+            this.tone(`sine`, n(t + 12), n(t + 12), 0.1, 0.05),
+            this.tone(`sine`, 150, 70, 0.12, 0.3));
+          break;
+        }
+        case `go`:
+          ([72, 76, 79, 84].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.5, 0.12, t * 0.02),
+          ),
+            this.tone(`square`, n(84), n(84), 0.3, 0.06),
+            this.tone(`sine`, 170, 60, 0.2, 0.45),
+            this.burst(`bandpass`, 900, 1.2, 0.4, 0.25, 0, 4200));
+          break;
+        case `hurry`:
+          this.gate(`hurry`, 200) &&
+            (this.tone(`square`, n(88), n(88), 0.05, 0.07),
+            this.tone(`sine`, n(100), n(100), 0.04, 0.03));
+          break;
+        case `landWarn`:
+          this.gate(`landWarn`, 220) &&
+            (t
+              ? (this.tone(`triangle`, n(79), n(84), 0.07, 0.035),
+                this.tone(`sine`, n(91), n(96), 0.06, 0.025, 0.03))
+              : (this.tone(`triangle`, 196, 150, 0.1, 0.04),
+                this.tone(`triangle`, 165, 120, 0.12, 0.035, 0.09)));
+          break;
+        case `landOk`:
+          this.gate(`landOk`, 220) &&
+            (this.tone(`sine`, n(84), n(84), 0.09, 0.05),
+            this.tone(`sine`, n(91), n(91), 0.14, 0.045, 0.06));
+          break;
+        case `perfect`:
+          for (let e = 0; e < 5; e++)
+            this.tone(
+              `square`,
+              n(84 + e * 3),
+              n(84 + e * 3),
+              0.03,
+              0.035,
+              e * 0.035,
+            );
+          (this.burst(`bandpass`, 3200, 2, 0.04, 0.25, 0.18),
+            this.tone(`square`, n(96), n(96), 0.04, 0.05, 0.18));
+          for (let e of [100, 107])
+            (this.tone(`sine`, n(e), n(e), 0.5, 0.06, 0.21),
+              this.tone(`sine`, n(e) * 1.006, n(e) * 1.006, 0.5, 0.04, 0.21));
+          for (let e = 0; e < 3; e++)
+            this.burst(
+              `bandpass`,
+              5200 + e * 400,
+              4,
+              0.04,
+              0.08,
+              0.24 + e * 0.04,
+            );
+          break;
+        case `sloppy`:
+          for (let e = 0; e < 4; e++)
+            this.tone(
+              `square`,
+              n(79 - e * 2),
+              n(79 - e * 2),
+              0.03,
+              0.035,
+              e * 0.035,
+            );
+          (this.tone(`square`, n(46), n(45), 0.22, 0.06, 0.15),
+            this.tone(`square`, n(47), n(46), 0.22, 0.05, 0.15));
+          break;
+        case `matchFound`:
+          [67, 71, 74, 79].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.18, 0.12, t * 0.07),
+          );
+          break;
+        case `gate`:
+          this.gate(`gate`, 500) &&
+            (this.tone(`sine`, n(79), n(84), 0.14, 0.06),
+            this.swell(1800, 1.4, 0.06, 0.3, 0.03));
+          break;
+        case `queueIn`:
+          ([72, 76, 79, 84, 88].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.16, 0.11, t * 0.045),
+          ),
+            this.tone(`sine`, n(96), n(100), 0.2, 0.05, 0.22),
+            this.tone(`sine`, 190, 70, 0.14, 0.3),
+            this.swell(1400, 0.9, 0.05, 0.45, 0.06));
+          break;
+        case `queueOut`:
+          (this.tone(`triangle`, n(79), n(72), 0.14, 0.1),
+            this.tone(`triangle`, n(72), n(64), 0.22, 0.1, 0.11),
+            this.burst(`lowpass`, 800, 0.7, 0.18, 0.18, 0, 200));
+          break;
+        case `grass`:
+          this.duckMusic(0.4, 0.6);
+          for (let e = 0; e < 0.24; e += 0.018 + Math.random() * 0.03)
+            this.burst(
+              `bandpass`,
+              2600 + Math.random() * 3200,
+              2.5,
+              0.03 + Math.random() * 0.04,
+              0.32 * (1 - (e / 0.24) * 0.7),
+              e,
+            );
+          this.whistle(2900, 0.34, 0.1, 0.2, 0.92);
+          break;
+        case `queuePing`:
+          this.gate(`queuePing`, 150) &&
+            (this.tone(`sine`, n(88), n(91), 0.08, 0.05),
+            this.tone(`sine`, n(95), n(95), 0.07, 0.035, 0.05));
+          break;
+        case `results`:
+          [72, 76, 79, 84, 88].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.3, 0.1, t * 0.09),
+          );
+          break;
+        case `letter`:
+          [84, 88, 91].forEach((e, t) =>
+            this.tone(`sine`, n(e), n(e), 0.16, 0.12, t * 0.05),
+          );
+          break;
+        case `coin`:
+          if (this.gate(`coin`, 60)) {
+            let e = t * 2;
+            (this.tone(`square`, n(83 + e), n(83 + e), 0.07, 0.05),
+              this.tone(`square`, n(88 + e), n(88 + e), 0.24, 0.05, 0.07),
+              t >= 2 && this.tone(`sine`, n(100), n(100), 0.25, 0.05, 0.13));
+          }
+          break;
+        case `stash`:
+          ([79, 83, 86, 91, 95].forEach((e, t) =>
+            this.tone(`square`, n(e), n(e), 0.16, 0.045, t * 0.055),
+          ),
+            this.swell(1600, 1.1, 0.06, 0.5, 0.05, 0.12));
+          break;
+        case `tagged`:
+          (this.tone(`sine`, 130, 38, 0.3, 0.75),
+            this.burst(`highpass`, 2600, 0.7, 0.07, 0.55),
+            this.burst(`lowpass`, 900, 0.8, 0.12, 0.4),
+            this.tone(`sawtooth`, n(79), n(66), 0.5, 0.08, 0.07),
+            this.tone(`triangle`, n(74), n(61), 0.55, 0.1, 0.1));
+          break;
+        case `bonk`:
+          (this.tone(`sine`, 950, 170, 0.2, 0.4),
+            this.tone(`triangle`, 1500, 1350, 0.05, 0.2),
+            this.burst(`bandpass`, 2200, 4, 0.04, 0.35),
+            this.tone(`sine`, n(84), n(91), 0.25, 0.07, 0.09),
+            this.swell(700, 1.2, 0.08, 0.75, 0.08, 0.06));
+          break;
+        case `tagFar`:
+          this.gate(`tagFar`, 150) &&
+            (this.tone(`sine`, 720, 240, 0.13, 0.13),
+            this.burst(`bandpass`, 2e3, 4, 0.03, 0.12));
+          break;
+        case `tagNear`:
+          this.gate(`tagNear`, 220) &&
+            (this.tone(`sine`, 72, 48, 0.11, 0.4),
+            this.tone(`sine`, 66, 44, 0.1, 0.28, 0.15));
+          break;
+        case `horseSet`:
+          ([72, 79, 84].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.25, 0.1, t * 0.06),
+          ),
+            this.tone(`sine`, 170, 55, 0.18, 0.4, 0.12));
+          break;
+        case `horseSafe`:
+          ([79, 84, 88, 91].forEach((e, t) =>
+            this.tone(`sine`, n(e), n(e), 0.2, 0.09, t * 0.05),
+          ),
+            this.swell(1300, 0.9, 0.1, 0.6, 0.05, 0.1));
+          break;
+        case `horseLetter`:
+          (this.tone(`triangle`, n(67), n(63), 0.24, 0.12),
+            this.tone(`triangle`, n(63), n(55), 0.45, 0.12, 0.26),
+            this.tone(`sine`, 140, 50, 0.2, 0.4));
+          break;
+        case `horseOut`:
+          (this.tone(`sawtooth`, n(64), n(52), 0.7, 0.07),
+            this.tone(`triangle`, n(60), n(48), 0.8, 0.1, 0.05),
+            this.tone(`sine`, 170, 45, 0.3, 0.6),
+            this.burst(`lowpass`, 900, 0.7, 0.12, 0.45),
+            this.swell(600, 1.1, 0.1, 1, 0.08, 0.15));
+          break;
+        case `special`: {
+          let e = 0.2;
+          (this.burst(`bandpass`, 600, 1.1, 0.28, 0.3, 0, 6e3),
+            this.tone(`square`, n(52), n(76), e, 0.04));
+          for (let t of [64, 71, 76])
+            (this.tone(`sawtooth`, n(t), n(t), 0.45, 0.045, e),
+              this.tone(`square`, n(t) * 1.004, n(t) * 1.004, 0.3, 0.025, e));
+          (this.tone(`sine`, 160, 48, 0.3, 0.5, e),
+            this.burst(`highpass`, 3500, 0.7, 0.06, 0.3, e),
+            [88, 91, 95, 100, 103].forEach((e, t) =>
+              this.tone(`sine`, n(e), n(e), 0.18, 0.05, 0.25 + t * 0.035),
+            ));
+          for (let t of [76, 83, 88])
+            (this.tone(`sine`, n(t), n(t), 1.2, 0.045, e),
+              this.tone(`sine`, n(t) * 1.005, n(t) * 1.005, 1.3, 0.035, e));
+          this.swell(1100, 0.9, 0.15, 1.2, 0.1, e);
+          break;
+        }
+        case `specialTrick`: {
+          let e = 0.17;
+          (this.swell(6500, 0.6, e, 0.2, 0.22),
+            this.tone(`sine`, 500, 2600, e, 0.025),
+            this.burst(`highpass`, 3e3, 0.7, 0.05, 0.5, e),
+            this.tone(`sine`, 110, 34, 0.6, 0.65, e));
+          for (let [t, n, r] of [
+            [1, 0.9, 0.05],
+            [1.47, 0.7, 0.035],
+            [2.09, 0.55, 0.03],
+            [2.76, 0.4, 0.02],
+          ])
+            this.ring(2093 * t, n, r, this.sfx, e);
+          (this.tone(`sine`, 3e3, 5600, 0.28, 0.025, 0.19),
+            this.swell(3200, 1, 0.02, 0.8, 0.05, e));
+          break;
+        }
+        case `specialLand`: {
+          let e = [72, 76, 79, 84, 88, 91];
+          e.forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.2, 0.1, t * 0.045),
+          );
+          let r = e.length * 0.045,
+            i = 0.8 + Math.min(0.6, t / 2e4);
+          for (let e of [84, 88, 91])
+            (this.tone(`sine`, n(e), n(e), i, 0.05, r),
+              this.tone(`sine`, n(e) * 1.004, n(e) * 1.004, i, 0.04, r));
+          (this.tone(`sine`, 130, 65, 0.22, 0.25),
+            this.swell(1100, 0.9, 0.18, 1.3, 0.12, 0.1),
+            this.swell(2400, 1.2, 0.22, 1.1, 0.05, 0.12));
+          break;
+        }
+        case `mission`:
+          [79, 84, 88, 91, 96].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.22, 0.09, t * 0.055),
+          );
+          for (let e of [91, 95, 98])
+            this.tone(`sine`, n(e), n(e), 0.6, 0.04, 0.3);
+          this.swell(1400, 0.9, 0.12, 0.8, 0.06, 0.25);
+          break;
+        case `claim`:
+          (this.tone(`square`, n(83), n(83), 0.07, 0.06),
+            this.tone(`square`, n(88), n(88), 0.35, 0.06, 0.07));
+          break;
+        case `stamp`:
+          (this.tone(`sine`, 170, 55, 0.18, 0.5),
+            this.burst(`lowpass`, 900, 0.7, 0.09, 0.4));
+          break;
+        case `spray`:
+          this.gate(`spray`, 35) &&
+            this.swell(
+              4200 + Math.random() * 1500,
+              0.7,
+              0.015,
+              t || 0.24,
+              0.07,
+            );
+          break;
+        case `nope`:
+          (this.tone(`square`, 220, 180, 0.09, 0.05),
+            this.tone(`square`, 180, 150, 0.12, 0.05, 0.1));
+          break;
+        case `rattle`:
+          this.gate(`rattle`, 60) &&
+            (this.burst(`bandpass`, 1300 + Math.random() * 500, 3, 0.05, 0.3),
+            this.tone(`triangle`, 420, 300, 0.05, 0.08));
+          break;
+        case `crate`:
+          (this.burst(`bandpass`, 700, 0.9, 0.35, 0.4, 0, 5e3),
+            [72, 76, 79, 84, 88, 91].forEach((e, t) =>
+              this.tone(`triangle`, n(e), n(e), 0.3, 0.1, 0.05 + t * 0.05),
+            ));
+          for (let e of [84, 88, 91])
+            this.tone(`sine`, n(e), n(e), 1.1, 0.05, 0.35);
+          this.swell(1100, 0.9, 0.15, 1.2, 0.1, 0.1);
+          break;
+        case `fanfare`:
+          [67, 72, 76].forEach((e, t) =>
+            this.tone(`sawtooth`, n(e), n(e), 0.12, 0.05, t * 0.1),
+          );
+          for (let e of [72, 76, 79, 84])
+            (this.tone(`sawtooth`, n(e), n(e), 1.4, 0.035, 0.3),
+              this.tone(`sine`, n(e + 12), n(e + 12), 1.6, 0.04, 0.3));
+          (this.tone(`sine`, 130, 65, 0.3, 0.3, 0.3),
+            this.swell(1100, 0.9, 0.25, 1.8, 0.14, 0.3),
+            this.swell(2600, 1.2, 0.3, 1.5, 0.05, 0.35));
+          break;
+        case `tick`:
+          this.gate(`tick`, 40) &&
+            this.tone(
+              `sine`,
+              n(84 + Math.round(t * 12)),
+              n(84 + Math.round(t * 12)),
+              0.04,
+              0.05,
+            );
+          break;
+        case `star`:
+          this.gate(`star`, 45) &&
+            this.tone(
+              `sine`,
+              n(96 + Math.floor(Math.random() * 5)),
+              n(100),
+              0.12,
+              0.05,
+            );
+          break;
+        case `xp`:
+          if (this.gate(`xp`, 40)) {
+            let e = 86 + Math.min(t, 6) * 2;
+            (this.tone(`triangle`, n(e), n(e), 0.06, 0.08),
+              this.tone(`triangle`, n(e + 7), n(e + 7), 0.1, 0.07, 0.04));
+          }
+          break;
+        case `combo`: {
+          let e = t >= 2e4 ? 5 : t >= 8e3 ? 4 : t >= 2500 ? 3 : 2,
+            r = [72, 76, 79, 84, 88];
+          for (let t = 0; t < e; t++)
+            this.tone(
+              `triangle`,
+              n(r[t]),
+              n(r[t]),
+              0.22 + t * 0.03,
+              0.1,
+              t * 0.06,
+            );
+          break;
+        }
+        case `levelUp`: {
+          let e = [60, 64, 67, 72, 76, 79, 84, 88];
+          (e.forEach((e, t) =>
+            this.tone(`square`, n(e), n(e), 0.08, 0.035, t * 0.035),
+          ),
+            this.burst(`bandpass`, 500, 0.8, 0.3, 0.18, 0, 5e3));
+          let t = e.length * 0.035;
+          for (let e of [72, 76, 79, 84, 91])
+            (this.tone(`triangle`, n(e), n(e), 1.5, 0.05, t),
+              this.tone(`sine`, n(e) * 1.005, n(e) * 1.005, 1.7, 0.035, t));
+          (this.tone(`sine`, 150, 48, 0.4, 0.45, t),
+            this.swell(1100, 0.9, 0.2, 1.9, 0.13, t),
+            this.swell(2600, 1.2, 0.25, 1.5, 0.05, t + 0.05),
+            [96, 100, 103, 108].forEach((e, r) =>
+              this.tone(`sine`, n(e), n(e), 0.3, 0.03, t + 0.18 + r * 0.07),
+            ));
+          break;
+        }
+        case `levelUpFar`:
+          this.gate(`levelUpFar`, 400) &&
+            [84, 88, 91, 96].forEach((e, t) =>
+              this.tone(`sine`, n(e), n(e), 0.3, 0.035, t * 0.06),
+            );
+          break;
+        case `statUp`: {
+          let e = 74 + Math.round(t * 14);
+          (this.tone(`square`, n(e), n(e), 0.05, 0.05),
+            this.tone(`triangle`, n(e + 7), n(e + 12), 0.16, 0.09, 0.04),
+            this.tone(`sine`, n(e + 19), n(e + 19), 0.22, 0.03, 0.09));
+          break;
+        }
+        case `statDown`:
+          (this.tone(`triangle`, n(79), n(70), 0.14, 0.08),
+            this.tone(`sine`, 300, 180, 0.08, 0.06, 0.03));
+          break;
+        case `statMax`:
+          [79, 83, 86, 91].forEach((e, t) =>
+            this.tone(`triangle`, n(e), n(e), 0.18, 0.09, t * 0.05),
+          );
+          for (let e of [91, 95, 98])
+            this.tone(`sine`, n(e), n(e), 0.8, 0.04, 0.2);
+          this.swell(1400, 0.9, 0.12, 0.8, 0.06, 0.18);
+      }
+    }
+  };
+function p(e, t) {
+  let n = e.sampleRate * 2,
+    r = e.createBuffer(1, n, e.sampleRate),
+    i = r.getChannelData(0),
+    a = 0;
+  for (let e = 0; e < n; e++) {
+    let n = Math.random() * 2 - 1;
+    t ? ((a = (a + 0.02 * n) / 1.02), (i[e] = a * 3.5)) : (i[e] = n);
+  }
+  return r;
+}
+function m(e) {
+  let t = e.sampleRate,
+    n = t * 2,
+    r = e.createBuffer(1, n, t),
+    i = r.getChannelData(0),
+    a = 1 - Math.exp(-1 / (t * 0.004)),
+    o = 0,
+    s = 0,
+    c = 0;
+  for (let e = 0; e < n; e++)
+    (--c <= 0 &&
+      ((c = Math.round(t * (0.006 + Math.random() * 0.03))),
+      (o = (Math.random() * 2 - 1) * (Math.random() < 0.16 ? 1 : 0.48))),
+      (s += (o - s) * a),
+      (i[e] = s));
+  return r;
+}
+function h() {
+  let e = 2205,
+    t = new DataView(new ArrayBuffer(2249)),
+    n = (e, n) => {
+      for (let r = 0; r < n.length; r++) t.setUint8(e + r, n.charCodeAt(r));
+    };
+  (n(0, `RIFF`),
+    t.setUint32(4, 2241, !0),
+    n(8, `WAVE`),
+    n(12, `fmt `),
+    t.setUint32(16, 16, !0),
+    t.setUint16(20, 1, !0),
+    t.setUint16(22, 1, !0),
+    t.setUint32(24, 22050, !0),
+    t.setUint32(28, 22050, !0),
+    t.setUint16(32, 1, !0),
+    t.setUint16(34, 8, !0),
+    n(36, `data`),
+    t.setUint32(40, e, !0));
+  for (let n = 0; n < e; n++) t.setUint8(44 + n, 128);
+  return URL.createObjectURL(new Blob([t.buffer], { type: `audio/wav` }));
+}
+var g = new f();
+function _() {
+  let e = () => {
+    g.unlock();
+  };
+  for (let t of [
+    `pointerdown`,
+    `pointerup`,
+    `keydown`,
+    `touchstart`,
+    `touchend`,
+  ])
+    window.addEventListener(t, e, { passive: !0 });
+  document.addEventListener(`visibilitychange`, () => g.hide(document.hidden));
+}
+export { o as a, c as i, _ as n, i as o, a as r, l as s, g as t };

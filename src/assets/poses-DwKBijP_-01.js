@@ -1,0 +1,123 @@
+// assets/poses-DwKBijP_ 01 — clip
+// Lines 1-121 of readable/assets/poses-DwKBijP_.pretty.js (statement-aligned).
+var e = {
+    greet: [
+      { clip: `emote-wave` },
+      { clip: `greet-salute` },
+      { clip: `greet-point` },
+      { clip: `greet-nod` },
+      { clip: `greet-both` },
+      { clip: `greet-flap`, only: !0 },
+    ],
+    win: [
+      { clip: `victory` },
+      { clip: `victory-fist` },
+      { clip: `victory-flex` },
+      { clip: `victory-360` },
+      { clip: `victory-point` },
+      { clip: `victory-howl`, only: !0 },
+      { clip: `victory-bonk`, only: !0 },
+      { clip: `victory-sentai`, only: !0 },
+    ],
+    lose: [{ clip: `lose` }, { clip: `lose-ohno` }, { clip: `lose-stomp` }],
+    fidget: [
+      { clip: `fidget-look` },
+      { clip: `fidget-stretch` },
+      { clip: `fidget-tap` },
+      { clip: `fidget-shake` },
+      { clip: `fidget-bounce` },
+      { clip: `fidget-tictac` },
+      { clip: `fidget-manual` },
+      { clip: `fidget-wait` },
+      { clip: `fidget-sky` },
+      { clip: `fidget-sneeze` },
+      { clip: `fidget-ears`, only: !0 },
+      { clip: `fidget-scheme`, only: !0 },
+    ],
+    carry: [
+      { clip: `carry-twirl` },
+      { clip: `carry-tap` },
+      { clip: `carry-look` },
+    ],
+  },
+  t = {
+    hawk: [`victory-360`, `greet-flap`],
+    duck: [`greet-flap`, `fidget-tap`],
+    axolotl: [`fidget-shake`, `greet-nod`],
+    muskrat: [`fidget-bounce`, `greet-point`],
+    fox: [`victory-howl`, `fidget-ears`],
+    wolf: [`victory-howl`, `fidget-ears`],
+    koala: [`fidget-stretch`, `greet-nod`],
+    pony: [`victory-360`, `fidget-ears`],
+    camel: [`greet-nod`, `victory-flex`],
+    otter: [`greet-both`, `victory-fist`],
+    glider: [`greet-flap`, `victory-360`],
+    cat: [`fidget-stretch`, `fidget-ears`],
+    seal: [`greet-flap`, `greet-both`],
+    goat: [`victory-point`, `greet-salute`],
+    toad: [`victory-fist`, `victory-flex`],
+    puffin: [`greet-flap`, `victory-fist`],
+    bear: [`greet-both`, `fidget-stretch`],
+    giraffe: [`victory-point`, `fidget-look`],
+    hare: [`fidget-ears`, `victory-360`],
+    shrew: [`victory-360`, `victory-fist`],
+    goose: [`victory-bonk`, `fidget-scheme`],
+    collie: [`fidget-look`, `fidget-bounce`],
+    sagui: [`fidget-bounce`, `victory-360`],
+    tamarin: [`fidget-look`, `greet-point`],
+    alien: [`greet-salute`, `fidget-look`],
+    yeti: [`victory-flex`, `lose-stomp`],
+    spider: [`fidget-bounce`, `greet-both`],
+    bat: [`fidget-scheme`, `greet-nod`],
+    hyena: [`victory-360`, `lose-ohno`],
+    chupa: [`fidget-look`, `lose-stomp`],
+    ranger: [`victory-sentai`, `greet-salute`],
+  },
+  n = {
+    hawk: `stand-kick`,
+    duck: `stand-wave`,
+    axolotl: `stand-sit`,
+    muskrat: `stand-lean`,
+    fox: `idle-stand`,
+    wolf: `stand-kick`,
+    koala: `stand-sit`,
+    pony: `stand-point`,
+    camel: `idle-stand`,
+    otter: `idle-stand`,
+    glider: `stand-flex`,
+    cat: `stand-lean`,
+    seal: `stand-wave`,
+    goat: `stand-point`,
+    toad: `stand-flex`,
+    puffin: `stand-point`,
+    bear: `stand-wave`,
+    giraffe: `stand-lean`,
+    hare: `stand-kick`,
+    shrew: `stand-flex`,
+    goose: `stand-point`,
+    collie: `stand-sit`,
+    sagui: `stand-wave`,
+    tamarin: `stand-lean`,
+    alien: `stand-point`,
+    yeti: `stand-flex`,
+    spider: `stand-sit`,
+    bat: `stand-lean`,
+    hyena: `stand-point`,
+    chupa: `stand-kick`,
+    ranger: `stand-kick`,
+  },
+  r = 0.5;
+function i(n, r) {
+  let i = t[r] ?? [];
+  return e[n]
+    .filter((e) => !e.only || i.includes(e.clip))
+    .map((e) => ({ clip: e.clip, w: i.includes(e.clip) ? 3 : 1 }));
+}
+function a(e, t, n, r) {
+  let a = i(e, t);
+  a.length > 1 && (a = a.filter((e) => e.clip !== r));
+  let o = a.reduce((e, t) => e + t.w, 0),
+    s = n() * o;
+  for (let e of a) if (((s -= e.w), s < 0)) return e.clip;
+  return a[a.length - 1].clip;
+}

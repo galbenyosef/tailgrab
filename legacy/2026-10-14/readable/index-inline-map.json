@@ -1,0 +1,39 @@
+{
+  "generated": "2026-10-13",
+  "note": "byte ranges + sha256 of every inline <script>/<style> content block in the captured HTML documents (index.html: the critical <style>, the gtag bootstrap script; parks/index.html: the viewer <style>); twins are the prettified (prettier 3.9.6, module API) renderings and are never shipped to a browser. Typed data blocks (application/ld+json) are recorded in split-spec notRendered instead — data, not code.",
+  "blocks": [
+    {
+      "file": "readable/index-inline-1.pretty.css",
+      "source": "index.html",
+      "section": "index-inline-1.css",
+      "kind": "style",
+      "block": 1,
+      "byteStart": 3314,
+      "byteEnd": 5619,
+      "bytes": 2305,
+      "sha256": "58692225950b342059f07ed9b3aef00ee2a6e293aa5014352af547c605d49866"
+    },
+    {
+      "file": "readable/index-inline-2.pretty.js",
+      "source": "index.html",
+      "section": "index-inline-2.js",
+      "kind": "script",
+      "block": 2,
+      "byteStart": 8696,
+      "byteEnd": 8829,
+      "bytes": 133,
+      "sha256": "5e5e0c277a63435211d9730663d3bf12808cf072cfd43a4f32adea9787d24da0"
+    },
+    {
+      "file": "readable/parks__index-inline-1.pretty.css",
+      "source": "parks/index.html",
+      "section": "parks__index-inline-1.css",
+      "kind": "style",
+      "block": 1,
+      "byteStart": 327,
+      "byteEnd": 597,
+      "bytes": 270,
+      "sha256": "e82992b15e2d91fb940830aad31ea246397a440a9c6384f5e5c7464674dbeca0"
+    }
+  ]
+}
