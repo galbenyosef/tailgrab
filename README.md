@@ -158,7 +158,13 @@ node tools/check-exports.mjs         # the derived layer still exports every pub
 Last run: `177 files checked, 0 problems` and `AUDIT PASS` (273 sections,
 214/214 slice round-trips through the recorded rename map, 61/61 pretties
 re-render byte-exact, 253/254 imports resolve, 1 whitelisted dynamic asset URL),
-plus `check-exports: no public export name lost` (47 export tables checked).
+plus `check-exports: no public export name lost` (47 export tables checked, 5
+NOT covered — the five whole-file vendor bundles' tables, which the layer
+carries in `readable/` only; unchecked, not proven intact). Every skipped
+export-table tail records the served chunk's own export statement as its
+`text`, so the gate compares the reading copy's rendered table against the
+capture's own statement — two different files — instead of the pristine
+compared with itself.
 
 Rebuild the derived layers from the frozen capture (byte-identical, proven):
 

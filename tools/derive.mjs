@@ -180,6 +180,59 @@ function parses(text) {
   return { ok: r.status === 0, why: (r.stderr || "").trim().split("\n").slice(-3).join(" | ") };
 }
 
+/**
+ * The PUBLIC names of an `export { … }` list: the ALIAS, not the local — the
+ * alias is the name the chunk exports.
+ */
+function exportListNames(text) {
+  const out = new Set();
+  for (const m of text.matchAll(/export\s*\{([^}]*)\}/g)) {
+    for (const part of m[1].split(",")) {
+      const seg = part.trim();
+      if (!seg) continue;
+      const as = seg.split(/\s+as\s+/);
+      out.add((as.length === 2 ? as[1] : seg).trim());
+    }
+  }
+  return out;
+}
+
+/**
+ * The served chunk's OWN export statement — the capture-side text the reading
+ * copy's rendered table must still match.
+ *
+ * A skipped tail carries no file: the export list at the end of a module
+ * references bindings declared in earlier slices, so it does not parse alone
+ * and the layer never fabricates it. The public-export-name gate therefore has
+ * no derived text for that table and reports it UNCHECKED — unless the tail
+ * records one. `text` is that text: the capture's own export statement, so
+ * the two sides of the gate's comparison are two DIFFERENT files (the served
+ * chunk's raw statement and the reading copy's rendering of it) instead of the
+ * pristine compared with itself.
+ *
+ * The statement is matched by its PUBLIC NAMES, so a fragment of a string that
+ * happens to contain `export {` is never mistaken for it, and nothing is
+ * invented: when the capture carries no statement with the tail's names, the
+ * tail stays a plain skipped record and the gate keeps reporting it unchecked.
+ */
+function captureExportStatement(captureRel, want) {
+  if (!want || !want.size) return null;
+  let cap;
+  try {
+    cap = fs.readFileSync(path.join(proj, captureRel), "utf8");
+  } catch {
+    return null;
+  }
+  let found = null;
+  for (const m of cap.matchAll(/export\s*\{([^}]*)\}/g)) {
+    const names = exportListNames(m[0]);
+    if (names.size !== want.size) continue;
+    if (![...want].every((n) => names.has(n))) continue;
+    found = m[0];
+  }
+  return found;
+}
+
 // ── markers for titles (top tokens, lowercase; fleet convention) ────────
 const STOP = new Set(
   ("function return typeof undefined object string number boolean prototype length value default " +
@@ -612,16 +665,27 @@ async function main() {
         });
       } else {
         perFileSkipped++;
+        // the served chunk's OWN export statement — the text the public-export-
+        // name gate compares the reading copy's rendered table against. With
+        // no recorded text the gate rebuilds the tail from the PRISTINE's own
+        // lines: the file compared with itself, which proves nothing.
+        const tailText = lines.slice(b.A - 1, b.B).join("\n");
+        const capExport = captureExportStatement(rel, exportListNames(tailText));
         sections.push({
           file: b.file,
           skipped: true,
           title: b.title,
-          desc: b.desc,
+          desc:
+            b.desc +
+            (capExport
+              ? ` The tail records the served chunk's own export statement (${rel}) as its text — the statement the reading copy's table must still match.`
+              : ""),
           startLine: b.A,
           endLine: b.B,
           sourceFile,
           firstLine: lines[b.A - 1],
           lastLine: lines[b.B - 1],
+          ...(capExport ? { text: capExport } : {}),
         });
       }
     }
@@ -863,7 +927,10 @@ async function main() {
       "carries its viewer <style> twin (readable/parks/index-inline-1.pretty.css). Non-standalone parts are " +
       "skipped sections, indexed but never sliced: every app chunk's final export {…} table (the bindings live " +
       "in the earlier slices; the campaign renames their local side through split-spec sources[].renameBindings, " +
-      "the public side is the capture's own API). Capture bytes are untouched by everything above; re-cut with `node " +
+      "the public side is the capture's own API); each such tail also records the served chunk's own export " +
+      "statement as its `text`, so the public-export-name gate compares the reading copy's rendered table against " +
+      "the capture's own statement instead of comparing the pristine with itself. Capture bytes are untouched by " +
+      "everything above; re-cut with `node " +
       "tools/derive.mjs` after any capture refresh. `node tools/audit.js` is the gate.",
     renderOptions: {
       _default:
