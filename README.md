@@ -95,7 +95,9 @@ External at runtime (documented gaps, never backfilled):
   `rename-map.json`
 - `tools/verify-rename.mjs` — per-slice rename gate
   (reproduces / references / bindings); `tools/check-chunk.mjs` — whole-chunk
-  gate (re-splice + cross-slice resolve); `tools/refcheck.mjs`,
+  gate (re-splice + cross-slice resolve); `tools/check-links.mjs` — layer link
+  gate (every export table in the layer names a binding the layer declares);
+  `tools/refcheck.mjs`,
   `tools/engine/rename-layer.mjs`, `tools/lib-acorn.mjs` — the shared
   scope/token engine the rename tools use (acorn installs into `tools/.deps`,
   gitignored, authoring-time only)
