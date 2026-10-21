@@ -152,11 +152,13 @@ node tools/verify.mjs                # re-hash the capture against the manifest
 node tools/audit.js                  # derived-layer + rename-map integrity gate
 node tools/verify-rename.mjs --all   # rename layer: reproduces/references/bindings
 node tools/check-chunk.mjs --all     # re-splice + cross-slice resolve
+node tools/check-exports.mjs         # the derived layer still exports every public name
 ```
 
 Last run: `177 files checked, 0 problems` and `AUDIT PASS` (273 sections,
 214/214 slice round-trips through the recorded rename map, 61/61 pretties
-re-render byte-exact, 253/254 imports resolve, 1 whitelisted dynamic asset URL).
+re-render byte-exact, 253/254 imports resolve, 1 whitelisted dynamic asset URL),
+plus `check-exports: no public export name lost` (47 export tables checked).
 
 Rebuild the derived layers from the frozen capture (byte-identical, proven):
 
@@ -180,7 +182,7 @@ the recorded `rename-map.json` where the chunk shape is unchanged; a changed
 chunk makes `tools/apply-names.mjs` refuse loudly (it keys on the capture rels
 and the pristine readable ranges) rather than rename the wrong spans —
 re-author the batch, then re-run `apply-names.mjs --all` →
-`recover-scoped-map.mjs` and the four gates. Known noise: `_mirror-report.json`
+`recover-scoped-map.mjs` and the five gates. Known noise: `_mirror-report.json`
 and `.upstream/capture-log.json` are local records and are never probed; the
 record tools (`verify.mjs` / `update.mjs`) are manifest-driven and never walk
 the tree, so `src/`, `legacy/`, `split-spec.json`, `rename-map.json` and
