@@ -1170,7 +1170,10 @@
       "tag": "assets/Client-CpE02kO_",
       "slices": 0,
       "derived": "readable only (vendor bundle, wholeFile)",
-      "what": "Colyseus SDK client"
+      "what": "Colyseus SDK client",
+      "wholeFileSection": {
+        "file": "assets/Client-CpE02kO_.js"
+      }
     },
     {
       "sourceFile": "readable/assets/GLTFLoader-BAb7LzOS.pretty.js",
@@ -1185,7 +1188,10 @@
       "tag": "assets/GLTFLoader-BAb7LzOS",
       "slices": 0,
       "derived": "readable only (vendor bundle, wholeFile)",
-      "what": "three.js GLTFLoader addon (DRACO/KTX2/meshopt)"
+      "what": "three.js GLTFLoader addon (DRACO/KTX2/meshopt)",
+      "wholeFileSection": {
+        "file": "assets/GLTFLoader-BAb7LzOS.js"
+      }
     },
     {
       "sourceFile": "readable/assets/lil-gui.esm-uYN4JE7y.pretty.js",
@@ -1200,7 +1206,10 @@
       "tag": "assets/lil-gui.esm-uYN4JE7y",
       "slices": 0,
       "derived": "readable only (vendor bundle, wholeFile)",
-      "what": "lil-gui build"
+      "what": "lil-gui build",
+      "wholeFileSection": {
+        "file": "assets/lil-gui.esm-uYN4JE7y.js"
+      }
     },
     {
       "sourceFile": "readable/assets/modulepreload-polyfill-P2Xu9kJm.pretty.js",
@@ -1215,7 +1224,10 @@
       "tag": "assets/modulepreload-polyfill-P2Xu9kJm",
       "slices": 0,
       "derived": "readable only (vendor bundle, wholeFile)",
-      "what": "Vite modulepreload polyfill"
+      "what": "Vite modulepreload polyfill",
+      "wholeFileSection": {
+        "file": "assets/modulepreload-polyfill-P2Xu9kJm.js"
+      }
     },
     {
       "sourceFile": "readable/assets/OrbitControls-CQWqkYLs.pretty.js",
@@ -1230,7 +1242,10 @@
       "tag": "assets/OrbitControls-CQWqkYLs",
       "slices": 0,
       "derived": "readable only (vendor bundle, wholeFile)",
-      "what": "three.js OrbitControls addon"
+      "what": "three.js OrbitControls addon",
+      "wholeFileSection": {
+        "file": "assets/OrbitControls-CQWqkYLs.js"
+      }
     },
     {
       "sourceFile": "readable/assets/three.core-DVWDmH0S.pretty.js",
@@ -1245,7 +1260,10 @@
       "tag": "assets/three.core-DVWDmH0S",
       "slices": 0,
       "derived": "readable only (vendor bundle, wholeFile)",
-      "what": "three.js r186 core build"
+      "what": "three.js r186 core build",
+      "wholeFileSection": {
+        "file": "assets/three.core-DVWDmH0S.js"
+      }
     },
     {
       "sourceFile": "readable/assets/main-BefG6oT8.pretty.css",
@@ -3609,8 +3627,9 @@
       "text": "export{i as n,o as r,p as t}"
     },
     {
-      "file": "assets/Client-CpE02kO_-vendor.js",
+      "file": "readable/assets/Client-CpE02kO_.pretty.js",
       "wholeFile": true,
+      "source": "assets/Client-CpE02kO_.js",
       "title": "assets/Client-CpE02kO_ — Colyseus SDK client (vendor, whole-file, never sliced)",
       "desc": "Lines 1-9830 of readable/assets/Client-CpE02kO_.pretty.js: The bundled Colyseus multiplayer SDK client (Room/Client transport, schema encoding via @colyseus/schema, the /matchmake + /auth HTTP/WS handshake) that talks to the game's live backend — vendor, not app code; the backend itself is external (see README). Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
       "note": "whole-file (vendor rule): indexed in readable/, never sliced",
@@ -3619,8 +3638,9 @@
       "sourceFile": "readable/assets/Client-CpE02kO_.pretty.js"
     },
     {
-      "file": "assets/GLTFLoader-BAb7LzOS-vendor.js",
+      "file": "readable/assets/GLTFLoader-BAb7LzOS.pretty.js",
       "wholeFile": true,
+      "source": "assets/GLTFLoader-BAb7LzOS.js",
       "title": "assets/GLTFLoader-BAb7LzOS — three.js GLTFLoader addon (vendor, whole-file, never sliced)",
       "desc": "Lines 1-2406 of readable/assets/GLTFLoader-BAb7LzOS.pretty.js: The bundled three.js examples/jsm GLTFLoader with its KHR_* extension callbacks plus the DRACO mesh compression path, the KTX2 texture loader hook and the meshopt decoder hook — vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
       "note": "whole-file (vendor rule): indexed in readable/, never sliced",
@@ -3629,8 +3649,9 @@
       "sourceFile": "readable/assets/GLTFLoader-BAb7LzOS.pretty.js"
     },
     {
-      "file": "assets/lil-gui.esm-uYN4JE7y-vendor.js",
+      "file": "readable/assets/lil-gui.esm-uYN4JE7y.pretty.js",
       "wholeFile": true,
+      "source": "assets/lil-gui.esm-uYN4JE7y.js",
       "title": "assets/lil-gui.esm-uYN4JE7y — lil-gui build (vendor, whole-file, never sliced)",
       "desc": "Lines 1-1315 of readable/assets/lil-gui.esm-uYN4JE7y.pretty.js: The bundled lil-gui control panel library (Controller/BooleanController/… with its DOM controller tree) used by the park viewer's debug UI — vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
       "note": "whole-file (vendor rule): indexed in readable/, never sliced",
@@ -3639,8 +3660,9 @@
       "sourceFile": "readable/assets/lil-gui.esm-uYN4JE7y.pretty.js"
     },
     {
-      "file": "assets/modulepreload-polyfill-P2Xu9kJm-vendor.js",
+      "file": "readable/assets/modulepreload-polyfill-P2Xu9kJm.pretty.js",
       "wholeFile": true,
+      "source": "assets/modulepreload-polyfill-P2Xu9kJm.js",
       "title": "assets/modulepreload-polyfill-P2Xu9kJm — Vite modulepreload polyfill (build machinery, whole-file, never sliced)",
       "desc": "Lines 1-31 of readable/assets/modulepreload-polyfill-P2Xu9kJm.pretty.js: The Vite-generated modulepreload polyfill (`link[rel=modulepreload]` relList.supports check + MutationObserver fetch warm-up) — build machinery, not app code. Indexed whole-file in readable/, never sliced.",
       "note": "whole-file (vendor rule): indexed in readable/, never sliced",
@@ -3649,8 +3671,9 @@
       "sourceFile": "readable/assets/modulepreload-polyfill-P2Xu9kJm.pretty.js"
     },
     {
-      "file": "assets/OrbitControls-CQWqkYLs-vendor.js",
+      "file": "readable/assets/OrbitControls-CQWqkYLs.pretty.js",
       "wholeFile": true,
+      "source": "assets/OrbitControls-CQWqkYLs.js",
       "title": "assets/OrbitControls-CQWqkYLs — three.js OrbitControls addon (vendor, whole-file, never sliced)",
       "desc": "Lines 1-854 of readable/assets/OrbitControls-CQWqkYLs.pretty.js: The bundled three.js examples/jsm OrbitControls (camera orbit/dolly/pan with pointer + touch handling) used by the park viewer — vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
       "note": "whole-file (vendor rule): indexed in readable/, never sliced",
@@ -3659,8 +3682,9 @@
       "sourceFile": "readable/assets/OrbitControls-CQWqkYLs.pretty.js"
     },
     {
-      "file": "assets/three.core-DVWDmH0S-vendor.js",
+      "file": "readable/assets/three.core-DVWDmH0S.pretty.js",
       "wholeFile": true,
+      "source": "assets/three.core-DVWDmH0S.js",
       "title": "assets/three.core-DVWDmH0S — three.js r186 core build (vendor, whole-file, never sliced)",
       "desc": "Lines 1-15349 of readable/assets/three.core-DVWDmH0S.pretty.js: The bundled three.js r186 core build (constants, math (Vector3/Matrix4/Quaternion), BufferGeometry, textures, materials, scene graph, loaders' shared machinery, the `window.__THREE__` revision 186 registration) — the renderer itself is split into the toon chunk by the build. Vendor, not app code. Vendor rule — indexed whole-file in readable/, never sliced or rewritten.",
       "note": "whole-file (vendor rule): indexed in readable/, never sliced",

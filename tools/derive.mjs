@@ -481,8 +481,19 @@ async function main() {
       if (cls.guard && !cls.guard(pretty))
         throw new Error(`${rel}: whole-file guard failed — readable changed shape`);
       sections.push({
-        file: `${tag}-vendor.js`,
+        // the DERIVED text of this whole-file section is the READING COPY the
+        // vendor bundle was re-rendered into (the file that really exists),
+        // and `source` names the PRISTINE it was rendered from — the served
+        // capture. The export gate then compares the capture's own export
+        // table with the reading copy's: two DIFFERENT files, so the
+        // comparison is real instead of a file compared with itself.
+        //
+        // The section names no `capture`: the gate rebinds a source's
+        // whole-file link to the section naming the SAME capture, and the
+        // check would end up comparing the capture with itself.
+        file: sourceFile,
         wholeFile: true,
+        source: rel,
         title: cls.title,
         desc: `Lines 1-${lines.length} of ${sourceFile}: ${cls.desc}`,
         note: "whole-file (vendor rule): indexed in readable/, never sliced",
@@ -504,6 +515,10 @@ async function main() {
         slices: 0,
         derived: "readable only (vendor bundle, wholeFile)",
         what: cls.what,
+        // the reading copy has no src slice of its own, so the export gate is
+        // pointed at the capture it was rendered from: the reading copy's
+        // export table is compared with the capture's (two different files).
+        wholeFileSection: { file: rel },
       });
       console.log(`derive: ${rel} -> ${sourceFile} (${lines.length} lines, wholeFile vendor)`);
       continue;
