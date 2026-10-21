@@ -153,6 +153,7 @@ node tools/audit.js                  # derived-layer + rename-map integrity gate
 node tools/verify-rename.mjs --all   # rename layer: reproduces/references/bindings
 node tools/check-chunk.mjs --all     # re-splice + cross-slice resolve
 node tools/check-exports.mjs         # the derived layer still exports every public name
+node tools/derive.mjs --check          # the derived layer is current? (compares a fresh rebuild; writes NOTHING)
 ```
 
 Last run: `177 files checked, 0 problems` and `AUDIT PASS` (273 sections,
