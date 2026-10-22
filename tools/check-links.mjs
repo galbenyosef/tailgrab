@@ -591,16 +591,30 @@ for (const [sourceFile, sections] of [...modules.entries()].sort((a, b) => a[0].
     // The module as the LAYER's own bytes export a name nothing declares.
     const names = undeclaredExports(text);
     const listed = names.length ? names : [module.missing];
-    // Where the mirror's own rename record says the binding lives: the layer
-    // file that was supposed to declare it.
+    // Where the binding should have been declared: the mirror's own rename
+    // record places it, and where there is no rename record the layer files
+    // that still mention the name are the ones to look at.
     const where = [];
     for (const name of listed) {
       const at = places.get(name);
-      where.push(
-        at && at.size
-          ? `${name} (the rename record puts it in ${[...at].map((f) => `src/${f}`).join(", ")})`
-          : `${name}`,
-      );
+      if (at && at.size) {
+        where.push(`${name} (the rename record puts it in ${[...at].map((f) => `src/${f}`).join(", ")})`);
+        continue;
+      }
+      const re = new RegExp(`(?<![\\w$])${ESCAPE_RE(name)}(?![\\w$])`);
+      const mentions = parts
+        .filter((p) => p.kind === "slice" && re.test(p.text))
+        .map((p) => p.file);
+      if (mentions.length) {
+        where.push(
+          `${name} (the layer file(s) that mention it: ${mentions.slice(0, 4).join(", ")}${mentions.length > 4 ? `, … (${mentions.length} in all)` : ""})`,
+        );
+      } else {
+        const slices = parts.filter((p) => p.kind === "slice").map((p) => p.file);
+        where.push(
+          `${name} (the module's layer file(s): ${slices.slice(0, 4).join(", ")}${slices.length > 4 ? `, … (${slices.length} in all)` : ""})`,
+        );
+      }
     }
     problems.push(
       `${sourceFile}: the layer's own bytes export { ${listed.join(", ")} } but no binding named ${listed[0]} is declared in any slice of that module — ${where.join("; ")} (export table in: ${carriers.map((c) => c.rel).join(", ") || "an index-only tail"})`,
