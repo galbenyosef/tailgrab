@@ -147,6 +147,15 @@ The game boots to the Skate Hub. It joins the live multiplayer backend
 backend stays external; with no backend reachable, network features (hub
 roster, matchmaking) fail while the client still runs.
 
+## Boot test (2026-10-27)
+
+- Entry: `http://127.0.0.1:4977/` served by `tools/serve.mjs` with the network blocked (`MAP * 127.0.0.1`).
+- Outcome: **rendered** — the Skate Hub 3D park (ramps, rails, plaza ledges and the coloured mode gates) drew on a live WebGL canvas; no blank or error page.
+- Evidence: body 0 chars; canvas 1262x568 (WebGL context present, not lost); 1 console error; 0 failed same-origin requests, 7 blocked cross-origin; screenshot `docs/boot-2026-10-27.png`.
+- Gaps seen: none.
+
+The boot refutes the "playable build absent/gated" hypothesis: the full client and its runtime asset closure are present and render offline. The only failures are the documented external ones — the `backend.tailgrab.io` auth/matchmake calls (MatchMakeError) and the `googletagmanager.com` script — both blocked by the offline rule, exactly as the Run section above describes.
+
 ## Verify
 
 ```
